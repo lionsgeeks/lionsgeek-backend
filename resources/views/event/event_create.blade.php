@@ -1,23 +1,24 @@
-@extends('layouts.index')
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Create Event') }}
+        </h2>
+    </x-slot>
 
-
-@section('content')
-    <div class="flex">
-        @include('layouts.sidebare')
-        <div class="w-[84vw] h-[100vh] flex flex-col overflow-y-scroll">
-            <div class="flex items-center justify-between py-[1.2rem] px-[1rem] w-[100%] bg-white  ">
-                <p class="text-[25px] font-bold ">Create Event</p>
-            </div>
-            <div class="bg-slate-100 p-[2rem] gap-[1.6rem] flex flex-col items-center overflow-y-scroll w-[100%]">
-                <form class="flex flex-col items-center justify-center py-6 w-[100%] bg-[#fef819] gap-5  "
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="bg-white  overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-6 text-gray-900">
+                    <form class="flex flex-col items-center justify-center py-6 w-[100%] bg-white p-2 rounded gap-5  "
                     action="{{ route('events.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
-                    <div x-data="{ tab: 'English' }" class="w-[100%] flex flex-col items-center ">
+                    <div x-data="{ tab: 'English' }" class="w-[100%] flex flex-col items-center">
                         {{-- Language buttons --}}
-                        <div class="flex items-center justify-center gap-2 p-2 w-[100%]">
+                        <div class="flex items-center justify-center gap-2 p-2 w-[100%] bg-slate-200 rounded">
                             @foreach (['English', 'Français', 'العربية'] as $language)
-                                <button type="button" class="px-[3rem] py-[0.5rem] bg-white rounded-[20px]"
-                                    @click="tab = '{{ $language }}' ">
+                                <button @click="tab = '{{ $language }}'"
+                                    :class="{ 'bg-white text-black': tab === '{{ $language }}', 'bg-slate-200 text-black': tab !== '{{ $language }}' }"
+                                    type="button" class="w-1/3 rounded-md font-medium p-1">
                                     {{ $language }}
                                 </button>
                             @endforeach
@@ -38,14 +39,15 @@
                                     </div>
                                     <div class="flex flex-col w-[100%]  gap-1 ">
                                         <label for="description_en">Description</label>
-                                        <textarea placeholder="Enter description" required rows="5" class="w-[100%] border-[2px] border-black rounded-[10px]"
-                                            type="text" name="description[en]" id="description_en">{{ old('description.en') }}</textarea>
+                                        <textarea placeholder="Enter description" required rows="5"
+                                            class="w-[100%] border-[2px] border-black rounded-[10px]" type="text" name="description[en]" id="description_en">{{ old('description.en') }}</textarea>
                                     </div>
                                     <div class="flex flex-col w-[100%] gap-1">
                                         <label for="description_en">Location</label>
                                         <input placeholder="Enter location"
                                             class="w-[100%] border-[2px] border-black rounded-[10px]" type="text"
-                                            name="location[en]" id="description_en" required value="{{ old('location.en') }}">
+                                            name="location[en]" id="description_en" required
+                                            value="{{ old('location.en') }}">
                                     </div>
                                 </div>
 
@@ -53,13 +55,14 @@
                                 <div class="flex flex-col items-center w-[100%] gap-5" x-show="tab === 'Français' ">
                                     <div class="flex flex-col w-[100%] gap-1">
                                         <label for="name_fr">Nom</label>
-                                        <input required placeholder="Enter le nom" class=" border-[2px] border-black rounded-[10px]"
-                                            type="text" name="name[fr]" id="name_fr" value="{{ old('name.fr') }}">
+                                        <input required placeholder="Enter le nom"
+                                            class=" border-[2px] border-black rounded-[10px]" type="text" name="name[fr]"
+                                            id="name_fr" value="{{ old('name.fr') }}">
                                     </div>
                                     <div class="flex flex-col  w-[100%] gap-1">
                                         <label for="description_fr">Description</label>
-                                        <textarea required placeholder="Enter la description" rows="5" class="w-[100%] border-[2px] border-black rounded-[10px]"
-                                            type="text" name="description[fr]" id="description_fr">{{ old('description.fr') }}</textarea>
+                                        <textarea required placeholder="Enter la description" rows="5"
+                                            class="w-[100%] border-[2px] border-black rounded-[10px]" type="text" name="description[fr]" id="description_fr">{{ old('description.fr') }}</textarea>
                                     </div>
                                     <div class="flex flex-col w-[100%]  gap-1">
                                         <label for="location_fr">Localisation</label>
@@ -73,8 +76,9 @@
                                 <div class="flex flex-col items-center w-[100%] gap-5" x-show="tab === 'العربية' ">
                                     <div class="flex flex-col  w-[100%] text-end gap-1">
                                         <label for="name_ar">الاسم</label>
-                                        <input required placeholder="أدخل الاسم" class=" border-[2px] border-black rounded-[10px]"
-                                            type="text" name="name[ar]" id="name_ar" value="{{ old('name.ar') }}">
+                                        <input required placeholder="أدخل الاسم"
+                                            class=" border-[2px] border-black rounded-[10px]" type="text" name="name[ar]"
+                                            id="name_ar" value="{{ old('name.ar') }}">
                                     </div>
                                     <div class="flex flex-col w-[100%]  text-end gap-1">
                                         <label for="description_ar">وصف النص</label>
@@ -117,7 +121,8 @@
                                     :placeholder="tab === 'Français' ? 'Enter le prix' : tab === 'العربية' ? 'أدخل السعر' :
                                         'Enter price'"
                                     class="w-[100%] border-[2px] border-black rounded-[10px]" type="number"
-                                    name="price" required value="{{ old('price') }}" id="" min="0" step="0.01">
+                                    name="price" required value="{{ old('price') }}" id="" min="0"
+                                    step="0.01">
                             </div>
 
                             {{-- Cover --}}
@@ -149,9 +154,11 @@
 
                     </div>
 
-                    <button>Submit</button>
+                    <button class="bg-black w-full text-white rounded py-2">Submit</button>
                 </form>
+                </div>
             </div>
         </div>
     </div>
-@endsection
+</x-app-layout>
+

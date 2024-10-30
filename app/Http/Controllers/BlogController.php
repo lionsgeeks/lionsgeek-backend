@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BlogController extends Controller
 {
@@ -12,7 +14,8 @@ class BlogController extends Controller
      */
     public function index()
     {
-        return view('blogs.blogs');
+        $blogs = Blog::all();
+        return view('blogs.blogs', compact('blogs'));
     }
 
     /**
@@ -20,7 +23,7 @@ class BlogController extends Controller
      */
     public function create()
     {
-        //
+        return view('blogs.partials.blogs_create');
     }
 
     /**
@@ -28,7 +31,37 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        request()->validate([
+            'title' => 'required',
+            'title.en' => 'required|string',
+            'title.fr' => 'required|string',
+            'title.ar' => 'required|string',
+            'description' => 'required',
+            'description.en' => 'required|string',
+            'description.fr' => 'required|string',
+            'description.ar' => 'required|string',
+            'image' => 'required|mimes:png,jpg,jfif,webp',
+        ]);
+
+        $image = $request->file('image');
+
+        if ($image) {
+            $imageName = time() .  $image->getClientOriginalName();
+            $image->storeAs('images', $imageName, 'public');
+            $blog = Blog::create([
+                'title' => $request->input('title'),
+                'description' => $request->input('description'),
+                'image' => $imageName
+            ]);
+
+        }
+
+        if ($blog instanceof Model) {
+            return redirect()->route('blogs.index')->with('success', 'Blog created');
+        } else {
+            return redirect()->route('blogs.index')->with('error', 'Something Went Wrong. Try Again.');
+        }
+
     }
 
     /**
@@ -44,7 +77,7 @@ class BlogController extends Controller
      */
     public function edit(Blog $blog)
     {
-        //
+        return view('blogs.partials.blogs_edit', compact('blog'));
     }
 
     /**
@@ -52,7 +85,32 @@ class BlogController extends Controller
      */
     public function update(Request $request, Blog $blog)
     {
-        //
+        request()->validate([
+            'title' => 'required',
+            'title.en' => 'required|string',
+            'title.fr' => 'required|string',
+            'title.ar' => 'required|string',
+            'description' => 'required',
+            'description.en' => 'required|string',
+            'description.fr' => 'required|string',
+            'description.ar' => 'required|string',
+        ]);
+
+        $theImg = $request->image;
+        if ($theImg) {
+            Storage::disk('public')->delete('images/' . $blog->image);
+            $imageName = time() .  $theImg->getClientOriginalName();
+            $theImg->storeAs('images', $imageName, 'public');
+        }
+
+        $blog->update([
+            'title' => $request->input('title'),
+            'description' => $request->input('description'),
+            'image' => $theImg ? $imageName : $blog->image,
+        ]);
+
+        return back()->with('success', 'Blog Updated Successfully!!');
+
     }
 
     /**
@@ -60,6 +118,7 @@ class BlogController extends Controller
      */
     public function destroy(Blog $blog)
     {
-        //
+        $blog->delete();
+        return back()->with('success', 'Blog Deleted Successuflly');
     }
 }

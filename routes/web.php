@@ -11,9 +11,9 @@ Route::get('/', function () {
 
 
 
-Route::resource("Event",EventController::class)->except("index");
+Route::resource("events",EventController::class);
 
-Route::get("/event",[EventController::class,"index"])->name("event.event");
+// Route::get("/events",[EventController::class,"index"])->name("event.index");
 
 
 

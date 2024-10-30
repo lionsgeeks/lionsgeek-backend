@@ -8,10 +8,20 @@ class Event extends Model
 {
     protected $fillable = [
         "name",
-        "date",
         "location",
         "description",
+        "date",
         "price",
         "cover"
     ] ;
+
+    protected $casts = [
+        'name' => 'object',
+        'description' => 'object',
+        'location' => 'object',
+    ];
+    public function attendances()
+    {
+        return $this->belongsToMany(Attendence::class,'reservations');
+    }
 }

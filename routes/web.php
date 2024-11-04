@@ -3,6 +3,7 @@
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,7 +22,7 @@ Route::resource("blogs", BlogController::class);
 Route::resource("contacts", ContactController::class);
 
 
-
+Route::resource('newsletter', NewsletterController::class);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AttendenceController;
 use App\Http\Controllers\Api\BlogController;
 use App\Http\Controllers\Api\ContactController;
+use App\Http\Controllers\Api\SubscriberController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,3 +17,5 @@ Route::get("/events",[AttendenceController::class,"show"]);
 
 Route::get('/blogs', [BlogController::class, 'index']);
 Route::post('/contact', [ContactController::class, 'store']);
+
+Route::post('/subscriber', [SubscriberController::class, 'store']);

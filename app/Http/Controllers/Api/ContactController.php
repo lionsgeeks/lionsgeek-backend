@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
+use App\Models\Coworking;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
@@ -69,5 +70,43 @@ class ContactController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+
+    public function cowork(Request $request)
+    {
+        if ($request->file('cv')) {
+            $cv = $request->file('cv')->store('uploads', 'public');
+        }
+        if ($request->file('presentation')) {
+            $presentation = $request->file('presentation')->store('uploads', 'public');
+        }
+
+        $request->validate([
+            'full_name' => 'required|string',
+            'email' => 'required|email',
+            'phone' => 'required|string',
+        ]);
+
+        Coworking::create([
+            'full_name' => $request->full_name,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'birthday' => $request->birthday,
+            'formation' => $request->formation,
+            'cv' => $cv ?? null,
+            'proj_name' => $request->proj_name,
+            'proj_description' => $request->proj_desc,
+            'domain' => $request->domain,
+            'plan' => $request->proj_plan,
+            'presentation' => $presentation ?? null,
+            'prev_proj' => $request->prev_proj,
+            'reasons' => $request->reasons,
+            'needs' => $request->needs
+        ]);
+
+        return response()->json([
+            'message' => 'success'
+        ]);
     }
 }

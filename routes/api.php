@@ -19,3 +19,4 @@ Route::get('/blogs', [BlogController::class, 'index']);
 Route::post('/contact', [ContactController::class, 'store']);
 
 Route::post('/subscriber', [SubscriberController::class, 'store']);
+Route::post('/cowork', [ContactController::class, 'cowork']);

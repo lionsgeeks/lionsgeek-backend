@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\CoworkingController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\ProfileController;
@@ -20,6 +21,7 @@ Route::resource("events",EventController::class);
 
 Route::resource("blogs", BlogController::class);
 Route::resource("contacts", ContactController::class);
+Route::resource("coworkings", CoworkingController::class);
 
 
 Route::resource('newsletter', NewsletterController::class);

@@ -4,6 +4,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CoworkingController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\InfoSessionController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -15,7 +16,7 @@ Route::get('/', function () {
 
 
 
-Route::resource("events",EventController::class);
+Route::resource("events", EventController::class);
 
 // Route::get("/events",[EventController::class,"index"])->name("event.index");
 
@@ -23,7 +24,9 @@ Route::resource("blogs", BlogController::class);
 Route::resource("contacts", ContactController::class);
 Route::resource("coworkings", CoworkingController::class);
 
-
+Route::resource('infosessions', InfoSessionController::class);
+Route::patch('/infosessions/available/{id}', [InfoSessionController::class, 'availabilityStatus'])->name('infosessions.isavailable');
+Route::patch('/infosessions/complete/{id}', [InfoSessionController::class, 'completeStatus'])->name('infosessions.isfinish');
 Route::resource('newsletter', NewsletterController::class);
 
 Route::get('/dashboard', function () {
@@ -36,4 +39,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

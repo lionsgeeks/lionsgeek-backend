@@ -7,7 +7,7 @@
         </h2>
         @if ($projects->count()>0)
         <button onclick="openModal('projectCreate')"
-            class=" py-[0.7rem] px-[2rem] text-[16px] font-bold rounded-[10px] bg-alpha hover:bg-black hover:text-white transition duration-150 ">Add
+            class="bg-black text-white rounded-lg px-4 py-2 hover:bg-alpha hover:text-black  transition duration-150 ">Add
             Project
         </button>
             
@@ -17,7 +17,7 @@
 
 
     <div class="py-12">
-        <div class="max-w-7xl  sm:px-6 lg:px-8 ">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 ">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg flex items-center gap-5 flex-wrap p-3">
 
                 @forelse ($projects as $project)
@@ -76,7 +76,7 @@
                             <h1 class="text-2xl font-semibold text-gray-700 mb-3">No Projects Available</h1>
                             <p class="text-gray-500 mb-6">It looks like there aren’t any projects created yet.</p>
                             <button onclick="openModal('projectCreate')"
-                                class="px-6 py-2  bg-alpha text-base font-medium text-black  hover:bg-gray-800  hover:text-alpha  rounded-md shadow  transition">
+                                class="px-6 py-2 bg-black text-white text-base font-medium rounded-md shadow hover:bg-alpha hover:text-black  transition">
                                 Create a New Project
                             </button>
                         </div>

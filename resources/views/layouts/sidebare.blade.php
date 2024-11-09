@@ -27,10 +27,10 @@
 
 <div class="w-[16vw]  h-screen bg-alpha flex flex-col py-5 justify-">
     <div class="flex flex-col w-full">
-        <div class="px-[1.5rem]">
-            <a href="{{ route('dashboard') }}" class="text-3xl font-bold">
-                {{-- <x-application-logo color size="100" /> --}}
-                LIONSGEEK
+        <div class="px-[1rem]">
+            <a href="{{ route('dashboard') }}" class="text-xl  flex   gap-x-3">
+                <x-application-logo color size="100" />
+                <span class="mt-2 font-extrabold">LionsGeek</span>
             </a>
         </div>
 
@@ -62,6 +62,17 @@
                 </svg>
                 BLOGS
             </a>
+            <a href='{{ route('projects.index') }}'
+                class='nav-button no-underline text-base font-bold py-[0.75rem] flex items-center gap-2 hover:text-alpha hover:bg-gray-800 rounded-xl px-[1rem] {{ request()->routeIs('projects.index') ? 'text-alpha bg-gray-800' : '' }}'>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-person-vcard" viewBox="0 0 16 16">
+                    <path
+                        d="M5 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4m4-2.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5M9 8a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4A.5.5 0 0 1 9 8m1 2.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5" />
+                    <path
+                        d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zM1 4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H8.96q.04-.245.04-.5C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 1 1 12z" />
+                </svg>
+                Projects
+            </a>
             <a href='{{ route('contacts.index') }}'
                 class='nav-button no-underline text-base font-bold py-[0.75rem] flex items-center gap-2 hover:text-alpha hover:bg-gray-800 rounded-xl px-[1rem] {{ request()->routeIs('contacts.index') ? 'text-alpha bg-gray-800' : '' }}'>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -85,7 +96,7 @@
 
 
             <a href='{{ route('newsletter.index') }}'
-                class='nav-button no-underline text-base font-bold py-[0.75rem] flex items-center gap-2 hover:text-alpha hover:bg-gray-100 rounded-xl px-[1rem] {{ request()->routeIs('blogs.index') ? 'text-alpha bg-gray-800' : '' }}'>
+                class='nav-button no-underline text-base font-bold py-[0.75rem] flex items-center gap-2 hover:text-alpha hover:bg-gray-800 rounded-xl px-[1rem] {{ request()->routeIs('newsletter.index') ? 'text-alpha bg-gray-800' : '' }}'>
 
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="size-5">
@@ -95,7 +106,7 @@
                 Newsletter
             </a>
             <a href='{{ route('infosessions.index') }}'
-                class='nav-button no-underline text-base font-bold py-[0.75rem] flex items-center gap-2 hover:text-alpha hover:bg-gray-100 rounded-xl px-[1rem] {{ request()->routeIs('blogs.index') ? 'text-alpha bg-gray-100' : '' }}'>
+                class='nav-button no-underline text-base font-bold py-[0.75rem] flex items-center gap-2 hover:text-alpha hover:bg-gray-800 rounded-xl px-[1rem] {{ request()->routeIs('infosessions.index') ? 'text-alpha bg-gray-800' : '' }}'>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="size-5">
                     <path stroke-linecap="round" stroke-linejoin="round"

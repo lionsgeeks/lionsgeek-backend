@@ -13,6 +13,7 @@
 
                         <table class="w-full">
                             <thead>
+                                <th>Time</th>
                                 <th>Name</th>
                                 <th>Phone</th>
                                 <th>Email</th>
@@ -20,9 +21,12 @@
                             </thead>
 
                             <tbody class="w-full">
-                                @foreach ($contacts as $contact)
-                                    <tr class="w-full text-center h-[5vh]">
+                                @foreach ($contacts->reverse() as $contact)
+                                    <tr class="w-full text-center h-[10vh] py-2">
 
+                                        <td>
+                                            {{ $contact->created_at->format("d-M-y") }}
+                                        </td>
                                         <td>
                                             {{ $contact->full_name }}
                                         </td>
@@ -32,8 +36,11 @@
                                         <td>
                                             {{ $contact->email }}
                                         </td>
-                                        <td>
-                                            {{ $contact->message }}
+                                        <td class="">
+                                        <button onclick="openModal('contactMessage{{ $contact->id }}')" class="bg-black py-2 px-3 rounded-lg text-alpha">
+                                            Read Message
+                                        </button>
+                                        @include("contacts.partials.contact_message_details")
                                         </td>
                                     </tr>
                                 @endforeach

@@ -34,4 +34,12 @@ class InfoSessionController extends Controller
     //         'response' => 'success'
     //     ]);
     // }
+
+    public function index()
+    {
+        $infos = InfoSession::all();
+        return response()->json([
+            'infos' => $infos,
+        ]);
+    }
 }

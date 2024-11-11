@@ -14,4 +14,9 @@ class InfoSession extends Model
         'isAvailable',
         'isFinish',
     ];
+
+    public function participants()
+    {
+        return $this->hasMany(Participant::class);
+    }
 }

@@ -24,3 +24,5 @@ Route::post('/subscriber', [SubscriberController::class, 'store']);
 Route::post('/cowork', [ContactController::class, 'cowork']);
 
 Route::post('/infosession', [InfoSessionController::class, 'store']);
+Route::post('/participate', [ContactController::class, 'participate']);
+Route::get('/infosessions', [InfoSessionController::class, 'index']);

@@ -5,19 +5,12 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
 use App\Models\Coworking;
+use App\Models\Participant;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class ContactController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      */
@@ -44,35 +37,11 @@ class ContactController extends Controller
         return response()->json([
             'message' => 'success',
         ]);
-
-        // return $request->phone;
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 
 
+    // mafia li ysayeb controller 3la 9bel function wa7da so jm3thum hna - oussama
+    //* coworking
     public function cowork(Request $request)
     {
         if ($request->file('cv')) {
@@ -103,6 +72,39 @@ class ContactController extends Controller
             'prev_proj' => $request->prev_proj,
             'reasons' => $request->reasons,
             'needs' => $request->needs
+        ]);
+
+        return response()->json([
+            'message' => 'success'
+        ]);
+    }
+
+    //* session info sign up
+    public function participate(Request $request)
+    {
+
+        $request->validate([
+            'first_name' => 'required|string',
+            'last_name' => 'required|string',
+            'email' => 'required|string|email',
+            'birthday' => 'required|string',
+            'phone' => 'required|string',
+            'city' => 'required|string',
+            'address' => 'required|string',
+            'code' => 'required|string',
+            'info_session_id' => 'required'
+        ]);
+
+        Participant::create([
+            'info_session_id' => $request->info_session_id,
+            'first_name' => $request->first_name,
+            'last_name' => $request->last_name,
+            'email' => $request->email,
+            'birthday' => $request->birthday,
+            'phone' => $request->phone,
+            'city' => $request->city,
+            'address' => $request->address,
+            'code' => $request->code
         ]);
 
         return response()->json([

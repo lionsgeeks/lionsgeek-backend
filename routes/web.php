@@ -6,6 +6,7 @@ use App\Http\Controllers\CoworkingController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\InfoSessionController;
 use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,7 @@ Route::resource("events", EventController::class);
 Route::resource("blogs", BlogController::class);
 Route::resource("contacts", ContactController::class);
 Route::resource("coworkings", CoworkingController::class);
+Route::resource('participants', ParticipantController::class);
 
 Route::resource('infosessions', InfoSessionController::class);
 Route::patch('/infosessions/available/{id}', [InfoSessionController::class, 'availabilityStatus'])->name('infosessions.isavailable');

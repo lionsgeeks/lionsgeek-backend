@@ -20,5 +20,17 @@ export default {
         },
     },
 
-    plugins: [forms],
+    plugins: [forms,
+        function ({ addUtilities }) {
+            addUtilities({
+                '.no-scrollbar': {
+                    '-webkit-overflow-scrolling': 'touch',
+                    'scrollbar-width': 'none',
+                    '&::-webkit-scrollbar': {
+                        display: 'none',
+                    },
+                },
+            });
+        }
+    ],
 };

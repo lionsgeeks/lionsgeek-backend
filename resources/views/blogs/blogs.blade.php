@@ -4,13 +4,13 @@
             {{ __('BLOGS') }}
         </h2>
 
-        @if ($blogs->count()>0)
-            
-        <a href="{{ route('blogs.create') }}">
-            <button class="bg-black text-white rounded-lg px-4 py-2 hover:bg-alpha hover:text-black  transition duration-150">
-                <span class="text-lg font-bold">+</span> Write a New Blog
-            </button>
-        </a>
+        @if ($blogs->count() > 0)
+            <a href="{{ route('blogs.create') }}">
+                <button
+                    class="bg-black text-white rounded-lg px-4 py-2 hover:bg-alpha hover:text-black  transition duration-150">
+                    <span class="text-lg font-bold">+</span> Write a New Blog
+                </button>
+            </a>
         @endif
     </x-slot>
 
@@ -21,7 +21,7 @@
                     <div class="p-6 text-gray-900">
 
                         <div class="w-full flex justify-end">
-                     
+
                         </div>
 
                         <br><br>
@@ -86,18 +86,19 @@
                     </div>
                 </div>
             @else
-            <div class="h-[70vh] bg-white flex rounded-lg items-center justify-center w-full">
-                <div class="text-center">
-                    <h1 class="text-2xl font-semibold text-gray-700 mb-3">No Blogs Available</h1>
-                    <p class="text-gray-500 mb-6">It looks like there aren’t any blogs published yet.</p>
-                    <a href="{{ route('blogs.create') }}">
-                        <button class="px-6 py-2 bg-black text-white text-base font-medium rounded-md shadow hover:bg-alpha hover:text-black transition">
-                             Write a New Blog
-                        </button>
-                    </a>
+                <div class="h-[70vh] bg-white flex rounded-lg items-center justify-center w-full">
+                    <div class="text-center">
+                        <h1 class="text-2xl font-semibold text-gray-700 mb-3">No Blogs Available</h1>
+                        <p class="text-gray-500 mb-6">It looks like there aren’t any blogs published yet.</p>
+                        <a href="{{ route('blogs.create') }}">
+                            <button
+                                class="px-6 py-2 bg-black text-white text-base font-medium rounded-md shadow hover:bg-alpha hover:text-black transition">
+                                Write a New Blog
+                            </button>
+                        </a>
+                    </div>
                 </div>
-            </div>
-            
+
             @endif
         </div>
     </div>

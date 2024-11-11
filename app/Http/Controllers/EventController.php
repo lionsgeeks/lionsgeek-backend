@@ -56,13 +56,10 @@ class EventController extends Controller
 
         ]);
 
-        // $cover = $request->file("cover");
-        // $coverName = Hash::make("salam") . "_" . $cover->getClientOriginalName();
-        // $cover->storeAs("public/img", $coverName);
-
-        $content =file_get_contents($request->cover);
-        $fileName = hash("sha256",$content).'.'.$request->cover->getClientOriginalName();
-        Storage::disk("public")->put("images/".$fileName ,$content);
+        
+        $content = file_get_contents($request->cover);
+        $fileName = hash("sha256", $content) . '.' . $request->cover->getClientOriginalName();
+        Storage::disk("public")->put("images/" . $fileName, $content);
 
         Event::create([
             "name" => $request->input("name"),
@@ -116,20 +113,19 @@ class EventController extends Controller
 
             "date" => "required|date|after:now",
             "price" => "required|numeric|min:0",
-            "cover" => "required|",
+            "cover" => "nullable",
         ]);
 
-        // ? Update image
+        // ? Update cover
 
         $hasFile = $request->cover;
 
         if ($hasFile) {
 
-            Storage::disk('public')->delete("images/".$event->cover);
-            $content =file_get_contents($request->cover);
-            $fileName = hash("sha256",$content).'.'.$request->cover->getClientOriginalName();
-            Storage::disk("public")->put("images/".$fileName ,$content);   
-
+            Storage::disk('public')->delete("images/" . $event->cover);
+            $content = file_get_contents($request->cover);
+            $fileName = hash("sha256", $content) . '.' . $request->cover->getClientOriginalName();
+            Storage::disk("public")->put("images/" . $fileName, $content);
         }
 
 
@@ -151,10 +147,10 @@ class EventController extends Controller
     public function destroy(Event $event)
     {
 
-        Storage::disk("public")->delete("images/".$event->cover);
+        Storage::disk("public")->delete("images/" . $event->cover);
 
         $event->delete();
 
-        return redirect("events");
+        return redirect("/events");
     }
 }

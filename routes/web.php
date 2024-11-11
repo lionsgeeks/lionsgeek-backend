@@ -5,6 +5,8 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CoworkingController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\InfoSessionController;
+use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\ProfileController;
@@ -20,7 +22,10 @@ Route::get('/', function () {
 
 Route::resource("events", EventController::class);
 
-// Route::get("/events",[EventController::class,"index"])->name("event.index");
+Route::resource("gallery",GalleryController::class);
+
+Route::resource("images",ImageController::class);
+
 
 Route::resource("blogs", BlogController::class);
 Route::resource("contacts", ContactController::class);

@@ -25,7 +25,7 @@
 </div> --}}
 
 
-<div class="w-[16vw]  h-screen bg-alpha flex flex-col py-5 justify-">
+<div class="w-[16vw]  h-screen bg-black text-white flex flex-col py-5 justify-">
     <div class="flex flex-col w-full">
         <div class="px-[1rem]">
             <a href="{{ route('dashboard') }}" class="text-xl  flex   gap-x-3">

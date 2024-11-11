@@ -7,6 +7,7 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            @if ($coworkings->count() > 0)
             <div class="bg-white  overflow-hidden shadow-sm sm:rounded-lg">
                 {{-- TODO: add search feature by name, email, phone, --}}
                 {{-- <input type="search" name="search" id="search" placeholder="Search..." class="rounded ml-3 mt-3"> --}}
@@ -60,6 +61,16 @@
                     </table>
                 </div>
             </div>
+
+            @else
+            <div class="h-[70vh] bg-white rounded-lg flex items-center justify-center w-full">
+                <div class="text-center">
+                    <h1 class="text-2xl font-semibold text-gray-700 mb-3">No Membership Requests</h1>
+                    <p class="text-gray-500 mb-6">Currently, there are no requests to join the coworking space.</p>
+                    <p class="text-gray-400">Make it easy for potential members to inquire by ensuring your sign-up form is accessible and inviting.</p>
+                </div>
+            </div>            
+            @endif
         </div>
     </div>
 </x-app-layout>

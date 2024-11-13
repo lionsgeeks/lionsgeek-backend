@@ -37,7 +37,7 @@ class InfoSessionController extends Controller
 
     public function index()
     {
-        $infos = InfoSession::all();
+        $infos = InfoSession::where('isAvailable', true)->get();
         return response()->json([
             'infos' => $infos,
         ]);

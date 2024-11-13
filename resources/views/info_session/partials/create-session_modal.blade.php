@@ -2,7 +2,7 @@
     <div x-data="{ showModal: false }">
         <!-- Button to open the modal -->
         <button @click="showModal = true"
-            class="w-full px-4 py-2 text-sm font-medium bg-alpha text-black border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-red-500">
+            class="px-6 py-2 bg-black text-white text-base font-medium rounded-md shadow hover:bg-alpha hover:text-black transition">
             Create new session </button>
         <!-- Background overlay -->
         <div x-show="showModal" class="fixed inset-0 transition-opacity" aria-hidden="true" @click="showModal = false">
@@ -48,13 +48,9 @@
                                             <label for="">First Session</label>
                                             <input min="{{ now()->format('Y-m-d\TH:i') }}" class="w-full rounded" name="start_date" type="datetime-local">
                                         </div>
-                                        <div class="flex flex-col gap-3 items-start">
-                                            <label for="">Second Session</label>
-                                            <input min="{{ now()->format('Y-m-d\TH:i') }}" class="w-full rounded" name="end_date" type="datetime-local">
-                                        </div>
                                         <div class="px-4 py-3 sm:px-6 gap-3 sm:flex sm:flex-row-reverse">
                                             <button  type="submit"
-                                                class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-alpha text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
+                                                class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-alpha text-base font-medium text-white hover:bg-alpha hover:text-black transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-alpha sm:ml-3 sm:w-auto sm:text-sm">
                                                 Create </button>
                                             <button @click="showModal = false" type="button"
                                                 class="w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">

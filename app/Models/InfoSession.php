@@ -10,7 +10,6 @@ class InfoSession extends Model
         'name',
         'formation',
         'start_date',
-        'end_date',
         'isAvailable',
         'isFinish',
     ];

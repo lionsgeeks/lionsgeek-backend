@@ -9,6 +9,7 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\ParticipantController;
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
@@ -38,6 +39,8 @@ Route::patch('/infosessions/complete/{id}', [InfoSessionController::class, 'comp
 Route::resource('newsletter', NewsletterController::class);
 Route::resource("projects" , ProjectController::class);
 
+Route::get('/passqr', [PdfController::class,'index'])->name('pass.qrcode');
+Route::get('/sendqr', [PdfController::class,'sendQrcode'])->name('send.qrcode');
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

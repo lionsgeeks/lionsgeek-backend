@@ -10,7 +10,6 @@ class Subscriber extends Model
 {
     use Notifiable, HasFactory;
     protected $fillable = [
-        "name",
         "email"
     ];
 }

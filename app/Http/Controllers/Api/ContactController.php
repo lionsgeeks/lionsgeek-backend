@@ -8,6 +8,14 @@ use App\Models\Coworking;
 use App\Models\Participant;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Mail;
+use LaravelQRCode\Facades\QRCode;
+use App\Mail\CodeMail;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
+
+
 
 class ContactController extends Controller
 {
@@ -91,11 +99,11 @@ class ContactController extends Controller
             'phone' => 'required|string',
             'city' => 'required|string',
             'address' => 'required|string',
-            'code' => 'required|string',
             'info_session_id' => 'required'
         ]);
-
-        Participant::create([
+        $time = Carbon::now();
+        $code = $request->first_name . $request->last_name . $time->format('h:i:s');
+        $participant = Participant::create([
             'info_session_id' => $request->info_session_id,
             'first_name' => $request->first_name,
             'last_name' => $request->last_name,
@@ -104,9 +112,29 @@ class ContactController extends Controller
             'phone' => $request->phone,
             'city' => $request->city,
             'address' => $request->address,
-            'code' => $request->code
+            'code' => $code
         ]);
-
+        $data['first_name'] = $participant->first_name;
+        $data['last_name'] = $participant->last_name;
+        $data['email'] = $participant->email;
+        $data['code'] = $participant->code;
+        $data['infosession'] = $participant->infoSession->name;
+        $data['formation'] = $participant->infoSession->formation;
+        $data['time'] = $participant->infoSession->start_date;
+        $data['created_at'] = $participant->created_at;
+        $jsonData = json_encode([
+            'email' => $data['email'],
+            'code' => $data['code']
+        ]);
+        ob_start();
+        QRCode::text($jsonData)
+            ->setErrorCorrectionLevel('H')
+            ->png();
+        $qrImage = ob_get_clean();
+        $image = base64_encode($qrImage);
+        $pdf = Pdf::loadView('mail.partials.code', compact(['image', 'data']));
+        $data['pdf'] = $pdf;
+        Mail::to($participant->email)->send(new CodeMail($data, $image));
         return response()->json([
             'message' => 'success'
         ]);

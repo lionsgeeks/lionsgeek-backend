@@ -23,13 +23,12 @@ class InfoSessionController extends Controller
             'name' => 'required',
             'formation' => 'required',
             'start_date' => 'required',
-            'end_date' => 'required',
+
         ]);
         InfoSession::create([
             'name' => $request->name,
             'formation' => $request->formation,
             'start_date' => $request->start_date,
-            'end_date' => $request->end_date,
         ]);
         return back();
     }
@@ -41,7 +40,6 @@ class InfoSessionController extends Controller
             'name' => 'required',
             'formation' => 'required',
             'start_date' => 'required',
-            'end_date' => 'required',
             'isAvailable' => 'required',
             'isFinish' => 'required',
         ]);
@@ -49,7 +47,6 @@ class InfoSessionController extends Controller
             'name' => $request->name,
             'formation' => $request->formation,
             'start_date' => $request->start_date,
-            'end_date' => $request->end_date,
             'isAvailable' => filter_var($request->isAvailable, FILTER_VALIDATE_BOOLEAN),
             'isFinish' => filter_var($request->isFinish, FILTER_VALIDATE_BOOLEAN),
         ]);

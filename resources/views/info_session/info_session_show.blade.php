@@ -40,11 +40,11 @@
                     <input value="{{ old('start_date', $infoSession->start_date) }}" class="w-full rounded"
                         name="start_date" type="datetime-local" min="{{ now()->format('Y-m-d\TH:i') }}">
                 </div>
-                <div class="flex flex-col w-full  gap-3 items-start">
+                {{-- <div class="flex flex-col w-full  gap-3 items-start">
                     <label for="">Second Session</label>
                     <input value="{{ old('end_date', $infoSession->end_date) }}" class="w-full rounded" name="end_date"
                         type="datetime-local" min="{{ now()->format('Y-m-d\TH:i') }}">
-                </div>
+                </div> --}}
             </div>
             <div class="flex gap-4">
                 <div class="w-full ">

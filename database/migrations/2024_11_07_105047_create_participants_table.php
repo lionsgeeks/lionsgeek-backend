@@ -21,7 +21,9 @@ return new class extends Migration
             $table->string('city');
             $table->string('address');
             $table->string('code');
+            $table->string('image')->nullable();
             $table->string('phone');
+            $table->string('gender');
             $table->string('current_step')->default('info_session');
             $table->boolean('is_visited')->default(0);
             $table->timestamps();

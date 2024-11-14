@@ -8,6 +8,8 @@
         "php": "^8.2",
         "barryvdh/laravel-dompdf": "^3.0",
         "giauphan/laravel-qr-code": "^1.0",
+        "google-gemini-php/client": "^1.0",
+        "guzzlehttp/guzzle": "^7.9",
         "laravel/framework": "^11.9",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9"

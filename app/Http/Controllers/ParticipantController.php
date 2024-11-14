@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\InfoSession;
 use App\Models\Participant;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,8 @@ class ParticipantController extends Controller
     public function index()
     {
         $participants = Participant::all();
-        return view('participants.participants', compact('participants'));
+        $infos = InfoSession::all();
+        return view('participants.participants', compact('participants', 'infos'));
     }
 
     /**
@@ -37,7 +39,7 @@ class ParticipantController extends Controller
      */
     public function show(Participant $participant)
     {
-        //
+        return view('participants.partials.participant_show', compact('participant'));
     }
 
     /**

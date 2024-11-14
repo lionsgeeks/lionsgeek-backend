@@ -27,6 +27,7 @@ return new class extends Migration
             $table->longText('prev_proj')->nullable();
             $table->longText('reasons');
             $table->longText('needs')->nullable();
+            $table->string('gender');
             $table->timestamps();
         });
     }

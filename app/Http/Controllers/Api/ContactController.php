@@ -59,6 +59,7 @@ class ContactController extends Controller
             $presentation = $request->file('presentation')->store('uploads', 'public');
         }
 
+        // to be finished later
         $request->validate([
             'full_name' => 'required|string',
             'email' => 'required|email',
@@ -79,7 +80,8 @@ class ContactController extends Controller
             'presentation' => $presentation ?? null,
             'prev_proj' => $request->prev_proj,
             'reasons' => $request->reasons,
-            'needs' => $request->needs
+            'needs' => $request->needs,
+            'gender' => $request->gender,
         ]);
 
         return response()->json([
@@ -99,8 +101,10 @@ class ContactController extends Controller
             'phone' => 'required|string',
             'city' => 'required|string',
             'address' => 'required|string',
-            'info_session_id' => 'required'
+            'info_session_id' => 'required',
+            'gender' => 'required|string'
         ]);
+
         $time = Carbon::now();
         $code = $request->first_name . $request->last_name . $time->format('h:i:s');
         $participant = Participant::create([
@@ -112,8 +116,10 @@ class ContactController extends Controller
             'phone' => $request->phone,
             'city' => $request->city,
             'address' => $request->address,
+            'gender' => $request->gender,
             'code' => $code
         ]);
+
         $data['first_name'] = $participant->first_name;
         $data['last_name'] = $participant->last_name;
         $data['email'] = $participant->email;
@@ -122,19 +128,24 @@ class ContactController extends Controller
         $data['formation'] = $participant->infoSession->formation;
         $data['time'] = $participant->infoSession->start_date;
         $data['created_at'] = $participant->created_at;
+
         $jsonData = json_encode([
             'email' => $data['email'],
             'code' => $data['code']
         ]);
+
         ob_start();
         QRCode::text($jsonData)
             ->setErrorCorrectionLevel('H')
             ->png();
+
         $qrImage = ob_get_clean();
         $image = base64_encode($qrImage);
         $pdf = Pdf::loadView('mail.partials.code', compact(['image', 'data']));
         $data['pdf'] = $pdf;
+
         Mail::to($participant->email)->send(new CodeMail($data, $image));
+
         return response()->json([
             'message' => 'success'
         ]);

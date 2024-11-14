@@ -17,7 +17,8 @@ class Participant extends Model
         'code',
         'phone',
         'current_step',
-        'is_visited'
+        'is_visited',
+        'gender',
 
     ];
 

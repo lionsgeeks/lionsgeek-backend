@@ -17,18 +17,12 @@
                             'Phone' => $coworking->phone,
                             'Birthday' => $coworking->birthday,
                             'Formation' => $coworking->formation,
-                            'CV' =>
-                                '<a href="' .
-                                asset('storage/' . $coworking->cv) .
-                                '" target="_blank" class="text-blue-600 hover:text-blue-800">Download CV</a>',
+                            'CV' => $coworking->cv,
                             'Project Name' => $coworking->proj_name,
                             'Project Description' => $coworking->proj_description,
                             'Domain' => $coworking->domain,
                             'Plan' => $coworking->plan,
-                            'Presentation' =>
-                                '<a href="' .
-                                asset('storage/' . $coworking->presentation) .
-                                '" target="_blank" class="text-blue-600 hover:text-blue-800">Download CV</a>',
+                            'Presentation' => $coworking->presentation,
                             'Previous Projects' => $coworking->prev_proj,
                             'Reasons' => $coworking->reasons,
                             'Needs' => $coworking->needs,
@@ -45,7 +39,6 @@
                         <tbody>
                             @foreach ($fields as $label => $value)
                                 @php
-                                    // Determine the background color class based on the loop iteration
                                     $bgClass = $loop->iteration % 2 == 0 ? 'bg-alpha/10' : '';
                                 @endphp
 
@@ -53,20 +46,22 @@
                                     <td class="border p-3 border-alpha font-semibold">{{ $label }}</td>
                                     <td class="border p-3 border-alpha">
                                         @if ($label == 'CV' || $label == 'Presentation')
-                                            <div
-                                                class="flex gap-2 border items-center justify-center bg-black text-alpha p-2 rounded">
-                                                <a class="font-semibold"
-                                                    href="{{ asset('storage/' . $coworking->$label) }}"
-                                                    download="{{ $coworking->full_name . '_' . $label }}">
-                                                    {{ $coworking->full_name . ' ' . $label }}
-                                                </a>
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                    viewBox="0 0 24 24" stroke-width="2.5" stroke="#ffc801"
-                                                    class="size-5">
-                                                    <path stroke-linecap="round" stroke-linejoin="round"
-                                                        d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
-                                                </svg>
-                                            </div>
+                                            @if ($value)
+                                                <div
+                                                    class="flex gap-2 border items-center justify-center bg-black text-alpha p-2 rounded">
+                                                    <a class="font-semibold"
+                                                        href="{{ asset('storage/' . $coworking->$label) }}"
+                                                        download="{{ $coworking->full_name . '_' . $label }}">
+                                                        {{ $coworking->full_name . ' ' . $label }}
+                                                    </a>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                        viewBox="0 0 24 24" stroke-width="2.5" stroke="#ffc801"
+                                                        class="size-5">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
+                                                    </svg>
+                                                </div>
+                                            @endif
                                         @elseif ($label == 'Domain' || $label == 'Reasons')
                                             <span class="capitalize">
                                                 {{ str_replace('-', ' ', implode(', ', explode(',', $value))) }}

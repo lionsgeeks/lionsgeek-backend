@@ -34,7 +34,7 @@
         <div class="md:w-1/2  flex flex-col gap-3 ">
             <div class="text-xl bg-white p-4 flex flex-col gap-4">
                 <h1 class="font-bold">Total Subscribers</h1>
-                <p class="font-medium">5678</p>
+                <p class="font-medium">{{ $subscribers->count() }}</p>
             </div>
             <div class="bg-white p-4">
                 <div>
@@ -42,28 +42,21 @@
                     <p>Recent newsletters sent to subscribers</p>
                 </div>
                 <div>
-                    <table class="w-full ">
-                        <tr class="border-b ">
-                            <th class="py-3 text-start">Subject</th>
-                            <th class="py-3 text-start">Sent Date</th>
-                        </tr>
-                        <tr class="border-b">
-                            <td class="py-3">New chapter is start</td>
-                            <td class="py-3">2023-06-15</td>
-                        </tr>
-                        <tr class="border-b">
-                            <td class="py-3">New chapter is start</td>
-                            <td class="py-3">2023-06-15</td>
-                        </tr>
-                        <tr class="border-b">
-                            <td class="py-3">New chapter is start</td>
-                            <td class="py-3">2023-06-15</td>
-                        </tr>
-                        <tr class="border-b">
-                            <td class="py-3">New chapter is start</td>
-                            <td class="py-3">2023-06-15</td>
-                        </tr>
-                    </table>
+                    @if ($lastnews->count() > 0)
+                        <table class="w-full ">
+                            @foreach ($lastnews as $item)
+                                <tr class="border-b ">
+                                    <th class="py-3 text-start">{{ $item->subject }}</th>
+                                    <th class="py-3 text-start">{{ $item->created_at }}</th>
+                                </tr>
+                            @endforeach
+                        </table>
+                    @else
+                        <div class="flex flex-col items-center justify-center min-h-[40vh] text-black/50">
+                            <h1 class="text-xl font-bold ">Not Available</h1>
+                            <p>It looks like you haven't sent any newsletters yet.</p>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

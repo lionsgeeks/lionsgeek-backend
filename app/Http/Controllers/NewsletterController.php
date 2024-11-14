@@ -12,7 +12,9 @@ class NewsletterController extends Controller
 {
     public function index()
     {
-        return view("newsletter.newsletter");
+        $subscribers = Subscriber::all();
+        $lastnews = Newsletter::latest(4);
+        return view("newsletter.newsletter", compact(['subscribers','lastnews']));
     }
     public function store(Request $request)
     {

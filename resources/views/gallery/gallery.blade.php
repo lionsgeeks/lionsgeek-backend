@@ -11,7 +11,7 @@
     </x-slot>
 
 
-    <div class="p-6">
+    <div class="py-12 px-10">
         <div class="flex {{ $galleries->count() == 0 ? 'h-[70vh]' : 'min-h-[70vh]' }}  p-6 flex-wrap gap-x-[calc(5%/3)] gap-y-4 w-[100%] bg-white rounded-lg ">
             @if ($galleries->count() == 0)
                 <div class="h-[100%] bg-white flex rounded-lg items-center justify-center w-full">

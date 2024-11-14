@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AttendenceController;
 use App\Http\Controllers\Api\BlogController;
 use App\Http\Controllers\Api\ContactController;
+use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\Api\InfoSessionController;
 use App\Http\Controllers\Api\GalleryController;
 use App\Http\Controllers\Api\SubscriberController;
@@ -29,3 +30,4 @@ Route::post('/participate', [ContactController::class, 'participate']);
 Route::get('/infosessions', [InfoSessionController::class, 'index']);
 
 Route::get("/galleries",[GalleryController::class,"index"]);
+Route::get('/events',[EventController::class,'index']);

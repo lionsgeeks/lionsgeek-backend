@@ -5,14 +5,15 @@
         </h2>
 
         <a href="{{ route('events.create') }}">
-            <button class=" py-[0.7rem] {{ $events->count() == 0 ? "hidden" : "" }} px-[2rem] text-[16px] font-bold rounded-[10px] bg-alpha hover:bg-black hover:text-white transition duration-150 ">
-                Create Event
+            <button
+                class="bg-black {{ $events->count() == 0 ? "hidden" : "" }} text-white rounded-lg px-4 py-2 hover:bg-alpha hover:text-black  transition duration-150">
+                <span class="text-lg font-bold">+</span> Create a New Event
             </button>
         </a>
     </x-slot>
 
-    <div class="p-6">
-        <div class=" {{ $events->count() == 0 ? 'h-[70vh]' : 'min-h-[70vh]' }} bg-white rounded-lg p-6  w-[100%] ">
+    <div class="py-12 px-10">
+        <div class=" {{ $events->count() == 0 ? 'h-[70vh]' : 'min-h-[70vh]' }} bg-white rounded-lg p-6  w-[100%] px-8 ">
             @if ($events->count() == 0)
                 <div class="h-[100%] bg-white flex rounded-lg items-center justify-center w-full">
                     <div class="text-center">

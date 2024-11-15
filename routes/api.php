@@ -31,3 +31,5 @@ Route::get('/infosessions', [InfoSessionController::class, 'index']);
 
 Route::get("/galleries",[GalleryController::class,"index"]);
 Route::get('/events',[EventController::class,'index']);
+
+Route::get('/upcoming', [EventController::class,'upcoming']);

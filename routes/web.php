@@ -8,6 +8,7 @@ use App\Http\Controllers\InfoSessionController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\NoteController;
 use App\Http\Controllers\ParticipantController;
 use App\Http\Controllers\PdfController;
 use App\Http\Controllers\ProfileController;
@@ -32,6 +33,8 @@ Route::resource("blogs", BlogController::class);
 Route::resource("contacts", ContactController::class);
 Route::resource("coworkings", CoworkingController::class);
 Route::resource('participants', ParticipantController::class);
+Route::resource('notes', NoteController::class)->except(['store']);
+Route::post('notes/{participant}', [NoteController::class, 'store'])->name('notes.store');
 
 Route::resource('infosessions', InfoSessionController::class);
 Route::patch('/infosessions/available/{id}', [InfoSessionController::class, 'availabilityStatus'])->name('infosessions.isavailable');

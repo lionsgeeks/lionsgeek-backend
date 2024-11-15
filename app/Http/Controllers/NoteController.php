@@ -2,21 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\InfoSession;
 use App\Models\Note;
 use App\Models\Participant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class ParticipantController extends Controller
+class NoteController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $participants = Participant::all();
-        $infos = InfoSession::all();
-        return view('participants.participants', compact('participants', 'infos'));
+        //
     }
 
     /**
@@ -30,24 +28,36 @@ class ParticipantController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, Participant $participant)
     {
-        //
+        $request->validate([
+            'note' => 'required|string',
+        ]);
+
+        $user = Auth::user();
+
+        Note::create([
+            'note' => $request->note,
+            'participant_id' => $participant->id,
+            'author' => $user->name,
+        ]);
+
+
+        return redirect()->back();
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Participant $participant)
+    public function show(string $id)
     {
-        $notes = Note::where('participant_id', $participant->id)->get();
-        return view('participants.partials.participant_show', compact('participant', 'notes'));
+        //
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Participant $participant)
+    public function edit(string $id)
     {
         //
     }
@@ -55,7 +65,7 @@ class ParticipantController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Participant $participant)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -63,7 +73,7 @@ class ParticipantController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Participant $participant)
+    public function destroy(string $id)
     {
         //
     }

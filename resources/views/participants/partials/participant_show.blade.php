@@ -226,8 +226,8 @@
                         <div class="flex flex-wrap mt-4">
                             @foreach ([1, 2, 3, 4, 5, 6, 7, 8, 9, 10] as $item)
                                 <div class="w-[20%] my-2">
-                                    <!-- Checkbox -->
-                                    <input type="checkbox" :id="'item' + {{ $item }}" st
+
+                                    <input type="checkbox" :id="'item' + {{ $item }}"
                                         @change="toggleTask($event.target.checked)" />
                                     <label :for="'item' + {{ $item }}">Condition {{ $item }}</label>
                                 </div>
@@ -238,15 +238,26 @@
                     <br>
                     {{-- Admin Notes --}}
                     <div class="p-3 rounded shadow-md">
-                        <h1 class="text-2xl font-bold">Admin Notes:</h1>
-                        <br>
+                        <h1 class="text-2xl font-bold mb-2">Admin Notes:</h1>
                         <div>
                             <p class="mb-2 text-lg">Add a Note:</p>
-                            <textarea name="note" id="notes" class="w-full rounded border-gray-400" rows="5"
-                                placeholder="Enter your remarks about the user"></textarea>
-                            <button class="w-full bg-black text-white rounded py-2 mt-2">
-                                Add Note
-                            </button>
+                            <form action="{{ route('notes.store', $participant) }}" method="POST">
+                                @csrf
+                                <textarea name="note" id="note" class="w-full rounded border-gray-400" rows="5"
+                                    placeholder="Enter your remarks about the user"></textarea>
+                                <button type="submit" class="w-full bg-black text-white rounded py-2 mt-2">
+                                    Add Note
+                                </button>
+                            </form>
+
+                            {{-- <div> --}}
+                                @foreach ($notes as $note)
+                                <div class="bg-gray-200 px-5 py-3 rounded-lg my-3 capitalize">
+                                    <p>{{$note->note}}</p>
+                                    <p class="text-gray-500">{{$note->author}} - {{$note->created_at}}</p>
+                                </div>
+                            @endforeach
+                            {{-- </div> --}}
                         </div>
                     </div>
                 </div>

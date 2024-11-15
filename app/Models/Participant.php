@@ -26,4 +26,9 @@ class Participant extends Model
     {
         return  $this->belongsTo(InfoSession::class);
     }
+
+    public function notes()
+    {
+        return $this->hasMany(Note::class);
+    }
 }

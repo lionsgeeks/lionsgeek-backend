@@ -227,6 +227,7 @@
                             @foreach ([1, 2, 3, 4, 5, 6, 7, 8, 9, 10] as $item)
                                 <div class="w-[20%] my-2">
 
+                                    <!-- Checkbox -->
                                     <input type="checkbox" :id="'item' + {{ $item }}"
                                         @change="toggleTask($event.target.checked)" />
                                     <label :for="'item' + {{ $item }}">Condition {{ $item }}</label>

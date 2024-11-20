@@ -8,17 +8,17 @@
         <div class="w-[84vw] h-[100vh] flex flex-col overflow-y-scroll">
             <div class="flex items-center justify-between py-[1.2rem] px-[1rem] w-[100%] bg-white  ">
                 <p class="text-[25px] font-bold ">{{ $gallery->title->en }}</p>
-                <form action="{{ route('gallery.destroy', $gallery) }}" method="post" enctype="multipart/form-data" onsubmit="this.submitButton.disabled =true" >
+                <form action="{{ route('gallery.destroy', $gallery) }}" method="post" enctype="multipart/form-data"
+                    onsubmit="this.submitButton.disabled =true">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" name="submitButton" class="px-[2.2rem] py-[.8rem] font-bold rounded-[14px] bg-red-500 ">Delete resource</button>
+                    <button type="submit" name="submitButton"
+                        class="px-[2rem] py-[.7rem] font-semibold rounded-[14px] bg-red-500 ">Delete resource</button>
                 </form>
             </div>
 
-            <div class="flex w-[100%] bg-slate-100 ">
+            <div class="flex w-[100%] bg-[#f3f4f6] ">
                 <div class=" p-[2rem] gap-[1.6rem] flex flex-col items-center  w-[65%]">
-                    <img class="w-[50%] bg-yellow-50  " src="{{ asset('storage/images/' . $gallery->couverture) }}"
-                        alt="">
                     <form class="flex flex-col items-center justify-center py-6 w-[100%] bg-white rounded-[20px] gap-5 "
                         action="{{ route('gallery.update', $gallery) }}" method="post" enctype="multipart/form-data">
                         @csrf
@@ -27,9 +27,9 @@
 
                         <div x-data="{ tab: 'English' }" class="w-[100%]  flex flex-col items-center ">
                             {{-- Language buttons --}}
-                            <div class="flex items-center justify-center gap-2 p-2 w-[100%] ">
+                            <div class="flex items-center justify-center gap-2 p-2 px-7 w-[100%] ">
                                 @foreach (['English', 'Français', 'العربية'] as $language)
-                                    <button type="button" class="px-[3rem] py-[0.5rem] bg-slate-100 rounded-[20px]"
+                                    <button type="button" class="px-[3rem] py-[0.5rem] w-1/3 bg-[#f3f4f6] rounded-lg"
                                         @click="tab = '{{ $language }}' ">
                                         {{ $language }}
                                     </button>
@@ -46,14 +46,14 @@
                                         <div class="flex flex-col w-[100%]  gap-1">
                                             <label for="title_en">Title</label>
                                             <input required placeholder="Enter title"
-                                                class="w-[100%] bg-slate-100 border-[2px] border-black rounded-[10px]"
+                                                class="w-[100%] bg-[#f3f4f6]  border-black rounded-[10px]"
                                                 type="text" name="title[en]" id="title_en"
                                                 value="{{ $gallery->title->en }}">
                                         </div>
                                         <div class="flex flex-col w-[100%]  gap-1 ">
                                             <label for="description_en">Description</label>
                                             <textarea placeholder="Enter description" rows="5"
-                                                class="w-[100%] bg-slate-100 border-[2px] border-black rounded-[10px]" type="text" name="description[en]"
+                                                class="w-[100%] bg-[#f3f4f6]  border-black rounded-[10px]" type="text" name="description[en]"
                                                 id="description_en">{{ $gallery->description->en }}</textarea>
                                         </div>
                                     </div>
@@ -63,14 +63,14 @@
                                         <div class="flex flex-col w-[100%] gap-1">
                                             <label for="name_fr">Titre</label>
                                             <input required placeholder="Enter le Titre"
-                                                class=" bg-slate-100 border-[2px] border-black rounded-[10px]"
+                                                class=" bg-[#f3f4f6]  border-black rounded-[10px]"
                                                 type="text" name="title[fr]" id="name_fr"
                                                 value="{{ $gallery->title->fr }}">
                                         </div>
                                         <div class="flex flex-col  w-[100%] gap-1">
                                             <label for="description_fr">Description</label>
                                             <textarea placeholder="Enter la description" rows="5"
-                                                class="w-[100%] bg-slate-100 border-[2px] border-black rounded-[10px]" type="text" name="description[fr]"
+                                                class="w-[100%] bg-[#f3f4f6]  border-black rounded-[10px]" type="text" name="description[fr]"
                                                 id="description_fr">{{ $gallery->description->fr }}</textarea>
                                         </div>
                                     </div>
@@ -80,13 +80,13 @@
                                         <div class="flex flex-col  w-[100%] text-end gap-1">
                                             <label for="name_ar">الاسم</label>
                                             <input required placeholder="أدخل العنوان"
-                                                class=" border-[2px] bg-slate-100 border-black rounded-[10px]"
+                                                class="  bg-[#f3f4f6] border-black rounded-[10px]"
                                                 type="text" name="title[ar]" id="name_ar"
                                                 value="{{ $gallery->title->ar }}">
                                         </div>
                                         <div class="flex flex-col w-[100%]  text-end gap-1">
                                             <label for="description_ar">وصف النص</label>
-                                            <textarea placeholder="أدخل الوصف" class="w-[100%] border-[2px] bg-slate-100 border-black rounded-[10px]" rows="5"
+                                            <textarea placeholder="أدخل الوصف" class="w-[100%]  bg-[#f3f4f6] border-black rounded-[10px]" rows="5"
                                                 type="text" name="description[ar]" id="description_ar">{{ $gallery->description->ar }}</textarea>
                                         </div>
                                     </div>
@@ -100,38 +100,36 @@
                                         <p x-show="tab=== 'Français' " class="">Couverture</p>
                                         <p x-show="tab=== 'العربية' " class="text-end">الغطاء</p>
                                     </div>
-                                    <label for="image"
-                                        class="p-[0.75rem] cursor-pointer flex gap-2 items-center  border-[2px] border-black bg-slate-100 rounded-[10px]">
-                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor" class="size-6 flex-shrink-0">
-                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
-                                        </svg>
-                                        <span id="imagesPlaceholder" class="text-base text-gray-500">
-                                            upload new Cover (optional)
-                                        </span>
-                                    </label>
-                                    <input
-                                        onchange="imagesPlaceholder.textContent = [...this.files].map(f => f.name).join(', ')"
-                                        class="hidden" type="file" placeholder="image"
-                                        accept="image/png, image/jpg, image/jpeg" name="couverture" id="image"
-                                        value="{{ $gallery->couverture }}">
+
+                                    <div class="h-96 relative rounded-lg flex items-center justify-center">
+                                        <h1 class="text-white absolute font-semibold z-30">+ Update the cover</h1>
+                                        <div class="w-full h-full bg-black/50 absolute top-0 z-20 rounded-lg"></div>
+                                        <input
+                                        name="couverture"
+                                            onchange="imagesPlaceholder.textContent = [...this.files].map(f => f.name).join(', ')"
+                                            accept="image/*" type="file"
+                                            class="w-full rounded-lg h-full absolute top-0 opacity-0 cursor-pointer z-30">
+                                        <img class="w-full h-full object-cover rounded-lg "
+                                            src="{{ asset('storage/images/' . $gallery->couverture) }}"alt="">
+                                    </div>
+
+                                    
                                 </div>
 
                             </div>
 
+                            <button type="submit" class="w-[92%] py-3  rounded-[14px] bg-black text-white">Submit</button>
                         </div>
-                        <button type="submit" class="p-3 px-[3rem] rounded-[14px] bg-black text-white">Submit</button>
                     </form>
                 </div>
                 <div class="w-[35%] min-h-[100vh] p-[2rem] flex flex-col ">
                     <div class= "flex flex-wrap justify-between gap-y-3 bg-white p-[1rem] rounded-[20px]">
                         <div onclick="storeImage.click()"
-                            class="w-[48%] h-fit aspect-square border-dashed border-slate-100 border-[2px] rounded  cursor-pointer ">
-                            
+                            class="w-[48%] h-fit aspect-square border-dashed border-slate-100  rounded  cursor-pointer ">
+
                             <form class="flex flex-col gap-1 items-center justify-center h-[100%] w-[100%%]"
                                 action="{{ route('images.store', $gallery) }}" method="post"
-                                enctype="multipart/form-data" onsubmit="this.submitButton.disabled = true" >
+                                enctype="multipart/form-data" onsubmit="this.submitButton.disabled = true">
                                 @csrf
                                 <p class="">Add image</p>
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -144,21 +142,22 @@
                                 <input onchange="addImgBtn.click()" multiple name="images[]" type="file"
                                     id="storeImage" accept="image/png, image/jpeg" multiple
                                     class="mt-2 border-2 rounded w-full bg-white hidden">
-                                <button type="submit" name="submitButton" class="hidden" id="addImgBtn">confirm</button>
+                                <button type="submit" name="submitButton" class="hidden"
+                                    id="addImgBtn">confirm</button>
                             </form>
 
                         </div>
                         @foreach ($gallery->images as $image)
-                            <form action="{{ route('images.destroy', $image) }}" method="post" class="w-[48%] h-fit" onsubmit="this.submitButton.disabled = true" >
+                            <form action="{{ route('images.destroy', $image) }}" method="post" class="w-[48%] h-fit"
+                                onsubmit="this.submitButton.disabled = true">
                                 @csrf
                                 @method('DELETE')
                                 <div class="w-[100%] relative group">
                                     <img class="w-[100%] group-hover:opacity-50 transition duration-300 aspect-square object-cover rounded border"
                                         src="{{ asset('storage/images/' . $image->path) }}" alt="">
-                                    <button
-                                        name="submitButton" type="submit"
+                                    <button name="submitButton" type="submit"
                                         class="w-[100%] h-[100%]  absolute inset-0 items-center justify-center hidden group-hover:flex transition duration-300 ">
-                                        <svg class=" w-[30%] rounded bg-red-600 " xmlns="http://www.w3.org/2000/svg"
+                                        <svg class=" w-8 rounded bg-red-600 " xmlns="http://www.w3.org/2000/svg"
                                             fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                                             class="size-6">
                                             <path stroke-linecap="round" stroke-linejoin="round"

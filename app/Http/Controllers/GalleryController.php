@@ -99,6 +99,7 @@ class GalleryController extends Controller
      */
     public function update(Request $request , Gallery $gallery)
     {
+        // dd("j");
         request()->validate([
             "title" => "required|array|min:3",
             "title.en" => "string|required",

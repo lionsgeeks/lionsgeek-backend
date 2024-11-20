@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\Api\InfoSessionController;
 use App\Http\Controllers\Api\GalleryController;
+use App\Http\Controllers\Api\ProjectController;
 use App\Http\Controllers\Api\SubscriberController;
 use App\Models\InfoSession;
 use Illuminate\Http\Request;
@@ -31,5 +32,6 @@ Route::get('/infosessions', [InfoSessionController::class, 'index']);
 
 Route::get("/galleries",[GalleryController::class,"index"]);
 Route::get('/events',[EventController::class,'index']);
+Route::get('/projects',[ProjectController::class,'index']);
 
 Route::get('/upcoming', [EventController::class,'upcoming']);

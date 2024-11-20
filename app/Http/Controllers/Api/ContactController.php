@@ -12,6 +12,8 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Mail;
 use LaravelQRCode\Facades\QRCode;
 use App\Mail\CodeMail;
+use App\Models\FrequentQuestion;
+use App\Models\Satisfaction;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 
@@ -107,6 +109,7 @@ class ContactController extends Controller
 
         $time = Carbon::now();
         $code = $request->first_name . $request->last_name . $time->format('h:i:s');
+        // create the participant
         $participant = Participant::create([
             'info_session_id' => $request->info_session_id,
             'first_name' => $request->first_name,
@@ -119,6 +122,16 @@ class ContactController extends Controller
             'gender' => $request->gender,
             'code' => $code
         ]);
+
+        // one to one relationship
+        $questions = FrequentQuestion::create([
+            'participant_id' => $participant->id,
+        ]);
+        $satisfaction = Satisfaction::create([
+            'participant_id' => $participant->id,
+        ]);
+
+
 
         $data['first_name'] = $participant->first_name;
         $data['last_name'] = $participant->last_name;

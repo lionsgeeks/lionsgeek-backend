@@ -43,7 +43,7 @@
                                             <textarea placeholder="Enter description" required rows="5"
                                                 class="w-[100%] border-[2px] border-black rounded-[10px]" type="text" name="description[en]" id="description_en">{{ old('description.en') }}</textarea>
                                         </div>
-                                        
+
                                     </div>
 
                                     {{-- Français --}}

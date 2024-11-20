@@ -51,15 +51,15 @@
 
                                 <div x-show="tab === 'Français'">
                                     <div class="flex flex-col gap-y-[0.75rem]">
-                                        <div class="flex flex-col gap-[0.5rem] text-end">
+                                        <div class="flex flex-col gap-[0.5rem]">
                                             <label for="title_fr" class="text-base">Titre du Blog</label>
-                                            <input class="rounded text-end" type="text" placeholder="Titre..."
+                                            <input class="rounded" type="text" placeholder="Titre..."
                                                 name="title[fr]" id="title_fr" value="{{ $blog->title->fr }}"
                                                 required>
                                         </div>
 
                                         <div class="flex flex-col gap-[0.5rem]">
-                                            <label for="description_fr" class="text-base text-end">Description du Blog</label>
+                                            <label for="description_fr" class="text-base">Description du Blog</label>
 
                                             <div id="quill-editor_fr" class="mb-3" style="height: 300px;"></div>
                                             <textarea rows="3" class="w-full hidden" name="description[fr]" id="description_fr">{{ $blog->description->fr }}</textarea>
@@ -127,9 +127,7 @@
                             [{
                                 header: [1, 2, 3, false]
                             }],
-                            ['bold', 'underline', 'code', 'strike', {
-                                align: ['justify', 'center', 'right']
-                            }],
+                            ['bold', 'underline', 'code', 'strike', { align: ['justify','center', 'right'] }],
 
                             ['link', {
                                 list: 'ordered'
@@ -170,7 +168,7 @@
                             [{
                                 header: [1, 2, 3, false]
                             }],
-                            ['bold', 'underline', 'code', 'strike', 'blockquote'],
+                            ['bold', 'underline', 'code', 'strike', { align: ['justify','center', 'right'] }],
 
                             ['link', {
                                 list: 'ordered'
@@ -208,7 +206,7 @@
                             [{
                                 header: [1, 2, 3, false]
                             }],
-                            ['bold', 'underline', 'code', 'strike', 'blockquote'],
+                            ['bold', 'underline', 'code', 'strike', { align: ['justify','center', 'right'] }],
 
                             ['link', {
                                 list: 'ordered'

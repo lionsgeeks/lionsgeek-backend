@@ -31,4 +31,14 @@ class Participant extends Model
     {
         return $this->hasMany(Note::class);
     }
+
+    public function questions()
+    {
+        return $this->hasOne(FrequentQuestion::class);
+    }
+
+    public function satisfaction()
+    {
+        return $this->hasOne(Satisfaction::class);
+    }
 }

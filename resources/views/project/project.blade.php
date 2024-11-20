@@ -10,7 +10,7 @@
             class="bg-black text-white rounded-lg px-4 py-2 hover:bg-alpha hover:text-black  transition duration-150 ">Add
             Project
         </button>
-            
+
         @endif
         @include('project.partials.create_project')
     </x-slot>

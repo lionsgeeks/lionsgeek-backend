@@ -3,10 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
-use App\Http\Requests\StoreEventRequest;
-use App\Http\Requests\UpdateEventRequest;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
 class EventController extends Controller
@@ -58,7 +55,8 @@ class EventController extends Controller
 
         
         $content = file_get_contents($request->cover);
-        $fileName = hash("sha256", $content) . '.' . $request->cover->getClientOriginalName();
+        $fileName = hash("sha256", $content . now()) . '.'  . $request->cover->getClientOriginalName();
+        // dd($fileName);
         Storage::disk("public")->put("images/" . $fileName, $content);
 
         Event::create([
@@ -124,7 +122,7 @@ class EventController extends Controller
 
             Storage::disk('public')->delete("images/" . $event->cover);
             $content = file_get_contents($request->cover);
-            $fileName = hash("sha256", $content) . '.' . $request->cover->getClientOriginalName();
+            $fileName = hash("sha256", $content . now()) . '.'  . $request->cover->getClientOriginalName();
             Storage::disk("public")->put("images/" . $fileName, $content);
         }
 

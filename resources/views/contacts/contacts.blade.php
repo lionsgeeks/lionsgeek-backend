@@ -57,7 +57,7 @@
                     <p class="text-gray-400">Encourage visitors to reach out by checking that your contact form is accessible and easy to use.</p>
                 </div>
             </div>
-            
+
             @endif
         </div>
     </div>

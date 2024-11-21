@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Satisfaction extends Model
+{
+    protected $fillable = [
+        'participant_id',
+        'interest_in_joining_lionsgeek',
+        'studying',
+        'working',
+        'overall_availability',
+        'language',
+        'discipline',
+        'motivation_overcoming_challenges',
+        'team_player',
+        'soft_skills',
+    ];
+
+
+    public function participant()
+    {
+        return $this->belongsTo(Participant::class);
+    }
+}

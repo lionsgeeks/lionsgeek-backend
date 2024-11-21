@@ -35,6 +35,8 @@ Route::resource("coworkings", CoworkingController::class);
 Route::resource('participants', ParticipantController::class);
 Route::resource('notes', NoteController::class)->except(['store']);
 Route::post('notes/{participant}', [NoteController::class, 'store'])->name('notes.store');
+Route::post('satisfaction/{participant}', [ParticipantController::class, 'updateSatisfaction'])->name('satisfaction.store');
+Route::post('frequent/{participant}', [ParticipantController::class, 'frequestQuestions'])->name('frequent.store');
 
 Route::resource('infosessions', InfoSessionController::class);
 Route::patch('/infosessions/available/{id}', [InfoSessionController::class, 'availabilityStatus'])->name('infosessions.isavailable');

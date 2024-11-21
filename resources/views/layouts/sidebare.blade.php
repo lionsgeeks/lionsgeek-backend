@@ -96,7 +96,7 @@
 
 
             <a href='{{ route('gallery.index') }}'
-                class='nav-button no-underline text-base font-bold py-[0.75rem] flex items-center gap-2 hover:text-alpha hover:bg-gray-100 rounded-xl px-[1rem] {{ request()->routeIs('gallery.index' ) || request()->routeIs('gallery.create') || request()->routeIs('gallery.show') ? 'text-alpha bg-gray-100' : '' }}'>
+                class='nav-button no-underline text-base font-bold py-[0.75rem] flex items-center gap-2 hover:text-alpha hover:bg-gray-800 rounded-xl px-[1rem] {{ request()->routeIs('gallery.index' ) || request()->routeIs('gallery.create') || request()->routeIs('gallery.show') ? 'text-alpha bg-gray-800' : '' }}'>
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="size-5">
                     <path stroke-linecap="round" stroke-linejoin="round"

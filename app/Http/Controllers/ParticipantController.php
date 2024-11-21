@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\FrequentQuestion;
 use App\Models\InfoSession;
 use App\Models\Note;
 use App\Models\Participant;
@@ -41,7 +42,9 @@ class ParticipantController extends Controller
     public function show(Participant $participant)
     {
         $notes = Note::where('participant_id', $participant->id)->get();
-        return view('participants.partials.participant_show', compact('participant', 'notes'));
+        $questions = $participant->questions;
+
+        return view('participants.partials.participant_show', compact('participant', 'notes', 'questions'));
     }
 
     /**
@@ -66,5 +69,39 @@ class ParticipantController extends Controller
     public function destroy(Participant $participant)
     {
         //
+    }
+
+    public function frequestQuestions(Request $request, Participant $participant)
+    {
+
+
+        $frequents = $participant->questions;
+        foreach ($request->all() as $field => $value) {
+            if ($field != '_token') {
+                $frequents->update([
+                    $field => $value,
+                ]);
+            }
+        }
+
+        return redirect()->back()->with('success', 'Form submitted successfully!');
+    }
+
+
+
+    public function updateSatisfaction(Request $request, $participantId)
+    {
+
+        $participant = Participant::findOrFail($participantId);
+
+        $satisfactionData = $request->input('satisfaction', []);
+
+        foreach ($satisfactionData as $column => $checked) {
+            $participant->satisfaction->{$column} = $checked == "on" ? 1 : 0;
+        }
+
+        $participant->satisfaction->save();
+
+        return redirect()->back()->with('success', 'Satisfaction data saved successfully!');
     }
 }

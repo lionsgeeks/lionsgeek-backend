@@ -17,9 +17,11 @@ class EventController extends Controller
     public function upcoming()
     {
         $timeNow = now();
-        $upcomingEvents = Event::where('date', ">", $timeNow)->orderBy('date')->get();
-        return response()->json(
-            $upcomingEvents
-        );
+        $upcomingEvents = Event::where('date', ">", $timeNow)->orderBy('date')->first();
+        $latestEvent = Event::latest('date')->first();
+        return response()->json([
+            'upcoming' => $upcomingEvents,
+            'latest' => $latestEvent ? $latestEvent->toArray() : null
+        ]);
     }
 }

@@ -69,7 +69,7 @@
                     <p class="text-gray-500 mb-6">Currently, there are no requests to join the coworking space.</p>
                     <p class="text-gray-400">Make it easy for potential members to inquire by ensuring your sign-up form is accessible and inviting.</p>
                 </div>
-            </div>            
+            </div>
             @endif
         </div>
     </div>

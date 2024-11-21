@@ -7,21 +7,30 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white  overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                {{-- TODO: this for approving/denying --}}
+                {{-- <div class="flex items-center justify-between bg-white p-2">
+                    <p>Next Step</p>
+                    <div class="flex items-center gap-2">
+                        <p>DOWN</p>
+                        <p>UP</p>
+                    </div>
+                </div> --}}
                 <div class="p-6 text-gray-900">
                     <div class="flex items-center gap-2 justify-between">
                         {{-- User Info --}}
                         <div class="w-full p-3 shadow-md h-[65vh] rounded">
                             <div class="flex items-center justify-between">
                                 <h1 class="text-2xl font-bold mb-2">User Profile</h1>
-                                <button class="bg-black text-white rounded px-2 py-1">
+                                {{-- TODO: this button to edit the user information --}}
+                                {{-- <button class="bg-black text-white rounded px-2 py-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="size-4">
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
                                     </svg>
 
-                                </button>
+                                </button> --}}
                             </div>
 
                             <div class="flex items- gap-7 ">
@@ -98,88 +107,87 @@
                         </div>
 
                         {{-- Frequent Questions --}}
-                        <div
-                            class="w-full flex items-center justify-center p-3 shadow-md h-[65vh] rounded overflow-y-auto">
+                        <div class="w-full flex justify-center p-3 shadow-md h-[65vh] rounded overflow-y-auto">
                             <div class="w-full">
-                                <h1 class="text-2xl font-bold">Frequent Questions: </h1>
-                                <div class="w-full my-2">
-                                    <p class="mb-1">Question 1:</p>
-                                    <div class="flex items-center gap-2">
-                                        <input class="w-full rounded" type="text" name="" id=""
-                                            placeholder="Answer 1">
-                                        <button class=" border rounded p-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                stroke-width="1.5" stroke="currentColor" class="size-5">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
-                                            </svg>
+                                <div x-data="{
+                                    open: null,
+                                    frequents: {{json_encode($questions)}},
+                                    sections: [{
+                                            title: 'Background',
+                                            questions: [
+                                                { text: 'Mode of Transportation?', id: 1 },
+                                                { text: 'Living Situation?', id: 2 },
+                                                { text: 'Where have you heard of LionsGeek?', id: 3 },
+                                                { text: 'Academic Background?', id: 4 },
+                                                { text: 'Professional Experience?', id: 5 },
+                                            ]
+                                        },
+                                        {
+                                            title: 'Interest',
+                                            questions: [
+                                                { text: 'Interest In Joining Lionsgeek?', id: 1 },
+                                                { text: 'Technical Skills?', id: 2 },
+                                                { text: 'Profeciency in French?', id: 3 },
+                                                { text: 'Profeciency in English?', id: 4 },
+                                            ]
+                                        },
+                                        {
+                                            title: 'Additional',
+                                            questions: [
+                                                { text: 'Strengths?', id: 1 },
+                                                { text: 'Weaknesses?', id: 2 },
+                                                { text: 'Do you have a laptop?', id: 3 },
+                                                { text: 'Available all week?', id: 4 },
+                                            ]
+                                        }
+                                    ],
+                                    answers: {}
+                                }">
+                                    <!-- Form to submit answers -->
+                                    <form action="{{ route('frequent.store', $participant) }}" class="py-2"
+                                        method="POST">
+                                        @csrf
 
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="w-full my-2">
-                                    <p class="mb-1">Question 2:</p>
-                                    <div class="flex items-center gap-2">
-                                        <input class="w-full rounded" type="text" name="" id=""
-                                            placeholder="Answer 2">
-                                        <button class=" border rounded p-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                stroke-width="1.5" stroke="currentColor" class="size-5">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
-                                            </svg>
+                                        <div class="flex items-center justify-between">
+                                            <h1 class="text-2xl font-bold mb-2">Frequent Questions:</h1>
+                                            <button type="submit"
+                                                class="mt-4 px-2 py-1 bg-black text-white rounded">Save</button>
+                                        </div>
 
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="w-full my-2">
-                                    <p class="mb-1">Question 3:</p>
-                                    <div class="flex items-center gap-2">
-                                        <input class="w-full rounded" type="text" name="" id=""
-                                            placeholder="Answer 3">
-                                        <button class=" border rounded p-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                class="size-5">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
-                                            </svg>
+                                        <template x-for="(section, index) in sections" :key="section.title">
+                                            <div>
+                                                <!-- Section header with toggle functionality -->
+                                                <h1 @click="open = open === index ? null : index"
+                                                    class="group cursor-pointer p-2 border-b border-gray-300 rounded my-2">
+                                                    <span class="group-hover:underline" x-text="section.title"></span>
+                                                </h1>
 
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="w-full my-2">
-                                    <p class="mb-1">Question 4:</p>
-                                    <div class="flex items-center gap-2">
-                                        <input class="w-full rounded" type="text" name="" id=""
-                                            placeholder="Answer 4">
-                                        <button class=" border rounded p-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                class="size-5">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
-                                            </svg>
+                                                <!-- Section questions, shown when section is expanded -->
+                                                <div x-show="open === index" class="pl-4">
+                                                    <template x-for="(question, qIndex) in section.questions"
+                                                        :key="qIndex">
+                                                        <div class="w-full my-2">
+                                                            <p class="mb-1" x-text="question.text"></p>
+                                                            <div class="flex items-center gap-2">
 
-                                        </button>
-                                    </div>
-                                </div>
-                                <div class="w-full my-2">
-                                    <p class="mb-1">Question 5:</p>
-                                    <div class="flex items-center gap-2">
-                                        <input class="w-full rounded" type="text" name="" id=""
-                                            placeholder="Answer 5">
-                                        <button class=" border rounded p-2">
-                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                                viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-                                                class="size-5">
-                                                <path stroke-linecap="round" stroke-linejoin="round"
-                                                    d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
-                                            </svg>
+                                                                <input class="w-full rounded"
+                                                                    :name="`${question.text.toLowerCase().replace(/ /g, '_').replace('?','')}`"
+                                                                    type="text"
+                                                                    :placeholder="`${frequents[question.text.toLowerCase().replace(/ /g, '_').replace('?','')]}`"
+                                                                    x-model="answers[`${section.title.toLowerCase()}_${question.id}`]">
 
-                                        </button>
-                                    </div>
+                                                            </div>
+                                                        </div>
+                                                    </template>
+                                                </div>
+                                            </div>
+                                        </template>
+
+                                    </form>
                                 </div>
+
+
+
                             </div>
 
                         </div>
@@ -188,7 +196,8 @@
                     {{-- Satisfaction --}}
                     <div x-data="{
                         totalTasks: 10,
-                        checkedTasks: 0,
+                        checkedTasks: {{ array_sum(array_map(fn($item) => $item ? 1 : 0, array_slice($participant->satisfaction->getAttributes(), 2, -2))) }},
+
                         get percentage() {
                             return (this.checkedTasks / this.totalTasks) * 100;
                         },
@@ -205,7 +214,7 @@
                             this.checkedTasks += checked ? 1 : -1;
                         }
                     }" class="p-3 rounded shadow-md ">
-
+                        {{--
                         <div class="flex items-center justify-between">
                             <h1 class="text-2xl font-bold ">Satisfaction Percentage:</h1>
                             <button class="bg-black text-white rounded px-3 py-1">Save</button>
@@ -224,16 +233,56 @@
 
                         <!-- Task List -->
                         <div class="flex flex-wrap mt-4">
-                            @foreach ([1, 2, 3, 4, 5, 6, 7, 8, 9, 10] as $item)
+                            @foreach (array_slice($participant->satisfaction->getAttributes(), 2, -2) as $column => $item)
                                 <div class="w-[20%] my-2">
 
                                     <!-- Checkbox -->
                                     <input type="checkbox" :id="'item' + {{ $item }}"
-                                        @change="toggleTask($event.target.checked)" />
-                                    <label :for="'item' + {{ $item }}">Condition {{ $item }}</label>
+                                        :checked={{ $item }} @change="toggleTask($event.target.checked)" />
+                                    <label :for="'item' + {{ $item }}"
+                                        class="capitalize">{{ str_replace('_', ' ', $column) }}</label>
                                 </div>
                             @endforeach
-                        </div>
+                        </div> --}}
+
+
+                        <form action="{{ route('satisfaction.store', $participant->id) }}" method="POST">
+                            @csrf
+
+                            <div class="flex items-center justify-between">
+                                <h1 class="text-2xl font-bold">Satisfaction Percentage:</h1>
+                                <button type="submit" class="bg-black text-white rounded px-3 py-1">Save</button>
+                            </div>
+
+                            <div class="relative h-[2vh] mt-4">
+                                <div class="w-full h-[2vh] bg-gray-200 rounded-full absolute top-0 left-0"></div>
+
+                                <div :style="'width: ' + percentage + '%; background-color: ' + barColor"
+                                    class="h-[2vh] w-full rounded-full absolute top-0 left-0 transition-all duration-150 ease-in-out">
+                                </div>
+                            </div>
+
+                            <!-- Task List -->
+                            <div class="flex flex-wrap mt-4">
+                                @foreach (array_slice($participant->satisfaction->getAttributes(), 2, -2) as $column => $item)
+                                    <div class="w-[20%] my-2">
+                                        {{-- send the ones that havent been modified as well --}}
+                                        <input type="hidden" name="satisfaction[{{ $column }}]"
+                                            value="0">
+
+                                        <label :for="satisfaction_{{ $column }}" class="capitalize">
+                                            <input type="checkbox" :id="'item' + {{ $item }}"
+                                                :name="satisfaction[{{ $column }}]" :checked={{ $item }}
+                                                @change="toggleTask($event.target.checked)" />
+
+                                            {{ str_replace('_', ' ', $column) }}
+
+                                        </label>
+                                    </div>
+                                @endforeach
+                            </div>
+                        </form>
+
                     </div>
 
                     <br>
@@ -252,10 +301,12 @@
                             </form>
 
                             {{-- <div> --}}
-                                @foreach ($notes as $note)
+                            @foreach ($notes as $note)
                                 <div class="bg-gray-200 px-5 py-3 rounded-lg my-3 capitalize">
-                                    <p>{{$note->note}}</p>
-                                    <p class="text-gray-500">{{$note->author}} - {{$note->created_at}}</p>
+                                    <p>{{ $note->note }}</p>
+
+                                    <p class="text-gray-500 text-sm">{{ $note->author }} - {{ $note->created_at }}
+                                    </p>
                                 </div>
                             @endforeach
                             {{-- </div> --}}

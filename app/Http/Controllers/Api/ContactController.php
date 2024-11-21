@@ -96,15 +96,16 @@ class ContactController extends Controller
     {
 
         $request->validate([
-            'first_name' => 'required|string',
-            'last_name' => 'required|string',
+            'full_name' => 'required|string',
             'email' => 'required|string|email',
             'birthday' => 'required|string',
             'phone' => 'required|string',
             'city' => 'required|string',
-            'address' => 'required|string',
+            'prefecture' => 'required|string',
             'info_session_id' => 'required',
-            'gender' => 'required|string'
+            'gender' => 'required|string',
+            'motivation' => 'required|string',
+            'source' => 'required|string',
         ]);
 
         $time = Carbon::now();
@@ -112,18 +113,19 @@ class ContactController extends Controller
         // create the participant
         $participant = Participant::create([
             'info_session_id' => $request->info_session_id,
-            'first_name' => $request->first_name,
-            'last_name' => $request->last_name,
+            'full_name' => $request->full_name,
             'email' => $request->email,
             'birthday' => $request->birthday,
             'phone' => $request->phone,
             'city' => $request->city,
-            'address' => $request->address,
+            'prefecture' => $request->prefecture,
             'gender' => $request->gender,
+            'source' => $request->source,
+            'motivation' => $request->motivation,
             'code' => $code
         ]);
 
-        // one to one relationship
+        // one to one relationships
         $questions = FrequentQuestion::create([
             'participant_id' => $participant->id,
         ]);

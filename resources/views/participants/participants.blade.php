@@ -15,8 +15,7 @@
     {{-- search function: return true if any of the conditions are met --}}
     matchesSearch(participants) {
         const query = this.searchQuery.toLowerCase();
-        return participants.first_name.toLowerCase().includes(query) ||
-            participants.last_name.toLowerCase().includes(query) ||
+        return participants.full_name.toLowerCase().includes(query) ||
             participants.email.toLowerCase().includes(query) ||
             participants.phone.toLowerCase().includes(query);},
 
@@ -110,7 +109,7 @@
                                     <td>
                                         <span class="cursor-pointer border-b border-black"
                                             x-on:click="window.location.href = '/participants/' + participant.id"
-                                            x-text="participant.first_name + ' ' + participant.last_name"></span>
+                                            x-text="participant.full_name"></span>
                                     </td>
                                     <td x-text="participant.phone"></td>
                                     <td x-text="participant.email"></td>

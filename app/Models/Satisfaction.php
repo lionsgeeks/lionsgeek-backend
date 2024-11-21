@@ -9,8 +9,6 @@ class Satisfaction extends Model
     protected $fillable = [
         'participant_id',
         'interest_in_joining_lionsgeek',
-        'studying',
-        'working',
         'overall_availability',
         'language',
         'discipline',

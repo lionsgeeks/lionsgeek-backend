@@ -8,17 +8,18 @@ class Participant extends Model
 {
     protected $fillable = [
         'info_session_id',
-        'first_name',
-        'last_name',
-        'birthday',
+        'full_name',
         'email',
-        'city',
-        'address',
-        'code',
+        'birthday',
         'phone',
+        'city',
+        'prefecture',
+        'gender',
+        'motivation',
+        'source',
+        'code',
         'current_step',
         'is_visited',
-        'gender',
 
     ];
 

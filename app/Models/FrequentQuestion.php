@@ -11,7 +11,7 @@ class FrequentQuestion extends Model
     protected $fillable = [
         'participant_id',
         'mode_of_transportation',
-        'living_sitaution',
+        'living_situation',
         'where_have_you_heard_of_lionsgeek',
         'academic_background',
         'professional_experience',

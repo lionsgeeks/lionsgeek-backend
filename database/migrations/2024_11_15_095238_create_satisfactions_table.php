@@ -15,8 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('participant_id')->constrained()->cascadeOnDelete();
             $table->boolean('interest_in_joining_lionsgeek')->default(0);
-            $table->boolean('studying')->default(0);
-            $table->boolean('working')->default(0);
             $table->boolean('overall_availability')->default(0);
             $table->boolean('ability_to_learn')->default(0);
             $table->boolean('language')->default(0);

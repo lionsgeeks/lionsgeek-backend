@@ -50,7 +50,7 @@
                                     </svg>
                                 @endif
 
-                                <div class="flex flex-col justify-between  h-full items-start">
+                                <div class="flex flex-col justify-between  h-full items-start gap-2">
                                     <p class="text-lg font-semibold ">{{ $participant->first_name }}
                                         {{ $participant->last_name }}</p>
 
@@ -94,8 +94,8 @@
                                         {{ str_replace('_', ' ', $participant->current_step) }}</p>
                                 </div>
                                 <div>
-                                    <p class="text-lg my-3 font-semibold">Address:</p>
-                                    <p class="rounded border border-gray-200 p-2">{{ $participant->address }}</p>
+                                    <p class="text-lg my-3 font-semibold">Location:</p>
+                                    <p class="rounded border border-gray-200 p-2 capitalize">{{ $participant->city }}, {{str_replace('_', ' ', $participant->prefecture)}}</p>
                                 </div>
                                 <div>
                                     <p class="text-lg my-2 font-semibold">Session:</p>
@@ -158,7 +158,7 @@
                                             <div>
                                                 <!-- Section header with toggle functionality -->
                                                 <h1 @click="open = open === index ? null : index"
-                                                    class="group cursor-pointer p-2 border-b border-gray-300 rounded my-2">
+                                                    class="group cursor-pointer p-2 border-b border-gray-400 rounded my-2 text-lg">
                                                     <span class="group-hover:underline" x-text="section.title"></span>
                                                 </h1>
 
@@ -195,7 +195,7 @@
                     <br>
                     {{-- Satisfaction --}}
                     <div x-data="{
-                        totalTasks: 10,
+                        totalTasks: 8,
                         checkedTasks: {{ array_sum(array_map(fn($item) => $item ? 1 : 0, array_slice($participant->satisfaction->getAttributes(), 2, -2))) }},
 
                         get percentage() {
@@ -214,37 +214,6 @@
                             this.checkedTasks += checked ? 1 : -1;
                         }
                     }" class="p-3 rounded shadow-md ">
-                        {{--
-                        <div class="flex items-center justify-between">
-                            <h1 class="text-2xl font-bold ">Satisfaction Percentage:</h1>
-                            <button class="bg-black text-white rounded px-3 py-1">Save</button>
-                        </div>
-
-                        <div class="relative h-[2vh] mt-4">
-
-                            <div class="w-full h-[2vh] bg-gray-200 rounded-full absolute top-0 left-0">
-                            </div>
-
-                            <!-- Progress Bar (Filled part) -->
-                            <div :style="'width: ' + percentage + '%; background-color: ' + barColor"
-                                class="h-[2vh] w-full rounded-full absolute top-0 left-0 transition-all duration-150 ease-in-out">
-                            </div>
-                        </div>
-
-                        <!-- Task List -->
-                        <div class="flex flex-wrap mt-4">
-                            @foreach (array_slice($participant->satisfaction->getAttributes(), 2, -2) as $column => $item)
-                                <div class="w-[20%] my-2">
-
-                                    <!-- Checkbox -->
-                                    <input type="checkbox" :id="'item' + {{ $item }}"
-                                        :checked={{ $item }} @change="toggleTask($event.target.checked)" />
-                                    <label :for="'item' + {{ $item }}"
-                                        class="capitalize">{{ str_replace('_', ' ', $column) }}</label>
-                                </div>
-                            @endforeach
-                        </div> --}}
-
 
                         <form action="{{ route('satisfaction.store', $participant->id) }}" method="POST">
                             @csrf
@@ -267,12 +236,11 @@
                                 @foreach (array_slice($participant->satisfaction->getAttributes(), 2, -2) as $column => $item)
                                     <div class="w-[20%] my-2">
                                         {{-- send the ones that havent been modified as well --}}
-                                        <input type="hidden" name="satisfaction[{{ $column }}]"
-                                            value="0">
+                                        <input type="hidden" name="satisfaction[{{ $column }}]" value="0">
 
                                         <label :for="satisfaction_{{ $column }}" class="capitalize">
                                             <input type="checkbox" :id="'item' + {{ $item }}"
-                                                :name="satisfaction[{{ $column }}]" :checked={{ $item }}
+                                                :name="satisfaction[{{ $column }}]" value="{{$item}}" :checked={{ $item }}
                                                 @change="toggleTask($event.target.checked)" />
 
                                             {{ str_replace('_', ' ', $column) }}

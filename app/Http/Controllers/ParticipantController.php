@@ -79,7 +79,7 @@ class ParticipantController extends Controller
         foreach ($request->all() as $field => $value) {
             if ($field != '_token') {
                 $frequents->update([
-                    $field => $value,
+                    $field => $value ?? $frequents->$field,
                 ]);
             }
         }
@@ -91,11 +91,11 @@ class ParticipantController extends Controller
 
     public function updateSatisfaction(Request $request, $participantId)
     {
-
         $participant = Participant::findOrFail($participantId);
 
         $satisfactionData = $request->input('satisfaction', []);
 
+        // dd($satisfactionData);
         foreach ($satisfactionData as $column => $checked) {
             $participant->satisfaction->{$column} = $checked == "on" ? 1 : 0;
         }

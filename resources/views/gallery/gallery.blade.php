@@ -1,7 +1,9 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Gallery') }}
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight ">
+            {{ __('Projects') }}
+
+
         </h2>
         <a href="{{ route('gallery.create') }}">
             <button
@@ -9,6 +11,9 @@
                 Create Gallery
             </button>
         </a>
+{{--             
+        @endif
+        @include('project.partials.create_project') --}}
     </x-slot>
 
 

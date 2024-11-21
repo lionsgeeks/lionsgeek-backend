@@ -140,7 +140,7 @@ class GalleryController extends Controller
 
         
 
-        return back();
+        return redirect("gallery");
     }
 
     /**

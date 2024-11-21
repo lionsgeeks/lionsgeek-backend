@@ -6,7 +6,7 @@
 
         <a href="{{ route('events.create') }}">
             <button
-                class="bg-black {{ $events->count() == 0 ? "hidden" : "" }} text-white rounded-lg px-4 py-2 hover:bg-alpha hover:text-black  transition duration-150">
+                class="bg-black {{ $events->count() == 0 ? 'hidden' : '' }} text-white rounded-lg px-4 py-2 hover:bg-alpha hover:text-black  transition duration-150">
                 <span class="text-lg font-bold">+</span> Create a New Event
             </button>
         </a>
@@ -28,9 +28,9 @@
                     </div>
                 </div>
             @endif
-            <div class="flex flex-wrap gap-x-[calc(5%/3)] gap-y-4  ">
+            <div class="flex flex-wrap gap-x-[calc(5%/2)] gap-y-4  ">
                 @foreach ($events as $event)
-                    <div
+                    {{-- <div
                         class="w-[calc(95%/4)] flex flex-col overflow-hidden text-nowrap gap-3 h-fit px-[1rem] py-[1rem] rounded-[16px]  bg-[#f9f9f9]">
                         <img class="w-[100%] h-[8rem] rounded-[16px] "
                             src="{{ asset('storage/images/' . $event->cover) }}" alt="">
@@ -44,6 +44,21 @@
                                 See Event
                             </button>
                         </a>
+                    </div> --}}
+                    <div
+                        class=" w-[calc(95%/3)] text-nowrap flex flex-col overflow-hidden  gap-3 h-fit px-[1rem] py-[1rem] rounded-[16px]  bg-[#f9f9f9]">
+                        <img class="w-[100%] h-[12rem] object-cover rounded-[16px] "
+                            src="{{ asset('storage/images/' . $event->cover) }}" alt="">
+                        <div class="w-full flex items-center justify-between">
+
+                            <h4 class="text-[20px] font-semibold ">{{ Str::limit($event->name->en, 15, '...') }}
+                            </h4>
+                            <a href="{{ route('events.show', $event->id) }}">
+                                <button class="py-[.5rem] px-[1.5rem] rounded-lg bg-black text-white " type="button">
+                                    See Gallery
+                                </button>
+                            </a>
+                        </div>
                     </div>
                 @endforeach
             </div>

@@ -111,7 +111,7 @@ class GalleryController extends Controller
             "description.fr" => "string|required",
             "description.ar" => "string|required",
             
-            "couverture" => "nullable|file|image|mimes:jpeg,png,jpg,gif|max:2048",
+            "couverture" => "nullable|file|image|mimes:jpeg,png,jpg,gif",
         ]);
 
         // dd($request->hasFile("couverture"));

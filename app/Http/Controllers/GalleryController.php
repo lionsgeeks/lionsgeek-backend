@@ -43,7 +43,7 @@ class GalleryController extends Controller
             "description.fr" => "string|required",
             "description.ar" => "string|required",
 
-            "couverture" => "required|file|image|mimes:jpeg,png,jpg,gif|max:2048",
+            "couverture" => "required|file|image|mimes:jpeg,png,jpg,gif",
 
             "images.*" => "file|image|mimes:jpeg,png,jpg,gif|max:2048"
         ]);

@@ -84,5 +84,11 @@
                     Update </button>
             </div>
         </form>
+
+
+        @include('participants.partials.participants_table', [
+            'parts' => $infoSession->participants,
+            'infos' => [],
+        ])
     </div>
 </x-app-layout>

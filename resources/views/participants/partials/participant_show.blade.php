@@ -8,14 +8,21 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                {{-- TODO: this for approving/denying --}}
-                {{-- <div class="flex items-center justify-between bg-white p-2">
-                    <p>Next Step</p>
-                    <div class="flex items-center gap-2">
-                        <p>DOWN</p>
-                        <p>UP</p>
+                <div class="flex items-center justify-between bg-white p-2">
+                    <div class="flex items-center justify-end w-full gap-2">
+
+                        <form action="{{route('participant.step', $participant)}}" method="post">
+                            @csrf
+                            <button type="submit" name="action" value="deny" class="bg-red-600 text-white py-2 px-4 rounded">
+                                Deny
+                            </button>
+                            <button type="submit" name="action" value="next" class="bg-black text-white py-2 px-4 rounded">
+                                Go To Next Step
+                            </button>
+                        </form>
+
                     </div>
-                </div> --}}
+                </div>
                 <div class="p-6 text-gray-900">
                     <div class="flex items-center gap-2 justify-between">
                         {{-- User Info --}}
@@ -95,12 +102,14 @@
                                 </div>
                                 <div>
                                     <p class="text-lg my-3 font-semibold">Location:</p>
-                                    <p class="rounded border border-gray-200 p-2 capitalize">{{ $participant->city }}, {{str_replace('_', ' ', $participant->prefecture)}}</p>
+                                    <p class="rounded border border-gray-200 p-2 capitalize">{{ $participant->city }},
+                                        {{ str_replace('_', ' ', $participant->prefecture) }}</p>
                                 </div>
                                 <div>
                                     <p class="text-lg my-2 font-semibold">Session:</p>
                                     <p class="rounded border border-gray-200 p-2">
-                                        {{ $participant->infoSession->formation }} {{ $participant->infoSession->name }}
+                                        {{ $participant->infoSession->formation }}
+                                        {{ $participant->infoSession->name }}
                                     </p>
                                 </div>
                             </div>
@@ -111,7 +120,7 @@
                             <div class="w-full">
                                 <div x-data="{
                                     open: null,
-                                    frequents: {{json_encode($questions)}},
+                                    frequents: {{ json_encode($questions) }},
                                     sections: [{
                                             title: 'Background',
                                             questions: [
@@ -196,8 +205,8 @@
                     {{-- Satisfaction --}}
                     <div x-data="{
                         totalTasks: 8,
-                        checkedTasks: {{ array_sum(array_map(fn($item) => $item ? 1 : 0, array_slice($participant->satisfaction->getAttributes(), 2, -2))) }},
-
+                        checkedTasks: {{ array_sum(array_map(fn($item) => $item ? 1 : 0, $satisfactions)) }},
+                        sats: {{ json_encode($satisfactions) }},
                         get percentage() {
                             return (this.checkedTasks / this.totalTasks) * 100;
                         },
@@ -233,14 +242,14 @@
 
                             <!-- Task List -->
                             <div class="flex flex-wrap mt-4">
-                                @foreach (array_slice($participant->satisfaction->getAttributes(), 2, -2) as $column => $item)
-                                    <div class="w-[20%] my-2">
+                                @foreach ($satisfactions as $column => $item)
+                                    <div class="w-[25%] my-2">
                                         {{-- send the ones that havent been modified as well --}}
-                                        <input type="hidden" name="satisfaction[{{ $column }}]" value="0">
-
-                                        <label :for="satisfaction_{{ $column }}" class="capitalize">
-                                            <input type="checkbox" :id="'item' + {{ $item }}"
-                                                :name="satisfaction[{{ $column }}]" value="{{$item}}" :checked={{ $item }}
+                                        <input type="hidden" name="satisfaction[{{ $column }}]"
+                                            value="0">
+                                        <label for="satisfaction_{{ $column }}" class="capitalize">
+                                            <input type="checkbox" id="'item' + {{ $item }}"
+                                                name="satisfaction[{{ $column }}]" :checked={{ $item }}
                                                 @change="toggleTask($event.target.checked)" />
 
                                             {{ str_replace('_', ' ', $column) }}

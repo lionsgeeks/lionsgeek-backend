@@ -15,7 +15,8 @@ class InfoSessionController extends Controller
     public function show($id)
     {
         $infoSession = InfoSession::where('id', $id)->first();
-        return view('info_session.info_session_show', compact('infoSession'));
+        $participants = $infoSession->participants;
+        return view('info_session.info_session_show', compact('infoSession', 'participants'));
     }
     public function store(Request $request)
     {

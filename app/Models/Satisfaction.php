@@ -10,6 +10,7 @@ class Satisfaction extends Model
         'participant_id',
         'interest_in_joining_lionsgeek',
         'overall_availability',
+        'ability_to_learn',
         'language',
         'discipline',
         'motivation_overcoming_challenges',

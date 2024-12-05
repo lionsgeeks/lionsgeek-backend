@@ -24,9 +24,9 @@ Route::get('/', function () {
 
 Route::resource("events", EventController::class);
 
-Route::resource("gallery",GalleryController::class);
+Route::resource("gallery", GalleryController::class);
 
-Route::resource("images",ImageController::class);
+Route::resource("images", ImageController::class);
 
 
 Route::resource("blogs", BlogController::class);
@@ -37,15 +37,16 @@ Route::resource('notes', NoteController::class)->except(['store']);
 Route::post('notes/{participant}', [NoteController::class, 'store'])->name('notes.store');
 Route::post('satisfaction/{participant}', [ParticipantController::class, 'updateSatisfaction'])->name('satisfaction.store');
 Route::post('frequent/{participant}', [ParticipantController::class, 'frequestQuestions'])->name('frequent.store');
+Route::post('participant/step/{participant}', [ParticipantController::class, 'step'])->name('participant.step');
 
 Route::resource('infosessions', InfoSessionController::class);
 Route::patch('/infosessions/available/{id}', [InfoSessionController::class, 'availabilityStatus'])->name('infosessions.isavailable');
 Route::patch('/infosessions/complete/{id}', [InfoSessionController::class, 'completeStatus'])->name('infosessions.isfinish');
 Route::resource('newsletter', NewsletterController::class);
-Route::resource("projects" , ProjectController::class);
+Route::resource("projects", ProjectController::class);
 
-Route::get('/passqr', [PdfController::class,'index'])->name('pass.qrcode');
-Route::get('/sendqr', [PdfController::class,'sendQrcode'])->name('send.qrcode');
+Route::get('/passqr', [PdfController::class, 'index'])->name('pass.qrcode');
+Route::get('/sendqr', [PdfController::class, 'sendQrcode'])->name('send.qrcode');
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -55,6 +56,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    // excel export
+    Route::post('coworkings/export/', [CoworkingController::class, 'export'])->name('coworking.export');
+    Route::post('participant/export', [ParticipantController::class, 'export'])->name('participant.export');
 });
 
 require __DIR__ . '/auth.php';

@@ -16,7 +16,11 @@ use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return redirect()->to("https://lionsgeek.ma/");
+    if (request()->redirect == "true") {
+        return redirect()->to("https://lionsgeek.ma/");
+    }else {
+        return view("welcome");
+    }
 });
 
 

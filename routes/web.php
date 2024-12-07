@@ -62,6 +62,7 @@ Route::middleware('auth')->group(function () {
 
     // excel export
     Route::post('coworkings/export/', [CoworkingController::class, 'export'])->name('coworking.export');
+    Route::post('contact/export/', [ContactController::class, 'export'])->name('contact.export');
     Route::post('participant/export', [ParticipantController::class, 'export'])->name('participant.export');
 });
 

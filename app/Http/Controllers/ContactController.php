@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ContactsExport;
 use App\Models\Contact;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ContactController extends Controller
 {
@@ -62,5 +64,9 @@ class ContactController extends Controller
     public function destroy(Contact $contact)
     {
         //
+    }
+    public function export()
+    {
+        return Excel::download(new ContactsExport, 'contact.xlsx');
     }
 }

@@ -24,5 +24,6 @@ class Coworking extends Model
         'reasons',
         'needs',
         'gender',
+        'status'
     ];
 }

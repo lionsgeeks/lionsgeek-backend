@@ -52,6 +52,7 @@
                                 <th>Email</th>
                                 <th>Date</th>
                                 <th>Full Detail</th>
+                                <th>Action</th>
                             </thead>
 
                             <tbody class="w-full">
@@ -61,7 +62,7 @@
                                         <td x-text="cow.phone"></td>
                                         <td x-text="cow.email"></td>
                                         <td x-text="new Date(cow.created_at).toLocaleDateString()"></td>
-                                        <td>
+                                        <td class="">
                                             <a :href="'/coworkings/' + cow.id">
                                                 <button
                                                     class="p-1 bg-black text-white hover:bg-alpha hover:text-black transition-all duration-200 ease-out rounded">
@@ -75,6 +76,40 @@
                                                     </svg>
                                                 </button>
                                             </a>
+                
+                                        </td>
+                                        <td class="flex items-center justify-center gap-x-2 mt-2" >
+                                            <template x-if="!cow.status">
+                                                    {{-- reject/approve form --}}
+                                                    <form method="POST" :action="`{{ route('coworkings.update', '') }}/${cow.id}`" class="flex items-center justify-center gap-x-2 mt-2">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <button class="border p-1 rounded-md"  type="submit" name="action" value="reject">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg text-red-500" viewBox="0 0 16 16">
+                                                                <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z"/>
+                                                            </svg>
+                                                        </button>
+                                                        <button class="bg-[#356966] text-white px-2 rounded-md " type="submit" name="action" value="approve">
+                                                            Approve
+                                                        </button>
+                                                    </form>
+                                            </template>
+                                            <template x-if="cow.status == 1">
+                                                    <button class="bg-[#f3f8f0] text-black rounded-full  flex items-center gap-x-2 px-2 py-0.5 border border-green-900">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-circle text-green-900 " viewBox="0 0 16 16">
+                                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                                                            <path d="m10.97 4.97-.02.022-3.473 4.425-2.093-2.094a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05"/>
+                                                          </svg> <span>Approved</span>
+                                                    </button>
+                                            </template>
+                                            <template x-if="cow.status == 2">
+                                                    <button class="bg-[#fef8f5] text-black rounded-full  flex items-center gap-x-2 px-2 py-0.5 border border-red-500">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-circle text-red-500" viewBox="0 0 16 16">
+                                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                                                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                                                          </svg> <span>Rejected</span>
+                                                    </button>
+                                            </template>
                                         </td>
                                     </tr>
                                 </template>

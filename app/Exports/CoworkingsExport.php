@@ -18,6 +18,8 @@ class CoworkingsExport implements FromCollection, WithHeadings
             $cow->cv = $url . $cow->cv;
             $cow->presentation = $url . $cow->presentation;
             $cow->reasons = ucwords(str_replace('-', ' ', $cow->reasons));
+            $cow->status = $cow->status == 1 ? 'Approved' : 
+               ($cow->status == 2 ? 'Rejected' : 'Pending');
 
 
             return $cow;
@@ -45,8 +47,10 @@ class CoworkingsExport implements FromCollection, WithHeadings
             'How They Find LionsGeek',
             'Needs',
             'Gender',
+            'status',
             'Created At',
             'Updated At',
+            
         ];
     }
 }

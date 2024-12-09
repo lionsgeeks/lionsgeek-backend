@@ -28,6 +28,7 @@ return new class extends Migration
             $table->longText('reasons');
             $table->longText('needs')->nullable();
             $table->string('gender');
+            $table->boolean('status')->default(false);
             $table->timestamps();
         });
     }

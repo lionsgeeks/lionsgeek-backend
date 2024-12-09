@@ -12,7 +12,7 @@
         </a>
     </x-slot>
 
-    <div class="py-12 px-10">
+    <div class="py-12 md:px-10 px-4">
         <div class=" {{ $events->count() == 0 ? 'h-[70vh]' : 'min-h-[70vh]' }} bg-white rounded-lg p-6  w-[100%] px-8 ">
             @if ($events->count() == 0)
                 <div class="h-[100%] bg-white flex rounded-lg items-center justify-center w-full">
@@ -28,7 +28,7 @@
                     </div>
                 </div>
             @endif
-            <div class="flex flex-wrap gap-x-[calc(5%/2)] gap-y-4  ">
+            <div class="md:flex hidden flex-wrap gap-x-[calc(5%/2)] gap-y-4  ">
                 @foreach ($events as $event)
                     {{-- <div
                         class="w-[calc(95%/4)] flex flex-col overflow-hidden text-nowrap gap-3 h-fit px-[1rem] py-[1rem] rounded-[16px]  bg-[#f9f9f9]">
@@ -62,6 +62,24 @@
                     </div>
                 @endforeach
             </div>
+            <!-- Mobile Grid -->
+            <div class="md:hidden flex flex-wrap gap-4">
+                @foreach ($events as $event)
+                    <div class="flex flex-col overflow-hidden gap-3 rounded-[16px] bg-[#f9f9f9] p-3 w-full sm:w-[calc(50%-1rem)]">
+                        <img class="w-full aspect-video object-cover rounded-[16px]" 
+                                src="{{ asset('storage/images/' . $event->cover) }}" 
+                                alt="">
+                        <div class="space-y-3">
+                            <h4 class="text-lg font-semibold">{{ Str::limit($event->name->en, 15, '...') }}</h4>
+                            <a href="{{ route('events.show', $event->id) }}" class="block">
+                                <button class="w-full py-2 px-4 rounded-lg bg-black text-white text-sm" type="button">
+                                    See Gallery
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                @endforeach
+            </div>                    
         </div>
     </div>
 </x-app-layout>

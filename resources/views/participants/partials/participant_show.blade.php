@@ -1,27 +1,30 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Participant Profile') }}
+            {{ $participant->full_name }}'s Profile
         </h2>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="flex items-center justify-between bg-white p-2">
-                    <div class="flex items-center justify-end w-full gap-2">
+                <div class="flex items-center justify-end w-full gap-2 p-2">
 
-                        <form action="{{route('participant.step', $participant)}}" method="post">
+                    {{-- if the participant failed any step, hide this form --}}
+                    @if (!str_contains($participant->current_step, 'fail'))
+                        <form action="{{ route('participant.step', $participant) }}" method="post">
                             @csrf
-                            <button type="submit" name="action" value="deny" class="bg-red-600 text-white py-2 px-4 rounded">
+                            <button type="submit" name="action" value="deny"
+                                class="border-2 border-black py-2 px-4 rounded">
                                 Deny
                             </button>
-                            <button type="submit" name="action" value="next" class="bg-black text-white py-2 px-4 rounded">
+                            <button type="submit" name="action" value="next"
+                                class="bg-black text-white py-2 px-4 rounded">
                                 Go To Next Step
                             </button>
                         </form>
+                    @endif
 
-                    </div>
                 </div>
                 <div class="p-6 text-gray-900">
                     <div class="flex items-center gap-2 justify-between">
@@ -29,20 +32,25 @@
                         <div class="w-full p-3 shadow-md h-[65vh] rounded">
                             <div class="flex items-center justify-between">
                                 <h1 class="text-2xl font-bold mb-2">User Profile</h1>
-                                {{-- TODO: this button to edit the user information --}}
-                                {{-- <button class="bg-black text-white rounded px-2 py-1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.5" stroke="currentColor" class="size-4">
-                                        <path stroke-linecap="round" stroke-linejoin="round"
-                                            d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
-                                    </svg>
+                                <form action="{{ route('participants.edit', $participant) }}" method="post">
+                                    @csrf
+                                    @method("GET")
+                                    <button class="bg-black text-white rounded px-2 py-1" type="submit">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            stroke-width="1.5" stroke="currentColor" class="size-4">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
+                                        </svg>
 
-                                </button> --}}
+                                    </button>
+                                </form>
                             </div>
 
                             <div class="flex items- gap-7 ">
                                 @if ($participant->image)
-                                    <h1>ana image khasni nkun hna</h1>
+                                    <img src="{{asset('storage/images/' . $participant->image)}}"
+                                    width="150" class="rounded-full aspect-square"
+                                    alt="">
                                 @else
                                     <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="125" height="125"
                                         viewBox="0 0 280 280" preserveAspectRatio="xMidYMid meet" class="">
@@ -97,7 +105,7 @@
 
                                 <div>
                                     <p class="text-lg mb-2 font-semibold">Current Step:</p>
-                                    <p class="capitalize rounded border border-gray-200 p-2"">
+                                    <p class="capitalize rounded border border-gray-200 p-2">
                                         {{ str_replace('_', ' ', $participant->current_step) }}</p>
                                 </div>
                                 <div>
@@ -179,10 +187,11 @@
                                                             <p class="mb-1" x-text="question.text"></p>
                                                             <div class="flex items-center gap-2">
 
-                                                                <input class="w-full rounded"
+                                                                <input class="w-full rounded focus:ring-black"
                                                                     :name="`${question.text.toLowerCase().replace(/ /g, '_').replace('?','')}`"
                                                                     type="text"
-                                                                    :placeholder="`${frequents[question.text.toLowerCase().replace(/ /g, '_').replace('?','')]}`"
+                                                                    value="{{ old('interest_in_joining_lionsgeek', 'hey hey') }}"
+                                                                    {{-- :placeholder="`${frequents[question.text.toLowerCase().replace(/ /g, '_').replace('?','')]}`" --}}
                                                                     x-model="answers[`${section.title.toLowerCase()}_${question.id}`]">
 
                                                             </div>

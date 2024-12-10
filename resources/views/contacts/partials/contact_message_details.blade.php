@@ -32,7 +32,7 @@
 
                 <div class="pt-3 mt-2 flex items-center justify-end gap-x-3">
                     <a class="bg-black px-3 py-2 text-white font-bold hover:bg-alpha hover:text-black rounded-lg" href="mailto:{{ $contact->email }}">Reply via email</a>
-                    <button class="border px-3 py-2 rounded-lg">Close</button>
+                    {{-- <button class="border px-3 py-2 rounded-lg">Close</button> --}}
                 </div>
             </div>
         </div>

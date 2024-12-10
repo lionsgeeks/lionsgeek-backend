@@ -15,6 +15,7 @@ use App\Mail\CodeMail;
 use App\Models\FrequentQuestion;
 use App\Models\Satisfaction;
 use Carbon\Carbon;
+use DateTime;
 use Illuminate\Support\Facades\Hash;
 
 
@@ -110,12 +111,19 @@ class ContactController extends Controller
 
         $time = Carbon::now();
         $code = $request->first_name . $request->last_name . $time->format('h:i:s');
+
+        $birthObj = new DateTime($request->birthday);
+        $currentDay = new DateTime();
+        $age = $birthObj->diff($currentDay)->y;
+
+
         // create the participant
         $participant = Participant::create([
             'info_session_id' => $request->info_session_id,
             'full_name' => $request->full_name,
             'email' => $request->email,
             'birthday' => $request->birthday,
+            'age' => $age,
             'phone' => $request->phone,
             'city' => $request->city,
             'prefecture' => $request->prefecture,

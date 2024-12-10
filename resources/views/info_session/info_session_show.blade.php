@@ -14,6 +14,16 @@
         @include('info_session.partials.delete-session_modal')
     </x-slot>
     <div class="p-10">
+
+        <div class="flex items-center gap-2 mb-3">
+            <div class="w-[30%] bg-white p-2 rounded">
+                <canvas id="genderChart"></canvas>
+            </div>
+
+            <div class="w-[40%] bg-white p-2 rounded">
+                <canvas id="ageChart"></canvas>
+            </div>
+        </div>
         <form class="bg-white p-5 rounded-lg flex flex-col gap-5"
             action="{{ route('infosessions.update', $infoSession) }}" method="POST" class="flex flex-col gap-3">
             @csrf
@@ -91,4 +101,65 @@
             'infos' => [],
         ])
     </div>
+
+    <script>
+        // The Gender Chart
+        const genderChart = document.getElementById('genderChart');
+
+        new Chart(genderChart, {
+            type: 'doughnut',
+            data: {
+                labels: ['Male', 'Female'],
+                datasets: [{
+                    label: 'Gender',
+                    data: [{{ $males }},
+                        {{ $infoSession->participants->count() - $males }}
+                    ],
+                    backgroundColor: [
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 99, 132, 0.2)',
+                    ],
+                    borderColor: [
+                        'rgb(54, 162, 235)',
+                        'rgb(255, 99, 132)',
+                    ],
+                    borderWidth: 1
+                }],
+            },
+            options: {}
+        });
+
+        // The Age Chart
+        const ageChart = document.getElementById('ageChart')
+        new Chart(ageChart, {
+            type: 'bar',
+            data: {
+                labels: ['18-20', '21-23', '24-26', '27-30'],
+                datasets: [{
+                    label: 'Age',
+                    // count the ages of the participants
+                    data: [{{ $babies }}, {{ $prime }}, {{ $late }},
+                        {{ $oldies }}
+                    ],
+                    backgroundColor: [
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(255, 205, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(201, 203, 207, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgb(255, 159, 64)',
+                        'rgb(255, 205, 86)',
+                        'rgb(75, 192, 192)',
+                        'rgb(153, 102, 255)',
+                        'rgb(201, 203, 207)'
+                    ],
+                    borderWidth: 1
+                }]
+            }
+        })
+
+        
+    </script>
 </x-app-layout>

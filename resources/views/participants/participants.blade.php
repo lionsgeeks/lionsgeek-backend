@@ -7,7 +7,10 @@
 
     <div class="sm:px-6 lg:px-8">
 
-        @include("participants.partials.participants_table", ['parts' => $participants])
+        @include('participants.partials.participants_table', [
+            'parts' => $participants,
+            'infoSession' => null,
+        ])
     </div>
 
 </x-app-layout>

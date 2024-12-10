@@ -26,7 +26,7 @@
 
 
 <div
-    class="w-[75px] hover:w-[16vw] transition-all text-nowrap duration-300 group h-screen overflow-y-scroll no-scrollbar bg-black text-white flex flex-col py-5 justify-">
+    class="w-[75px] hover:w-[16vw] transition-all text-nowrap duration-150 group h-screen overflow-y-scroll no-scrollbar bg-black text-white flex flex-col py-5 justify-">
     <div class="flex flex-col w-full">
         <div class="px-[1rem]">
             <a href="{{ route('dashboard') }}" class="text-xl  flex   gap-x-3">

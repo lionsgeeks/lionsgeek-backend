@@ -90,14 +90,15 @@ this.selectedSession = "";
                         </button>
                     </div>
 
-                    @if ($infos)
-                        <form action="{{ route('participant.export') }}" method="post">
+                        <form action='{{ route('participant.export') }}' method="post">
                             @csrf
+                            <input class="hidden" type="text" name="term" id="term" :value="searchQuery">
+                            <input class="hidden" type="text" name="step" id="step" :value="selectedStep">
+                            <input class="hidden" type="text" name="session" id="session" :value="infos && infos.length > 0 ? selectedSession : {{$infoSession ? $infoSession->id : null}}">
                             <button class="bg-black text-white px-4 py-1 rounded">
                                 Export Excel
                             </button>
                         </form>
-                    @endif
                 </div>
 
                 <table class="w-full text-center">
@@ -133,7 +134,7 @@ this.selectedSession = "";
                                         x-text="session = infos.find(session => session.id === participant.info_session_id)"></span>
 
 
-                                        @if ($infos)
+                                    @if ($infos)
                                         <span class="p-1 rounded-lg border"
                                             :class="{
                                                 'bg-yellow-200 border-yellow-400': session
@@ -142,9 +143,11 @@ this.selectedSession = "";
                                                     ?.formation === 'Coding'
                                             }"
                                             x-text="session?.formation + ' ' + session?.name"></span>
-                                        @else
-                                            <span>{{$infoSession->formation}} {{$infoSession->name}}</span>
-                                        @endif
+                                    @else
+                                        <span
+                                            class="p-1 rounded-lg border {{ $infoSession->formation == 'Coding' ? 'bg-black/80 text-white border-white' : 'bg-yellow-200 border-yellow-400' }}">{{ $infoSession->formation }}
+                                            {{ $infoSession->name }}</span>
+                                    @endif
 
                                 </td>
                                 <td x-text="formatDate(participant.birthday)"></td>

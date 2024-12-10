@@ -11,6 +11,7 @@ class Participant extends Model
         'full_name',
         'email',
         'birthday',
+        'age',
         'phone',
         'city',
         'prefecture',
@@ -20,6 +21,7 @@ class Participant extends Model
         'code',
         'current_step',
         'is_visited',
+        'image',
 
     ];
 

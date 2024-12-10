@@ -16,7 +16,27 @@ class InfoSessionController extends Controller
     {
         $infoSession = InfoSession::where('id', $id)->first();
         $participants = $infoSession->participants;
-        return view('info_session.info_session_show', compact('infoSession', 'participants'));
+        $males = $participants->filter(function ($participant) {
+            return $participant->gender == 'male';
+        })->count();
+
+        $babies = $participants->filter(function ($participant) {
+            return $participant->age <= 20;
+        })->count();
+
+        $prime = $participants->filter(function ($participant) {
+            return $participant->age >= 21 && $participant->age <= 23;
+        })->count();
+
+        $late = $participants->filter(function ($participant) {
+            return $participant->age >= 24 && $participant->age <= 26;
+        })->count();
+
+        $oldies = $participants->filter(function ($participant) {
+            return $participant->age >= 27;
+        })->count();
+
+        return view('info_session.info_session_show', compact('infoSession', 'participants', 'males', 'babies', 'prime', 'late', 'oldies'));
     }
     public function store(Request $request)
     {

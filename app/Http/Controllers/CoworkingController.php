@@ -30,12 +30,12 @@ class CoworkingController extends Controller
             $coworking->update([
                 "status" => "1"
             ]);
+            Mail::to($coworking->email)->send(new CoworkingActionMailer($coworking->full_name));
         }else{
             $coworking->update([
                 "status" => "2"
             ]);
         }
-        Mail::to("chafikidrissisara@gmail.com")->send(new CoworkingActionMailer($coworking->full_name));
         return back()->with('success', $coworking->full_name ."'s request has been " . $status . " successfully.");
 
 

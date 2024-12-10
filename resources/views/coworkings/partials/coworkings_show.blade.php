@@ -7,9 +7,18 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white  overflow-hidden shadow-sm sm:rounded-lg ">
+            <div class="bg-white table overflow-hidden shadow-sm sm:rounded-lg ">
                 <div class="p-6 text-gray-900 flex flex-col gap-y-3">
-                    <div>
+                    <div class="flex justify-end gap-x-2">
+                        @if ($coworking->status == '2')
+                        <form method="POST" :action="`{{ route('coworkings.update', '') }}/${cow.id}`" class="flex items-center justify-center gap-x-2 mt-2">
+                            @csrf
+                            @method('PUT')
+                            <button class="bg-[#356966]  text-white px-4 py-2 rounded-lg " type="submit" name="action" value="approve">
+                                Approve
+                            </button>
+                        </form>
+                        @endif
                         <button
                             onclick="openModal('modelConfirm')"
                             class="text-slate-800 hover:text-blue-600 text-sm bg-white hover:bg-slate-100 border border-red-900 rounded-lg font-medium px-4 py-2 inline-flex space-x-1 items-center">

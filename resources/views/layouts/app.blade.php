@@ -27,8 +27,16 @@
         @include('layouts.sidebare')
         <div class="flex flex-col w-full overflow-y-auto h-screen">
             @isset($header)
-                <header class="bg-white shadow flex justify-between items-center w-full ">
-                    <div class="max-w-7xl py-[1.25rem] px-4 sm:px-6 lg:px-8 w-full">
+                <header class="bg-white shadow flex items-center justify-between items-center w-full ">
+                    <div class="max-w-7xl py-[1.25rem] flex gap-x-2 px-4 sm:px-6 lg:px-8 w-full">
+                        <div class="md:hidden">
+                            <input id="checkbox" type="checkbox">
+                            <label class="toggle" for="checkbox">
+                                <div id="bar1" class="bars"></div>
+                                <div id="bar2" class="bars"></div>
+                                <div id="bar3" class="bars"></div>
+                            </label>
+                        </div>
                         <div class="flex justify-between items-center w-full">
                             @if (isset($title))
                                 <h2 class="text-alpha leading-tight capitalize font-bold text-xl">
@@ -41,6 +49,14 @@
                             {{ $header }}
                         </div>
 
+                    </div>
+                    <div class="md:hidden">
+                        <div class="px-[1rem]">
+                            <a href="{{ route('dashboard') }}" class="text-xl  flex   gap-x-3">
+                                <x-application-logo color size="100" />
+                                <span class="mt-2 font-extrabold hidden group-hover:block">LionsGeek</span>
+                            </a>
+                        </div>
                     </div>
                     <div class="hidden mr-4 sm:flex {{ isset($header) ? '' : 'sm:ml-auto' }}">
                         <x-dropdown align="right" width="48">

@@ -9,12 +9,6 @@ input[type="checkbox"] {
     accent-color: #fee819;
   } */
 
-  @media screen and (max-width: 393px) {
-
-
-
-  }
-
   #checkbox {
     display: none;
   }

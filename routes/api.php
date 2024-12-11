@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\Api\InfoSessionController;
 use App\Http\Controllers\Api\GalleryController;
+use App\Http\Controllers\Api\ParticipantController ;
 use App\Http\Controllers\Api\ProjectController;
 use App\Http\Controllers\Api\SubscriberController;
 use App\Models\InfoSession;
@@ -29,6 +30,8 @@ Route::post('/cowork', [ContactController::class, 'cowork']);
 Route::post('/infosession', [InfoSessionController::class, 'store']);
 Route::post('/participate', [ContactController::class, 'participate']);
 Route::get('/infosessions', [InfoSessionController::class, 'index']);
+Route::put('/validate-invitation', [InfoSessionController::class,'validateParticipant']);
+Route::post('/session-photo', [ParticipantController::class,'setPhoto']);
 
 Route::get("/galleries",[GalleryController::class,"index"]);
 Route::get('/events',[EventController::class,'index']);

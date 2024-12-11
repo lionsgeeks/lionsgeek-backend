@@ -9,14 +9,6 @@ input[type="checkbox"] {
     accent-color: #fee819;
   } */
 
-<<<<<<< Updated upstream
-  @media screen and (max-width: 393px) {
-  
-   
-   
-  }
-
-=======
   #checkbox {
     display: none;
   }
@@ -92,4 +84,3 @@ input[type="checkbox"] {
     -ms-transform: translateX(5vw);
     -o-transform: translateX(5vw);
 }
->>>>>>> Stashed changes

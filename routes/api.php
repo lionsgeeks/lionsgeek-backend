@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\ContactController;
 use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\Api\InfoSessionController;
 use App\Http\Controllers\Api\GalleryController;
+use App\Http\Controllers\Api\GeneralController;
 use App\Http\Controllers\Api\ParticipantController ;
 use App\Http\Controllers\Api\ProjectController;
 use App\Http\Controllers\Api\SubscriberController;
@@ -38,3 +39,5 @@ Route::get('/events',[EventController::class,'index']);
 Route::get('/projects',[ProjectController::class,'index']);
 
 Route::get('/upcoming', [EventController::class,'upcoming']);
+
+Route::post('/views', [GeneralController::class, 'increment']);

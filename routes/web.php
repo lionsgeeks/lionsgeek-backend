@@ -14,6 +14,14 @@ use App\Http\Controllers\PdfController;
 use App\Http\Controllers\PressController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ProjectController;
+use App\Models\Blog;
+use App\Models\Contact;
+use App\Models\Coworking;
+use App\Models\Event;
+use App\Models\General;
+use App\Models\InfoSession;
+use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -54,7 +62,26 @@ Route::resource("projects", ProjectController::class);
 Route::get('/passqr', [PdfController::class, 'index'])->name('pass.qrcode');
 Route::get('/sendqr', [PdfController::class, 'sendQrcode'])->name('send.qrcode');
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    $totalContacts = Contact::all()->count();
+    $totalEvents = Event::all()->count();
+    $members = User::all()->count();
+
+    //* order sessions by the nearest date between now and one month from now
+    $sessions = InfoSession::where('isAvailable', 1)
+        ->whereBetween('start_date', [Carbon::now(), Carbon::now()->addMonth()])
+        ->orderByRaw('ABS(julianday(start_date) - julianday(?))', [Carbon::now()])
+        ->take(4)
+        ->get();
+    $upcomingEvents = Event::whereBetween('date', [Carbon::now(), Carbon::now()->addMonth()])
+        ->orderByRaw('ABS(julianday(date) - julianday(?))', [Carbon::now()])
+        ->take(4)
+        ->get();
+    $pendingCoworkings = Coworking::where('status', 0)->take(4)->get();
+    $coworkings = Coworking::latest()->take(4)->get();
+    $blogs = Blog::latest()->take(4)->get();
+    $views = General::where('id', 1)->first();
+    // dd($views);
+    return view('dashboard', compact('totalContacts', 'totalEvents', 'members', 'sessions', 'coworkings', 'upcomingEvents', 'pendingCoworkings', 'blogs', 'views'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

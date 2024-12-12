@@ -5,7 +5,7 @@
         @include('layouts.sidebare')
 
 
-        <div class="w-[84vw] h-[100vh] flex flex-col overflow-y-scroll">
+        <div class="w-[100vw] h-[100vh] flex flex-col overflow-y-scroll">
 
             <div class="flex items-center justify-between py-[1.2rem] px-[1rem] w-[100%] bg-white  ">
                 <p class="text-[25px] font-bold ">{{ $event->name->en }}</p>

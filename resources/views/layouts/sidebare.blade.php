@@ -80,6 +80,31 @@
                         Projects
                     </p>
                 </a>
+                <a href='{{ route('press.index') }}'
+                    class='nav-button no-underline text-base font-bold py-[0.75rem] flex items-center gap-2 hover:text-alpha hover:bg-gray-800 rounded-xl px-[1rem] {{ request()->routeIs('press.index') ? 'text-alpha bg-gray-800' : '' }}'>
+                    <svg version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink" class="size-6  " viewBox="0 0 512 512" xml:space="preserve"
+                        fill="#fff">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                            <g>
+                                <path class="st0"
+                                    d="M296.36,101.589l66.196,94.901c27.122,10.01,58.064,8.253,84.653-6.628L331.849,24.456 C308.697,44.25,296.334,72.666,296.36,101.589z">
+                                </path>
+                                <path class="st0"
+                                    d="M481.027,43.342c-30.925-44.329-90.834-56.272-136.282-28.294L460.49,181.013 C502.448,148.025,511.952,87.678,481.027,43.342z">
+                                </path>
+                                <path class="st0"
+                                    d="M259.586,450.298V343.683c18.178-6.234,31.327-23.275,31.336-43.577 c-0.009-18.195-10.588-33.758-25.854-41.321l84.242-54.278l-65.033-93.248L22.87,308.158c-10.904,8.21-13.36,23.59-5.553,34.781 l22.322,32.017c7.817,11.192,23.091,14.209,34.57,6.812l124.357-80.132c0.655,19.62,13.464,35.978,31.178,42.056v106.616 c-39.021,4.87-72.202,28.538-90.135,61.692h210.119C331.796,478.846,298.616,455.168,259.586,450.298z M244.67,319.508 c-10.711-0.018-19.384-8.691-19.402-19.402c0.018-10.702,8.691-19.376,19.402-19.402c10.702,0.026,19.376,8.7,19.392,19.402 C264.045,310.816,255.371,319.49,244.67,319.508z">
+                                </path>
+                            </g>
+                        </g>
+                    </svg>
+                    <p class="hidden group-hover:block truncate ">
+                        Press
+                    </p>
+                </a>
                 <a href='{{ route('contacts.index') }}'
                     class='nav-button no-underline text-base font-bold py-[0.75rem] flex items-center gap-2 hover:text-alpha hover:bg-gray-800 rounded-xl px-[1rem] {{ request()->routeIs('contacts.index') ? 'text-alpha bg-gray-800' : '' }}'>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -160,7 +185,8 @@
     </div>
 </div>
 <div class="md:hidden z-50">
-    <div class="bg-black side-bar rounded-lg fixed top-[11vh] left-[-700px] w-[70vw] flex flex-col  p-5 duration-500 transition-all ">
+    <div
+        class="bg-black side-bar rounded-lg fixed top-[11vh] left-[-700px] w-[70vw] flex flex-col  p-5 duration-500 transition-all ">
         <a href='{{ route('dashboard') }}'
             class='nav-button no-underline text-base font-bold py-[0.75rem] flex items-center gap-2 hover:text-alpha hover:bg-gray-800 rounded-xl px-[1rem] {{ request()->routeIs('dashboard') ? 'text-alpha bg-gray-800' : 'text-white' }}'>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -204,6 +230,31 @@
             </svg>
             <p class=" group-hover:block truncate ">
                 Projects
+            </p>
+        </a>
+        <a href='{{ route('press.index') }}'
+            class='nav-button no-underline text-base font-bold py-[0.75rem] flex items-center gap-2 hover:text-alpha hover:bg-gray-800 rounded-xl px-[1rem] {{ request()->routeIs('press.index') ? 'text-alpha bg-gray-800' : 'text-white' }}'>
+            <svg version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink" class="size-6 " viewBox="0 0 512 512" xml:space="preserve"
+                fill="#fff">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                    <g>
+                        <path class="st0"
+                            d="M296.36,101.589l66.196,94.901c27.122,10.01,58.064,8.253,84.653-6.628L331.849,24.456 C308.697,44.25,296.334,72.666,296.36,101.589z">
+                        </path>
+                        <path class="st0"
+                            d="M481.027,43.342c-30.925-44.329-90.834-56.272-136.282-28.294L460.49,181.013 C502.448,148.025,511.952,87.678,481.027,43.342z">
+                        </path>
+                        <path class="st0"
+                            d="M259.586,450.298V343.683c18.178-6.234,31.327-23.275,31.336-43.577 c-0.009-18.195-10.588-33.758-25.854-41.321l84.242-54.278l-65.033-93.248L22.87,308.158c-10.904,8.21-13.36,23.59-5.553,34.781 l22.322,32.017c7.817,11.192,23.091,14.209,34.57,6.812l124.357-80.132c0.655,19.62,13.464,35.978,31.178,42.056v106.616 c-39.021,4.87-72.202,28.538-90.135,61.692h210.119C331.796,478.846,298.616,455.168,259.586,450.298z M244.67,319.508 c-10.711-0.018-19.384-8.691-19.402-19.402c0.018-10.702,8.691-19.376,19.402-19.402c10.702,0.026,19.376,8.7,19.392,19.402 C264.045,310.816,255.371,319.49,244.67,319.508z">
+                        </path>
+                    </g>
+                </g>
+            </svg>
+            <p class=" group-hover:block truncate ">
+                Press
             </p>
         </a>
         <a href='{{ route('contacts.index') }}'

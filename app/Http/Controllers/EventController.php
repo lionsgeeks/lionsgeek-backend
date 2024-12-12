@@ -53,7 +53,7 @@ class EventController extends Controller
 
         ]);
 
-        
+
         $content = file_get_contents($request->cover);
         $fileName = hash("sha256", $content . now()) . '.'  . $request->cover->getClientOriginalName();
         // dd($fileName);

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CoworkingController;
 use App\Http\Controllers\EventController;
@@ -58,6 +59,7 @@ Route::patch('/infosessions/available/{id}', [InfoSessionController::class, 'ava
 Route::patch('/infosessions/complete/{id}', [InfoSessionController::class, 'completeStatus'])->name('infosessions.isfinish');
 Route::resource('newsletter', NewsletterController::class);
 Route::resource("projects", ProjectController::class);
+Route::resource("booking", BookingController::class);
 
 Route::get('/passqr', [PdfController::class, 'index'])->name('pass.qrcode');
 Route::get('/sendqr', [PdfController::class, 'sendQrcode'])->name('send.qrcode');
@@ -103,5 +105,6 @@ Route::middleware('auth')->group(function () {
     Route::delete("/press/destroy/{press}",[PressController::class,'destroy'])->name("press.destroy");
 
 });
+Route::post('/booking/store', [BookingController::class, 'store'])->name('booking.store');
 
 require __DIR__ . '/auth.php';

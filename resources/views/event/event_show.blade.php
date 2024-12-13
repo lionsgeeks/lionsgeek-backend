@@ -1,172 +1,229 @@
-@extends('layouts.index')
+<x-app-layout>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Events Update') }}
+        </h2>
 
-@section('content')
-    <div class="flex">
-        @include('layouts.sidebare')
-
-
-        <div class="w-[100vw] h-[100vh] flex flex-col overflow-y-scroll">
-
-            <div class="flex items-center justify-between py-[1.2rem] px-[1rem] w-[100%] bg-white  ">
-                <p class="text-[25px] font-bold ">{{ $event->name->en }}</p>
-                <form action="{{ route('events.destroy', $event) }}" method="post" enctype="multipart/form-data"
-                    onsubmit="this.submitBtn.disabled = true ">
-                    @csrf
-                    @method('DELETE')
-                    <button name="submitBtn" type="submit"
-                        class="px-[2.2rem] py-[.8rem] font-bold rounded-[14px] bg-red-500 ">Delete resource</button>
-                </form>
-            </div>
-
-            <div class="bg-slate-100 p-[2rem] gap-[1.6rem] flex flex-col items-center overflow-y-scroll w-[100%]">
-
-                {{-- <img class="w-[50%] bg-yellow-50  " src="{{ asset("storage/images/".$event->cover) }}" alt=""> --}}
-                <form class="flex flex-col items-center justify-center py-6 w-[100%] bg-white rounded-[20px] gap-5 "
-                    action="{{ route('events.update', $event) }}" method="post" enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
-                    <p class="text-[25px] font-bold">Update Event</p>
-
-                    <div x-data="{ tab: 'English' }" class="w-[100%]  flex flex-col items-center ">
-                        {{-- Language buttons --}}
-                        <div class="flex items-center justify-center gap-2 p-2 w-[100%] ">
-                            @foreach (['English', 'Français', 'العربية'] as $language)
-                                <button type="button" class="px-[3rem] py-[0.5rem] bg-slate-100 rounded-[20px]"
-                                    @click="tab = '{{ $language }}' ">
-                                    {{ $language }}
-                                </button>
-                            @endforeach
-                        </div>
-
-                        <div class="Tabs flex flex-col gap-5 w-[100%]  p-8 rounded-[20px]">
-
-                            {{-- Name & Description & Location --}}
-
-                            <div class="flex flex-col">
-                                {{-- English --}}
-                                <div class="flex flex-col items-center w-[100%] gap-5" x-show="tab === 'English' ">
-                                    <div class="flex flex-col w-[100%]  gap-1">
+        <form action="{{ route('events.destroy', $event) }}" method="post" enctype="multipart/form-data"
+        onsubmit="this.submitBtn.disabled = true ">
+        @csrf
+        @method('DELETE')
+        <button name="submitBtn" type="submit"
+            class="px-[2.2rem] text-white py-[.8rem] font-bold rounded-[14px] bg-red-500 ">Delete Event</button>
+    </form>
+    </x-slot>
+    
+    <div class="w-full min-h-screen flex flex-col overflow-y-auto">
+        <div class="bg-slate-100 p-4 md:p-[2rem] gap-4 md:gap-[1.6rem] flex flex-col items-center overflow-y-auto w-full">
+            <form class="flex flex-col items-center justify-center py-4 md:py-6 w-full bg-white rounded-[20px] gap-4 md:gap-5"
+                action="{{ route('events.update', $event) }}" method="post" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <p class="text-[20px] md:text-[25px] font-bold">Update Event</p>
+    
+                <div x-data="{ tab: 'English' }" class="w-full flex flex-col items-center">
+                    {{-- Language buttons --}}
+                    <div class="flex items-center justify-center gap-2 p-2 w-full overflow-x-auto">
+                        @foreach (['English', 'Français', 'العربية'] as $language)
+                            <button type="button" 
+                                class="px-[1.5rem] md:px-[3rem] py-[0.5rem] bg-[#f3f4f6] rounded-[20px] whitespace-nowrap text-sm md:text-base"
+                                @click="tab = '{{ $language }}' ">
+                                {{ $language }}
+                            </button>
+                        @endforeach
+                    </div>
+    
+                    <div class="flex flex-col gap-4 md:gap-5 w-full p-4 md:p-8 rounded-[20px]">
+                        {{-- Name & Description & Location --}}
+                        <div class="flex flex-col">
+                            {{-- Date & Price Section --}}
+                            <div class="flex flex-col md:flex-row gap-4 md:gap-x-6 justify-center w-full pb-5">
+                                {{-- Date --}}
+                                <div class="w-full md:w-[50%]">
+                                    <label class="block mb-2">
+                                        <p x-show="tab === 'English'">Date</p>
+                                        <p x-show="tab === 'Français'">La date</p>
+                                        <p x-show="tab === 'العربية'" class="text-end">التاريخ</p>
+                                    </label>
+                                    <input
+                                        :placeholder="tab === 'Français' ? 'Enter la date' : tab === 'العربية' ? 'أدخل التاريخ' : 'Enter date'"
+                                        class="w-full border-[2px] border-black bg-transparent rounded-[10px] p-2"
+                                        type="datetime-local"
+                                        name="date"
+                                        required
+                                        value="{{ $event->date }}"
+                                        min="{{ now()->format('Y-m-d\TH:i') }}">
+                                </div>
+    
+                                {{-- Price --}}
+                                <div class="w-full md:w-[50%]">
+                                    <label class="block mb-2">
+                                        <p x-show="tab === 'English'">Price</p>
+                                        <p x-show="tab === 'Français'">Prix</p>
+                                        <p x-show="tab === 'العربية'" class="text-end">السعر</p>
+                                    </label>
+                                    <input
+                                        required
+                                        :placeholder="tab === 'Français' ? 'Enter le prix' : tab === 'العربية' ? 'أدخل السعر' : 'Enter price'"
+                                        class="w-full border-[2px] border-black bg-transparent rounded-[10px] p-2"
+                                        type="number"
+                                        name="price"
+                                        value="{{ $event->price }}"
+                                        min="0"
+                                        step="0.01">
+                                </div>
+                            </div>
+    
+                            {{-- Language Tabs Content --}}
+                            {{-- English --}}
+                            <div class="flex flex-col items-center w-full gap-4 md:gap-5" x-show="tab === 'English'">
+                                <div class="flex flex-col md:flex-row justify-center gap-4 w-full">
+                                    <div class="flex flex-col w-full md:w-[50%] gap-1">
                                         <label for="name_en">Name</label>
                                         <input required placeholder="Enter name"
-                                            class="w-[100%] border-[2px] border-black bg-slate-100 rounded-[10px]"
+                                            class="w-full border-[2px] border-black bg-transparent rounded-[10px] p-2"
                                             type="text" name="name[en]" id="name_en" value="{{ $event->name->en }}">
                                     </div>
-                                    <div class="flex flex-col w-[100%]  gap-1 ">
-                                        <label for="description_en">Description</label>
-                                        <textarea placeholder="Enter description" rows="5"
-                                            class="w-[100%] border-[2px] bg-slate-100 border-black rounded-[10px]" type="text" name="description[en]"
-                                            id="description_en">{{ $event->description->en }}</textarea>
-                                    </div>
-                                    <div class="flex flex-col w-[100%] gap-1">
-                                        <label for="description_en">Location</label>
+                                    <div class="flex flex-col w-full md:w-[50%] gap-1">
+                                        <label for="location_en">Location</label>
                                         <input required placeholder="Enter location"
-                                            class="w-[100%] border-[2px] border-black bg-slate-100 rounded-[10px]"
-                                            type="text" name="location[en]" id="description_en"
+                                            class="w-full border-[2px] border-black bg-transparent rounded-[10px] p-2"
+                                            type="text" name="location[en]" id="location_en"
                                             value="{{ $event->location->en }}">
                                     </div>
                                 </div>
-
-                                {{-- Français --}}
-                                <div class="flex flex-col items-center w-[100%] gap-5" x-show="tab === 'Français' ">
-                                    <div class="flex flex-col w-[100%] gap-1">
+                                <div class="flex flex-col w-full gap-1">
+                                    <label for="description_en">Description</label>
+                                    <textarea placeholder="Enter description" rows="5"
+                                        class="w-full border-[2px] bg-transparent border-black rounded-[10px] p-2"
+                                        name="description[en]" id="description_en">{{ $event->description->en }}</textarea>
+                                </div>
+                            </div>
+    
+                            {{-- Français --}}
+                            <div class="flex flex-col items-center w-full gap-4 md:gap-5" x-show="tab === 'Français'">
+                                <div class="flex flex-col md:flex-row justify-center gap-4 w-full">
+                                    <div class="flex flex-col w-full md:w-[50%] gap-1">
                                         <label for="name_fr">Nom</label>
                                         <input required placeholder="Enter le nom"
-                                            class=" border-[2px] border-black bg-slate-100 rounded-[10px]" type="text"
-                                            name="name[fr]" id="name_fr" value="{{ $event->name->fr }}">
+                                            class="w-full border-[2px] border-black bg-transparent rounded-[10px] p-2"
+                                            type="text" name="name[fr]" id="name_fr" value="{{ $event->name->fr }}">
                                     </div>
-                                    <div class="flex flex-col  w-[100%] gap-1">
-                                        <label for="description_fr">Description</label>
-                                        <textarea placeholder="Enter la description" rows="5"
-                                            class="w-[100%] border-[2px] border-black bg-slate-100 rounded-[10px]" type="text" name="description[fr]"
-                                            id="description_fr">{{ $event->description->fr }}</textarea>
-                                    </div>
-                                    <div class="flex flex-col w-[100%]  gap-1">
+                                    <div class="flex flex-col w-full md:w-[50%] gap-1">
                                         <label for="location_fr">Localisation</label>
                                         <input required placeholder="Enter la localisation"
-                                            class="w-[100%] border-[2px] border-black bg-slate-100 rounded-[10px]"
-                                            type="text" name="location[fr]" value="{{ $event->location->fr }}"
-                                            id="location_fr">
+                                            class="w-full border-[2px] border-black bg-transparent rounded-[10px] p-2"
+                                            type="text" name="location[fr]" id="location_fr"
+                                            value="{{ $event->location->fr }}">
                                     </div>
                                 </div>
-
-                                {{-- العربية --}}
-                                <div class="flex flex-col items-center w-[100%] gap-5" x-show="tab === 'العربية' ">
-                                    <div class="flex flex-col  w-[100%] text-end gap-1">
+                                <div class="flex flex-col w-full gap-1">
+                                    <label for="description_fr">Description</label>
+                                    <textarea placeholder="Enter la description" rows="5"
+                                        class="w-full border-[2px] border-black bg-transparent rounded-[10px] p-2"
+                                        name="description[fr]" id="description_fr">{{ $event->description->fr }}</textarea>
+                                </div>
+                            </div>
+    
+                            {{-- العربية --}}
+                            <div class="flex flex-col items-center w-full gap-4 md:gap-5" x-show="tab === 'العربية'">
+                                <div class="flex flex-col md:flex-row justify-center gap-4 w-full">
+                                    <div class="flex flex-col w-full md:w-[50%] text-end gap-1">
                                         <label for="name_ar">الاسم</label>
                                         <input required placeholder="أدخل الاسم"
-                                            class=" border-[2px] border-black bg-slate-100 rounded-[10px]" type="text"
-                                            name="name[ar]" id="name_ar" value="{{ $event->name->ar }}">
+                                            class="w-full border-[2px] border-black bg-transparent rounded-[10px] p-2"
+                                            type="text" name="name[ar]" id="name_ar" value="{{ $event->name->ar }}">
                                     </div>
-                                    <div class="flex flex-col w-[100%]  text-end gap-1">
-                                        <label for="description_ar">وصف النص</label>
-                                        <textarea placeholder="أدخل الوصف" class="w-[100%] border-[2px] bg-slate-100 border-black rounded-[10px]" rows="5"
-                                            type="text" name="description[ar]" id="description_ar">{{ $event->description->ar }}</textarea>
-                                    </div>
-                                    <div class="flex flex-col w-[100%] text-end gap-1">
+                                    <div class="flex flex-col w-full md:w-[50%] text-end gap-1">
                                         <label for="location_ar">الموقع</label>
                                         <input required placeholder="أدخل الموقع"
-                                            class="w-[100%] border-[2px] border-black bg-slate-100 rounded-[10px]"
+                                            class="w-full border-[2px] border-black bg-transparent rounded-[10px] p-2"
                                             type="text" name="location[ar]" id="location_ar"
                                             value="{{ $event->location->ar }}">
                                     </div>
                                 </div>
-                            </div>
-
-                            {{-- Date --}}
-
-                            <div class="">
-                                <label for="">
-                                    <p x-show="tab === 'English' ">Date</p>
-                                    <p x-show="tab === 'Français' ">La date</p>
-                                    <p x-show="tab === 'العربية' " class="text-end">التاريخ</p>
-                                </label>
-                                <input
-                                    :placeholder="tab === 'Français' ? 'Enter la date' : tab === 'العربية' ? 'أدخل التاريخ' :
-                                        'Enter date'"
-                                    class="w-[100%] border-[2px] border-black bg-slate-100 rounded-[10px]"
-                                    type="datetime-local" name="date" id="" required
-                                    value="{{ $event->date }}" min="{{ now()->format('Y-m-d\TH:i') }}">
-                            </div>
-
-                            {{-- Price --}}
-
-                            <div class="">
-                                <label for="">
-                                    <p x-show="tab === 'English' ">Price</p>
-                                    <p x-show="tab === 'Français' ">Prix</p>
-                                    <p x-show="tab === 'العربية' " class="text-end">السعر</p>
-                                </label>
-                                <input required
-                                    :placeholder="tab === 'Français' ? 'Enter le prix' : tab === 'العربية' ? 'أدخل السعر' :
-                                        'Enter price'"
-                                    class="w-[100%] border-[2px] border-black bg-slate-100 rounded-[10px]" type="number"
-                                    name="price" value="{{ $event->price }}" id="" min="0"
-                                    step="0.01">
-                            </div>
-
-                            {{-- Cover --}}
-
-                            <div class="flex flex-col gap-1">
-                                <div class="">
-                                    <p x-show="tab=== 'English' " class="">Cover</p>
-                                    <p x-show="tab=== 'Français' " class="">Couverture</p>
-                                    <p x-show="tab=== 'العربية' " class="text-end">الغطاء</p>
-                                </div>
-                                <div class="h-96 relative rounded-lg flex items-center justify-center">
-                                    <h1 class="text-white absolute font-semibold z-30">+ Update the cover</h1>
-                                    <div class="w-full h-full bg-black/50 absolute top-0 z-20 rounded-lg"></div>
-                                    <input name="cover"
-                                        accept="image/*" type="file"
-                                        class="w-full rounded-lg h-full absolute top-0 opacity-0 cursor-pointer z-30">
-                                    <img class="w-full h-full object-cover rounded-lg "
-                                        src="{{ asset("storage/images/".$event->cover) }}"alt="">
+                                <div class="flex flex-col w-full text-end gap-1">
+                                    <label for="description_ar">وصف النص</label>
+                                    <textarea placeholder="أدخل الوصف" rows="5"
+                                        class="w-full border-[2px] bg-transparent border-black rounded-[10px] p-2"
+                                        name="description[ar]" id="description_ar">{{ $event->description->ar }}</textarea>
                                 </div>
                             </div>
                         </div>
+    
+                        {{-- Cover --}}
+                        <div class="flex flex-col gap-1">
+                            <div>
+                                <p x-show="tab === 'English'" class="">Cover</p>
+                                <p x-show="tab === 'Français'" class="">Couverture</p>
+                                <p x-show="tab === 'العربية'" class="text-end">الغطاء</p>
+                            </div>
+                            <div class="h-48 md:h-96 relative rounded-lg flex items-center justify-center">
+                                <h1 class="text-white absolute font-semibold z-30">+ Update the cover</h1>
+                                <div class="w-full h-full bg-black/50 absolute top-0 z-20 rounded-lg"></div>
+                                <input name="cover" accept="image/*" type="file"
+                                    class="w-full rounded-lg h-full absolute top-0 opacity-0 cursor-pointer z-30">
+                                <img class="w-full h-full object-cover rounded-lg"
+                                    src="{{ asset('storage/images/'.$event->cover) }}" alt="">
+                            </div>
+                        </div>
+    
+                        {{-- Participants --}}
+                        <div class="flex flex-col gap-3 w-full mt-6" x-data="{
+                            searchQuery: '',
+                            bookings: {{ $event->bookings }},
+                            filteredBookings() {
+                                return this.bookings.filter(b => 
+                                    b.name.toLowerCase().includes(this.searchQuery.toLowerCase()) || 
+                                    b.email.toLowerCase().includes(this.searchQuery.toLowerCase())
+                                );
+                            }
+                        }">
+                            <p x-show="tab === 'English'" class="text-xl font-bold">Participants</p>
+                            <p x-show="tab === 'Français'" class="text-xl font-bold">Participants</p>
+                            <p x-show="tab === 'العربية'" class="text-xl font-bold text-end">المشاركين</p>
+    
+                            <div class="mb-4">
+                                <input type="text" x-model="searchQuery" 
+                                    placeholder="Search participants..." 
+                                    class="px-4 py-2 border border-gray-300 rounded-lg w-full">
+                            </div>
+    
+                            <div class="overflow-x-auto">
+                                <table class="w-full text-left border border-gray-300 rounded-lg">
+                                    <thead>
+                                        <tr class="bg-gray-100">
+                                            <th class="px-2 md:px-4 py-2 font-medium text-gray-700 text-sm md:text-base">#</th>
+                                            <th class="px-2 md:px-4 py-2 font-medium text-gray-700 text-sm md:text-base">Name</th>
+                                            <th class="px-2 md:px-4 py-2 font-medium text-gray-700 text-sm md:text-base">Email</th>
+                                            <th class="px-2 hidden md:block md:px-4 py-2 font-medium text-gray-700 text-sm md:text-base">Booked at</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <template x-for="(booking, index) in filteredBookings()" :key="index">
+                                            <tr class="border-t border-gray-300 hover:bg-gray-50 transition">
+                                                <td class="px-2 md:px-4 py-2 text-gray-800 font-medium text-sm md:text-base" x-text="index + 1"></td>
+                                                <td class="px-2 md:px-4 py-2 text-gray-800 text-sm md:text-base" x-text="booking.name"></td>
+                                                <td class="px-2 md:px-4 py-2 text-gray-800 text-sm md:text-base" x-text="booking.email"></td>
+                                                <td class="px-2 md:px-4 hidden md:block py-2 text-gray-800 text-sm md:text-base" 
+                                                    x-text="new Date(booking.created_at).toLocaleDateString('en-GB', { 
+                                                        year: 'numeric', 
+                                                        month: 'long', 
+                                                        day: 'numeric' 
+                                                    })">
+                                                </td>
+                                            </tr>
+                                        </template>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
                     </div>
-                    <button class="p-3 px-[3rem] rounded-[14px] bg-black text-white">Submit</button>
-                </form>
-            </div>
+                </div>
+                <button class="p-3 px-[2rem] md:px-[3rem] rounded-[14px] bg-black text-white text-sm md:text-base">
+                    Submit
+                </button>
+            </form>
         </div>
     </div>
-@endsection
+</x-app-layout>

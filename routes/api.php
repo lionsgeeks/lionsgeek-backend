@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\GeneralController;
 use App\Http\Controllers\Api\ParticipantController ;
 use App\Http\Controllers\Api\ProjectController;
 use App\Http\Controllers\Api\SubscriberController;
+use App\Http\Controllers\BookingController;
 use App\Models\InfoSession;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,7 @@ Route::get("/events", [AttendenceController::class, "show"]);
 
 Route::get('/blogs', [BlogController::class, 'index']);
 Route::post('/contact', [ContactController::class, 'store']);
+Route::post('/booking/store', [BookingController::class, 'store']);
 
 Route::post('/subscriber', [SubscriberController::class, 'store']);
 Route::post('/cowork', [ContactController::class, 'cowork']);

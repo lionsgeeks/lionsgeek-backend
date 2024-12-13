@@ -27,7 +27,7 @@
         @include('layouts.sidebare')
         <div class="flex flex-col w-full overflow-y-auto h-screen">
             @isset($header)
-                <header class="bg-white shadow flex items-center justify-between items-center w-full ">
+                <header class="bg-white shadow flex  justify-between items-center w-full ">
                     <div class="max-w-7xl py-[1.25rem] flex gap-x-2 px-4 sm:px-6 lg:px-8 w-full">
                         <div class="md:hidden">
                             <input id="checkbox" type="checkbox">

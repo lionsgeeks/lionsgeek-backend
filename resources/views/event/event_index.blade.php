@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+            {{ __('Events') }}
         </h2>
 
         <a href="{{ route('events.create') }}">
@@ -55,7 +55,7 @@
                             </h4>
                             <a href="{{ route('events.show', $event->id) }}">
                                 <button class="py-[.5rem] px-[1.5rem] rounded-lg bg-black text-white " type="button">
-                                    See Gallery
+                                    Event Details
                                 </button>
                             </a>
                         </div>
@@ -73,7 +73,7 @@
                             <h4 class="text-lg font-semibold">{{ Str::limit($event->name->en, 15, '...') }}</h4>
                             <a href="{{ route('events.show', $event->id) }}" class="block">
                                 <button class="w-full py-2 px-4 rounded-lg bg-black text-white text-sm" type="button">
-                                    See Gallery
+                                    Event details
                                 </button>
                             </a>
                         </div>

@@ -96,9 +96,8 @@
                         </span>
                         <div class="flex flex-col justify-center h-[50%]  text-black">
                             <span class="font-bold text-[18px]">Total Visits</span>
-                            @if ($views)
-                                <p class="text-4xl font-black">{{ $views->views }}</p>
-                            @endif
+
+                            <p class="text-4xl font-black">{{ $views?->views }}</p>
 
                         </div>
                     </div>
@@ -151,7 +150,7 @@
                                 cow.phone.toLowerCase().includes(query);},
                         matchesFilter(participant) {
                                 return this.matchesSearch(participant);},
-    
+
                     }'
                                 class=" overflow-hidden  sm:rounded-lg">
 

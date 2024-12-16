@@ -26,9 +26,11 @@
 
                     <div x-data="{ tab: 'English' }" class="w-[100%]  flex flex-col items-center ">
                         {{-- Language buttons --}}
-                        <div class="flex items-center justify-center gap-2 p-2 w-[100%] ">
+                        <div class="flex items-center justify-center gap-2 p-2 w-[100%] bg-slate-200 rounded">
                             @foreach (['English', 'Français', 'العربية'] as $language)
-                                <button type="button" class="px-[3rem] py-[0.5rem] bg-slate-100 rounded-[20px]"
+                                <button type="button"
+                                :class="{ 'bg-white text-black': tab === '{{ $language }}', 'bg-slate-200 text-black': tab !== '{{ $language }}' }"
+                                class="w-1/3 rounded-md font-medium p-1"
                                     @click="tab = '{{ $language }}' ">
                                     {{ $language }}
                                 </button>
@@ -71,6 +73,17 @@
                                 </div>
                             </div>
 
+                            {{-- link --}}
+                            <div class="flex flex-col gap-1">
+                                <div class="">
+                                    <p x-show="tab=== 'English' " class="">link</p>
+                                    <p x-show="tab=== 'Français' " class="">lien</p>
+                                    <p x-show="tab=== 'العربية' " class="text-end">رابط</p>
+                                </div>
+                                <input x-show="tab=== 'Français' " name="link" required type="url" value="{{ $press->link }}" placeholder="Entrez le lien" class="border-[2px] border-black rounded-[10px]">
+                                <input x-show="tab=== 'العربية' " name="link" required type="url" value="{{ $press->link }}" placeholder="أدخل الرابط" class="border-[2px] border-black rounded-[10px]">
+                                <input x-show="tab=== 'English' " name="link" required type="url" value="{{ $press->link }}" placeholder="Enter link" class="border-[2px] border-black rounded-[10px]">
+                            </div>
                             {{-- Cover --}}
 
                             <div class="flex flex-col gap-1">
@@ -90,17 +103,6 @@
                                 </div>
                             </div>
 
-                            {{-- link --}}
-                            <div class="flex flex-col gap-1">
-                                <div class="">
-                                    <p x-show="tab=== 'English' " class="">link</p>
-                                    <p x-show="tab=== 'Français' " class="">lien</p>
-                                    <p x-show="tab=== 'العربية' " class="text-end">رابط</p>
-                                </div>
-                                <input x-show="tab=== 'Français' " name="link" required type="url" value="{{ $press->link }}" placeholder="Entrez le lien" class="border-[2px] border-black rounded-[10px]">
-                                <input x-show="tab=== 'العربية' " name="link" required type="url" value="{{ $press->link }}" placeholder="أدخل الرابط" class="border-[2px] border-black rounded-[10px]">
-                                <input x-show="tab=== 'English' " name="link" required type="url" value="{{ $press->link }}" placeholder="Enter link" class="border-[2px] border-black rounded-[10px]">
-                            </div>
                         </div>
                     </div>
                     <button class="p-3 px-[3rem] rounded-[14px] bg-black text-white">Submit</button>

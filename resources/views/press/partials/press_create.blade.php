@@ -87,9 +87,10 @@
                                     <p x-show="tab=== 'Français' " class="">lien</p>
                                     <p x-show="tab=== 'العربية' " class="text-end">رابط</p>
                                 </div>
-                                <input x-show="tab=== 'Français' " name="link" required type="url" placeholder="Entrez le lien" class="border-[2px] border-black rounded-[10px]">
+                                <input name="link" required type="url" placeholder="Enter link" class="border-[2px] border-black rounded-[10px]">
+                                {{-- <input x-show="tab=== 'Français' " name="link" required type="url" placeholder="Entrez le lien" class="border-[2px] border-black rounded-[10px]">
                                 <input x-show="tab=== 'العربية' " name="link" required type="url" placeholder="أدخل الرابط" class="border-[2px] border-black rounded-[10px]">
-                                <input x-show="tab=== 'English' " name="link" required type="url" placeholder="Enter link" class="border-[2px] border-black rounded-[10px]">
+                                <input x-show="tab=== 'English' " name="link" required type="url" placeholder="Enter link" class="border-[2px] border-black rounded-[10px]"> --}}
                             </div>
                         </div>
 

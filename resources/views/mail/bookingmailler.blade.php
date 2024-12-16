@@ -7,6 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh</h1>
+    <h1>hhhhhhhhhhhhhhh{{ $name }}</h1>
 </body>
 </html>

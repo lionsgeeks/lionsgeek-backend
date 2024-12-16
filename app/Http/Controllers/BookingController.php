@@ -39,11 +39,11 @@ class BookingController extends Controller
            
         ]);
         $booking = booking::create([
-            "name" => $request->name,
-            "email" => $request->email,
-            "event_id" => $request->event_id
-        ]);
-        Mail::to($booking->email)->send(new BookingMailler($booking->name));
+                "name" => $request->name,
+                "email" => $request->email,
+                "event_id" => $request->event_id
+            ]);
+            Mail::to($booking->email)->send(new BookingMailler($booking->name));
         
         return  response()->json([
             "message" => "booking successsssssfullllly"

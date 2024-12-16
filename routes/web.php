@@ -105,6 +105,6 @@ Route::middleware('auth')->group(function () {
     Route::delete("/press/destroy/{press}",[PressController::class,'destroy'])->name("press.destroy");
 
 });
-Route::post('/booking/store', [BookingController::class, 'store'])->name('booking.store');
+// Route::post('/booking/store', [BookingController::class, 'store'])->name('booking.store');
 
 require __DIR__ . '/auth.php';

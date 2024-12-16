@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+// use Illuminate\Container\Attributes\Auth;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class BlogController extends Controller
@@ -44,14 +46,14 @@ class BlogController extends Controller
         ]);
 
         $image = $request->file('image');
-
         if ($image) {
             $imageName = time() .  $image->getClientOriginalName();
             $image->storeAs('images', $imageName, 'public');
             $blog = Blog::create([
                 'title' => $request->input('title'),
                 'description' => $request->input('description'),
-                'image' => $imageName
+                'image' => $imageName,
+                'user_id'=> Auth::user()->id
             ]);
 
         }

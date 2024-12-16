@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\BookingMailler;
 use App\Models\booking;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class BookingController extends Controller
 {
@@ -36,12 +38,13 @@ class BookingController extends Controller
             "event_id" => "required",
            
         ]);
-         booking::create([
+        $booking = booking::create([
             "name" => $request->name,
             "email" => $request->email,
             "event_id" => $request->event_id
         ]);
-
+        Mail::to($booking->email)->send(new BookingMailler($booking->name));
+        
         return  response()->json([
             "message" => "booking successsssssfullllly"
         ]);

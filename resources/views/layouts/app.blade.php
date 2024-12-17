@@ -28,7 +28,7 @@
         <div class="flex flex-col w-full overflow-y-auto h-screen">
             @isset($header)
                 <header class="bg-white shadow flex  justify-between items-center w-full ">
-                    <div class="max-w-7xl py-[1.25rem] flex gap-x-2 px-4 sm:px-6 lg:px-8 w-full">
+                    <div class=" py-[1.25rem] flex gap-x-2 px-4 sm:px-6 lg:px-8 w-full">
                         <div class="md:hidden">
                             <input id="checkbox" type="checkbox">
                             <label class="toggle" for="checkbox">
@@ -62,7 +62,7 @@
                         <x-dropdown align="right" width="48">
                             <x-slot name="trigger">
                                 <button
-                                    class="inline-flex items-center  text-sm leading-4 font-medium  focus:outline-none transition ease-in-out duration-150 ms-1 bg-gray-100 rounded-full p-2">
+                                    class="inline-flex  items-center  text-sm leading-4 font-medium  focus:outline-none transition ease-in-out duration-150 ms-1 bg-gray-100 rounded-full p-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         stroke-width="1.5" stroke="currentColor" class="size-5">
                                         <path stroke-linecap="round" stroke-linejoin="round"

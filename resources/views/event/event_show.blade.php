@@ -4,13 +4,24 @@
             {{ __('Events Update') }}
         </h2>
 
-        <form action="{{ route('events.destroy', $event) }}" method="post" enctype="multipart/form-data"
-        onsubmit="this.submitBtn.disabled = true ">
+        <form 
+        action="{{ route('events.destroy', $event) }}" 
+        method="post" 
+        enctype="multipart/form-data" 
+        onsubmit="this.submitBtn.disabled = true"
+        class="flex flex-col items-center sm:items-start sm:flex-row"
+    >
         @csrf
         @method('DELETE')
-        <button name="submitBtn" type="submit"
-            class="px-[2.2rem] text-white py-[.8rem] font-bold rounded-[14px] bg-red-500 ">Delete Event</button>
+        <button 
+            name="submitBtn" 
+            type="submit"
+            class="w-full sm:w-auto px-4 sm:px-6 text-white py-2 sm:py-3 font-bold rounded-md bg-red-500 hover:bg-red-600 transition-all"
+        >
+            Delete Event
+        </button>
     </form>
+    
     </x-slot>
     
     <div class="w-full min-h-screen flex flex-col overflow-y-auto">
@@ -26,7 +37,7 @@
                     <div class="flex items-center justify-center gap-2 p-2 w-full overflow-x-auto">
                         @foreach (['English', 'Français', 'العربية'] as $language)
                             <button type="button" 
-                                class="px-[1.5rem] md:px-[3rem] py-[0.5rem] bg-[#f3f4f6] rounded-[20px] whitespace-nowrap text-sm md:text-base"
+                                class="px-[1.5rem] md:px-[3rem] py-[0.5rem] w-[30%] bg-[#f3f4f6] rounded-[10px] whitespace-nowrap text-sm md:text-base"
                                 @click="tab = '{{ $language }}' ">
                                 {{ $language }}
                             </button>
@@ -151,23 +162,33 @@
                             </div>
                         </div>
     
-                        {{-- Cover --}}
-                        <div class="flex flex-col gap-1">
+                         <!-- Cover -->
+                         <div class="flex flex-col gap-1" x-data="{
+                            selectedImage: '{{ asset('storage/images/'.$event->cover) }}',
+                            updateImage(event) {
+                                const file = event.target.files[0];
+                                if (file) {
+                                    this.selectedImage = URL.createObjectURL(file);
+                                }
+                            }
+                        }">
                             <div>
                                 <p x-show="tab === 'English'" class="">Cover</p>
                                 <p x-show="tab === 'Français'" class="">Couverture</p>
                                 <p x-show="tab === 'العربية'" class="text-end">الغطاء</p>
                             </div>
-                            <div class="h-48 md:h-96 relative rounded-lg flex items-center justify-center">
+                            <div class="h-48 md:h-96 relative rounded-[10px] flex items-center justify-center">
                                 <h1 class="text-white absolute font-semibold z-30">+ Update the cover</h1>
-                                <div class="w-full h-full bg-black/50 absolute top-0 z-20 rounded-lg"></div>
+                                <div class="w-full h-full bg-black/50 absolute top-0 z-20 rounded-[10px]"></div>
                                 <input name="cover" accept="image/*" type="file"
-                                    class="w-full rounded-lg h-full absolute top-0 opacity-0 cursor-pointer z-30">
-                                <img class="w-full h-full object-cover rounded-lg"
-                                    src="{{ asset('storage/images/'.$event->cover) }}" alt="">
+                                    class="w-full rounded-[10px] h-full absolute top-0 opacity-0 cursor-pointer z-30"
+                                    @change="updateImage">
+                                <img class="w-full h-full object-cover rounded-[10px]" :src="selectedImage" alt="Selected Cover">
                             </div>
                         </div>
-    
+                        <button class="p-3 px-[2rem] md:px-[3rem] rounded-[10px] w-full bg-black text-white text-sm md:text-base">
+                            Submit
+                        </button>
                         {{-- Participants --}}
                         <div class="flex flex-col gap-3 w-full mt-6" x-data="{
                             searchQuery: '',
@@ -186,11 +207,11 @@
                             <div class="mb-4">
                                 <input type="text" x-model="searchQuery" 
                                     placeholder="Search participants..." 
-                                    class="px-4 py-2 border border-gray-300 rounded-lg w-full">
+                                    class="px-4 py-2 border border-gray-300 rounded-[10px] w-full">
                             </div>
     
                             <div class="overflow-x-auto">
-                                <table class="w-full text-left border border-gray-300 rounded-lg">
+                                <table class="w-full text-left border border-gray-300 rounded-[10px]">
                                     <thead>
                                         <tr class="bg-gray-100">
                                             <th class="px-2 md:px-4 py-2 font-medium text-gray-700 text-sm md:text-base">#</th>
@@ -220,9 +241,7 @@
                         </div>
                     </div>
                 </div>
-                <button class="p-3 px-[2rem] md:px-[3rem] rounded-[14px] bg-black text-white text-sm md:text-base">
-                    Submit
-                </button>
+                
             </form>
         </div>
     </div>

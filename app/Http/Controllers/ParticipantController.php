@@ -7,6 +7,7 @@ use App\Models\FrequentQuestion;
 use App\Models\InfoSession;
 use App\Models\Note;
 use App\Models\Participant;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
@@ -19,8 +20,12 @@ class ParticipantController extends Controller
     public function index()
     {
         $participants = Participant::all();
+        $males = $participants->filter(function ($participant) {
+            return $participant->gender == 'male';
+        })->count();
+
         $infos = InfoSession::all();
-        return view("participants.participants", compact("participants", "infos"));
+        return view("participants.participants", compact("participants", "infos", "males"));
     }
 
     /**
@@ -139,10 +144,10 @@ class ParticipantController extends Controller
     }
 
 
-    // TODO: add date to the title, here and coworking
     public function export(Request $request)
     {
-        return (new ParticipantsExport($request->term, $request->step, $request->session))->download('participant.xlsx');
+        $date = (new DateTime())->format('F_d_Y');
+        return (new ParticipantsExport($request->term, $request->step, $request->session))->download($date . '_participants.xlsx');
     }
 
 
@@ -151,14 +156,18 @@ class ParticipantController extends Controller
     {
         // the action value of the submit buttons in the form
         $action = $request->input("action");
+        // this is for determining either coding/media
+        $formation = strtolower($participant->infoSession->formation);
+        $week = $formation . "_week";
+        $school = $formation . "_school";
 
         if ($participant->current_step == "interview") {
             $participant->update([
-                "current_step" => $action == "next" ? "coding_week" : "interview_failed",
+                "current_step" => $action == "next" ? $week : "interview_failed",
             ]);
-        } elseif ($participant->current_step == "coding_week") {
+        } elseif ($participant->current_step == $week) {
             $participant->update([
-                "current_step" => $action == "next" ? "coding_school" : "coding_week_failed",
+                "current_step" => $action == "next" ? $school : $week . "_failed",
             ]);
         }
 

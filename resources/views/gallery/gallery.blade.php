@@ -11,7 +11,7 @@
                 Create Gallery
             </button>
         </a>
-{{--             
+        {{--
         @endif
         @include('project.partials.create_project') --}}
     </x-slot>
@@ -51,4 +51,5 @@
                 </div>
             @endforeach
         </div>
+    </div>
 </x-app-layout>

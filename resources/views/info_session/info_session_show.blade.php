@@ -17,7 +17,10 @@
 
         <div class="flex items-center gap-2 mb-3">
             <div class="w-[30%] bg-white p-2 rounded">
-                <canvas id="genderChart"></canvas>
+                @php
+                    $totalNumber = $infoSession->participants->count();
+                @endphp
+                <x-gender-chart :$males :$totalNumber />
             </div>
 
             <div class="w-[40%] bg-white p-2 rounded">
@@ -103,32 +106,6 @@
     </div>
 
     <script>
-        // The Gender Chart
-        const genderChart = document.getElementById('genderChart');
-
-        new Chart(genderChart, {
-            type: 'doughnut',
-            data: {
-                labels: ['Male', 'Female'],
-                datasets: [{
-                    label: 'Gender',
-                    data: [{{ $males }},
-                        {{ $infoSession->participants->count() - $males }}
-                    ],
-                    backgroundColor: [
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 99, 132, 0.2)',
-                    ],
-                    borderColor: [
-                        'rgb(54, 162, 235)',
-                        'rgb(255, 99, 132)',
-                    ],
-                    borderWidth: 1
-                }],
-            },
-            options: {}
-        });
-
         // The Age Chart
         const ageChart = document.getElementById('ageChart')
         new Chart(ageChart, {
@@ -160,6 +137,5 @@
             }
         })
 
-        
     </script>
 </x-app-layout>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\ContactsExport;
 use App\Models\Contact;
+use DateTime;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -67,6 +68,7 @@ class ContactController extends Controller
     }
     public function export()
     {
-        return Excel::download(new ContactsExport, 'contact.xlsx');
+        $date = (new DateTime())->format('F_d_Y');
+        return Excel::download(new ContactsExport, $date . '_contacts.xlsx');
     }
 }

@@ -14,12 +14,14 @@
                         {{ Auth::user()->name }},</h1>
                     <div>
                         <button
+                            onclick="openModal('modalAdmin')"
                             class="lg:px-6 px-2 py-2 bg-black text-white text-base font-medium rounded-md shadow hover:bg-alpha  transition">
                             Add Admin
                         </button>
+                        @include('layouts.AdminModal')
                         <button
                             class="lg:px-6 px-2 py-2 bg-black text-white text-base font-medium rounded-md shadow hover:bg-alpha  transition">
-                            Add Press
+                            <a href="{{ route("press.create") }}">Add Press</a>
                         </button>
 
                     </div>

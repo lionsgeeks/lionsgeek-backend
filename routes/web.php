@@ -73,7 +73,6 @@ Route::get('/dashboard', function () {
     $sessions = InfoSession::where('isAvailable', 1)
         ->whereBetween('start_date', [Carbon::now(), Carbon::now()->addMonth()])
         ->orderByRaw('ABS(julianday(start_date) - julianday(?))', [Carbon::now()])
-        ->take(4)
         ->get();
     $upcomingEvents = Event::whereBetween('date', [Carbon::now(), Carbon::now()->addMonth()])
         ->orderByRaw('ABS(julianday(date) - julianday(?))', [Carbon::now()])

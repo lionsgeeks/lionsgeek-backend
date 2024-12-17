@@ -43,7 +43,7 @@
                         <div class="flex flex-col h-[50%] justify-center ">
                             <span class="font-bold text-[18px]">Total Contacts</span>
                             @if ($totalContacts > 0)
-                                <p class="text-4xl font-black ">{{ $totalContacts }}</p>
+                                <p class="text-3xl font-black ">{{ $totalContacts }}</p>
                             @else
                                 <p>No Messages Received</p>
                             @endif
@@ -63,7 +63,7 @@
                         <div class="flex flex-col h-[50%] justify-center  text-black">
                             <span class="font-bold text-[18px]">Upcoming Events</span>
                             @if ($totalEvents > 0)
-                                <p class="text-4xl font-black ">{{ $totalEvents }}</p>
+                                <p class="text-3xl font-black ">{{ $totalEvents }}</p>
                             @else
                                 <p>there are no events yet</p>
                             @endif
@@ -81,7 +81,7 @@
                         <div class="flex flex-col h-[50%] justify-center  text-black">
                             <span class="font-bold text-[18px]">Total Members</span>
                             @if ($members > 0)
-                                <p class="text-4xl font-black ">{{ $members }}</p>
+                                <p class="text-3xl font-black ">{{ $members }}</p>
                             @else
                                 <p>No event Available</p>
                             @endif
@@ -99,7 +99,7 @@
                         <div class="flex flex-col justify-center h-[50%]  text-black">
                             <span class="font-bold text-[18px]">Total Visits</span>
 
-                            <p class="text-4xl font-black">{{ $views?->views }}</p>
+                            <p class="text-3xl font-black">{{ $views?->views ?? 0 }}</p>
 
                         </div>
                     </div>
@@ -109,8 +109,8 @@
                 <div class="">
                     @if ($sessions->count() > 0)
                         <div class="p-4 shadow-md rounded-[16px] flex flex-col gap-y-4 bg-white ">
-                            <h1 class="text-3xl font-[500] ">Upcoming Info Sessions</h1>
-                            <div class="grid  lg:grid-cols-4 lg:gap-x-2 md:gap-x-4 grid-cols-2 gap-x-4 gap-y-6 ">
+                            <h1 class="text-xl font-semibold text-black ">Upcoming Info Sessions</h1>
+                            <div class="grid  mt-2 lg:grid-cols-4 lg:gap-x-2 md:gap-x-4 grid-cols-2 gap-x-4 gap-y-8 ">
                                 @foreach ($sessions as $session)
                                     <div class="flex  items-center gap-x-2  ">
                                         <div
@@ -158,11 +158,11 @@
 
                                 <div class="p-6 text-gray-900 ">
                                     <div class="flex justify-between items-center">
-                                        <h1 class="text-3xl font-bold mb-2">Recent Coworking Requests</h1>
+                                        <h1 class="text-xl font-semibold text-black mb-2">Recent Coworking Requests</h1>
                                         <a href="{{ route('coworkings.index') }}" class="underline text-alpha">See
                                             all</a>
                                     </div>
-                                    <table class="w-full ">
+                                    <table class="w-full mt-4">
                                         <thead class="border-b">
                                             <th class=" ">Name</th>
                                             {{-- <th class=" sm:table-cell hidden">Phone</th> --}}
@@ -293,11 +293,11 @@
 
                                 <div class="p-6 text-gray-900 ">
                                     <div class="flex justify-between items-center">
-                                        <h1 class="text-3xl font-bold mb-2">Upcoming Events</h1>
+                                        <h1 class="text-xl font-semibold text-black mb-2">Upcoming Events</h1>
                                         <a href="{{ route('events.index') }}" class="underline text-alpha">See
                                             all</a>
                                     </div>
-                                    <table class="w-full ">
+                                    <table class="w-full mt-4">
                                         <thead class="border-b">
                                             <th class=" ">Event</th>
                                             <th class=" sm:table-cell hidden">Date</th>
@@ -358,16 +358,16 @@
 
                 <div class="w-full  flex flex-col gap-y-2 bg-white p-4 rounded-[16px]">
 
-                    @if ($blogs)
+                    @if ($blogs->count() > 0)
 
                         <div class="flex justify-between items-center ">
-                            <h1 class="text-3xl font-[500] ">Latest Blogs</h1>
+                            <h1 class="text-xl font-semibold text-black ">Latest Blogs</h1>
                             <a href="{{ route('blogs.index') }}" class="underline text-alpha">See all</a>
                         </div>
                         <div class=" grid lg:grid-cols-4 md:grid-cols-2 gap-x-4  p-4 rounded-[16px] gap-y-4 ">
                             @foreach ($blogs as $blog)
-                                <div class=" flex flex-col gap-y-4">
-                                    <div class="h-[15vh]">
+                                <div class=" flex flex-col gap-y-2">
+                                    <div class="h-[20vh]">
                                         <img class="w-[90%] aspect-video object-cover rounded-[16px] h-full"
                                             src="{{ asset('storage/images/' . $blog->image) }}" alt="">
                                     </div>
@@ -376,7 +376,7 @@
                                             {{ $blog->title->en }}</h1>
                                         <div
                                             class="flex  items-center gap-x-1 w-fit px-2 bg-alpha/10 border border-[#eeb76b34] rounded-full">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10"
                                                 fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
                                                 <path
                                                     d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z" />

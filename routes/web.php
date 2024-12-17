@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AddAdminController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ContactController;
@@ -104,6 +105,8 @@ Route::middleware('auth')->group(function () {
     Route::put("/press/update/{press}",[PressController::class,'update'])->name("press.update");
     Route::delete("/press/destroy/{press}",[PressController::class,'destroy'])->name("press.destroy");
 
+    //addAdmin
+    Route::post("/addadmin/store",[AddAdminController::class,"AddAdmin"])->name("addadmin.store");
 });
 // Route::post('/booking/store', [BookingController::class, 'store'])->name('booking.store');
 

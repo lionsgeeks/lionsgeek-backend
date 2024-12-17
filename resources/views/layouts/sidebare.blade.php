@@ -61,11 +61,11 @@
                     <!-- Dropdown Toggle Button -->
                     <div class="w-[100%] nav-button no-underline text-base font-bold flex gap-2 items-center   py-[0.75rem] px-[1rem] bg-black text-white  rounded-xl  hover:text-alpha hover:bg-gray-800 transition-all duration-300">
                         <button id="dropdownButton1" class="flex items-center gap-2 w-[100%] ">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="currentColor" class="bi bi-card-text" viewBox="0 0 16 16">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="size-5" fill="currentColor" class="bi bi-card-text" viewBox="0 0 16 16">
                                 <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z"/>
                                 <path d="M3 5.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M3 8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 8m0 2.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5"/>
                               </svg>
-                            <div class="hidden group-hover:flex truncate  items-center gap-2">
+                            <div class="hidden group-hover:flex truncate w-[100%] justify-between items-center gap-2">
                                 Articles
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 9l-7.5 7.5L4.5 9" />
@@ -112,11 +112,11 @@
                     <!-- Dropdown Toggle Button -->
                     <div class="w-[100%] nav-button no-underline text-base font-bold flex gap-2 items-center   py-[0.75rem] px-[1rem] bg-black text-white  rounded-xl hover:text-alpha hover:bg-gray-800 transition-all duration-300">
                         <button id="dropdownButton2" class="flex items-center gap-2 w-[100%] ">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="currentColor" class="bi bi-person-workspace" viewBox="0 0 16 16">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="size-5" fill="currentColor" class="bi bi-person-workspace" viewBox="0 0 16 16">
                                 <path d="M4 16s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-5.95a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
                                 <path d="M2 1a2 2 0 0 0-2 2v9.5A1.5 1.5 0 0 0 1.5 14h.653a5.4 5.4 0 0 1 1.066-2H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v9h-2.219c.554.654.89 1.373 1.066 2h.653a1.5 1.5 0 0 0 1.5-1.5V3a2 2 0 0 0-2-2z"/>
                               </svg>
-                            <div class="hidden group-hover:flex truncate  items-center gap-2">
+                            <div class="hidden group-hover:flex truncate w-[100%] justify-between items-center gap-2">
                                 Connect
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 9l-7.5 7.5L4.5 9" />
@@ -152,7 +152,7 @@
                 </div>
                 <a href='{{ route('gallery.index') }}'
                     class='nav-button no-underline text-base font-bold py-[0.75rem] flex items-center gap-2 hover:text-alpha hover:bg-gray-800 rounded-xl px-[1rem] {{ request()->routeIs('gallery.index') || request()->routeIs('gallery.create') || request()->routeIs('gallery.show') ? 'text-alpha bg-gray-800' : '' }}'>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="currentColor" class="bi bi-card-image" viewBox="0 0 16 16">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="size-5" fill="currentColor" class="bi bi-card-image" viewBox="0 0 16 16">
                         <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
                         <path d="M1.5 2A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2zm13 1a.5.5 0 0 1 .5.5v6l-3.775-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12v.54L1 12.5v-9a.5.5 0 0 1 .5-.5z"/>
                       </svg>
@@ -163,7 +163,7 @@
                 <a href='{{ route('newsletter.index') }}'
                     class='nav-button no-underline text-base font-bold py-[0.75rem] flex items-center gap-2 hover:text-alpha hover:bg-gray-800 rounded-xl px-[1rem] {{ request()->routeIs('newsletter.index') ? 'text-alpha bg-gray-800' : '' }}'>
 
-                    <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="size-5" fill="currentColor" class="bi bi-envelope" viewBox="0 0 16 16">
                         <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z"/>
                       </svg>
                     <p class="hidden group-hover:block truncate ">
@@ -175,11 +175,11 @@
                     <!-- Dropdown Toggle Button -->
                     <div class="w-[100%] nav-button no-underline text-base font-bold flex gap-2 items-center   py-[0.75rem] px-[1rem] bg-black text-white  rounded-xl hover:text-alpha hover:bg-gray-800 transition-all duration-300">
                         <button id="dropdownButton3" class="flex items-center gap-2 w-[100%] ">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="size-6" fill="currentColor" class="bi bi-person-video3" viewBox="0 0 16 16">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="size-5" fill="currentColor" class="bi bi-person-video3" viewBox="0 0 16 16">
                                 <path d="M14 9.5a2 2 0 1 1-4 0 2 2 0 0 1 4 0m-6 5.7c0 .8.8.8.8.8h6.4s.8 0 .8-.8-.8-3.2-4-3.2-4 2.4-4 3.2"/>
                                 <path d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h5.243c.122-.326.295-.668.526-1H2a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v7.81c.353.23.656.496.91.783Q16 12.312 16 12V4a2 2 0 0 0-2-2z"/>
                               </svg>
-                            <div class="hidden group-hover:flex truncate  items-center gap-2">
+                            <div class="hidden group-hover:flex truncate w-[100%] justify-between items-center gap-2">
                                 session participent
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 9l-7.5 7.5L4.5 9" />
@@ -222,7 +222,7 @@
 
 <div class="md:hidden z-50">
     <div
-        class="bg-black side-bar rounded-lg text-white fixed top-[11vh] left-[-700px] w-[70vw] flex flex-col gap-2  p-5 duration-500 transition-all ">
+        class="bg-black side-bar rounded-lg text-white fixed top-[11vh] left-[-700px] w-[70vw] flex flex-col gap-1  p-3 duration-500 transition-all ">
         <a href='{{ route('dashboard') }}'
             class='nav-button no-underline text-base font-bold py-[0.75rem] flex items-center gap-2 hover:text-alpha hover:bg-gray-800 rounded-xl px-[1rem] {{ request()->routeIs('dashboard') ? 'text-alpha bg-gray-800' : 'text-white' }}'>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -253,7 +253,7 @@
                         <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z"/>
                         <path d="M3 5.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M3 8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 8m0 2.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5"/>
                       </svg>
-                    <div class="flex truncate  items-center gap-2">
+                    <div class="flex w-[100%] justify-between truncate  items-center gap-2">
                         Articles
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 9l-7.5 7.5L4.5 9" />
@@ -305,7 +305,7 @@
                         <path d="M4 16s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-5.95a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
                         <path d="M2 1a2 2 0 0 0-2 2v9.5A1.5 1.5 0 0 0 1.5 14h.653a5.4 5.4 0 0 1 1.066-2H1V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v9h-2.219c.554.654.89 1.373 1.066 2h.653a1.5 1.5 0 0 0 1.5-1.5V3a2 2 0 0 0-2-2z"/>
                       </svg>
-                    <div class="flex truncate  items-center gap-2">
+                    <div class="flex truncate w-[100%] justify-between items-center gap-2">
                         Connect
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 9l-7.5 7.5L4.5 9" />
@@ -371,7 +371,7 @@
                         <path d="M14 9.5a2 2 0 1 1-4 0 2 2 0 0 1 4 0m-6 5.7c0 .8.8.8.8.8h6.4s.8 0 .8-.8-.8-3.2-4-3.2-4 2.4-4 3.2"/>
                         <path d="M2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h5.243c.122-.326.295-.668.526-1H2a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v7.81c.353.23.656.496.91.783Q16 12.312 16 12V4a2 2 0 0 0-2-2z"/>
                       </svg>
-                    <div class="flex truncate  items-center gap-2">
+                    <div class="flex truncate w-[100%] justify-between items-center gap-2">
                         session participent
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 9l-7.5 7.5L4.5 9" />

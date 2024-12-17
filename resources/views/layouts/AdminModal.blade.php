@@ -11,19 +11,19 @@
             </button>
         </div>
         <div class="px-6">
-            <form action="{{ route("addadmin.store") }}" class="flex flex-col gap-y-2" method="post">
+            <form action="{{ route("addadmin.store") }}" class="flex flex-col gap-3" method="post">
                 @csrf
                 <h1 class="text-center text-xl font-semibold">Add Admin</h1>
-                <div class="flex flex-col">
+                <div class="flex gap-2 flex-col">
                     <label for="" class="font-semibold">Name :</label>
                     <input type="text" name="name" placeholder="Enter Name" class="p-2 rounded-lg border-2 focus:ring-alpha focus:border-alpha">
                 </div>
-                <div class="flex flex-col">
+                <div class="flex gap-2 flex-col">
                     <label for="" class="font-semibold">Email :</label>
                     <input type="email" name="email" placeholder="Enter Email" class="p-2 rounded-lg border-2 focus:ring-alpha focus:border-alpha">
                 </div>
                 <div class="py-5 flex items-center justify-end gap-x-2 ">
-                    <button class=" lg:px-6 px-7 py-2 bg-black text-white text-base font-medium rounded-md shadow hover:bg-alpha  transition">
+                    <button class=" lg:px-6 px-7 py-2 bg-alpha text-base font-medium text-white hover:bg-alpha hover:text-black  rounded-md shadow   transition">
                         Add
                     </button>
                     <a href="#" onclick="closeModal('modalAdmin')"

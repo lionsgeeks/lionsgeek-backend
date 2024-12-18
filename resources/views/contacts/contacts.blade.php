@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl leading-tight">
             {{ __('Contact Form') }}
         </h2>
     </x-slot>
@@ -63,7 +63,7 @@
                                         <h3 class="font-medium text-gray-900">{{ $contact->full_name }}</h3>
                                         <p class="text-sm text-gray-500">{{ $contact->created_at->format("d-M-y") }}</p>
                                     </div>
-                                    <button onclick="openModal('contactMessage{{ $contact->id }}')" 
+                                    <button onclick="openModal('contactMessage{{ $contact->id }}')"
                                             class="bg-black py-2 px-3 rounded-lg text-alpha text-sm">
                                         Read Message
                                     </button>

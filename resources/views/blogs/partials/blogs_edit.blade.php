@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl leading-tight">
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
@@ -107,7 +107,7 @@
 
                             </div>
                         </div>
-                        <button type="submit" class="bg-green-600 rounded px-5 py-2 text-white w-full">
+                        <button type="submit" class="bg-black rounded py-2 text-white w-full">
                             Update Blog
                         </button>
                     </form>

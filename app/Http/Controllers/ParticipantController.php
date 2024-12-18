@@ -158,16 +158,15 @@ class ParticipantController extends Controller
         $action = $request->input("action");
         // this is for determining either coding/media
         $formation = strtolower($participant->infoSession->formation);
-        $week = $formation . "_week";
         $school = $formation . "_school";
 
         if ($participant->current_step == "interview") {
             $participant->update([
-                "current_step" => $action == "next" ? $week : "interview_failed",
+                "current_step" => $action == "next" ? "jungle" : "interview_failed",
             ]);
-        } elseif ($participant->current_step == $week) {
+        } elseif ($participant->current_step == "jungle") {
             $participant->update([
-                "current_step" => $action == "next" ? $school : $week . "_failed",
+                "current_step" => $action == "next" ? $school : "jungle" . "_failed",
             ]);
         }
 

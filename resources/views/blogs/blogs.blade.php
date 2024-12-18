@@ -1,13 +1,13 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800  leading-tight">
+        <h2 class="font-semibold text-xl leading-tight">
             {{ __('BLOGS') }}
         </h2>
 
         @if ($blogs->count() > 0)
             <a href="{{ route('blogs.create') }}">
                 <button
-                    class="bg-black text-white rounded-lg px-4 py-2 hover:bg-alpha hover:text-black  transition duration-150">
+                    class="bg-alpha text-black rounded-lg px-4 py-2 hover:bg-black hover:text-alpha border-2 border-alpha font-bold transition duration-150">
                     <span class="text-lg font-bold">+</span> Write a New Blog
                 </button>
             </a>
@@ -88,7 +88,7 @@
                             @foreach ($blogs->reverse() as $blog)
                                 <div class="bg-white rounded-lg shadow-sm p-4">
                                     <div class="flex items-center space-x-4">
-                                        <img class="w-24 h-16 border shadow object-cover rounded" 
+                                        <img class="w-24 h-16 border shadow object-cover rounded"
                                             src="{{ asset('storage/images/' . $blog->image) }}" alt="">
                                         <div class="flex-1">
                                             <h3 class="font-medium t">{{ $blog->title->en }}</h3>

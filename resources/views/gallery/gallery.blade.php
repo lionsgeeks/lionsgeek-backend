@@ -1,13 +1,13 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight ">
-            {{ __('Projects') }}
+        <h2 class="font-semibold text-xl leading-tight ">
+            {{ __('Gallery') }}
 
 
         </h2>
         <a href="{{ route('gallery.create') }}">
             <button
-                class=" py-[0.7rem] px-[2rem] text-[16px] {{ $galleries->count() == 0 ? 'hidden' : '' }} font-bold rounded-[10px] bg-alpha hover:bg-black hover:text-white transition duration-150 ">
+                class=" py-[0.7rem] px-[2rem] text-[16px] {{ $galleries->count() == 0 ? 'hidden' : '' }} font-bold rounded-[10px] bg-alpha text-black transition duration-150 hover:text-alpha border-2 border-alpha hover:bg-black">
                 Create Gallery
             </button>
         </a>

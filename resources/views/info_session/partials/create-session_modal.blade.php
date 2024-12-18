@@ -1,8 +1,8 @@
-<div class="flex items-center justify-center">
+<div class="flex items-center justify-center text-black">
     <div x-data="{ showModal: false }">
         <!-- Button to open the modal -->
         <button @click="showModal = true"
-            class="px-6 py-2 bg-black text-white text-base font-medium rounded-md shadow hover:bg-alpha hover:text-black transition">
+            class="px-6 py-2 bg-alpha text-black border-2 border-alpha text-base font-medium rounded-md shadow hover:bg-black hover:text-alpha transition">
             Create new session </button>
         <!-- Background overlay -->
         <div x-show="showModal" class="fixed inset-0 transition-opacity" aria-hidden="true" @click="showModal = false">
@@ -50,7 +50,7 @@
                                         </div>
                                         <div class="px-4 py-3 sm:px-6 gap-3 sm:flex sm:flex-row-reverse">
                                             <button  type="submit"
-                                                class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-alpha text-base font-medium text-white hover:bg-alpha hover:text-black transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-alpha sm:ml-3 sm:w-auto sm:text-sm">
+                                                class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-alpha text-base font-medium text-black hover:bg-alpha hover:text-black transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-alpha sm:ml-3 sm:w-auto sm:text-sm">
                                                 Create </button>
                                             <button @click="showModal = false" type="button"
                                                 class="w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">

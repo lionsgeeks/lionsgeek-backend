@@ -1,12 +1,12 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl leading-tight">
             {{ __('Press') }}
         </h2>
 
         <a href="{{ route("press.create") }}">
             <button
-                class="bg-black {{ $presses->count() == 0 ? 'hidden' : '' }} text-white rounded-lg px-4 py-2 hover:bg-alpha hover:text-black  transition duration-150">
+                class="{{ $presses->count() == 0 ? 'hidden' : '' }} bg-alpha text-black border-2 border-alpha rounded-lg px-4 py-2 hover:bg-black hover:text-alpha  transition duration-150">
                 Create a Press
             </button>
         </a>

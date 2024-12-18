@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl leading-tight">
             {{ $participant->full_name }}'s Profile
         </h2>
     </x-slot>
@@ -11,7 +11,7 @@
                 <div class="flex items-center justify-end w-full gap-2 p-2">
 
                     {{-- if the participant failed any step, hide this form --}}
-                    @if (!str_contains($participant->current_step, 'fail'))
+                    @if (!str_contains($participant->current_step, 'fail') && !str_contains($participant->current_step, 'info'))
                         <form action="{{ route('participant.step', $participant) }}" method="post">
                             @csrf
                             <button type="submit" name="action" value="deny"

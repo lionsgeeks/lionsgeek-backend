@@ -27,8 +27,8 @@
         @include('layouts.sidebare')
         <div class="flex flex-col w-full overflow-y-auto h-screen">
             @isset($header)
-                <header class="bg-white shadow flex  justify-between items-center w-full ">
-                    <div class=" py-[1.25rem] flex gap-x-2 px-4 sm:px-6 lg:px-8 w-full">
+                <header class="bg-black text-white shadow flex  justify-between items-center w-full">
+                    <div class="py-[1.25rem] flex gap-x-2 px-4 sm:px-6 lg:px-8 w-full">
                         <div class="md:hidden">
                             <input id="checkbox" type="checkbox">
                             <label class="toggle" for="checkbox">
@@ -64,7 +64,7 @@
                                 <button
                                     class="inline-flex  items-center  text-sm leading-4 font-medium  focus:outline-none transition ease-in-out duration-150 ms-1 bg-gray-100 rounded-full p-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                        stroke-width="1.5" stroke="currentColor" class="size-5">
+                                        stroke-width="1.5" stroke="#000000" class="size-5">
                                         <path stroke-linecap="round" stroke-linejoin="round"
                                             d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
                                     </svg>
@@ -80,7 +80,7 @@
                                 <x-dropdown-link :href="route('profile.edit')" class="no-underline">
                                     <div class="flex items-center gap-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                            stroke-width="1.5" stroke="currentColor" class="size-5">
+                                            stroke-width="1.5" stroke="#000000" class="size-5">
                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                 d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
                                         </svg>
@@ -97,7 +97,7 @@
                                                     this.closest('form').submit();">
                                         <div class="flex items-center gap-2">
                                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                                stroke-width="1.5" stroke="currentColor" class="size-5">
+                                                stroke-width="1.5" stroke="#000000" class="size-5">
                                                 <path stroke-linecap="round" stroke-linejoin="round"
                                                     d="M15.75 9V5.25A2.25 2.25 0 0 0 13.5 3h-6a2.25 2.25 0 0 0-2.25 2.25v13.5A2.25 2.25 0 0 0 7.5 21h6a2.25 2.25 0 0 0 2.25-2.25V15m3 0 3-3m0 0-3-3m3 3H9" />
                                             </svg>

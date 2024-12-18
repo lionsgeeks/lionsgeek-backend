@@ -1,12 +1,12 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl leading-tight">
             {{ __('Events') }}
         </h2>
 
         <a href="{{ route('events.create') }}">
             <button
-                class="bg-black {{ $events->count() == 0 ? 'hidden' : '' }} text-white rounded-lg px-4 py-2 hover:bg-alpha hover:text-black  transition duration-150">
+                class="{{ $events->count() == 0 ? 'hidden' : '' }} text-black bg-alpha border-2 border-alpha hover:bg-black hover:text-alpha font-bold rounded-lg px-4 py-2   transition duration-150">
                 <span class="text-lg font-bold">+</span> Create a New Event
             </button>
         </a>
@@ -66,8 +66,8 @@
             <div class="md:hidden flex flex-wrap gap-4">
                 @foreach ($events as $event)
                     <div class="flex flex-col overflow-hidden gap-3 rounded-[16px] bg-[#f9f9f9] p-3 w-full sm:w-[calc(50%-1rem)]">
-                        <img class="w-full aspect-video object-cover rounded-[16px]" 
-                                src="{{ asset('storage/images/' . $event->cover) }}" 
+                        <img class="w-full aspect-video object-cover rounded-[16px]"
+                                src="{{ asset('storage/images/' . $event->cover) }}"
                                 alt="">
                         <div class="space-y-3">
                             <h4 class="text-lg font-semibold">{{ Str::limit($event->name->en, 15, '...') }}</h4>
@@ -79,7 +79,7 @@
                         </div>
                     </div>
                 @endforeach
-            </div>                    
+            </div>
         </div>
     </div>
 </x-app-layout>

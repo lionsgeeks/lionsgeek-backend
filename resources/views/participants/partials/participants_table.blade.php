@@ -72,6 +72,11 @@ this.selectedSession = "";
                             <option value="">All Steps</option>
                             <option value="info_session">Info Session</option>
                             <option value="interview">Interview</option>
+                            <option value="interview_failed">Interview Failed</option>
+                            <option value="jungle">Jungle</option>
+                            <option value="jungle_failed">Jungle Failed</option>
+                            <option value="coding_school">Coding School</option>
+                            <option value="media_school">Media School</option>
                         </select>
 
                         @if ($infos)

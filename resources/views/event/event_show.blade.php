@@ -1,29 +1,29 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+        <h2 class="font-semibold text-xl leading-tight">
             {{ __('Events Update') }}
         </h2>
 
-        <form 
-        action="{{ route('events.destroy', $event) }}" 
-        method="post" 
-        enctype="multipart/form-data" 
+        <form
+        action="{{ route('events.destroy', $event) }}"
+        method="post"
+        enctype="multipart/form-data"
         onsubmit="this.submitBtn.disabled = true"
         class="flex flex-col items-center sm:items-start sm:flex-row"
     >
         @csrf
         @method('DELETE')
-        <button 
-            name="submitBtn" 
+        <button
+            name="submitBtn"
             type="submit"
             class="w-full sm:w-auto px-4 sm:px-6 text-white py-2 sm:py-3 font-bold rounded-md bg-red-500 hover:bg-red-600 transition-all"
         >
             Delete Event
         </button>
     </form>
-    
+
     </x-slot>
-    
+
     <div class="w-full min-h-screen flex flex-col overflow-y-auto">
         <div class="bg-slate-100 p-4 md:p-[2rem] gap-4 md:gap-[1.6rem] flex flex-col items-center overflow-y-auto w-full">
             <form class="flex flex-col items-center justify-center py-4 md:py-6 w-full bg-white rounded-[20px] gap-4 md:gap-5"
@@ -31,19 +31,19 @@
                 @csrf
                 @method('PUT')
                 <p class="text-[20px] md:text-[25px] font-bold">Update Event</p>
-    
+
                 <div x-data="{ tab: 'English' }" class="w-full flex flex-col items-center">
                     {{-- Language buttons --}}
                     <div class="flex items-center justify-center gap-2 p-2 w-full overflow-x-auto">
                         @foreach (['English', 'Français', 'العربية'] as $language)
-                            <button type="button" 
-                                class="px-[1.5rem] md:px-[3rem] py-[0.5rem] w-[30%] bg-[#f3f4f6] rounded-[10px] whitespace-nowrap text-sm md:text-base"
+                            <button type="button"
+                                class="px-[1.5rem] md:px-[3rem] py-[0.5rem] bg-[#f3f4f6] rounded-[20px] whitespace-nowrap text-sm md:text-base"
                                 @click="tab = '{{ $language }}' ">
                                 {{ $language }}
                             </button>
                         @endforeach
                     </div>
-    
+
                     <div class="flex flex-col gap-4 md:gap-5 w-full p-4 md:p-8 rounded-[20px]">
                         {{-- Name & Description & Location --}}
                         <div class="flex flex-col">
@@ -65,7 +65,7 @@
                                         value="{{ $event->date }}"
                                         min="{{ now()->format('Y-m-d\TH:i') }}">
                                 </div>
-    
+
                                 {{-- Price --}}
                                 <div class="w-full md:w-[50%]">
                                     <label class="block mb-2">
@@ -84,7 +84,7 @@
                                         step="0.01">
                                 </div>
                             </div>
-    
+
                             {{-- Language Tabs Content --}}
                             {{-- English --}}
                             <div class="flex flex-col items-center w-full gap-4 md:gap-5" x-show="tab === 'English'">
@@ -110,7 +110,7 @@
                                         name="description[en]" id="description_en">{{ $event->description->en }}</textarea>
                                 </div>
                             </div>
-    
+
                             {{-- Français --}}
                             <div class="flex flex-col items-center w-full gap-4 md:gap-5" x-show="tab === 'Français'">
                                 <div class="flex flex-col md:flex-row justify-center gap-4 w-full">
@@ -135,7 +135,7 @@
                                         name="description[fr]" id="description_fr">{{ $event->description->fr }}</textarea>
                                 </div>
                             </div>
-    
+
                             {{-- العربية --}}
                             <div class="flex flex-col items-center w-full gap-4 md:gap-5" x-show="tab === 'العربية'">
                                 <div class="flex flex-col md:flex-row justify-center gap-4 w-full">
@@ -161,7 +161,7 @@
                                 </div>
                             </div>
                         </div>
-    
+
                          <!-- Cover -->
                          <div class="flex flex-col gap-1" x-data="{
                             selectedImage: '{{ asset('storage/images/'.$event->cover) }}',
@@ -194,8 +194,8 @@
                             searchQuery: '',
                             bookings: {{ $event->bookings }},
                             filteredBookings() {
-                                return this.bookings.filter(b => 
-                                    b.name.toLowerCase().includes(this.searchQuery.toLowerCase()) || 
+                                return this.bookings.filter(b =>
+                                    b.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
                                     b.email.toLowerCase().includes(this.searchQuery.toLowerCase())
                                 );
                             }
@@ -203,13 +203,13 @@
                             <p x-show="tab === 'English'" class="text-xl font-bold">Participants</p>
                             <p x-show="tab === 'Français'" class="text-xl font-bold">Participants</p>
                             <p x-show="tab === 'العربية'" class="text-xl font-bold text-end">المشاركين</p>
-    
+
                             <div class="mb-4">
-                                <input type="text" x-model="searchQuery" 
-                                    placeholder="Search participants..." 
+                                <input type="text" x-model="searchQuery"
+                                    placeholder="Search participants..."
                                     class="px-4 py-2 border border-gray-300 rounded-[10px] w-full">
                             </div>
-    
+
                             <div class="overflow-x-auto">
                                 <table class="w-full text-left border border-gray-300 rounded-[10px]">
                                     <thead>
@@ -226,11 +226,11 @@
                                                 <td class="px-2 md:px-4 py-2 text-gray-800 font-medium text-sm md:text-base" x-text="index + 1"></td>
                                                 <td class="px-2 md:px-4 py-2 text-gray-800 text-sm md:text-base" x-text="booking.name"></td>
                                                 <td class="px-2 md:px-4 py-2 text-gray-800 text-sm md:text-base" x-text="booking.email"></td>
-                                                <td class="px-2 md:px-4 hidden md:block py-2 text-gray-800 text-sm md:text-base" 
-                                                    x-text="new Date(booking.created_at).toLocaleDateString('en-GB', { 
-                                                        year: 'numeric', 
-                                                        month: 'long', 
-                                                        day: 'numeric' 
+                                                <td class="px-2 md:px-4 hidden md:block py-2 text-gray-800 text-sm md:text-base"
+                                                    x-text="new Date(booking.created_at).toLocaleDateString('en-GB', {
+                                                        year: 'numeric',
+                                                        month: 'long',
+                                                        day: 'numeric'
                                                     })">
                                                 </td>
                                             </tr>
@@ -241,7 +241,7 @@
                         </div>
                     </div>
                 </div>
-                
+
             </form>
         </div>
     </div>

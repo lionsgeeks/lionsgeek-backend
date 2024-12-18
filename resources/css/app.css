@@ -29,7 +29,7 @@ input[type="checkbox"] {
   .bars {
     width: 100%;
     height: 3px;
-    background-color: black ;
+    background-color: white ;
     border-radius: 4px;
   }
 
@@ -39,6 +39,8 @@ input[type="checkbox"] {
 
   #bar1 {
     width: 50%;
+
+
   }
 
   #bar2 {

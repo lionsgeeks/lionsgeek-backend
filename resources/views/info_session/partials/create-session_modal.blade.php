@@ -2,7 +2,7 @@
     <div x-data="{ showModal: false }">
         <!-- Button to open the modal -->
         <button @click="showModal = true"
-            class="px-6 py-2 bg-alpha text-black border-2 border-alpha text-base font-medium rounded-md shadow hover:bg-black hover:text-alpha transition">
+            class="px-2 md:px-6 py-2 bg-alpha text-black border-2 border-alpha text-base font-medium rounded-md shadow hover:bg-black hover:text-alpha transition">
             Create new session </button>
         <!-- Background overlay -->
         <div x-show="showModal" class="fixed inset-0 transition-opacity" aria-hidden="true" @click="showModal = false">

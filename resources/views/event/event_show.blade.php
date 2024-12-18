@@ -37,7 +37,7 @@
                     <div class="flex items-center justify-center gap-2 p-2 w-full overflow-x-auto">
                         @foreach (['English', 'Français', 'العربية'] as $language)
                             <button type="button"
-                                class="px-[1.5rem] md:px-[3rem] py-[0.5rem] bg-[#f3f4f6] rounded-[20px] whitespace-nowrap text-sm md:text-base"
+                                class="px-[1.5rem] md:px-[3rem] py-[0.5rem] bg-[#f3f4f6] w-[32%] rounded-[20px] whitespace-nowrap text-sm md:text-base"
                                 @click="tab = '{{ $language }}' ">
                                 {{ $language }}
                             </button>

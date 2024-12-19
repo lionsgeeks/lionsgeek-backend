@@ -106,6 +106,13 @@ Route::middleware('auth')->group(function () {
 
     //addAdmin
     Route::post("/addadmin/store",[AddAdminController::class,"AddAdmin"])->name("addadmin.store");
+
+    //delete email
+    Route::delete('/email/destroy/{contact}', [ContactController::class, 'destroy'])->name('email.destroy');
+    //mark email as read
+    Route::put('/email/markread/{contact}', [ContactController::class, 'update'])->name('email.markread');
+
+
 });
 // Route::post('/booking/store', [BookingController::class, 'store'])->name('booking.store');
 

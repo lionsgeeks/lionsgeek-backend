@@ -16,7 +16,8 @@ class ContactController extends Controller
     public function index()
     {
         $contacts = Contact::all();
-        return view('contacts.contacts', compact('contacts'));
+        $unreadMessages = Contact::where('mark_as_read', 0)->count();
+        return view('contacts.contacts', compact('contacts', 'unreadMessages'));
     }
 
     /**
@@ -56,7 +57,8 @@ class ContactController extends Controller
      */
     public function update(Request $request, Contact $contact)
     {
-        //
+        $contact->update(['mark_as_read' => !$contact->mark_as_read]);
+        return back();
     }
 
     /**
@@ -64,7 +66,8 @@ class ContactController extends Controller
      */
     public function destroy(Contact $contact)
     {
-        //
+        $contact->delete();
+        return back();
     }
     public function export()
     {

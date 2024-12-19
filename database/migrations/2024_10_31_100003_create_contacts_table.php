@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('email');
             $table->text('message');
+            $table->boolean('mark_as_read')->default(false);
             $table->timestamps();
         });
     }

@@ -12,5 +12,6 @@ class Contact extends Model
         'phone',
         'email',
         'message',
+        'mark_as_read'
     ];
 }

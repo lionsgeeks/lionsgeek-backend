@@ -10,9 +10,9 @@
     <div class="">
         <div class=" mx-auto  ">
             @if ($contacts->count() > 0)
-                <div class="bg-white h-[91.5vh]   overflow-hidden shadow-sm ">
-                    <div x-data='{id:null, messages:{{ $contacts }}}' class=" text-gray-900 hidden md:flex">
-                        <div class="w-1/3 h-[91vh] border-t">
+                <div class="bg-white h-[91.5vh]   lg:overflow-hidden shadow-sm ">
+                    <div x-data='{id:null, messages:{{ $contacts }}}' class=" text-gray-900 flex">
+                        <div id="parentEmails" class="lg:w-1/3  w-full h-[91vh] border-t">
                             <div class="w-full h-[10%] bg-white border-b  flex justify-between items-center ps-6 pe-2">
                                 <h1 class="text-xl text-[#252e32] font-bold">Inbox</h1>
                                 <form action="{{ route('contact.export') }}" method="post">
@@ -26,11 +26,11 @@
                                 @if ($contacts->count() < 1)
                                     <h1 class="text-center py-4">There is no messages</h1>
                                 @endif
-                                <div class="p-2 ps-4 border-b md:sticky">
+                                <div class="p-2 ps-4 border-b sticky">
                                     <p class="text-sm font-bold">{{ $contacts->count() }} Converstation,
                                         {{ $unreadMessages }} Unread</p>
                                 </div>
-                                <div class="md:h-[600px] overflow-y-auto">
+                                <div class="md:h-[600px]  overflow-y-auto">
                                     @foreach ($contacts as $key => $message)
                                         <div onclick="toggleHidden()" x-on:click='id = {{ $key }}'
                                             class="p-4  {{ $message->mark_as_read ? '' : 'bg-blue-100 border-b-2 hover:bg-blue-50' }} flex flex-col gap-y-2  text--700 w-full border-b hover:bg-gray-100 cursor-pointer">
@@ -67,7 +67,7 @@
 
                         </div>
                         <template x-if="id !== null">
-                        <div class="w-2/3 h-[91vh] border">
+                        <div  class="lg:w-2/3 w-full h-[91vh] border hidden lg:block">
                                 <div class=" hidden w-full sm:flex flex-col gap-3 h-full px-4">
                                     <div
                                         class=" px-6 pt-1 w-full h-[10%] flex justify-between items-center bg-white border-b">
@@ -76,7 +76,6 @@
                                                 class="text-xl text-[#13181a] font-bold"></h1>
                                             <p x-text='messages[id].email' class="font-medium text-md text-[#999b9c]">
                                             </p>
-
                                         </div>
                                         <div class=" flex gap-3 justify-end items-center font-medium  w-full">
                                             <form :action="'{{ route('email.markread', '') }}' + '/' + messages[id].id"
@@ -98,7 +97,7 @@
                                                 <template x-if='messages[id].mark_as_read == true'>
                                                     <button class="flex items-center gap-x-2">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="30"
-                                                            height="30" fill="currentColor" class="bi bi-toggle-on"
+                                                            height="30" fill="green" class="bi bi-toggle-on"
                                                             viewBox="0 0 16 16">
                                                             <path
                                                                 d="M5 3a5 5 0 0 0 0 10h6a5 5 0 0 0 0-10zm6 9a4 4 0 1 1 0-8 4 4 0 0 1 0 8" />
@@ -113,14 +112,14 @@
                                                 @method('DELETE')
                                                 <button class="flex gap-x-2 items-center">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="20"
-                                                        height="20" fill="currentColor" class="bi bi-trash"
+                                                        height="20" fill="red" class="bi bi-trash"
                                                         viewBox="0 0 16 16">
                                                         <path
                                                             d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
                                                         <path
                                                             d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
                                                     </svg>
-                                                    <span>Delete</span>
+                                                    {{-- <span>Delete</span> --}}
                                                 </button>
                                             </form>
                                         </div>
@@ -150,8 +149,8 @@
                         </div>
                         </template>
                         <template x-if='id === null'>
-                            <div class="w-2/3 h-[91vh] border">
-                            <div class="hidden sm:flex w-full h-full justify-center gap-x-1 items-center ">
+                            <div class="w-2/3 h-[91vh]  hidden lg:block  border">
+                            <div class="hidden lg:flex w-full h-full justify-center gap-x-1 items-center ">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                     fill="currentColor" class="bi bi-cursor-fill" viewBox="0 0 16 16">
                                     <path
@@ -161,10 +160,14 @@
                             </div>
                             </div>
                         </template>
+
+
+
+                        
                         <template x-if="id !== null">
 
                             <div id="parentMessage"
-                                class="p-6 w-full h-screen overflow-y-scroll fixed top-0 bg-white sm:hidden flex flex-col gap-3">
+                                class="p-2 w-full h-screen overflow-y-scroll fixed top-0 bg-white sm:hidden flex flex-col gap-3">
                                 <div class="">
                                     <svg onclick="toggleHidden()" xmlns="http://www.w3.org/2000/svg" width="25"
                                         height="25" fill="currentColor" class="bi bi-arrow-left"
@@ -173,7 +176,88 @@
                                             d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8" />
                                     </svg>
                                 </div>
-                                <div class="flex gap-3 justify-between items-center font-medium pb-3 w-full">
+                                <div  class=" w-full h-[91vh] border ">
+                                    <div class=" w-full flex flex-col gap-3 h-full px-4">
+                                        <div
+                                            class=" pt-1 w-full h-[10%] flex justify-between items-center bg-white border-b">
+                                            <div>
+                                                <h1 x-text='messages[id].full_name'
+                                                    class="text-xl text-[#13181a] font-bold"></h1>
+                                                <p x-text='messages[id].email' class="font-medium text-md text-[#999b9c]">
+                                                </p>
+                                            </div>
+                                            <div class=" flex gap-3 justify-end items-center font-medium  w-full">
+                                                <form :action="'{{ route('email.markread', '') }}' + '/' + messages[id].id"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('PUT')
+    
+                                                    <template x-if='messages[id].mark_as_read == false'>
+                                                        <button class="flex items-center gap-x-2">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="30"
+                                                                height="30" fill="currentColor" class="bi bi-toggle-off"
+                                                                viewBox="0 0 16 16">
+                                                                <path
+                                                                    d="M11 4a4 4 0 0 1 0 8H8a5 5 0 0 0 2-4 5 5 0 0 0-2-4zm-6 8a4 4 0 1 1 0-8 4 4 0 0 1 0 8M0 8a5 5 0 0 0 5 5h6a5 5 0 0 0 0-10H5a5 5 0 0 0-5 5" />
+                                                            </svg>
+                                                            <span>Mark as read </span>
+                                                        </button>
+                                                    </template>
+                                                    <template x-if='messages[id].mark_as_read == true'>
+                                                        <button class="flex items-center gap-x-2">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="30"
+                                                                height="30" fill="green" class="bi bi-toggle-on"
+                                                                viewBox="0 0 16 16">
+                                                                <path
+                                                                    d="M5 3a5 5 0 0 0 0 10h6a5 5 0 0 0 0-10zm6 9a4 4 0 1 1 0-8 4 4 0 0 1 0 8" />
+                                                            </svg>
+                                                            <span>Mark as unread</span>
+                                                        </button>
+                                                    </template>
+                                                </form>
+                                                <form :action="'{{ route('email.destroy', '') }}' + '/' + messages[id].id"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="flex gap-x-2 items-center">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20"
+                                                            height="20" fill="red" class="bi bi-trash"
+                                                            viewBox="0 0 16 16">
+                                                            <path
+                                                                d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+                                                            <path
+                                                                d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+                                                        </svg>
+                                                        
+                                                    </button>
+                                                </form>
+                                            </div>
+    
+                                        </div>
+                                        <div class="p-6    h-[85%] border flex flex-col justify-between">
+                                            <div>
+                                                <div class="flex justify-between  border-b  ">
+                                                    <div class="flex items-center gap-x-2">
+                                                        <span class="text-[#999b9c] font-medium">From:</span>
+                                                        <p x-text='messages[id].email' class="font-medium text-[#13181a] ">
+                                                        </p>
+                                                    </div>
+                                                    <p class="text-[#999b9c] font-[500]"
+                                                        x-text="new Date(messages[id].created_at).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false })">
+                                                    </p>
+                                                </div>
+                                                <p class="pt-4" x-text='messages[id].message'></p>
+    
+                                            </div>
+                                            <div class="flex w-full justify-end  px-6">
+                                                <a class="bg-black px-3 py-2 text-white font-bold hover:bg-alpha hover:text-black rounded-lg"
+                                                    :href="'mailto:' + messages[id]?.email">Reply via email</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+
+                                {{-- <div class="flex gap-3 justify-between items-center font-medium pb-3 w-full">
                                     <form :action="'{{ route('email.markread', '') }}' + '/' + messages[id].id"
                                         method="POST">
                                         @csrf
@@ -203,7 +287,7 @@
                                 <h1 x-text='messages[id].fullname' class="text-xl font-bold"></h1>
                                 <p x-text="new Date(messages[id].created_at).toLocaleDateString('en-GB')"></p>
                                 <p x-text='messages[id].email' class="font-medium text-lg"></p>
-                                <p x-text='messages[id].message'></p>
+                                <p x-text='messages[id].message'></p> --}}
                             </div>
                         </template>
                     </div>
@@ -211,7 +295,7 @@
 
                 </div>
                 <!-- Mobile Card View -->
-                <div class="md:hidden space-y-4 px-2">
+                {{-- <div class="md:hidden space-y-4 px-2">
                     @foreach ($contacts->reverse() as $contact)
                         <div class="bg-gray-50 rounded-lg p-4 shadow-sm">
                             <div class="flex justify-between items-start mb-3">
@@ -247,7 +331,7 @@
                             @include('contacts.partials.contact_message_details')
                         </div>
                     @endforeach
-                </div>
+                </div> --}}
         </div>
         {{-- <div class="bg-white  overflow-hidden shadow-sm sm:rounded-lg">
 
@@ -349,4 +433,19 @@
         @endif
     </div>
     </div>
+    <script>
+        function toggleHidden(){
+            
+            if (parentMessage.classList.contains("hidden")) {
+                parentMessage.classList.remove("hidden")
+                // parentEmails.classList.add("hidden")
+                
+            }else{
+                parentMessage.classList.add("hidden")  
+                // parentEmails.classList.remove('hidden')
+                
+            }
+
+        }
+    </script>
 </x-app-layout>

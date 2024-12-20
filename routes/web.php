@@ -35,6 +35,7 @@ Route::get('/', function () {
     // return view("welcome");
 });
 
+Route::post('/projects/translate', [ProjectController::class, 'translate'])->name('projects.translate');
 
 
 

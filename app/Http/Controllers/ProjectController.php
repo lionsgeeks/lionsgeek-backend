@@ -18,11 +18,8 @@ class ProjectController extends Controller
     {
         //
         $projects = Project::all();
-        $projects->map(function ($project) {
-            $project->description = json_decode($project->description);
-            $project->description = $project->description->en;
-        });
-
+        
+        
         return view("project.project", compact("projects"));
     }
 
@@ -42,12 +39,15 @@ class ProjectController extends Controller
         //
         request()->validate([
             "name" => "required",
-            "description" => "required",
+            "description" => "array|min:3",
+            "description.en" => "string|nullable",
+            "description.fr" => "string|nullable",
+            "description.ar" => "string|nullable",
             "logo" => "required|mimes:png,jpg,svg,jfif,gif",
         ]);
-
-
-
+        
+        
+        
         if ($request->hasFile("logo")) {
             $logo = file_get_contents($request->logo);
             $logoName = hash("sha256", $logo . Carbon::now())  . "." . $request->logo->getClientOriginalExtension();
@@ -58,30 +58,79 @@ class ProjectController extends Controller
             $previewName = hash("sha256", $preview . Carbon::now())  . "." . $request->preview->getClientOriginalExtension();
             Storage::disk("public")->put("images/projects/" . $previewName, $preview);
         }
+        //     // dd();
 
+        // $gemini_api_key = env("GEMINI_API_KEY");
+
+        // $client = Gemini::client($gemini_api_key);
+        
+        //     $description = (object) $request->description;
+
+        //     $prompt = "Translate the following text into English, French, and Arabic, and return the result in an object like this  one  all in one  line: 
+        //     {\"en\": \"[translated text in English]\", \"fr\": \"[translated text in French]\", \"ar\": \"[translated text in Arabic]\"}. 
+        //     The text to translate is: \"$description->en\"";
+            
+        //     // dd($description->en);
+        // try {
+        //     $result = $client->geminiPro()->generateContent($prompt);
+        //     dd($result->text());
+        //     return response()->json([
+        //         'data' => $result->text() 
+        //     ]);
+           
+        // } catch (\Throwable $th) {
+        //     return back();
+        // }
+        Project::create([
+            "name" => $request->name,
+            // "description" => $result->text(),
+            "description" => $request->input("description"),
+            "logo" => $logoName,
+            "preview" => $request->hasFile("preview") ? $previewName : null
+        ]);
+// 
+        return back()->with("success", "kj");
+     
+    }
+    public function translate(Request $request)
+    {
         $gemini_api_key = env("GEMINI_API_KEY");
-
+    
+        // Check if description is provided
+        if (empty($request->description)) {
+            return response()->json(['error' => 'No description provided'], 400);
+        }
+    
         $client = Gemini::client($gemini_api_key);
-
-        $prompt = "Translate the following text into English, French, and Arabic, and return the result in an object like this  one  all in one  line: 
+        
+        $description = (object) $request->description;
+    
+        $prompt = "Translate the following text into English, French, and Arabic, and return the result in an object like this one all in one line: 
         {\"en\": \"[translated text in English]\", \"fr\": \"[translated text in French]\", \"ar\": \"[translated text in Arabic]\"}. 
-        The text to translate is: \"$request->description\"";
-
+        The text to translate is: \"$description->en\"";
+    
         try {
+            // Make the API request to Gemini
             $result = $client->geminiPro()->generateContent($prompt);
-            // dd($result->text());
-            Project::create([
-                "name" => $request->name,
-                "description" => $result->text(),
-                "logo" => $logoName,
-                "preview" => $request->hasFile("preview") ? $previewName : null
+    
+            // Assuming the result is in plain text format, convert it to JSON
+            $translatedText = $result->text();
+    
+            // If necessary, parse the translation text into a JSON object
+            $translated = json_decode($translatedText, true);
+    
+           
+    
+            return response()->json([
+                'data' => $translated
             ]);
-
-            return back()->with("success", "kj");
         } catch (\Throwable $th) {
-            return back();
+            
+            return response()->json(['error' => 'Translation failed due to an unexpected error'], 500);
         }
     }
+    
+
 
     /**
      * Display the specified resource.
@@ -108,7 +157,10 @@ class ProjectController extends Controller
 
         request()->validate([
             "name" => "required",
-            "description" => "required",
+            "description" => "array|min:3",
+            "description.en" => "string|nullable",
+            "description.fr" => "string|nullable",
+            "description.ar" => "string|nullable",
         ]);
 
         if ($request->hasFile("logo")) {
@@ -125,19 +177,19 @@ class ProjectController extends Controller
             Storage::disk("public")->put("images/projects/" . $previewName, $preview);
         }
 
-        $gemini_api_key = env("GEMINI_API_KEY");
+        // $gemini_api_key = env("GEMINI_API_KEY");
 
-        $client = Gemini::client($gemini_api_key);
+        // $client = Gemini::client($gemini_api_key);
 
 
-        $prompt = "Translate the following text into English, French, and Arabic, and return the result in an object like this  one  all in one  line: 
-        {\"en\": \"[translated text in English]\", \"fr\": \"[translated text in French]\", \"ar\": \"[translated text in Arabic]\"}. 
-        The text to translate is: \"$request->description\"";
-        $result = $client->geminiPro()->generateContent($prompt);
+        // $prompt = "Translate the following text into English, French, and Arabic, and return the result in an object like this  one  all in one  line: 
+        // {\"en\": \"[translated text in English]\", \"fr\": \"[translated text in French]\", \"ar\": \"[translated text in Arabic]\"}. 
+        // The text to translate is: \"$request->description\"";
+        // $result = $client->geminiPro()->generateContent($prompt);
 
         $project->update([
             "name" => $request->name,
-            "description" => $result->text(),
+            "description" => $request->input("description"),
             "logo" => $request->hasFile("logo") ? $logoName : $project->logo,
             "preview" => $request->hasFile("preview") ? $previewName : $project->preview
         ]);

@@ -15,4 +15,7 @@ class Project extends Model
         "description",
         "preview"
     ];
+    protected $casts = [
+        'description' => 'object',
+    ];
 }

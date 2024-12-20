@@ -13,15 +13,14 @@
                     <h1 class="lg:text-3xl md:text-2xl font-bold capitalize text-gray-500">hello
                         {{ Auth::user()->name }},</h1>
                     <div>
-                        <button
-                            onclick="openModal('modalAdmin')"
+                        <button onclick="openModal('modalAdmin')"
                             class="lg:px-6 px-2 py-2 bg-black text-white text-base font-medium rounded-md shadow hover:bg-alpha  transition">
                             Add Admin
                         </button>
                         @include('layouts.AdminModal')
                         <button
                             class="lg:px-6 px-2 py-2 bg-black text-white text-base font-medium rounded-md shadow hover:bg-alpha  transition">
-                            <a href="{{ route("press.create") }}">Add Press</a>
+                            <a href="{{ route('press.create') }}">Add Press</a>
                         </button>
 
                     </div>
@@ -106,6 +105,75 @@
 
 
                 </div>
+                @if ($notReadedMessages->count() > 0)
+                    <div class="lg:p-6 p-3 bg-white rounded-[16px] shadow-md">
+                        <div class="w-full flex flex-col gap-y-3">
+                            <div class="flex items-center gap-x-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="#ffc803" class="size-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
+                                </svg>
+                                <div class="flex justify-between items-center w-full">
+                                    <h1 class="text-xl font-bold ">Recent Messages</h1>
+
+
+                                    <a href="{{ route('contacts.index') }}"
+                                        class="text-alpha text-[18px] cursor-pointer underline">
+                                        view messages</a>
+
+                                </div>
+                            </div>
+                                {{-- <div x-on:click='id = {{ $key }}'
+                                    class="flex bg-yellow-400  justify-between p-2 border-b-[1.6px]">
+                                    <div class="flex gap-x-2 bg-black ">
+                                        <p class="bg-red-400">{{ $message->full_name }}</p>
+                                        <p class="bg-red-400 truncate border-r-[1.2px] pe-2 ">{{ $message->message }}</p>
+                                    </div>
+                                    <span
+                                        class="w-[20%] text-[#6c757d]">{{ $message->created_at->format('F j, Y') }}</span>
+
+                                </div> --}}
+
+                                <table class="w-full">
+                                    <thead class="">
+                                        <th class="lg:table-cell hidden">Name</th>
+                                        <th class="lg:table-cell hidden">Email</th>
+                                        <th>Message</th>
+                                        <th >Date</th>
+                                    </thead>
+
+                                    <tbody class="w-full ">
+                                        @foreach ($notReadedMessages->reverse() as $key => $contact)
+                                            <tr  class="w-full text-center h-[5vh]  border-t  {{  $key % 2 == 0 ? '' : 'bg-gray-100' }} ">
+
+                                                <td  class="truncate lg:table-cell hidden">
+                                                    {{ $contact->full_name }}
+                                                </td>
+                                                <td class="lg:table-cell hidden">
+                                                    {{ $contact->email }}
+                                                </td>
+                                               
+                                                
+                                                <td class="">
+                                                   <p >
+                                                    {{ Str::limit($contact->message, 15, '...') }}
+                                                   </p>
+                                                </td>
+                                                <td >
+                                                    {{ $contact->created_at->format('d M,y') }}
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+
+
+
+                        </div>
+                    </div>
+
+                @endif
                 <div class="">
                     @if ($sessions->count() > 0)
                         <div class="p-4 shadow-md rounded-[16px] flex flex-col gap-y-4 bg-white ">
@@ -188,9 +256,11 @@
                                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                                     viewBox="0 0 24 24" stroke-width="1.5"
                                                                     stroke="currentColor" class="size-6">
-                                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                                    <path stroke-linecap="round"
+                                                                        stroke-linejoin="round"
                                                                         d="M2.036 12.322a1.012 1.012 0 0 1 0-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178Z" />
-                                                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                                                    <path stroke-linecap="round"
+                                                                        stroke-linejoin="round"
                                                                         d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                                                                 </svg>
                                                             </button>

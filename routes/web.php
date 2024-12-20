@@ -82,8 +82,8 @@ Route::get('/dashboard', function () {
     $coworkings = Coworking::latest()->take(4)->get();
     $blogs = Blog::latest()->take(4)->get();
     $views = General::where('id', 1)->first();
-    // dd($views);
-    return view('dashboard', compact('totalContacts', 'totalEvents', 'members', 'sessions', 'coworkings', 'upcomingEvents', 'pendingCoworkings', 'blogs', 'views'));
+    $notReadedMessages = Contact::where('mark_as_read', '0')->take(4)->get();
+    return view('dashboard', compact('totalContacts', 'totalEvents', 'members', 'sessions', 'coworkings', 'upcomingEvents', 'pendingCoworkings', 'blogs', 'views', 'notReadedMessages'));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {

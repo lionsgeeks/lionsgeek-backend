@@ -34,6 +34,8 @@ Route::post('/infosession', [InfoSessionController::class, 'store']);
 Route::post('/participate', [ContactController::class, 'participate']);
 Route::get('/infosessions', [InfoSessionController::class, 'index']);
 Route::put('/validate-invitation', [InfoSessionController::class,'validateParticipant']);
+Route::get('/session-data', [InfoSessionController::class,'infoData']);
+Route::get('/profile-data', [InfoSessionController::class,'profileData']);
 Route::post('/session-photo', [ParticipantController::class,'setPhoto']);
 
 Route::get("/galleries",[GalleryController::class,"index"]);

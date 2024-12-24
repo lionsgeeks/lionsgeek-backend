@@ -80,10 +80,10 @@ class ParticipantController extends Controller
 
         // check if the requested image is different from the already stored image
         if ($request->image !== $participant->image) {
-            Storage::disk('public')->delete('images/' . $participant->image);
+            Storage::disk('public')->delete('images/participants' . $participant->image);
             $image = $request->file('image');
             $imageName = time() . '_' .  $image->getClientOriginalName();
-            $image->storeAs('images', $imageName, 'public');
+            $image->storeAs('images/participants', $imageName, 'public');
             $participant->update([
                 'image' => $imageName,
             ]);

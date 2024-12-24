@@ -13,7 +13,7 @@ class InfoSessionController extends Controller
 {
     public function index()
     {
-        $infos = InfoSession::where('isAvailable', true)->where('isFinish', false)->get();
+        $infos = InfoSession::where('isAvailable', true)->where('isFinish', false)->orderBy('start_date', "desc")->get();
         return response()->json([
             'infos' => $infos,
         ]);
@@ -33,17 +33,20 @@ class InfoSessionController extends Controller
         if ($participant) {
             if (!$participant->is_visited) {
                 $participant->is_visited = true;
+                $participant->current_step = "Interview";
                 $participant->save();
 
                 return response()->json([
                     "message" => "Credentials match.",
                     "status" => 200,
+                    "profile" => $participant
                 ]);
             }
 
             return response()->json([
                 "message" => "Already participated.",
                 "status" => 200,
+                "profile" => $participant
             ]);
         } else {
             return response()->json([
@@ -51,5 +54,31 @@ class InfoSessionController extends Controller
                 "status" => 200,
             ]);
         }
+    }
+
+    public function infoData(Request $request)
+    {
+        $session = InfoSession::find($request->id);
+
+        $participant = $session->participants()->get();
+        $attended = $session->participants()->where("is_visited", 1)->orderby("updated_at", "desc")->get();
+        $unattended = $session->participants()->where("is_visited", 0)->orderby("created_at", "asc")->get();
+
+        // dd($attended);
+
+        return response()->json([
+            "session" => $session,
+            "participants" => $participant,
+            "attended" => $attended,
+            "unattended" => $unattended,
+        ]);
+    }
+
+
+    public function profileData(Request $request)
+    {
+        $profile = Participant::find($request->id);
+        // dd($attended);
+        return response()->json($profile);
     }
 }

@@ -48,7 +48,7 @@
 
                             <div class="flex items- gap-7 ">
                                 @if ($participant->image)
-                                    <img src="{{asset('storage/images/' . $participant->image)}}"
+                                    <img src="{{asset('storage/images/participants/' . $participant->image)}}"
                                     width="150" class="rounded-full aspect-square"
                                     alt="">
                                 @else

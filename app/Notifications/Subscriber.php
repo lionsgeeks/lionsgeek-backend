@@ -10,7 +10,6 @@ use Illuminate\Notifications\Notification;
 class Subscriber extends Notification implements ShouldQueue
 {
     use Queueable;
-
     /**
      * Create a new notification instance.
      */

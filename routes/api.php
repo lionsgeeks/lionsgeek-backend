@@ -43,3 +43,4 @@ Route::get('/projects',[ProjectController::class,'index']);
 Route::get('/upcoming', [EventController::class,'upcoming']);
 
 Route::post('/views', [GeneralController::class, 'increment']);
+Route::get('/queue', [ParticipantController::class, 'runQueue']);

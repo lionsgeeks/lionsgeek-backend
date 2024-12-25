@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\InfoSession;
+use App\Models\Participant;
 use Illuminate\Http\Request;
 
 class InfoSessionController extends Controller

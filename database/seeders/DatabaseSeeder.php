@@ -161,5 +161,6 @@ class DatabaseSeeder extends Seeder
         //     ],
         // ]);
         // Subscriber::factory(10)->create();
+        // Subscriber::factory(100)->create();
     }
 }

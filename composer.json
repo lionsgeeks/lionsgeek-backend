@@ -9,11 +9,13 @@
         "barryvdh/laravel-dompdf": "^3.0",
         "giauphan/laravel-qr-code": "^1.0",
         "google-gemini-php/client": "^1.0",
-        "guzzlehttp/guzzle": "^7.9",
         "laravel/framework": "^11.9",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
-        "maatwebsite/excel": "^3.1"
+        "maatwebsite/excel": "^3.1",
+        "resend/resend-laravel": "^0.15.0",
+        "symfony/http-client": "^7.2",
+        "symfony/mailgun-mailer": "^7.1"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",

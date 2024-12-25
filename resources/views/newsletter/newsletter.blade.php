@@ -13,7 +13,7 @@
         </a> --}}
     </x-slot>
     <div class="flex gap-2 p-4 rounded-lg">
-        <form class="md:w-1/2 bg-white p-3 flex flex-col gap-3" action="{{ route('newsletter.store') }}" method="POST">
+        <form id="newsForm" class="md:w-1/2 bg-white p-3 flex flex-col gap-3" action="{{ route('newsletter.store') }}" method="POST">
             @csrf
             <div>
                 <h1 class="text-xl font-bold">Send Newsletter</h1>
@@ -28,7 +28,7 @@
                 <textarea name="content" class="rounded-sm" id="" cols="30" rows="10"
                     placeholder="Write your newsletter content here ..."></textarea>
             </div>
-            <button class="bg-black text-white flex justify-center items-center px-3 py-2 rounded-sm">Send
+            <button type="button" id="sendNews" class="bg-black text-white flex justify-center items-center px-3 py-2 rounded-sm">Send
                 Newsletter</button>
         </form>
         <div class="md:w-1/2  flex flex-col gap-3 ">

@@ -24,6 +24,7 @@ use App\Models\General;
 use App\Models\InfoSession;
 use App\Models\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -37,6 +38,11 @@ Route::get('/', function () {
 
 Route::post('/projects/translate', [ProjectController::class, 'translate'])->name('projects.translate');
 
+Route::get('/run', function () {
+    // Artisan::call('queue:listen');
+    Artisan::call('queue:work --stop-when-empty');
+    return redirect('dashboard');
+});
 
 
 Route::resource("events", EventController::class);
@@ -55,6 +61,9 @@ Route::post('notes/{participant}', [NoteController::class, 'store'])->name('note
 Route::post('satisfaction/{participant}', [ParticipantController::class, 'updateSatisfaction'])->name('satisfaction.store');
 Route::post('frequent/{participant}', [ParticipantController::class, 'frequestQuestions'])->name('frequent.store');
 Route::post('participant/step/{participant}', [ParticipantController::class, 'step'])->name('participant.step');
+Route::post('participant/interview', [ParticipantController::class, 'toInterview'])->name('participant.interview');
+Route::post('participant/jungle', [ParticipantController::class, 'toJungle'])->name('participant.jungle');
+Route::post('participant/school', [ParticipantController::class, 'toSchool'])->name('participant.school');
 
 Route::resource('infosessions', InfoSessionController::class);
 Route::patch('/infosessions/available/{id}', [InfoSessionController::class, 'availabilityStatus'])->name('infosessions.isavailable');

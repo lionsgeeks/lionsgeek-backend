@@ -19,7 +19,7 @@ return new class extends Migration
             $table->boolean('ability_to_learn')->default(0);
             $table->boolean('language')->default(0);
             $table->boolean('discipline')->default(0);
-            $table->boolean('motivation_overcoming_challenges')->default(0);
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        $table->boolean('motivation')->default(0);
             $table->boolean('team_player')->default(0);
             $table->boolean('soft_skills')->default(0);
             $table->timestamps();

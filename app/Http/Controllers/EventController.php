@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\ImageManager;
 
 class EventController extends Controller
 {
@@ -53,11 +55,20 @@ class EventController extends Controller
 
         ]);
 
-
+        $coverFile = $request->cover;
+        $size_in_mb = ($coverFile->getSize() / 1024) / 1024;
+        if ($size_in_mb < 5) {
+            $quality = 70;
+        } elseif ($size_in_mb < 10) {
+            $quality = 50;
+        } else {
+            $quality = 20;
+        }
         $content = file_get_contents($request->cover);
-        $fileName = hash("sha256", $content . now()) . '.'  . $request->cover->getClientOriginalName();
-        // dd($fileName);
-        Storage::disk("public")->put("images/" . $fileName, $content);
+        $fileName = hash("sha256", $content . now()) . '.webp';
+        $path = public_path('storage/images') . "/" . $fileName;
+        $manager = new ImageManager(new Driver());
+        $manager->read($content)->encodeByMediaType('image/jpeg', progressive: true, quality: $quality)->save($path);
 
         Event::create([
             "name" => $request->input("name"),
@@ -121,9 +132,23 @@ class EventController extends Controller
         if ($hasFile) {
 
             Storage::disk('public')->delete("images/" . $event->cover);
-            $content = file_get_contents($request->cover);
-            $fileName = hash("sha256", $content . now()) . '.'  . $request->cover->getClientOriginalName();
-            Storage::disk("public")->put("images/" . $fileName, $content);
+            $coverFile = $request->cover;
+            $size_in_mb = ($coverFile->getSize() / 1024) / 1024;
+            if ($size_in_mb < 5) {
+                $quality = 70;
+            } elseif ($size_in_mb < 10) {
+                $quality = 50;
+            } else {
+                $quality = 20;
+            }
+
+            $content = file_get_contents($coverFile);
+            $fileName = hash("sha256", $content) . '.webp';
+            $path = public_path('storage/images') . "/" . $fileName;
+            $manager = new ImageManager(new Driver());
+            $manager->read($content)->encodeByMediaType('image/jpeg', progressive: true, quality: $quality)->save($path);
+
+
         }
 
 

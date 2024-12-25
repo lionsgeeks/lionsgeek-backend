@@ -13,7 +13,7 @@ class Satisfaction extends Model
         'ability_to_learn',
         'language',
         'discipline',
-        'motivation_overcoming_challenges',
+        'motivation',
         'team_player',
         'soft_skills',
     ];

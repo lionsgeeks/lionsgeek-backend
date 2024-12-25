@@ -34,7 +34,12 @@ return [
     |            "failover", "roundrobin"
     |
     */
-
+    // 'mailgun' => [
+    //     'transport' => 'resend',
+    //     // 'client' => [
+    //     //     'timeout' => 5,
+    //     // ],
+    // ],
     'mailers' => [
 
         'smtp' => [
@@ -109,7 +114,7 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'coding@lionsgeek.ma'),
+        'address' => env('MAIL_FROM_ADDRESS', 'info@lionsgeek.ma'),
         'name' => env('MAIL_FROM_NAME', 'Lionsgeek'),
     ],
 

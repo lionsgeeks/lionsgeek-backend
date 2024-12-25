@@ -13,10 +13,10 @@ use Illuminate\Support\Facades\Mail;
 use LaravelQRCode\Facades\QRCode;
 use App\Mail\CodeMail;
 use App\Models\FrequentQuestion;
+use App\Models\InfoSession;
 use App\Models\Satisfaction;
 use Carbon\Carbon;
 use DateTime;
-use Illuminate\Support\Facades\Hash;
 
 
 
@@ -108,6 +108,16 @@ class ContactController extends Controller
             'motivation' => 'required|string',
             'source' => 'required|string',
         ]);
+        
+
+        $checkUser = Participant::where('info_session_id', $request->info_session_id)
+            ->where('email', $request->email)->first();
+        if ($checkUser) {
+            return response()->json([
+                "status" => 69,
+                "message" => 'This email already exist'
+            ]);
+        }
 
         $time = Carbon::now();
         $code = $request->first_name . $request->last_name . $time->format('h:i:s');
@@ -143,8 +153,7 @@ class ContactController extends Controller
 
 
 
-        $data['first_name'] = $participant->first_name;
-        $data['last_name'] = $participant->last_name;
+        $data['full_name'] = $participant->full_name;
         $data['email'] = $participant->email;
         $data['code'] = $participant->code;
         $data['infosession'] = $participant->infoSession->name;
@@ -169,6 +178,17 @@ class ContactController extends Controller
 
         Mail::to($participant->email)->send(new CodeMail($data, $image));
 
+        $parts = Participant::where('info_session_id', $request->info_session_id)->count();
+        $infosession = InfoSession::where('id', $request->info_session_id)->first();
+        if ($parts == 16) {
+            $infosession->update([
+                'isAvailable' => false
+            ]);
+            return response()->json([
+                'status' => 'refresh'
+            ]);
+        }
+        
         return response()->json([
             'message' => 'success'
         ]);

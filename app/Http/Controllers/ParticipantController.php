@@ -3,12 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Exports\ParticipantsExport;
+use App\Mail\InterviewMail;
+use App\Mail\JungleMail;
+use App\Mail\SchoolMail;
 use App\Models\FrequentQuestion;
 use App\Models\InfoSession;
 use App\Models\Note;
 use App\Models\Participant;
 use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -159,7 +163,7 @@ class ParticipantController extends Controller
         // this is for determining either coding/media
         $formation = strtolower($participant->infoSession->formation);
         $school = $formation . "_school";
-
+        // dd($participant->current_step);
         if ($participant->current_step == "interview") {
             $participant->update([
                 "current_step" => $action == "next" ? "jungle" : "interview_failed",
@@ -170,6 +174,40 @@ class ParticipantController extends Controller
             ]);
         }
 
+        return back();
+    }
+
+    public function toInterview(Request $request)
+    {
+        // dd($request);
+        $candidats = Participant::where('info_session_id', $request->infosession_id)->where('is_visited', true)->get();
+        $divided = ceil(count($candidats) / count($request->times));
+        foreach ($request->times as $time) {
+            $group = $candidats->splice(0, $divided);
+            foreach ($group as $candidat) {
+                $fullName = $candidat->full_name;
+                $day = $request->date;
+                $timeSlot = $time;
+                Mail::to($candidat->email)->send(new InterviewMail($fullName, $day, $timeSlot));
+            }
+        }
+        return back();
+    }
+    public function toJungle(Request $request)
+    {
+        $candidats = Participant::where('current_step', 'jungle')->where('info_session_id', $request->infosession_id)->get();
+        $day = $request->date;
+        foreach ($candidats as $candidat) {
+            Mail::to($candidat->email)->send(new JungleMail($candidat->full_name, $day));
+        }
+        return back();
+    }
+    public function toSchool(Request $request) {
+        $candidats = Participant::where('info_session_id',$request->infosession_id)->where('current_step','coding_school')->orWhere('current_step','media_school')->get();
+        $day = $request->date;
+        foreach ($candidats as $key => $candidat) {
+            Mail::to($candidat->email)->send(new SchoolMail($candidat->full_name, $day, $candidat->current_step));
+        }
         return back();
     }
 }

@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <h1>Hello {{ $data['first_name'] }}</h1>
+    <h1>Hello {{ $data['full_name'] }}</h1>
     <p>Thank you for your interest in our upcoming info session with LionsGeek! We’re thrilled to help you explore our
         {{ $data['formation'] }} programs and learn how LionsGeek can support your growth.
     </p>
@@ -21,7 +21,7 @@
     </ul>
     <p>Event Details:</p>
     <ul>
-        <li>Date: {{ $data['time'] }}</li>
+        <li>Date: {{ \Carbon\Carbon::parse($data['time'])->format('Y-m-d H:i') }}</li>
         <li>Location: LionsGeek, LionsGeek, 4eme étage, Ain Sebaa Center, Route de Rabat, Casablanca
             20060, Maroc</li>
     </ul>
@@ -30,7 +30,7 @@
         easy.
     </p>
     <p>Bring any questions you might have about our programs or career guidance – we’ll be happy to help!
-        If you have any questions before the event, reach out at contact@lionsgeek.com or call +123-456-7890.</p>
+        If you have any questions before the event, reach out at contact@lionsgeek.com or call +212 522 662 660.</p>
     <p>We can’t wait to see you there and help you kickstart your journey with LionsGeek!</p>
     <h5>Warm regards,</h5>
     <p>Lionsgeek</p>

@@ -7,6 +7,8 @@ use App\Http\Requests\UpdateGalleryRequest;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\ImageManager;
 
 class GalleryController extends Controller
 {
@@ -16,7 +18,7 @@ class GalleryController extends Controller
     public function index()
     {
         $galleries = Gallery::all();
-        return view("gallery.gallery" , compact("galleries") );
+        return view("gallery.gallery", compact("galleries"));
     }
 
     /**
@@ -45,14 +47,26 @@ class GalleryController extends Controller
 
             "couverture" => "required|file|image|mimes:jpeg,png,jpg,gif",
 
-            "images.*" => "file|image|mimes:jpeg,png,jpg,gif|max:2048"
+            "images.*" => "file|image|mimes:jpeg,png,jpg"
         ]);
 
-        $coverFile = $request->couverture; 
+        $coverFile = $request->couverture;
+        $size_in_mb = ($coverFile->getSize() / 1024) / 1024;
+        if ($size_in_mb < 5) {
+            $quality = 70;
+        } elseif ($size_in_mb < 10) {
+            $quality = 50;
+        } else {
+            $quality = 20;
+        }
 
+        // hello, ana oussama: hada huwa lcode dial image compression.
+        // TODO: clean the code bach mayb9ach yt3awed f create/update dial other controllers
         $content = file_get_contents($coverFile);
-        $fileName = hash("sha256", $content) . '.' . $coverFile->getClientOriginalName();
-        Storage::disk("public")->put("images/" . $fileName, $content);
+        $fileName = hash("sha256", $content) . '.webp';
+        $path = public_path('storage/images') . "/" . $fileName;
+        $manager = new ImageManager(new Driver());
+        $manager->read($content)->encodeByMediaType('image/jpeg', progressive: true, quality: $quality)->save($path);
 
         $gallery =  Gallery::create([
             "title" => $request->input("title"),
@@ -61,12 +75,23 @@ class GalleryController extends Controller
         ]);
 
         // ? Multiple images store
-
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $file) {
-                $content = file_get_contents($file) . Carbon::now() ;
-                $fileName = hash("sha256", $content) . '.' . $file->getClientOriginalExtension();
-                Storage::disk("public")->put("images/" . $fileName, $content);
+                $content = file_get_contents($file) . Carbon::now();
+                $fileName = hash("sha256", $content) . '.webp';
+                $path = public_path('storage/images') . "/" . $fileName;
+
+                $size_in_mb = ($file->getSize() / 1024) / 1024;
+                if ($size_in_mb < 5) {
+                    $quality = 70;
+                } elseif ($size_in_mb < 10) {
+                    $quality = 50;
+                } else {
+                    $quality = 20;
+                }
+
+                $manager->read($content)->encodeByMediaType('image/jpeg', progressive: true, quality: $quality)->save($path);
+                // Storage::disk("public")->put("images/" . $fileName, $content);
 
                 // Save each image to the database
                 $gallery->images()->create([
@@ -83,21 +108,18 @@ class GalleryController extends Controller
      */
     public function show(Gallery $gallery)
     {
-        return view("gallery.gallery_show" , compact("gallery"));
+        return view("gallery.gallery_show", compact("gallery"));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Gallery $gallery)
-    {
-        
-    }
+    public function edit(Gallery $gallery) {}
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request , Gallery $gallery)
+    public function update(Request $request, Gallery $gallery)
     {
         // dd("j");
         request()->validate([
@@ -105,28 +127,43 @@ class GalleryController extends Controller
             "title.en" => "string|required",
             "title.fr" => "string|required",
             "title.ar" => "string|required",
-            
+
             "description" => "required|array|min:3",
             "description.en" => "string|required",
             "description.fr" => "string|required",
             "description.ar" => "string|required",
-            
-            "couverture" => "nullable|file|image|mimes:jpeg,png,jpg,gif",
+
+            "couverture" => "nullable|file|image|mimes:jpeg,png,jpg",
         ]);
 
         // dd($request->hasFile("couverture"));
 
         // ? Update cover
 
-        
+
 
         // dd(Storage::disk('public')->exists("images/" . $gallery->couverture));
 
         if ($request->hasFile("couverture")) {
             Storage::disk('public')->delete("images/" . $gallery->couverture);
-            $content = file_get_contents($request->couverture);
-            $fileName = hash("sha256", $content) . '.' . $request->couverture->getClientOriginalName();
-            Storage::disk("public")->put("images/" . $fileName, $content);
+
+            $coverFile = $request->couverture;
+            $size_in_mb = ($coverFile->getSize() / 1024) / 1024;
+            if ($size_in_mb < 5) {
+                $quality = 70;
+            } elseif ($size_in_mb < 10) {
+                $quality = 50;
+            } else {
+                $quality = 20;
+            }
+
+            $content = file_get_contents($coverFile);
+            $fileName = hash("sha256", $content) . '.webp';
+            $path = public_path('storage/images') . "/" . $fileName;
+            $manager = new ImageManager(new Driver());
+            $manager->read($content)->encodeByMediaType('image/jpeg', progressive: true, quality: $quality)->save($path);
+
+
         }
 
         $gallery->update([
@@ -138,7 +175,7 @@ class GalleryController extends Controller
             "couverture" => $request->hasFile("couverture") ? $fileName : $gallery->couverture
         ]);
 
-        
+
 
         return redirect("gallery");
     }
@@ -153,7 +190,7 @@ class GalleryController extends Controller
                 $image->erase();
             }
             $gallery->delete();
-    
+
             return redirect("/gallery");
         }
         if (!$gallery) {

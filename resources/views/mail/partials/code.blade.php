@@ -15,15 +15,16 @@
     <div style="height: 280px; position: relative; border: 1px black solid; margin-top: 20px">
         <div style="width: 60%; position: absolute; left: 0%; top: 0%; margin-left: 6px">
             <h3>{{ $data['infosession'] }}</h3>
-            <h5>{{ $data['first_name'] }} {{ $data['last_name'] }}</h5>
+            <h5>{{ $data['full_name'] }} </h5>
             <p>
                 LionsGeek, LionsGeek, 4eme étage, Ain Sebaa Center, Route de Rabat, Casablanca
                 20060, Maroc
             </p>
-            <p>Lundi 11 septembre 2023 à 15:00 (heure : Maroc)</p>
+            <p> {{ \Carbon\Carbon::parse($data['time'])->format('Y-m-d H:i') }}
+            </p>
             {{-- <p>{{ $data['session_date'] }} (heure : Maroc)</p> --}}
             <p style="color: #494949">Information de commande</p>
-            <p>Commandé par {{ $data['first_name'] }} {{ $data['last_name'] }} le {{ $data['created_at'] }}</p>
+            <p>Commandé par {{ $data['full_name'] }} le {{ $data['created_at'] }}</p>
         </div>
         <div style="width: 40%; position: absolute; right: 0%; top: 0%;">
             <img style="width: 85%" src="data:image/png;base64,{{ $image }}" alt="QR Code">

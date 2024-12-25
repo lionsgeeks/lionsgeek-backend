@@ -13,11 +13,21 @@ class SubscriberController extends Controller
         request()->validate([
             "email" => "required",
         ]);
-        Subscriber::create([
-            "email" => $request->email,
-        ]);
-        return response()->json([
-            "status" => "success",
-        ]);
+
+        $checkUser = Subscriber::where('email', $request->email)->first();
+        if ($checkUser) {
+            return response()->json([
+                'status' => 69,
+                'message' => 'This email already exist'
+            ]);
+        } else {
+            Subscriber::create([
+                "email" => $request->email,
+            ]);
+            return response()->json([
+                "status" => 200,
+                "message" => 'You subscribed succefully'
+            ]);
+        }
     }
 }

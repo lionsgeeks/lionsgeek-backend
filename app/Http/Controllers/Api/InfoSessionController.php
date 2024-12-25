@@ -33,7 +33,7 @@ class InfoSessionController extends Controller
         if ($participant) {
             if (!$participant->is_visited) {
                 $participant->is_visited = true;
-                $participant->current_step = "Interview";
+                $participant->current_step = "interview";
                 $participant->save();
 
                 return response()->json([

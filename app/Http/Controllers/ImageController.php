@@ -9,25 +9,11 @@ use App\Models\Gallery;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\ImageManager;
 
 class ImageController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      */
@@ -55,8 +41,19 @@ class ImageController extends Controller
             if ($images) {
                 foreach ($images as $file) {
                 $content = file_get_contents($file) . Carbon::now() ;
-                $fileName = hash("sha256", $content) . '.' . $file->getClientOriginalExtension();
-                Storage::disk("public")->put("images/" . $fileName, $content);
+                $fileName = hash("sha256", $content) . '.webp';
+                $path = public_path('storage/images') . "/" . $fileName;
+
+                $size_in_mb = ($file->getSize() / 1024) / 1024;
+                if ($size_in_mb < 5) {
+                    $quality = 70;
+                } elseif ($size_in_mb < 10) {
+                    $quality = 50;
+                } else {
+                    $quality = 20;
+                }
+                $manager = new ImageManager(new Driver());
+                $manager->read($content)->encodeByMediaType('image/jpeg', progressive: true, quality: $quality)->save($path);
 
                 // Save each image to the database
                 $ressource->images()->create([
@@ -69,29 +66,6 @@ class ImageController extends Controller
         return back();
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Image $image)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Image $image)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateImageRequest $request, Image $image)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Participant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 
 class ParticipantController extends Controller
 {
@@ -38,5 +39,12 @@ class ParticipantController extends Controller
         }
 
         return response()->json(['message' => "Error"], 400);
+    }
+    public function runQueue()
+    {
+        Artisan::call('queue:work --stop-when-empty');
+        return response()->json([
+            'message' => 'Queue started in background!'
+        ]);
     }
 }

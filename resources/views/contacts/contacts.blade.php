@@ -7,17 +7,17 @@
 
 
 
-    <div class="">
-        <div class=" mx-auto  ">
+    <div class="py-12 md:px-10 px-4">
+        <div class=" mx-auto ">
             @if ($contacts->count() > 0)
-                <div class="bg-white h-[91.5vh]   lg:overflow-hidden shadow-sm ">
+                <div class="bg-white h-[78vh]   lg:overflow-hidden shadow-sm ">
                     <div x-data='{id:null, messages:{{ $contacts }}}' class=" text-gray-900 flex">
                         <div id="parentEmails" class="lg:w-1/3  w-full h-[91vh] border-t">
                             <div class="w-full h-[10%] bg-white border-b  flex justify-between items-center ps-6 pe-2">
                                 <h1 class="text-xl text-[#252e32] font-bold">Inbox</h1>
                                 <form action="{{ route('contact.export') }}" method="post">
                                     @csrf
-                                    <button class="bg-black text-white px-4 py-2 rounded">
+                                    <button class="bg-black text-white px-4 py-1.5 rounded">
                                         Export Excel
                                     </button>
                                 </form>
@@ -30,7 +30,7 @@
                                     <p class="text-sm font-bold">{{ $contacts->count() }} Converstation,
                                         {{ $unreadMessages }} Unread</p>
                                 </div>
-                                <div class="md:h-[600px]  overflow-y-auto">
+                                <div class="md:h-[470px]  overflow-y-auto">
                                     @foreach ($contacts as $key => $message)
                                         <div onclick="toggleHidden()" x-on:click='id = {{ $key }}'
                                             class="p-4  {{ $message->mark_as_read ? '' : 'bg-blue-100 border-b-2 hover:bg-blue-50' }} flex flex-col gap-y-2  text--700 w-full border-b hover:bg-gray-100 cursor-pointer">
@@ -71,13 +71,10 @@
                                 <div class=" hidden w-full sm:flex flex-col gap-3 h-full px-4">
                                     <div
                                         class=" px-6 pt-1 w-full h-[10%] flex justify-between items-center bg-white border-b">
-                                        <div>
                                             <h1 x-text='messages[id].full_name'
-                                                class="text-xl text-[#13181a] font-bold"></h1>
-                                            <p x-text='messages[id].email' class="font-medium text-md text-[#999b9c]">
-                                            </p>
-                                        </div>
-                                        <div class=" flex gap-3 justify-end items-center font-medium  w-full">
+                                                class="text-xl text-[#13181a] w-fit font-bold"></h1>
+                                            
+                                        <div class=" flex gap-3 justify-end items-center font-medium  ">
                                             <form :action="'{{ route('email.markread', '') }}' + '/' + messages[id].id"
                                                 method="POST">
                                                 @csrf
@@ -97,7 +94,7 @@
                                                 <template x-if='messages[id].mark_as_read == true'>
                                                     <button class="flex items-center gap-x-2">
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="30"
-                                                            height="30" fill="green" class="bi bi-toggle-on"
+                                                            height="30" fill="" class="bi bi-toggle-on fill-alpha"
                                                             viewBox="0 0 16 16">
                                                             <path
                                                                 d="M5 3a5 5 0 0 0 0 10h6a5 5 0 0 0 0-10zm6 9a4 4 0 1 1 0-8 4 4 0 0 1 0 8" />
@@ -127,7 +124,7 @@
                                     </div>
                                     <div class="p-6    h-[85%] border flex flex-col justify-between">
                                         <div>
-                                            <div class="flex justify-between  border-b  ">
+                                            <div class="flex justify-between  border-b pb-2  ">
                                                 <div class="flex items-center gap-x-2">
                                                     <span class="text-[#999b9c] font-medium">From:</span>
                                                     <p x-text='messages[id].email' class="font-medium text-[#13181a] ">
@@ -206,7 +203,7 @@
                                                     <template x-if='messages[id].mark_as_read == true'>
                                                         <button class="flex items-center gap-x-2">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="30"
-                                                                height="30" fill="green" class="bi bi-toggle-on"
+                                                                height="30" fill="" class="bi bi-toggle-on fill-alpha"
                                                                 viewBox="0 0 16 16">
                                                                 <path
                                                                     d="M5 3a5 5 0 0 0 0 10h6a5 5 0 0 0 0-10zm6 9a4 4 0 1 1 0-8 4 4 0 0 1 0 8" />
@@ -236,7 +233,7 @@
                                         </div>
                                         <div class="p-6    h-[85%] border flex flex-col justify-between">
                                             <div>
-                                                <div class="flex justify-between  border-b  ">
+                                                <div class="flex justify-between  border-b pb-2  ">
                                                     <div class="flex items-center gap-x-2">
                                                         <span class="text-[#999b9c] font-medium">From:</span>
                                                         <p x-text='messages[id].email' class="font-medium text-[#13181a] ">

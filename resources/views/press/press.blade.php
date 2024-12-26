@@ -4,7 +4,7 @@
             {{ __('Press') }}
         </h2>
 
-        <a href="{{ route("press.create") }}">
+        <a href="{{ route('press.create') }}">
             <button
                 class="{{ $presses->count() == 0 ? 'hidden' : '' }} bg-alpha text-black border-2 border-alpha rounded-lg px-4 py-2 hover:bg-black hover:text-alpha  transition duration-150">
                 Create a Press
@@ -34,9 +34,10 @@
                         <img class="w-[100%] h-[12rem] object-cover rounded-[16px] "
                             src="{{ asset('storage/images/press/' . $press->cover) }}" alt="">
                         <div class="w-full flex items-center justify-between">
+                            <img class="rounded-full w-[35px]" src="{{ asset('storage/images/press/' . $press->logo) }}" alt="">
                             <h4 class="text-[20px] font-semibold ">{{ $press->name->en }}
                             </h4>
-                            <a href="{{ route("press.show",$press->id) }}" >
+                            <a href="{{ route('press.show', $press->id) }}">
                                 <button class="py-[.5rem] px-[1.5rem] rounded-lg bg-black text-white " type="button">
                                     See press
                                 </button>
@@ -47,13 +48,13 @@
             </div>
             <div class="md:hidden flex flex-wrap gap-4">
                 @foreach ($presses as $press)
-                    <div class="flex flex-col overflow-hidden gap-3 rounded-[16px] bg-[#f9f9f9] p-3 w-full sm:w-[calc(50%-1rem)]">
+                    <div
+                        class="flex flex-col overflow-hidden gap-3 rounded-[16px] bg-[#f9f9f9] p-3 w-full sm:w-[calc(50%-1rem)]">
                         <img class="w-full aspect-video object-cover rounded-[16px]"
-                                src="{{ asset('storage/images/press/' . $press->cover) }}"
-                                alt="">
+                            src="{{ asset('storage/images/press/' . $press->cover) }}" alt="">
                         <div class="space-y-3">
                             <h4 class="text-lg font-semibold">{{ $press->name->en }}</h4>
-                            <a href="{{ route("press.show",$press->id) }}" class="block">
+                            <a href="{{ route('press.show', $press->id) }}" class="block">
                                 <button class="w-full py-2 px-4 rounded-lg bg-black text-white text-sm" type="button">
                                     See press
                                 </button>

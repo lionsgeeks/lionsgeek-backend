@@ -5,13 +5,12 @@
         </h2>
 
         <form action="{{ route('press.destroy', $press) }}" method="post" enctype="multipart/form-data"
-        onsubmit="this.submitBtn.disabled = true ">
-        @csrf
-        @method('DELETE')
-        <button name="submitBtn" type="submit"
-            class="px-4 py-2 font-bold rounded-[14px] bg-red-500 ">Delete
-            resource</button>
-    </form>
+            onsubmit="this.submitBtn.disabled = true ">
+            @csrf
+            @method('DELETE')
+            <button name="submitBtn" type="submit" class="px-4 py-2 font-bold rounded-[14px] bg-red-500 ">Delete
+                resource</button>
+        </form>
     </x-slot>
     <div class="flex flex-col ">
 
@@ -74,9 +73,9 @@
 
                         {{-- link --}}
                         <div class="flex flex-col gap-1">
-                            <div class="">
-                                <p x-show="tab=== 'English' " class="">link</p>
-                                <p x-show="tab=== 'Français' " class="">lien</p>
+                            <div>
+                                <p x-show="tab=== 'English' ">link</p>
+                                <p x-show="tab=== 'Français' ">lien</p>
                                 <p x-show="tab=== 'العربية' " class="text-end">رابط</p>
                             </div>
                             <input x-show="tab=== 'Français' " name="link" required type="url"
@@ -92,9 +91,9 @@
                         {{-- Cover --}}
 
                         <div class="flex flex-col gap-1">
-                            <div class="">
-                                <p x-show="tab=== 'English' " class="">Cover</p>
-                                <p x-show="tab=== 'Français' " class="">Couverture</p>
+                            <div>
+                                <p x-show="tab=== 'English' ">Cover</p>
+                                <p x-show="tab=== 'Français' ">Couverture</p>
                                 <p x-show="tab=== 'العربية' " class="text-end">الغطاء</p>
                             </div>
                             <div class="h-96 relative rounded-lg flex items-center justify-center">
@@ -105,6 +104,28 @@
                                 <img class="w-full h-full object-cover rounded-lg "
                                     src="{{ asset('storage/images/press/' . $press->cover) }}"alt="">
                             </div>
+                        </div>
+
+                        {{-- Logo --}}
+                        <div class="flex flex-col gap-1">
+                            <div>
+                                <p x-show="tab=== 'English' ">Logo</p>
+                                <p x-show="tab=== 'Français' ">Logo</p>
+                                <p x-show="tab=== 'العربية' " class="text-end">الشعار</p>
+                            </div>
+                            <label for="logo"
+                                class="p-[0.75rem] cursor-pointer flex gap-2 items-center  border-[2px] border-black rounded-[10px]">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                    stroke-width="1.5" stroke="currentColor" class="size-6 flex-shrink-0">
+                                    <path stroke-linecap="round" stroke-linejoin="round"
+                                        d="m2.25 15.75 5.159-5.159a2.25 2.25 0 0 1 3.182 0l5.159 5.159m-1.5-1.5 1.409-1.409a2.25 2.25 0 0 1 3.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 0 0 1.5-1.5V6a1.5 1.5 0 0 0-1.5-1.5H3.75A1.5 1.5 0 0 0 2.25 6v12a1.5 1.5 0 0 0 1.5 1.5Zm10.5-11.25h.008v.008h-.008V8.25Zm.375 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z" />
+                                </svg>
+                                <span class="text-base text-gray-500">
+                                    Upload Logo
+                                </span>
+                            </label>
+                            <input class="hidden" type="file" placeholder="logo"
+                                accept="image/png, image/jpg, image/jpeg" name="logo" id="logo">
                         </div>
 
                     </div>

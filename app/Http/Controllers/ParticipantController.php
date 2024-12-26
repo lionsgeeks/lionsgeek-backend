@@ -163,8 +163,15 @@ class ParticipantController extends Controller
         // this is for determining either coding/media
         $formation = strtolower($participant->infoSession->formation);
         $school = $formation . "_school";
-        // dd($participant->current_step);
-        if ($participant->current_step == "interview") {
+
+        if ($action == "daz") {
+            $participant->update([
+                'current_step' => 'interview_pending'
+            ]);
+            return back();
+        }
+
+        if ($participant->current_step == "interview" || $participant->current_step == "interview_pending") {
             $participant->update([
                 "current_step" => $action == "next" ? "jungle" : "interview_failed",
             ]);
@@ -173,8 +180,8 @@ class ParticipantController extends Controller
                 "current_step" => $action == "next" ? $school : "jungle" . "_failed",
             ]);
         }
-
         return back();
+
     }
 
     public function toInterview(Request $request)

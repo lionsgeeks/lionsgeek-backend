@@ -107,12 +107,13 @@ Route::middleware('auth')->group(function () {
     Route::post('participant/export', [ParticipantController::class, 'export'])->name('participant.export');
 
     // Press
-    Route::get("/press",[PressController::class,'index'])->name("press.index");
-    Route::get("/press/create",[PressController::class,'create'])->name("press.create");
-    Route::post("/press/store",[PressController::class,'store'])->name("press.store");
-    Route::get("/press/show/{press}",[PressController::class,'show'])->name("press.show");
-    Route::put("/press/update/{press}",[PressController::class,'update'])->name("press.update");
-    Route::delete("/press/destroy/{press}",[PressController::class,'destroy'])->name("press.destroy");
+    // Route::get("/press",[PressController::class,'index'])->name("press.index");
+    // Route::get("/press/create",[PressController::class,'create'])->name("press.create");
+    // Route::post("/press/store",[PressController::class,'store'])->name("press.store");
+    // Route::get("/press/show/{press}",[PressController::class,'show'])->name("press.show");
+    // Route::put("/press/update/{press}",[PressController::class,'update'])->name("press.update");
+    // Route::delete("/press/destroy/{press}",[PressController::class,'destroy'])->name("press.destroy");
+    Route::resource('press', PressController::class);
 
     //addAdmin
     Route::post("/addadmin/store",[AddAdminController::class,"AddAdmin"])->name("addadmin.store");

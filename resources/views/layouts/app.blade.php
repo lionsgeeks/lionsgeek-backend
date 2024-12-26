@@ -21,7 +21,7 @@
 
 <body class="font-sans antialiased">
     <div class="min-h-screen flex" :class="darkmode ? 'bg-[#252529]' : 'bg-gray-100'" x-data="{
-        darkmode: true,
+        darkmode: false,
     }">
         {{-- @include('layouts.navigation') --}}
 

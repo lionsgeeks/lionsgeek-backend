@@ -43,12 +43,12 @@
                             'Phone' => $coworking->phone,
                             'Birthday' => $coworking->birthday,
                             'Formation' => $coworking->formation,
-                            'CV' => $coworking->cv,
+                            'cv' => $coworking->cv,
                             'Project Name' => $coworking->proj_name,
                             'Project Description' => $coworking->proj_description,
                             'Domain' => $coworking->domain,
                             'Plan' => $coworking->plan,
-                            'Presentation' => $coworking->presentation,
+                            'presentation' => $coworking->presentation,
                             'Previous Projects' => $coworking->prev_proj,
                             'Reasons' => $coworking->reasons,
                             'Needs' => $coworking->needs,
@@ -77,8 +77,9 @@
                                     <tr class="{{ $bgClass }}">
                                         <td class="border p-3 border-alpha font-semibold">{{ $label }}</td>
                                         <td class="border p-3 border-alpha">
-                                            @if ($label == 'CV' || $label == 'Presentation')
+                                            @if ($label == 'cv' || $label == 'presentation')
                                                 @if ($value)
+
                                                     <div
                                                         class="flex gap-2 border items-center justify-center bg-black text-alpha p-2 rounded">
                                                         <a class="font-semibold"

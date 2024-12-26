@@ -13,8 +13,7 @@ class PressController extends Controller
      */
     public function index()
     {
-        //
-        $presses = Press::all();
+        $presses = Press::latest()->get();
         return view("press.press" , compact("presses"));
     }
 
@@ -38,17 +37,23 @@ class PressController extends Controller
             "name.fr" => "string|required",
             "name.ar" => "string|required",
 
-            "cover" => "required",
-            "link" => "required"
+            "cover" => "required|file|image|mimes:jpeg,png,jpg",
+            "link" => "required",
+            "logo" => "required|file|image|mimes:jpeg,png,jpg"
         ]);
         $file = file_get_contents($request->cover);
-        $fileName = hash("sha256", $file . now()) . '.'  . $request->cover->getClientOriginalName();
+        $fileName = hash("sha256", $file . now()) . '.webp';
         Storage::disk("public")->put("images/press/" . $fileName, $file);
+
+        $logo = file_get_contents($request->logo);
+        $logoName = hash("sha256", $logo . now()) . "webp";
+        Storage::disk("public")->put("images/press/" . $logoName, $logo);
 
         Press::create([
             "name" => $request->input("name"),
             "cover" => $fileName,
             "link" => $request->link,
+            "logo" => $logoName,
         ]);
         return redirect(route("press.index"));
     }
@@ -75,7 +80,6 @@ class PressController extends Controller
      */
     public function update(Request $request, Press $press)
     {
-        //
         request()->validate([
             "name" => "required|array|min:3",
             "name.en" => "string|required",
@@ -83,24 +87,33 @@ class PressController extends Controller
             "name.ar" => "string|required",
 
             "cover" => "nullable",
-            "link" => "required"
+            "link" => "required",
+            "logo" => "nullable"
         ]);
 
         // ? Update cover
 
-        $hasFile = $request->cover;
-
-        if ($hasFile) {
+        $hasCover = $request->cover;
+        if ($hasCover) {
             Storage::disk('public')->delete("images/press/" . $press->cover);
             $content = file_get_contents($request->cover);
-            $fileName = hash("sha256", $content . now()) . '.'  . $request->cover->getClientOriginalName();
+            $fileName = hash("sha256", $content . now()) . '.webp';
             Storage::disk("public")->put("images/press/" . $fileName, $content);
+        }
+
+        $hasLogo = $request->logo;
+        if ($hasLogo) {
+            Storage::disk('public')->delete("images/press/" . $press->logo);
+            $cont = file_get_contents($request->logo);
+            $logoName = hash("sha256", $cont . now()) . ".webp";
+            Storage::disk("public")->put("images/press/" . $logoName, $cont);
         }
 
         $press->update([
             "name" => $request->input("name"),
-            "cover" => $hasFile ? $fileName : $press->cover,
+            "cover" => $hasCover ? $fileName : $press->cover,
             "link" => $request->link,
+            "logo" => $hasLogo ? $logoName : $press->logo,
         ]);
         return redirect(route("press.index"));
     }

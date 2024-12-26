@@ -24,6 +24,7 @@ Route::post("/attendence/create", [AttendenceController::class, "store"]);
 Route::get("/events", [AttendenceController::class, "show"]);
 
 Route::get('/blogs', [BlogController::class, 'index']);
+Route::get('/press', [BlogController::class, 'press']);
 Route::post('/contact', [ContactController::class, 'store']);
 Route::post('/booking/store', [BookingController::class, 'store']);
 

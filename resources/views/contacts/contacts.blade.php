@@ -7,7 +7,7 @@
 
 
 
-    <div class="py-12 md:px-10 px-4">
+    <div class="pt-12 md:px-10 px-4 ">
         <div class=" mx-auto ">
             @if ($contacts->count() > 0)
                 <div class="bg-white h-[78vh]   lg:overflow-hidden shadow-sm ">
@@ -30,7 +30,7 @@
                                     <p class="text-sm font-bold">{{ $contacts->count() }} Converstation,
                                         {{ $unreadMessages }} Unread</p>
                                 </div>
-                                <div class="md:h-[470px]  overflow-y-auto">
+                                <div class="md:h-[435px]  overflow-y-auto">
                                     @foreach ($contacts as $key => $message)
                                         <div onclick="toggleHidden()" x-on:click='id = {{ $key }}'
                                             class="p-4  {{ $message->mark_as_read ? '' : 'bg-blue-100 border-b-2 hover:bg-blue-50' }} flex flex-col gap-y-2  text--700 w-full border-b hover:bg-gray-100 cursor-pointer">
@@ -67,7 +67,7 @@
 
                         </div>
                         <template x-if="id !== null">
-                        <div  class="lg:w-2/3 w-full h-[91vh] border hidden lg:block">
+                        <div  class="lg:w-2/3 w-full max-h-[78vh]  overflow-y-hidden  border hidden lg:block">
                                 <div class=" hidden w-full sm:flex flex-col gap-3 h-full px-4">
                                     <div
                                         class=" px-6 pt-1 w-full h-[10%] flex justify-between items-center bg-white border-b">
@@ -122,7 +122,7 @@
                                         </div>
 
                                     </div>
-                                    <div class="p-6    h-[85%] border flex flex-col justify-between">
+                                    <div class="p-6 h-[85%] border flex flex-col justify-between">
                                         <div>
                                             <div class="flex justify-between  border-b pb-2  ">
                                                 <div class="flex items-center gap-x-2">
@@ -134,10 +134,10 @@
                                                     x-text="new Date(messages[id].created_at).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false })">
                                                 </p>
                                             </div>
-                                            <p class="pt-4" x-text='messages[id].message'></p>
+                                            <p class="pt-4 overflow-y-auto max-h-[48vh]" x-text='messages[id].message'></p>
 
                                         </div>
-                                        <div class="flex w-full justify-end  px-6">
+                                        <div class="flex w-full justify-end mt-3  px-6">
                                             <a class="bg-black px-3 py-2 text-white font-bold hover:bg-alpha hover:text-black rounded-lg"
                                                 :href="'mailto:' + messages[id]?.email">Reply via email</a>
                                         </div>

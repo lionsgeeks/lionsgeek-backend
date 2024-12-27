@@ -179,10 +179,11 @@ class ParticipantController extends Controller
 
     public function toInterview(Request $request)
     {
-        // dd($request);
-        $candidats = Participant::where('info_session_id', $request->infosession_id)->where('is_visited', true)->get();
-        $divided = ceil(count($candidats) / count($request->times));
-        foreach ($request->times as $time) {
+        $candidats = Participant::where('info_session_id', $request->infosession_id)->where('current_step', 'interview')->get();
+        dd($request->all());
+        $divided = ceil($candidats->count() / count($request->dates));
+        foreach ($request->dates as $time) {
+            // dd($time);
             $group = $candidats->splice(0, $divided);
             foreach ($group as $candidat) {
                 $fullName = $candidat->full_name;

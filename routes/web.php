@@ -123,6 +123,11 @@ Route::middleware('auth')->group(function () {
     Route::put('/email/markread/{contact}', [ContactController::class, 'update'])->name('email.markread');
 
 
+    Route::get('/stream-results', function() {
+        
+    });
+
+
 });
 // Route::post('/booking/store', [BookingController::class, 'store'])->name('booking.store');
 

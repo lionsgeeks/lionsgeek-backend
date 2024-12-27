@@ -52,6 +52,10 @@
                                                     </option>
                                                 </select>
                                             </div>
+                                            <div class="flex flex-col gap-2 items-start">
+                                                <label for="">Places</label>
+                                                <input class="w-full rounded" name="places" value="{{ old('places', $infoSession->places) }}" placeholder="0" type="number">
+                                            </div>
                                         </div>
                                         <div class="flex gap-4 ">
                                             <div class="flex flex-col  w-full gap-3 items-start">

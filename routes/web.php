@@ -30,73 +30,73 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     if (request()->redirect == "true") {
         return redirect()->to("https://lionsgeek.ma/");
-    }else {
+    } else {
         return view("welcome");
     }
     // return view("welcome");
 });
 
-Route::post('/projects/translate', [ProjectController::class, 'translate'])->name('projects.translate');
-
-Route::get('/run', function () {
-    // Artisan::call('queue:listen');
-    Artisan::call('queue:work --stop-when-empty');
-    return redirect('dashboard');
-});
-
-
-Route::resource("events", EventController::class);
-
-Route::resource("gallery", GalleryController::class);
-
-Route::resource("images", ImageController::class);
-
-
-Route::resource("blogs", BlogController::class);
-Route::resource("contacts", ContactController::class);
-Route::resource("coworkings", CoworkingController::class);
-Route::resource('participants', ParticipantController::class);
-Route::resource('notes', NoteController::class)->except(['store']);
-Route::post('notes/{participant}', [NoteController::class, 'store'])->name('notes.store');
-Route::post('satisfaction/{participant}', [ParticipantController::class, 'updateSatisfaction'])->name('satisfaction.store');
-Route::post('frequent/{participant}', [ParticipantController::class, 'frequestQuestions'])->name('frequent.store');
-Route::post('participant/step/{participant}', [ParticipantController::class, 'step'])->name('participant.step');
-Route::post('participant/interview', [ParticipantController::class, 'toInterview'])->name('participant.interview');
-Route::post('participant/jungle', [ParticipantController::class, 'toJungle'])->name('participant.jungle');
-Route::post('participant/school', [ParticipantController::class, 'toSchool'])->name('participant.school');
-
-Route::resource('infosessions', InfoSessionController::class);
-Route::patch('/infosessions/available/{id}', [InfoSessionController::class, 'availabilityStatus'])->name('infosessions.isavailable');
-Route::patch('/infosessions/complete/{id}', [InfoSessionController::class, 'completeStatus'])->name('infosessions.isfinish');
-Route::resource('newsletter', NewsletterController::class);
-Route::resource("projects", ProjectController::class);
-Route::resource("booking", BookingController::class);
-
-Route::get('/passqr', [PdfController::class, 'index'])->name('pass.qrcode');
-Route::get('/sendqr', [PdfController::class, 'sendQrcode'])->name('send.qrcode');
-Route::get('/dashboard', function () {
-    $totalContacts = Contact::all()->count();
-    $totalEvents = Event::all()->count();
-    $members = User::all()->count();
-
-    //* order sessions by the nearest date between now and one month from now
-    $sessions = InfoSession::where('isAvailable', 1)
-        ->whereBetween('start_date', [Carbon::now(), Carbon::now()->addMonth()])
-        ->orderByRaw('ABS(julianday(start_date) - julianday(?))', [Carbon::now()])
-        ->get();
-    $upcomingEvents = Event::whereBetween('date', [Carbon::now(), Carbon::now()->addMonth()])
-        ->orderByRaw('ABS(julianday(date) - julianday(?))', [Carbon::now()])
-        ->take(4)
-        ->get();
-    $pendingCoworkings = Coworking::where('status', 0)->take(4)->get();
-    $coworkings = Coworking::latest()->take(4)->get();
-    $blogs = Blog::latest()->take(4)->get();
-    $views = General::where('id', 1)->first();
-    $notReadedMessages = Contact::where('mark_as_read', '0')->take(4)->get();
-    return view('dashboard', compact('totalContacts', 'totalEvents', 'members', 'sessions', 'coworkings', 'upcomingEvents', 'pendingCoworkings', 'blogs', 'views', 'notReadedMessages'));
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::middleware('auth')->group(function () {
+    Route::post('/projects/translate', [ProjectController::class, 'translate'])->name('projects.translate');
+
+    Route::get('/run', function () {
+        // Artisan::call('queue:listen');
+        Artisan::call('queue:work --stop-when-empty');
+        return redirect('dashboard');
+    });
+
+
+    Route::resource("events", EventController::class);
+
+    Route::resource("gallery", GalleryController::class);
+
+    Route::resource("images", ImageController::class);
+
+
+    Route::resource("blogs", BlogController::class);
+    Route::resource("contacts", ContactController::class);
+    Route::resource("coworkings", CoworkingController::class);
+    Route::resource('participants', ParticipantController::class);
+    Route::resource('notes', NoteController::class)->except(['store']);
+    Route::post('notes/{participant}', [NoteController::class, 'store'])->name('notes.store');
+    Route::post('satisfaction/{participant}', [ParticipantController::class, 'updateSatisfaction'])->name('satisfaction.store');
+    Route::post('frequent/{participant}', [ParticipantController::class, 'frequestQuestions'])->name('frequent.store');
+    Route::post('participant/step/{participant}', [ParticipantController::class, 'step'])->name('participant.step');
+    Route::post('participant/interview', [ParticipantController::class, 'toInterview'])->name('participant.interview');
+    Route::post('participant/jungle', [ParticipantController::class, 'toJungle'])->name('participant.jungle');
+    Route::post('participant/school', [ParticipantController::class, 'toSchool'])->name('participant.school');
+
+    Route::resource('infosessions', InfoSessionController::class);
+    Route::patch('/infosessions/available/{id}', [InfoSessionController::class, 'availabilityStatus'])->name('infosessions.isavailable');
+    Route::patch('/infosessions/complete/{id}', [InfoSessionController::class, 'completeStatus'])->name('infosessions.isfinish');
+    Route::resource('newsletter', NewsletterController::class);
+    Route::resource("projects", ProjectController::class);
+    Route::resource("booking", BookingController::class);
+
+    Route::get('/passqr', [PdfController::class, 'index'])->name('pass.qrcode');
+    Route::get('/sendqr', [PdfController::class, 'sendQrcode'])->name('send.qrcode');
+    Route::get('/dashboard', function () {
+        $totalContacts = Contact::all()->count();
+        $totalEvents = Event::all()->count();
+        $members = User::all()->count();
+
+        //* order sessions by the nearest date between now and one month from now
+        $sessions = InfoSession::where('isAvailable', 1)
+            ->whereBetween('start_date', [Carbon::now(), Carbon::now()->addMonth()])
+            ->orderByRaw('ABS(julianday(start_date) - julianday(?))', [Carbon::now()])
+            ->get();
+        $upcomingEvents = Event::whereBetween('date', [Carbon::now(), Carbon::now()->addMonth()])
+            ->orderByRaw('ABS(julianday(date) - julianday(?))', [Carbon::now()])
+            ->take(4)
+            ->get();
+        $pendingCoworkings = Coworking::where('status', 0)->take(4)->get();
+        $coworkings = Coworking::latest()->take(4)->get();
+        $blogs = Blog::latest()->take(4)->get();
+        $views = General::where('id', 1)->first();
+        $notReadedMessages = Contact::where('mark_as_read', '0')->take(4)->get();
+        return view('dashboard', compact('totalContacts', 'totalEvents', 'members', 'sessions', 'coworkings', 'upcomingEvents', 'pendingCoworkings', 'blogs', 'views', 'notReadedMessages'));
+    })->middleware(['auth', 'verified'])->name('dashboard');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -117,19 +117,12 @@ Route::middleware('auth')->group(function () {
     Route::resource('press', PressController::class);
 
     //addAdmin
-    Route::post("/addadmin/store",[AddAdminController::class,"AddAdmin"])->name("addadmin.store");
+    Route::post("/addadmin/store", [AddAdminController::class, "AddAdmin"])->name("addadmin.store");
 
     //delete email
     Route::delete('/email/destroy/{contact}', [ContactController::class, 'destroy'])->name('email.destroy');
     //mark email as read
     Route::put('/email/markread/{contact}', [ContactController::class, 'update'])->name('email.markread');
-
-
-    Route::get('/stream-results', function() {
-        
-    });
-
-
 });
 // Route::post('/booking/store', [BookingController::class, 'store'])->name('booking.store');
 

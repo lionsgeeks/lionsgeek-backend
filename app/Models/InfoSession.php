@@ -12,6 +12,7 @@ class InfoSession extends Model
         'start_date',
         'isAvailable',
         'isFinish',
+        'places'
     ];
 
     public function participants()

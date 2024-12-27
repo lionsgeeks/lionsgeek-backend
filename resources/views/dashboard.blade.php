@@ -442,7 +442,7 @@
                                 <div class=" flex flex-col gap-y-2">
                                     <div class="h-[20vh]">
                                         <img class="w-[90%] aspect-video object-cover rounded-lg h-full"
-                                            src="{{ asset('storage/images/' . $blog->image) }}" alt="">
+                                            src="{{ asset('storage/images/blog/' . $blog->image) }}" alt="">
                                     </div>
                                     <div class="flex flex-col gap-y-1">
                                         <h1 class="text-xl truncate   rounded-full">

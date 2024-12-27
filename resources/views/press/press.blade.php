@@ -35,7 +35,7 @@
                             src="{{ asset('storage/images/press/' . $press->cover) }}" alt="">
                         <div class="w-full flex items-center justify-between">
                             <img class="rounded-full aspect-square w-[35px]" src="{{ asset('storage/images/press/' . $press->logo) }}" alt="">
-                            <h4 class="text-[20px] font-semibold ">{{ $press->name->en }}
+                            <h4 class="text-[20px] font-semibold truncate w-52 ">{{ $press->name->en }}
                             </h4>
                             <a href="{{ route('press.show', $press->id) }}">
                                 <button class="py-[.5rem] px-[1.5rem] rounded-lg bg-black text-white " type="button">

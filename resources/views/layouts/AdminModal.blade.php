@@ -1,5 +1,5 @@
 <div id="modalAdmin" class="fixed hidden z-50 inset-0 bg-gray-900 bg-opacity-60 overflow-y-auto h-full w-full px-4 ">
-    <div class="relative top-40 mx-auto shadow-xl rounded-md bg-white max-w-md">
+    <div class="relative top-10 mx-auto shadow-xl rounded-md bg-white max-w-md">
         <div class="flex justify-end p-2">
             <button onclick="closeModal('modalAdmin')" type="button"
                 class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center">
@@ -23,7 +23,7 @@
                     <input type="email" name="email" placeholder="Enter Email" class="p-2 rounded-lg border-2 focus:ring-alpha focus:border-alpha">
                 </div>
                 <div class="py-5 flex items-center justify-end gap-x-2 ">
-                    <button class=" lg:px-6 px-7 py-2 bg-alpha text-base font-medium text-white hover:bg-alpha hover:text-black  rounded-md shadow   transition">
+                    <button class=" lg:px-6 px-7 py-2 bg-black text-base font-medium text-white hover:bg-alpha hover:text-black  rounded-md shadow   transition">
                         Add
                     </button>
                     <a href="#" onclick="closeModal('modalAdmin')"

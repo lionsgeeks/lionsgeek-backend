@@ -5,8 +5,8 @@
         </h2>
     </x-slot>
 
-    <div class="py-12 ">
-        <div class="max-w-7xl mx-auto   sm:px-6 lg:px-8">
+    <div class="py-12 md:px-10 px-4 ">
+        <div class=" mx-auto bg-white  sm:px-6 lg:px-8 rounded-lg">
             <div class=" w-full   overflow-hidden p-4 flex flex-col gap-y-4 ">
 
                 <div class="flex items-center justify-between ">
@@ -29,9 +29,17 @@
                 </div>
                 <div
                     class="w-full grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1  gap-x-4 lg:gap-y-0 md:gap-y-2 gap-y-4 ">
-                    <div
-                        class=" ps-4 py-2   shadow-md bg-white  text-black flex   items-center  rounded-[16px]  gap-x-5">
-                        <span class="w-[50px] h-[50px] rounded-full   bg-[#eeb76b34] relative">
+                    <div class=" ps-4 py-6   shadow-md bg-white  text-black flex  items-start justify-around  rounded-lg  gap-x-5">
+                        
+                        <div class="flex flex-col gap-y-2 justify-center ">
+                            <span class="font-bold text-[18px]">Total Contacts</span>
+                            @if ($totalContacts > 0)
+                                <p class="text-xl font-black ">{{ $totalContacts }}</p>
+                            @else
+                                <p>No Messages Received</p>
+                            @endif
+                        </div>
+                        <span class="w-[40px] h-[40px] rounded-full   bg-[#eeb76b34] relative">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black"
                                 class="bi bi-envelope   absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
                                 viewBox="0 0 16 16">
@@ -39,17 +47,18 @@
                                     d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm2-1a1 1 0 0 0-1 1v.217l7 4.2 7-4.2V4a1 1 0 0 0-1-1zm13 2.383-4.708 2.825L15 11.105zm-.034 6.876-5.64-3.471L8 9.583l-1.326-.795-5.64 3.47A1 1 0 0 0 2 13h12a1 1 0 0 0 .966-.741M1 11.105l4.708-2.897L1 5.383z" />
                             </svg>
                         </span>
-                        <div class="flex flex-col h-[50%] justify-center ">
-                            <span class="font-bold text-[18px]">Total Contacts</span>
-                            @if ($totalContacts > 0)
-                                <p class="text-3xl font-black ">{{ $totalContacts }}</p>
+                    </div>
+                    <div class=" ps-4 py-6   shadow-md bg-white flex  items-start justify-around gap-x-5 rounded-lg ">
+                       
+                        <div class="flex flex-col gap-y-2 justify-center  text-black">
+                            <span class="font-bold text-[18px]">Upcoming Events</span>
+                            @if ($totalEvents > 0)
+                                <p class="text-xl font-black ">{{ $totalEvents }}</p>
                             @else
-                                <p>No Messages Received</p>
+                                <p>there are no events yet</p>
                             @endif
                         </div>
-                    </div>
-                    <div class=" ps-4 py-2   shadow-md bg-white flex  items-center gap-x-5 rounded-[16px] ">
-                        <span class="w-[50px] h-[50px] rounded-full bg-[#eeb76b34]  relative">
+                        <span class="w-[40px] h-[40px] rounded-full bg-[#eeb76b34]  relative">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black"
                                 class="bi bi-envelope text-black absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
                                 viewBox="0 0 16 16">
@@ -59,17 +68,18 @@
                                     d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z" />
                             </svg>
                         </span>
-                        <div class="flex flex-col h-[50%] justify-center  text-black">
-                            <span class="font-bold text-[18px]">Upcoming Events</span>
-                            @if ($totalEvents > 0)
-                                <p class="text-3xl font-black ">{{ $totalEvents }}</p>
+                    </div>
+                    <div class=" ps-4 py-6   shadow-md bg-white flex  items-start justify-around gap-x-5 rounded-lg ">
+                       
+                        <div class="flex flex-col gap-y-2 justify-center  text-black">
+                            <span class="font-bold text-[18px]">Total Members</span>
+                            @if ($members > 0)
+                                <p class="text-xl font-black ">{{ $members }}</p>
                             @else
-                                <p>there are no events yet</p>
+                                <p>No event Available</p>
                             @endif
                         </div>
-                    </div>
-                    <div class=" ps-4 py-2   shadow-md bg-white flex  items-center gap-x-5 rounded-[16px] ">
-                        <span class="w-[50px] h-[50px] rounded-full  bg-[#eeb76b34] relative">
+                        <span class="w-[40px] h-[40px] rounded-full  bg-[#eeb76b34] relative">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black"
                                 class="bi bi-envelope text-black absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
                                 viewBox="0 0 16 16">
@@ -77,17 +87,16 @@
                                     d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1zm-7.978-1L7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002-.014.002zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0M6.936 9.28a6 6 0 0 0-1.23-.247A7 7 0 0 0 5 9c-4 0-5 3-5 4q0 1 1 1h4.216A2.24 2.24 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816M4.92 10A5.5 5.5 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4" />
                             </svg>
                         </span>
-                        <div class="flex flex-col h-[50%] justify-center  text-black">
-                            <span class="font-bold text-[18px]">Total Members</span>
-                            @if ($members > 0)
-                                <p class="text-3xl font-black ">{{ $members }}</p>
-                            @else
-                                <p>No event Available</p>
-                            @endif
-                        </div>
                     </div>
-                    <div class=" ps-4 py-2   shadow-md bg-white flex  items-center gap-x-5 rounded-[16px]  ">
-                        <span class="w-[50px] h-[50px] rounded-full bg-[#eeb76b34] relative">
+                    <div class=" ps-4 py-6   shadow-md bg-white flex  items-start justify-around gap-x-5 rounded-lg  ">
+                        
+                        <div class="flex flex-col justify-center gap-y-2  text-black">
+                            <span class="font-bold text-[18px]">Total Visits</span>
+
+                            <p class="text-xl font-black">{{ $views?->views ?? 0 }}</p>
+
+                        </div>
+                        <span class="w-[40px] h-[40px] rounded-full bg-[#eeb76b34] relative">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black"
                                 class="bi bi-envelope text-black absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
                                 viewBox="0 0 16 16">
@@ -95,18 +104,12 @@
                                     d="M6.75 1a.75.75 0 0 1 .75.75V8a.5.5 0 0 0 1 0V5.467l.086-.004c.317-.012.637-.008.816.027.134.027.294.096.448.182.077.042.15.147.15.314V8a.5.5 0 0 0 1 0V6.435l.106-.01c.316-.024.584-.01.708.04.118.046.3.207.486.43.081.096.15.19.2.259V8.5a.5.5 0 1 0 1 0v-1h.342a1 1 0 0 1 .995 1.1l-.271 2.715a2.5 2.5 0 0 1-.317.991l-1.395 2.442a.5.5 0 0 1-.434.252H6.118a.5.5 0 0 1-.447-.276l-1.232-2.465-2.512-4.185a.517.517 0 0 1 .809-.631l2.41 2.41A.5.5 0 0 0 6 9.5V1.75A.75.75 0 0 1 6.75 1M8.5 4.466V1.75a1.75 1.75 0 1 0-3.5 0v6.543L3.443 6.736A1.517 1.517 0 0 0 1.07 8.588l2.491 4.153 1.215 2.43A1.5 1.5 0 0 0 6.118 16h6.302a1.5 1.5 0 0 0 1.302-.756l1.395-2.441a3.5 3.5 0 0 0 .444-1.389l.271-2.715a2 2 0 0 0-1.99-2.199h-.581a5 5 0 0 0-.195-.248c-.191-.229-.51-.568-.88-.716-.364-.146-.846-.132-1.158-.108l-.132.012a1.26 1.26 0 0 0-.56-.642 2.6 2.6 0 0 0-.738-.288c-.31-.062-.739-.058-1.05-.046zm2.094 2.025" />
                             </svg>
                         </span>
-                        <div class="flex flex-col justify-center h-[50%]  text-black">
-                            <span class="font-bold text-[18px]">Total Visits</span>
-
-                            <p class="text-3xl font-black">{{ $views?->views ?? 0 }}</p>
-
-                        </div>
                     </div>
 
 
                 </div>
                 @if ($notReadedMessages->count() > 0)
-                    <div class="lg:p-6 p-3 bg-white rounded-[16px] shadow-md">
+                    <div class="lg:p-6 p-3 bg-white rounded-lg shadow-md">
                         <div class="w-full flex flex-col gap-y-3">
                             <div class="flex items-center gap-x-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -119,7 +122,7 @@
 
 
                                     <a href="{{ route('contacts.index') }}"
-                                        class="text-alpha text-[18px] cursor-pointer underline">
+                                        class="text-alpha  hover:text-black text-[18px] cursor-pointer underline">
                                         view messages</a>
 
                                 </div>
@@ -136,7 +139,7 @@
                                 </div> --}}
 
                                 <table class="w-full">
-                                    <thead class="">
+                                    <thead class="h-[7vh]">
                                         <th class="lg:table-cell hidden">Name</th>
                                         <th class="lg:table-cell hidden">Email</th>
                                         <th>Message</th>
@@ -145,7 +148,7 @@
 
                                     <tbody class="w-full ">
                                         @foreach ($notReadedMessages->reverse() as $key => $contact)
-                                            <tr  class="w-full text-center h-[5vh]  border-t  {{  $key % 2 == 0 ? '' : 'bg-gray-100' }} ">
+                                            <tr  class="w-full text-center h-[7vh]  border-t  {{  $key % 2 == 0 ? '' : 'bg-gray-100' }} ">
 
                                                 <td  class="truncate lg:table-cell hidden">
                                                     {{ $contact->full_name }}
@@ -176,7 +179,7 @@
                 @endif
                 <div class="">
                     @if ($sessions->count() > 0)
-                        <div class="p-4 shadow-md rounded-[16px] flex flex-col gap-y-4 bg-white ">
+                        <div class="p-4 shadow-md rounded-lg flex flex-col gap-y-4 bg-white ">
                             <h1 class="text-xl font-semibold text-black ">Upcoming Info Sessions</h1>
                             <div class="grid  mt-2 lg:grid-cols-4 lg:gap-x-2 md:gap-x-4 grid-cols-2 gap-x-4 gap-y-8 ">
                                 @foreach ($sessions as $session)
@@ -208,7 +211,7 @@
                 </div>
 
                 <div class="w-ful grid lg:grid-cols-2 grid-cols-1 gap-x-4 lg:gap-y-0 gap-y-4 ">
-                    <div class=" h-[40vh] shadow-md rounded-[16px] bg-white ">
+                    <div class=" shadow-md rounded-lg bg-white ">
                         @if ($pendingCoworkings->count() > 0)
                             <div x-data='{
                         cows: {{ $pendingCoworkings }},
@@ -227,11 +230,11 @@
                                 <div class="p-6 text-gray-900 ">
                                     <div class="flex justify-between items-center">
                                         <h1 class="text-xl font-semibold text-black mb-2">Recent Coworking Requests</h1>
-                                        <a href="{{ route('coworkings.index') }}" class="underline text-alpha">See
+                                        <a href="{{ route('coworkings.index') }}" class="underline text-alpha hover:text-black">See
                                             all</a>
                                     </div>
                                     <table class="w-full mt-4">
-                                        <thead class="border-b">
+                                        <thead class="border-b h-[7vh]">
                                             <th class=" ">Name</th>
                                             {{-- <th class=" sm:table-cell hidden">Phone</th> --}}
                                             {{-- <th class=" sm:table-cell hidden">Email</th> --}}
@@ -267,8 +270,8 @@
                                                         </a>
 
                                                     </td>
-                                                    <td class="">
-                                                        <div class=" flex justify-center">
+                                                    <td class="flex justify-center items-center">
+                                                        <div class=" flex justify-center items-center">
                                                             <template x-if="!cow.status">
                                                                 {{-- reject/approve form --}}
                                                                 <form method="POST"
@@ -288,7 +291,7 @@
                                                                         </svg>
                                                                     </button>
                                                                     <button
-                                                                        class="bg-[#356966] text-black lg:px-2 p-1 rounded-md "
+                                                                        class="hover:bg-alpha text-white bg-black hover:text-white lg:px-1 p-1 rounded-md "
                                                                         type="submit" name="action"
                                                                         value="approve">
                                                                         <span class="lg:block hidden">Approve</span>
@@ -347,7 +350,7 @@
                                 </div>
                             </div>
                         @else
-                            <div class=" bg-white  h-full rounded-[16px] flex items-center justify-center w-full">
+                            <div class=" bg-white  h-full rounded-lg flex items-center justify-center w-full">
                                 <div class="text-center">
                                     <h1 class="text-2xl font-semibold text-black mb-3">No Pending Requests</h1>
                                     <p class="text-gray-600 mb-6">Currently, there are no pending requests to join the
@@ -357,18 +360,18 @@
                             </div>
                         @endif
                     </div>
-                    <div class="h-[40vh]  bg-white shadow-md  rounded-[16px]">
+                    <div class=" bg-white  shadow-md  rounded-lg">
                         @if ($upcomingEvents->count() > 0)
                             <div class=" overflow-hidden  sm:rounded-lg">
 
                                 <div class="p-6 text-gray-900 ">
                                     <div class="flex justify-between items-center">
                                         <h1 class="text-xl font-semibold text-black mb-2">Upcoming Events</h1>
-                                        <a href="{{ route('events.index') }}" class="underline text-alpha">See
+                                        <a href="{{ route('events.index') }}" class="underline text-alpha hover:text-black">See
                                             all</a>
                                     </div>
                                     <table class="w-full mt-4">
-                                        <thead class="border-b">
+                                        <thead class="border-b h-[7vh]">
                                             <th class=" ">Event</th>
                                             <th class=" sm:table-cell hidden">Date</th>
                                             <th class=" ">Time</th>
@@ -409,7 +412,7 @@
                                 </div>
                             </div>
                         @else
-                            <div class="h-[100%] bg-white flex rounded-[16px] items-center justify-center w-full">
+                            <div class="h-[100%] bg-white flex rounded-lg items-center justify-center w-full">
                                 <div class="text-center">
                                     <h1 class="text-2xl font-semibold text-gray-700 mb-3">No event Available</h1>
                                     <p class="text-gray-500 mb-6">It looks like there aren’t any events created yet.
@@ -426,33 +429,33 @@
                     </div>
                 </div>
 
-                <div class="w-full  flex flex-col gap-y-2 bg-white p-4 rounded-[16px]">
+                <div class="w-full  flex flex-col gap-y-2 bg-white p-4 rounded-lg">
 
                     @if ($blogs->count() > 0)
 
                         <div class="flex justify-between items-center ">
                             <h1 class="text-xl font-semibold text-black ">Latest Blogs</h1>
-                            <a href="{{ route('blogs.index') }}" class="underline text-alpha">See all</a>
+                            <a href="{{ route('blogs.index') }}" class="underline text-alpha hover:text-black">See all</a>
                         </div>
-                        <div class=" grid lg:grid-cols-4 md:grid-cols-2 gap-x-4  p-4 rounded-[16px] gap-y-4 ">
+                        <div class=" grid lg:grid-cols-4 md:grid-cols-2 gap-x-4  p-4 rounded-lg gap-y-4 ">
                             @foreach ($blogs as $blog)
                                 <div class=" flex flex-col gap-y-2">
                                     <div class="h-[20vh]">
-                                        <img class="w-[90%] aspect-video object-cover rounded-[16px] h-full"
+                                        <img class="w-[90%] aspect-video object-cover rounded-lg h-full"
                                             src="{{ asset('storage/images/' . $blog->image) }}" alt="">
                                     </div>
                                     <div class="flex flex-col gap-y-1">
                                         <h1 class="text-xl truncate   rounded-full">
                                             {{ $blog->title->en }}</h1>
                                         <div
-                                            class="flex  items-center gap-x-1 w-fit px-2 bg-alpha/10 border border-[#eeb76b34] rounded-full">
+                                            class="flex  items-center gap-x-1 w-fit px-2 bg-alpha/10 border border-[#eeb76b34] rounded-lg">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10"
                                                 fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16">
                                                 <path
                                                     d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z" />
                                             </svg>
                                             <p class="">Written By <span
-                                                    class="font-bold text-[18px]">{{ $blog->user?->name }}</span></p>
+                                                    class="font-bold text-sm">{{ $blog->user?->name }}</span></p>
                                         </div>
                                     </div>
 

@@ -47,8 +47,8 @@ class BlogController extends Controller
 
         $image = $request->file('image');
         if ($image) {
-            $imageName = time() .  $image->getClientOriginalName();
-            $image->storeAs('images', $imageName, 'public');
+            $imageName = $this->uploadFile($request->file('image'), "/blog/");
+
             $blog = Blog::create([
                 'title' => $request->input('title'),
                 'description' => $request->input('description'),
@@ -100,9 +100,8 @@ class BlogController extends Controller
 
         $theImg = $request->image;
         if ($theImg) {
-            Storage::disk('public')->delete('images/' . $blog->image);
-            $imageName = time() .  $theImg->getClientOriginalName();
-            $theImg->storeAs('images', $imageName, 'public');
+            Storage::disk('public')->delete('images/blog/' . $blog->image);
+            $imageName = $this->uploadFile($request->file('image'), "/blog/");
         }
 
         $blog->update([
@@ -120,6 +119,7 @@ class BlogController extends Controller
      */
     public function destroy(Blog $blog)
     {
+        Storage::disk('public')->delete('images/blog/' . $blog->image);
         $blog->delete();
         return back()->with('success', 'Blog Deleted Successuflly');
     }

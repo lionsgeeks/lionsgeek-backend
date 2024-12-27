@@ -102,7 +102,7 @@
                                         accept="image/*" type="file"
                                         class="w-full rounded-lg h-full absolute top-0 opacity-0 cursor-pointer z-30">
                                     <img class="w-full h-full object-cover rounded-lg "
-                                        src="{{ asset('storage/images/' . $gallery->couverture) }}"alt="">
+                                        src="{{ asset('storage/images/gallery/' . $gallery->couverture) }}"alt="">
                                 </div>
 
 

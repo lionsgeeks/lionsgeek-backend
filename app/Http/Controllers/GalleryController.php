@@ -51,7 +51,7 @@ class GalleryController extends Controller
         ]);
 
         // for more information about this function, look at Controller.php
-        $fileName = $this->uploadFile($request->file('couverture'));
+        $fileName = $this->uploadFile($request->file('couverture'), "/gallery/");
 
         $gallery =  Gallery::create([
             "title" => $request->input("title"),
@@ -63,7 +63,7 @@ class GalleryController extends Controller
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $file) {
 
-                $fileName = $this->uploadFile($file);
+                $fileName = $this->uploadFile($file, "/gallery/");
                 // Save each image to the database
                 $gallery->images()->create([
                     'path' => $fileName
@@ -92,7 +92,6 @@ class GalleryController extends Controller
      */
     public function update(Request $request, Gallery $gallery)
     {
-        // dd("j");
         request()->validate([
             "title" => "required|array|min:3",
             "title.en" => "string|required",
@@ -107,32 +106,11 @@ class GalleryController extends Controller
             "couverture" => "nullable|file|image|mimes:jpeg,png,jpg",
         ]);
 
-        // dd($request->hasFile("couverture"));
-
         // ? Update cover
 
-
-
-        // dd(Storage::disk('public')->exists("images/" . $gallery->couverture));
-
         if ($request->hasFile("couverture")) {
-            Storage::disk('public')->delete("images/" . $gallery->couverture);
-
-            $coverFile = $request->couverture;
-            $size_in_mb = ($coverFile->getSize() / 1024) / 1024;
-            if ($size_in_mb < 5) {
-                $quality = 70;
-            } elseif ($size_in_mb < 10) {
-                $quality = 50;
-            } else {
-                $quality = 20;
-            }
-
-            $content = file_get_contents($coverFile);
-            $fileName = hash("sha256", $content) . '.webp';
-            $path = public_path('storage/images') . "/" . $fileName;
-            $manager = new ImageManager(new Driver());
-            $manager->read($content)->encodeByMediaType('image/jpeg', progressive: true, quality: $quality)->save($path);
+            Storage::disk('public')->delete("images/gallery/" . $gallery->couverture);
+            $fileName = $this->uploadFile($request->couverture, "/gallery/");
         }
 
         $gallery->update([
@@ -154,6 +132,8 @@ class GalleryController extends Controller
      */
     public function destroy(Gallery $gallery)
     {
+        Storage::disk("public")->delete("images/gallery/" . $gallery->couverture);
+
         if ($gallery) {
             foreach ($gallery->images as $image) {
                 $image->erase();

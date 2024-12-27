@@ -41,7 +41,7 @@
                                         <tr class="w-full text-center ">
                                             <td class="flex py-2 items-center justify-center">
                                                 <img class="w-32 h-20 border shadow object-cover"
-                                                    src="{{ asset('storage/images/' . $blog->image) }}" alt="">
+                                                    src="{{ asset('storage/images/blog/' . $blog->image) }}" alt="">
                                             </td>
                                             <td>
                                                 {{ $blog->title->en }}

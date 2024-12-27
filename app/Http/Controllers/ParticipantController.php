@@ -82,15 +82,11 @@ class ParticipantController extends Controller
             'prefecture' => 'required',
         ]);
 
+        $hasImage = $request->image;
         // check if the requested image is different from the already stored image
-        if ($request->image !== $participant->image) {
-            Storage::disk('public')->delete('images/participants' . $participant->image);
-            $image = $request->file('image');
-            $imageName = time() . '_' .  $image->getClientOriginalName();
-            $image->storeAs('images/participants', $imageName, 'public');
-            $participant->update([
-                'image' => $imageName,
-            ]);
+        if ($hasImage) {
+            Storage::disk('public')->delete('images/participants/' . $participant->image);
+            $imageName = $this->uploadFile($request->file('image'), "/participants/");
         }
 
 
@@ -101,9 +97,10 @@ class ParticipantController extends Controller
             'phone' => $request->phone,
             'city' => $request->city,
             'prefecture' => $request->prefecture,
+            "image" => $hasImage ? $imageName : $participant->image,
         ]);
 
-        return back();
+        return redirect()->route('participants.show', $participant);
     }
 
     /**
@@ -181,7 +178,6 @@ class ParticipantController extends Controller
             ]);
         }
         return back();
-
     }
 
     public function toInterview(Request $request)
@@ -210,8 +206,9 @@ class ParticipantController extends Controller
         }
         return back();
     }
-    public function toSchool(Request $request) {
-        $candidats = Participant::where('info_session_id',$request->infosession_id)->where('current_step','coding_school')->orWhere('current_step','media_school')->get();
+    public function toSchool(Request $request)
+    {
+        $candidats = Participant::where('info_session_id', $request->infosession_id)->where('current_step', 'coding_school')->orWhere('current_step', 'media_school')->get();
         $day = $request->date;
         foreach ($candidats as $key => $candidat) {
             Mail::to($candidat->email)->send(new SchoolMail($candidat->full_name, $day, $candidat->current_step));

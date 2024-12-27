@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Intervention\Image\Drivers\Gd\Driver;
-use Intervention\Image\ImageManager;
 
 class EventController extends Controller
 {
@@ -55,26 +53,13 @@ class EventController extends Controller
 
         ]);
 
-        $coverFile = $request->cover;
-        $size_in_mb = ($coverFile->getSize() / 1024) / 1024;
-        if ($size_in_mb < 5) {
-            $quality = 70;
-        } elseif ($size_in_mb < 10) {
-            $quality = 50;
-        } else {
-            $quality = 20;
-        }
-        $content = file_get_contents($request->cover);
-        $fileName = hash("sha256", $content . now()) . '.webp';
-        $path = public_path('storage/images') . "/" . $fileName;
-        $manager = new ImageManager(new Driver());
-        $manager->read($content)->encodeByMediaType('image/jpeg', progressive: true, quality: $quality)->save($path);
+        $fileName = $this->uploadFile($request->file('cover'), "/events/");
+
 
         Event::create([
             "name" => $request->input("name"),
             "location" => $request->input("location"),
             "description" => $request->input("description"),
-
             "date" => $request->date,
             "price" => $request->price,
             "cover" => $fileName
@@ -130,24 +115,8 @@ class EventController extends Controller
         $hasFile = $request->cover;
 
         if ($hasFile) {
-
-            Storage::disk('public')->delete("images/" . $event->cover);
-            $coverFile = $request->cover;
-            $size_in_mb = ($coverFile->getSize() / 1024) / 1024;
-            if ($size_in_mb < 5) {
-                $quality = 70;
-            } elseif ($size_in_mb < 10) {
-                $quality = 50;
-            } else {
-                $quality = 20;
-            }
-
-            $content = file_get_contents($coverFile);
-            $fileName = hash("sha256", $content) . '.webp';
-            $path = public_path('storage/images') . "/" . $fileName;
-            $manager = new ImageManager(new Driver());
-            $manager->read($content)->encodeByMediaType('image/jpeg', progressive: true, quality: $quality)->save($path);
-
+            Storage::disk('public')->delete("images/events/" . $event->cover);
+            $fileName = $this->uploadFile($request->file('cover'), "/events/");
 
         }
 
@@ -170,7 +139,7 @@ class EventController extends Controller
     public function destroy(Event $event)
     {
 
-        Storage::disk("public")->delete("images/" . $event->cover);
+        Storage::disk("public")->delete("images/events/" . $event->cover);
 
         $event->delete();
 

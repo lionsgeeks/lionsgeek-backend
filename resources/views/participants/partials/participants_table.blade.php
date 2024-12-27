@@ -72,6 +72,12 @@ this.selectedSession = "";
                             <option value="">All Steps</option>
                             <option value="info_session">Info Session</option>
                             <option value="interview">Interview</option>
+                            <option value="interview_pending">Interview Pending</option>
+                            <option value="interview_failed">Interview Failed</option>
+                            <option value="jungle">Jungle</option>
+                            <option value="jungle_failed">Jungle Failed</option>
+                            <option value="coding_school">Coding School</option>
+                            <option value="media_school">Media School</option>
                         </select>
 
                         @if ($infos)
@@ -116,7 +122,9 @@ this.selectedSession = "";
                     <tbody class="w-full">
                         <template x-for="participant in participants" :key="participant.id">
                             <tr x-show="matchesFilter(participant)" class="h-[7vh] hover:bg-slate-100 cursor-pointer"
-                                x-on:click="window.location.href = '/participants/' + participant.id">
+                                x-on:click="window.location.href = '/participants/' + participant.id"
+                                {{-- :class="participant.current_step == 'interview_pending' ? 'bg-red-500' : 'bg-yellow-600' " --}}
+                                >
                                 <td>
                                     <span class="cursor-pointer border-b border-black"
                                         x-on:click="window.location.href = '/participants/' + participant.id"

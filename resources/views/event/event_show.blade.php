@@ -164,7 +164,7 @@
 
                          <!-- Cover -->
                          <div class="flex flex-col gap-1" x-data="{
-                            selectedImage: '{{ asset('storage/images/'.$event->cover) }}',
+                            selectedImage: '{{ asset('storage/images/events/'.$event->cover) }}',
                             updateImage(event) {
                                 const file = event.target.files[0];
                                 if (file) {

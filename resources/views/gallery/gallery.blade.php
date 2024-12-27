@@ -38,7 +38,7 @@
                 <div
                     class=" w-[calc(95%/3)] text-nowrap flex flex-col overflow-hidden  gap-3 h-fit px-[1rem] py-[1rem] rounded-[16px]  bg-[#f9f9f9]">
                     <img class="w-[100%] h-[12rem] object-cover rounded-[16px] "
-                        src="{{ asset('storage/images/' . $gallery->couverture) }}" alt="">
+                        src="{{ asset('storage/images/gallery/' . $gallery->couverture) }}" alt="">
                     <div class="w-full flex items-center justify-between">
 
                         <h4 class="text-[20px] font-semibold ">{{ Str::limit($gallery->title->en, 15, '...') }}</h4>

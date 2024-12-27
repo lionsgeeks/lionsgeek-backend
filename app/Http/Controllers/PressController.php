@@ -41,13 +41,10 @@ class PressController extends Controller
             "link" => "required",
             "logo" => "required|file|image|mimes:jpeg,png,jpg"
         ]);
-        $file = file_get_contents($request->cover);
-        $fileName = hash("sha256", $file . now()) . '.webp';
-        Storage::disk("public")->put("images/press/" . $fileName, $file);
 
-        $logo = file_get_contents($request->logo);
-        $logoName = hash("sha256", $logo . now()) . "webp";
-        Storage::disk("public")->put("images/press/" . $logoName, $logo);
+
+        $fileName = $this->uploadFile($request->file('cover'), "/press/");
+        $logoName = $this->uploadFile($request->file('logo'), "/press/");
 
         Press::create([
             "name" => $request->input("name"),
@@ -96,17 +93,13 @@ class PressController extends Controller
         $hasCover = $request->cover;
         if ($hasCover) {
             Storage::disk('public')->delete("images/press/" . $press->cover);
-            $content = file_get_contents($request->cover);
-            $fileName = hash("sha256", $content . now()) . '.webp';
-            Storage::disk("public")->put("images/press/" . $fileName, $content);
+            $fileName = $this->uploadFile($request->file('cover'), "/press/");
         }
 
         $hasLogo = $request->logo;
         if ($hasLogo) {
             Storage::disk('public')->delete("images/press/" . $press->logo);
-            $cont = file_get_contents($request->logo);
-            $logoName = hash("sha256", $cont . now()) . ".webp";
-            Storage::disk("public")->put("images/press/" . $logoName, $cont);
+            $logoName = $this->uploadFile($request->file('logo'), "/press/");
         }
 
         $press->update([
@@ -125,6 +118,7 @@ class PressController extends Controller
     {
         //
         Storage::disk("public")->delete("images/press/" . $press->cover);
+        Storage::disk("public")->delete("images/press/" . $press->logo);
         $press->delete();
 
         return redirect(route("press.index"));

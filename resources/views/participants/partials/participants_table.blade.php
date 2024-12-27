@@ -49,7 +49,7 @@ this.selectedSession = "";
             <div class="p-6 text-gray-900">
                 <div class="flex mb-3 items-center justify-between gap-4">
                     {{-- filters --}}
-                    <div class="flex items-center gap-4 w-[80%]">
+                    <div class="flex items-center gap-4">
                         <div class="w-1/3 flex items-center bg-gray-100 rounded-lg pl-2">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                 class="size-5">
@@ -96,22 +96,27 @@ this.selectedSession = "";
                         </button>
                     </div>
 
-                    <form action="{{ route('questions.export') }}" method="post">
-                        @csrf
-                        <button class="bg-black text-white px-3 py-2 rounded w-[10vw]">
-                            Export Questions
-                        </button>
-                    </form>
-                    <form action='{{ route('participant.export') }}' method="post">
-                        @csrf
-                        <input class="hidden" type="text" name="term" id="term" :value="searchQuery">
-                        <input class="hidden" type="text" name="step" id="step" :value="selectedStep">
-                        <input class="hidden" type="text" name="session" id="session"
-                            :value="infos && infos.length > 0 ? selectedSession : {{ $infoSession ? $infoSession->id : null }}">
-                        <button class="bg-black text-white px-3 py-2 rounded w-[10vw]">
-                            Export Students
-                        </button>
-                    </form>
+                    <div class="flex items-center gap-x-3">
+                        <form action="{{ route('questions.export') }}" method="post">
+                            @csrf
+
+                                <button class="bg-black px-2 py-1 rounded text-white">
+                                    Export Questions
+                                </button>
+
+                        </form>
+                        <form action='{{ route('participant.export') }}' method="post">
+                            @csrf
+                            <input class="hidden" type="text" name="term" id="term" :value="searchQuery">
+                            <input class="hidden" type="text" name="step" id="step" :value="selectedStep">
+                            <input class="hidden" type="text" name="session" id="session"
+                                :value="infos && infos.length > 0 ? selectedSession : {{ $infoSession ? $infoSession->id : null }}">
+                            <button class="bg-black px-2 py-1 rounded text-white ">
+                                Export Students
+                            </button>
+                        </form>
+                    </div>
+
                 </div>
 
                 <table class="w-full text-center">

@@ -35,7 +35,7 @@
                             action="{{ route('events.update', $event) }}" method="post" enctype="multipart/form-data">
                             @csrf
                             @method('PUT')
-                            <p class="text-[20px] md:text-[25px] font-bold">Update Event</p>
+                            {{-- <p class="text-[20px] md:text-[25px] font-bold">Update Event</p> --}}
     
                             <div x-data="{ tab: 'English' }" class="w-full flex flex-col items-center">
                                 {{-- Language buttons --}}

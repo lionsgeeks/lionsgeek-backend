@@ -24,7 +24,7 @@
                         <button type="submit" class=" px-4 py-2  rounded-lg bg-black text-white">Submit</button>
                         <button form="deletegallery" type="submit" class="px-4 py-2 font-semibold rounded-lg bg-red-500 text-white">Delete resource</button>    
                     </div>
-                    <p class="text-[25px] font-bold">Update Gallery</p>
+                    {{-- <p class="text-[25px] font-bold">Update Gallery</p> --}}
                     <div x-data="{ tab: 'English' }" class="w-[100%]  flex flex-col items-center ">
                         {{-- Language buttons --}}
                         <div class=" bg-gray-200  rounded-lg flex items-center justify-center gap-2 p-2 w-[95%] overflow-x-auto">

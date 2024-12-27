@@ -20,11 +20,11 @@
                 action="{{ route('press.update', $press) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
-                <div class="flex justify-end gap-x-4 px-5 w-full">
+                <div class="flex justify-end gap-x-4 px-5 py-1 w-full">
                     <button form="updateform" class=" px-4 py-2  rounded-lg bg-black text-white">Submit</button>
                     <button form="deleteform" type="submit" class="px-4 py-2 font-semibold rounded-lg bg-red-500 text-white">Delete resource</button>
                 </div>
-                <p class="text-[25px] font-bold">Update Press</p>
+                {{-- <p class="text-[25px] font-bold">Update Press</p> --}}
 
                     <div x-data="{ tab: 'English' }" class="w-full flex flex-col items-center">
                         {{-- Language buttons --}}

@@ -61,14 +61,13 @@
                     </div>
                 </div>
 
-                <div class="flex justify-end mt-3">
-                    <button type="button" onclick="translateAndPopulate()" class="px-4 py-2 bg-blue-500 text-white rounded-md">Translate</button>
-                </div>
+               
 
                 <div class="px-4 py-3 sm:px-6 gap-3 sm:flex sm:flex-row-reverse">
-                    <button type="submit" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-alpha text-base font-medium text-black hover:bg-gray-800 hover:text-alpha sm:ml-3 sm:w-auto sm:text-sm">
+                    <button type="submit" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-black text-base font-medium text-white hover:bg-alpha hover:text-black sm:ml-3 sm:w-auto sm:text-sm">
                         Create Project
                     </button>
+                    <button type="button" onclick="translateAndPopulate()" class="px-4 py-2 bg-alpha text-white rounded-md">Translate</button>
                     <button onclick="closeModal('projectCreate')" type="button"
                         class="w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
                         Cancel

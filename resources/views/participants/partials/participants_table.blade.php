@@ -49,7 +49,7 @@ this.selectedSession = "";
             <div class="p-6 text-gray-900">
                 <div class="flex mb-3 items-center justify-between gap-4">
                     {{-- filters --}}
-                    <div class="flex items-center gap-4">
+                    <div class="flex items-center gap-4 w-[70%] ">
                         <div class="w-1/3 flex items-center bg-gray-100 rounded-lg pl-2">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                 class="size-5">
@@ -91,12 +91,12 @@ this.selectedSession = "";
                             </select>
                         @endif
 
-                        <button @click="resetFilter()" class="bg-black px-2 py-1 rounded text-white">
+                        <button @click="resetFilter()" class="bg-black px-2  py-1 rounded text-white">
                             Reset Filters
                         </button>
                     </div>
 
-                    <div class="flex items-center gap-x-3">
+                    <div class="flex items-center gap-x-3 ">
                         <form action="{{ route('questions.export') }}" method="post">
                             @csrf
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\ParticipantsExport;
+use App\Exports\QuestionsExport;
 use App\Mail\InterviewMail;
 use App\Mail\JungleMail;
 use App\Mail\SchoolMail;
@@ -149,6 +150,12 @@ class ParticipantController extends Controller
     {
         $date = (new DateTime())->format('F_d_Y');
         return (new ParticipantsExport($request->term, $request->step, $request->session))->download($date . '_participants.xlsx');
+    }
+
+    public function questionsExport()
+    {
+        $date = (new DateTime())->format('F_d_Y');
+        return Excel::download(new QuestionsExport, $date . '_questions.xlsx');
     }
 
 

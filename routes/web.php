@@ -105,6 +105,7 @@ Route::middleware('auth')->group(function () {
     Route::post('coworkings/export/', [CoworkingController::class, 'export'])->name('coworking.export');
     Route::post('contact/export/', [ContactController::class, 'export'])->name('contact.export');
     Route::post('participant/export', [ParticipantController::class, 'export'])->name('participant.export');
+    Route::post('questions/export', [ParticipantController::class, 'questionsExport'])->name('questions.export');
 
     // Press
     // Route::get("/press",[PressController::class,'index'])->name("press.index");

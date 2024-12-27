@@ -96,14 +96,20 @@ this.selectedSession = "";
                         </button>
                     </div>
 
+                    <form action="{{ route('questions.export') }}" method="post">
+                        @csrf
+                        <button class="bg-black text-white px-3 py-2 rounded w-[10vw]">
+                            Export Questions
+                        </button>
+                    </form>
                     <form action='{{ route('participant.export') }}' method="post">
                         @csrf
                         <input class="hidden" type="text" name="term" id="term" :value="searchQuery">
                         <input class="hidden" type="text" name="step" id="step" :value="selectedStep">
                         <input class="hidden" type="text" name="session" id="session"
                             :value="infos && infos.length > 0 ? selectedSession : {{ $infoSession ? $infoSession->id : null }}">
-                        <button class="bg-black text-white px-4 py-1 rounded">
-                            Export Excel
+                        <button class="bg-black text-white px-3 py-2 rounded w-[10vw]">
+                            Export Students
                         </button>
                     </form>
                 </div>

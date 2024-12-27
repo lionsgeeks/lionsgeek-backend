@@ -177,8 +177,8 @@
 
                                         <div class="flex items-center justify-between">
                                             <h1 class="text-2xl font-bold mb-2">Frequent Questions:</h1>
-                                            <button type="submit"
-                                                class="mt-4 px-2 py-1 bg-black text-white rounded">Save</button>
+                                                <button type="submit"
+                                                class="px-3 py-1 bg-black text-white rounded">Save</button>
                                         </div>
 
                                         <template x-for="(section, index) in sections" :key="section.title">

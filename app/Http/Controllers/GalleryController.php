@@ -63,7 +63,7 @@ class GalleryController extends Controller
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $file) {
 
-                $fileName = $this->uploadFile($file, "/gallery/");
+                $fileName = $this->uploadFile($file, "/");
                 // Save each image to the database
                 $gallery->images()->create([
                     'path' => $fileName

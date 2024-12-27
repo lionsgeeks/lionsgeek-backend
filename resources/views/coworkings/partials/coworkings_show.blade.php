@@ -10,7 +10,7 @@
             <div class="bg-white table overflow-hidden shadow-sm sm:rounded-lg ">
                 <div class="p-6 text-gray-900 flex flex-col gap-y-3">
                     <div class="flex justify-end gap-x-2 items-center ">
-                        @if ($coworking->status == '2')
+                        @if ($coworking->status == '2' || $coworking->status == '0' )
                             <form method="POST" :action="`{{ route('coworkings.update', '') }}/${cow.id}`"
                                 class="flex items-center justify-center gap-x-2 mt-2">
                                 @csrf

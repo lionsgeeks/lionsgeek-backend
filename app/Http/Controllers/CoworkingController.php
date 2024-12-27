@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\CoworkingsExport;
 use App\Mail\CoworkingActionMailer;
+use App\Models\Contact;
 use App\Models\Coworking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -14,7 +15,10 @@ class CoworkingController extends Controller
     public function index()
     {
         $coworkings = Coworking::latest()->get();
-        return view('coworkings.coworkings', compact('coworkings'));
+        $pending = Coworking::where('status', '0')->get(); 
+        $notread = Contact::latest()->get();
+        $notifications = $pending->merge($notread)->sortByDesc('created_at');
+        return view('coworkings.coworkings', compact('coworkings' , 'pending' , 'notifications' ));
     }
 
     public function show(Coworking $coworking)
@@ -31,6 +35,8 @@ class CoworkingController extends Controller
                 "status" => "1"
             ]);
             Mail::to($coworking->email)->send(new CoworkingActionMailer($coworking->full_name));
+            session()->increment('pending_count'); 
+
         }else{
             $coworking->update([
                 "status" => "2"
@@ -52,4 +58,5 @@ class CoworkingController extends Controller
     {
         return Excel::download(new CoworkingsExport, 'coworking.xlsx');
     }
+    
 }

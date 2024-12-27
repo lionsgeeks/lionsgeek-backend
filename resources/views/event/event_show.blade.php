@@ -26,7 +26,9 @@
 
     <div class="w-full min-h-screen flex flex-col overflow-y-auto">
         <div class="bg-slate-100 p-4 md:p-[2rem] gap-4 md:gap-[1.6rem] flex flex-col items-center overflow-y-auto w-full">
-            <form class="flex flex-col items-center justify-center py-4 md:py-6 w-full bg-white rounded-[20px] gap-4 md:gap-5"
+            <div class="w-full bg-white">
+                <div class="w">
+                    <form class="flex flex-col items-center justify-center py-4 md:py-6 w-full bg-white rounded-[20px] gap-4 md:gap-5"
                 action="{{ route('events.update', $event) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
@@ -243,6 +245,8 @@
                 </div>
 
             </form>
+                </div>
+            </div>
         </div>
     </div>
 </x-app-layout>

@@ -14,12 +14,12 @@
                         {{ Auth::user()->name }},</h1>
                     <div>
                         <button onclick="openModal('modalAdmin')"
-                            class="lg:px-6 px-2 py-2 bg-black text-white text-base font-medium rounded-md shadow hover:bg-alpha  transition">
+                            class="lg:px-6 px-2 py-2 bg-black text-white text-base font-medium rounded-md shadow hover:bg-alpha hover:text-black  transition">
                             Add Admin
                         </button>
                         @include('layouts.AdminModal')
                         <button
-                            class="lg:px-6 px-2 py-2 bg-black text-white text-base font-medium rounded-md shadow hover:bg-alpha  transition">
+                            class="lg:px-6 px-2 py-2 bg-black text-white text-base font-medium rounded-md shadow hover:bg-alpha hover:text-black  transition">
                             <a href="{{ route('press.create') }}">Add Press</a>
                         </button>
 
@@ -212,7 +212,7 @@
 
                 <div class="w-ful grid lg:grid-cols-2 grid-cols-1 gap-x-4 lg:gap-y-0 gap-y-4 ">
                     <div class=" shadow-md rounded-lg bg-white ">
-                        @if ($pendingCoworkings->count() > 0)
+                        @if ($pendingCoworkings->count() < 0)
                             <div x-data='{
                         cows: {{ $pendingCoworkings }},
                         searchQuery: "",
@@ -360,8 +360,8 @@
                             </div>
                         @endif
                     </div>
-                    <div class=" bg-white  shadow-md  rounded-lg">
-                        @if ($upcomingEvents->count() > 0)
+                    <div class=" bg-white  shadow-md py-4  rounded-lg">
+                        @if ($upcomingEvents->count() < 0)
                             <div class=" overflow-hidden  sm:rounded-lg">
 
                                 <div class="p-6 text-gray-900 ">
@@ -429,7 +429,7 @@
                     </div>
                 </div>
 
-                <div class="w-full  flex flex-col gap-y-2 bg-white p-4 rounded-lg">
+                <div class="w-full  flex flex-col shadow-md gap-y-2 bg-white p-4 rounded-lg">
 
                     @if ($blogs->count() > 0)
 

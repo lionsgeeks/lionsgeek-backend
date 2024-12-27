@@ -4,16 +4,20 @@
             {{ __('Events') }}
         </h2>
 
-        <a href="{{ route('events.create') }}">
-            <button
-                class="{{ $events->count() == 0 ? 'hidden' : '' }} text-black bg-alpha border-2 border-alpha hover:bg-black hover:text-alpha font-bold rounded-lg px-4 py-2   transition duration-150">
-                <span class="text-lg font-bold">+</span> Create a New Event
-            </button>
-        </a>
     </x-slot>
-
+    
     <div class="py-12 md:px-10 px-4">
+        
         <div class=" {{ $events->count() == 0 ? 'h-[70vh]' : 'min-h-[70vh]' }} bg-white rounded-lg p-6  w-[100%] px-8 ">
+            <div class="flex justify-end mb-6">
+
+                <a href="{{ route('events.create') }}">
+                    <button
+                        class="{{ $events->count() == 0 ? 'hidden' : '' }} text-white bg-black  hover:bg-alpha hover:text-black font-bold rounded-lg px-4 py-2   transition duration-150">
+                        <span class="text-lg font-bold">+</span> Create a New Event
+                    </button>
+                </a>
+            </div>
             @if ($events->count() == 0)
                 <div class="h-[100%] bg-white flex rounded-lg items-center justify-center w-full">
                     <div class="text-center">
@@ -28,7 +32,7 @@
                     </div>
                 </div>
             @endif
-            <div class="md:flex hidden flex-wrap gap-x-[calc(5%/2)] gap-y-4  ">
+            <div class="md:flex hidden flex-wrap gap-x-[calc(5%/2)] gap-y-4   ">
                 @foreach ($events as $event)
                     {{-- <div
                         class="w-[calc(95%/4)] flex flex-col overflow-hidden text-nowrap gap-3 h-fit px-[1rem] py-[1rem] rounded-[16px]  bg-[#f9f9f9]">

@@ -84,10 +84,10 @@ class ParticipantController extends Controller
 
         // check if the requested image is different from the already stored image
         if ($request->image !== $participant->image) {
-            Storage::disk('public')->delete('images/' . $participant->image);
+            Storage::disk('public')->delete('images/participants' . $participant->image);
             $image = $request->file('image');
             $imageName = time() . '_' .  $image->getClientOriginalName();
-            $image->storeAs('images', $imageName, 'public');
+            $image->storeAs('images/participants', $imageName, 'public');
             $participant->update([
                 'image' => $imageName,
             ]);
@@ -164,7 +164,14 @@ class ParticipantController extends Controller
         $formation = strtolower($participant->infoSession->formation);
         $school = $formation . "_school";
 
-        if ($participant->current_step == "interview") {
+        if ($action == "daz") {
+            $participant->update([
+                'current_step' => 'interview_pending'
+            ]);
+            return back();
+        }
+
+        if ($participant->current_step == "interview" || $participant->current_step == "interview_pending") {
             $participant->update([
                 "current_step" => $action == "next" ? "jungle" : "interview_failed",
             ]);
@@ -173,16 +180,17 @@ class ParticipantController extends Controller
                 "current_step" => $action == "next" ? $school : "jungle" . "_failed",
             ]);
         }
-
         return back();
+
     }
 
     public function toInterview(Request $request)
     {
-        // dd($request);
-        $candidats = Participant::where('info_session_id', $request->infosession_id)->where('is_visited', true)->get();
-        $divided = ceil(count($candidats) / count($request->times));
-        foreach ($request->times as $time) {
+        $candidats = Participant::where('info_session_id', $request->infosession_id)->where('current_step', 'interview')->get();
+        dd($request->all());
+        $divided = ceil($candidats->count() / count($request->dates));
+        foreach ($request->dates as $time) {
+            // dd($time);
             $group = $candidats->splice(0, $divided);
             foreach ($group as $candidat) {
                 $fullName = $candidat->full_name;

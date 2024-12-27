@@ -24,6 +24,7 @@ Route::post("/attendence/create", [AttendenceController::class, "store"]);
 Route::get("/events", [AttendenceController::class, "show"]);
 
 Route::get('/blogs', [BlogController::class, 'index']);
+Route::get('/press', [BlogController::class, 'press']);
 Route::post('/contact', [ContactController::class, 'store']);
 Route::post('/booking/store', [BookingController::class, 'store']);
 
@@ -34,6 +35,8 @@ Route::post('/infosession', [InfoSessionController::class, 'store']);
 Route::post('/participate', [ContactController::class, 'participate']);
 Route::get('/infosessions', [InfoSessionController::class, 'index']);
 Route::put('/validate-invitation', [InfoSessionController::class,'validateParticipant']);
+Route::get('/session-data', [InfoSessionController::class,'infoData']);
+Route::get('/profile-data', [InfoSessionController::class,'profileData']);
 Route::post('/session-photo', [ParticipantController::class,'setPhoto']);
 
 Route::get("/galleries",[GalleryController::class,"index"]);

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->json("name");
             $table->string("cover");
             $table->string("link");
+            $table->string('logo');
             $table->timestamps();
         });
     }

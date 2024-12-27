@@ -10,8 +10,18 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="flex items-center justify-end w-full gap-2 p-2">
 
+                    @if ($participant->current_step == 'interview')
+                        <form action="{{ route('participant.step', $participant) }}" method="post">
+                            @csrf
+                            <button type="submit" name="action" value="daz"
+                                class="bg-black text-white py-2 px-4 rounded">
+                                Pending
+                            </button>
+                        </form>
+                    @endif
+
                     {{-- if the participant failed any step, hide this form --}}
-                    @if (!str_contains($participant->current_step, 'fail') && !str_contains($participant->current_step, 'info'))
+                    @if (!str_contains($participant->current_step, 'fail') && !str_contains($participant->current_step, 'info') && !str_contains($participant->current_step, 'school'))
                         <form action="{{ route('participant.step', $participant) }}" method="post">
                             @csrf
                             <button type="submit" name="action" value="deny"
@@ -34,7 +44,7 @@
                                 <h1 class="text-2xl font-bold mb-2">User Profile</h1>
                                 <form action="{{ route('participants.edit', $participant) }}" method="post">
                                     @csrf
-                                    @method("GET")
+                                    @method('GET')
                                     <button class="bg-black text-white rounded px-2 py-1" type="submit">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                             stroke-width="1.5" stroke="currentColor" class="size-4">
@@ -48,7 +58,7 @@
 
                             <div class="flex items- gap-7 ">
                                 @if ($participant->image)
-                                    <img src="{{asset('storage/images/' . $participant->image)}}"
+                                    <img src="{{asset('storage/images/participants/' . $participant->image)}}"
                                     width="150" class="rounded-full aspect-square"
                                     alt="">
                                 @else
@@ -190,8 +200,7 @@
                                                                 <input class="w-full rounded focus:ring-black"
                                                                     :name="`${question.text.toLowerCase().replace(/ /g, '_').replace('?','')}`"
                                                                     type="text"
-                                                                    value="{{ old('interest_in_joining_lionsgeek', 'hey hey') }}"
-                                                                    {{-- :placeholder="`${frequents[question.text.toLowerCase().replace(/ /g, '_').replace('?','')]}`" --}}
+                                                                    :placeholder="`${frequents[question.text.toLowerCase().replace(/ /g, '_').replace('?','')]}`"
                                                                     x-model="answers[`${section.title.toLowerCase()}_${question.id}`]">
 
                                                             </div>

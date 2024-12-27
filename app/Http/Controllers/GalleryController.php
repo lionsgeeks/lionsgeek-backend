@@ -45,28 +45,13 @@ class GalleryController extends Controller
             "description.fr" => "string|required",
             "description.ar" => "string|required",
 
-            "couverture" => "required|file|image|mimes:jpeg,png,jpg,gif",
+            "couverture" => "required|file|image|mimes:jpeg,png,jpg",
 
             "images.*" => "file|image|mimes:jpeg,png,jpg"
         ]);
 
-        $coverFile = $request->couverture;
-        $size_in_mb = ($coverFile->getSize() / 1024) / 1024;
-        if ($size_in_mb < 5) {
-            $quality = 70;
-        } elseif ($size_in_mb < 10) {
-            $quality = 50;
-        } else {
-            $quality = 20;
-        }
-
-        // hello, ana oussama: hada huwa lcode dial image compression.
-        // TODO: clean the code bach mayb9ach yt3awed f create/update dial other controllers
-        $content = file_get_contents($coverFile);
-        $fileName = hash("sha256", $content) . '.webp';
-        $path = public_path('storage/images') . "/" . $fileName;
-        $manager = new ImageManager(new Driver());
-        $manager->read($content)->encodeByMediaType('image/jpeg', progressive: true, quality: $quality)->save($path);
+        // for more information about this function, look at Controller.php
+        $fileName = $this->uploadFile($request->file('couverture'));
 
         $gallery =  Gallery::create([
             "title" => $request->input("title"),
@@ -77,22 +62,8 @@ class GalleryController extends Controller
         // ? Multiple images store
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $file) {
-                $content = file_get_contents($file) . Carbon::now();
-                $fileName = hash("sha256", $content) . '.webp';
-                $path = public_path('storage/images') . "/" . $fileName;
 
-                $size_in_mb = ($file->getSize() / 1024) / 1024;
-                if ($size_in_mb < 5) {
-                    $quality = 70;
-                } elseif ($size_in_mb < 10) {
-                    $quality = 50;
-                } else {
-                    $quality = 20;
-                }
-
-                $manager->read($content)->encodeByMediaType('image/jpeg', progressive: true, quality: $quality)->save($path);
-                // Storage::disk("public")->put("images/" . $fileName, $content);
-
+                $fileName = $this->uploadFile($file);
                 // Save each image to the database
                 $gallery->images()->create([
                     'path' => $fileName
@@ -162,8 +133,6 @@ class GalleryController extends Controller
             $path = public_path('storage/images') . "/" . $fileName;
             $manager = new ImageManager(new Driver());
             $manager->read($content)->encodeByMediaType('image/jpeg', progressive: true, quality: $quality)->save($path);
-
-
         }
 
         $gallery->update([

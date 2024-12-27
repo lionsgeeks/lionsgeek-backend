@@ -10,7 +10,8 @@ class Press extends Model
     protected $fillable = [
         "name",
         "cover",
-        "link"
+        "link",
+        "logo",
     ];
     protected $casts = [
         "name"=> 'object',

@@ -4,15 +4,17 @@
             {{ __('Press') }}
         </h2>
 
-        <a href="{{ route('press.create') }}">
-            <button
-                class="{{ $presses->count() == 0 ? 'hidden' : '' }} bg-alpha text-black border-2 border-alpha rounded-lg px-4 py-2 hover:bg-black hover:text-alpha  transition duration-150">
-                Create a Press
-            </button>
-        </a>
     </x-slot>
     <div class="py-12 md:px-10 px-4">
         <div class=" {{ $presses->count() == 0 ? 'h-[70vh]' : 'min-h-[70vh]' }} bg-white rounded-lg p-6  w-[100%] px-8 ">
+            <div class="flex justify-end">
+                <a href="{{ route('press.create') }}">
+                    <button
+                        class="{{ $presses->count() == 0 ? 'hidden' : '' }} bg-black text-white rounded-lg px-4 py-2 hover:bg-alpha hover:text-black  transition duration-150">
+                        Create a Press
+                    </button>
+                </a>
+            </div>
             @if ($presses->count() == 0)
                 <div class="h-[100%] bg-white flex rounded-lg items-center justify-center w-full">
                     <div class="text-center">

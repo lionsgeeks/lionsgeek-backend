@@ -38,13 +38,12 @@
                             <p class="text-[20px] md:text-[25px] font-bold">Update Event</p>
     
                             <div x-data="{ tab: 'English' }" class="w-full flex flex-col items-center">
-                                {{-- Rest of the form content remains exactly the same --}}
                                 {{-- Language buttons --}}
-                                <div class="flex items-center justify-center gap-2 p-2 w-full overflow-x-auto">
+                                <div class=" bg-gray-200  rounded-lg flex items-center justify-center gap-2 p-2 w-[95%] overflow-x-auto">
                                     @foreach (['English', 'Français', 'العربية'] as $language)
-                                        <button type="button"
-                                            class="px-[1.5rem] md:px-[3rem] py-[0.5rem] bg-[#f3f4f6] w-[32%] rounded-lg whitespace-nowrap text-sm md:text-base"
-                                            @click="tab = '{{ $language }}' ">
+                                        <button @click="tab = '{{ $language }}'"
+                                            :class="{ 'bg-white text-black': tab === '{{ $language }}', 'bg-transparent text-black': tab !== '{{ $language }}' }"
+                                            type="button" class="w-1/2 rounded-md font-medium p-1">
                                             {{ $language }}
                                         </button>
                                     @endforeach
@@ -200,7 +199,7 @@
                     </div>
                     <div class="w-[42%] max-h-[60rem] overflow-y-auto">
                         {{-- Participants --}}
-                        <div class="flex flex-col gap-3 w-full mt-6" x-data="{
+                        <div class="flex flex-col gap-3 w-full mt-4" x-data="{
                             searchQuery: '',
                             bookings: {{ $event->bookings }},
                             filteredBookings() {

@@ -3,12 +3,11 @@
         <h2 class="font-semibold text-xl leading-tight">
             Editing {{ $gallery->title->en }}
         </h2>
-        <form action="{{ route('gallery.destroy', $gallery) }}" method="post" enctype="multipart/form-data"
+        <form id="deletegallery" action="{{ route('gallery.destroy', $gallery) }}" method="post" enctype="multipart/form-data"
             onsubmit="this.submitButton.disabled =true">
             @csrf
             @method('DELETE')
-            <button type="submit" name="submitButton"
-                class="px-4 py-2 font-semibold rounded-[14px] bg-red-500 text-white">Delete resource</button>
+            
         </form>
     </x-slot>
 
@@ -21,14 +20,18 @@
                     action="{{ route('gallery.update', $gallery) }}" method="post" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
+                    <div class="flex justify-end w-full px-4 gap-x-4">
+                        <button type="submit" class=" px-4 py-2  rounded-lg bg-black text-white">Submit</button>
+                        <button form="deletegallery" type="submit" class="px-4 py-2 font-semibold rounded-lg bg-red-500 text-white">Delete resource</button>    
+                    </div>
                     <p class="text-[25px] font-bold">Update Gallery</p>
-
                     <div x-data="{ tab: 'English' }" class="w-[100%]  flex flex-col items-center ">
                         {{-- Language buttons --}}
-                        <div class="flex items-center justify-center gap-2  w-[100%] px-2 ">
+                        <div class=" bg-gray-200  rounded-lg flex items-center justify-center gap-2 p-2 w-[95%] overflow-x-auto">
                             @foreach (['English', 'Français', 'العربية'] as $language)
-                                <button type="button" class="p-2 w-1/3 bg-[#f3f4f6] rounded-lg"
-                                    @click="tab = '{{ $language }}' ">
+                                <button @click="tab = '{{ $language }}'"
+                                    :class="{ 'bg-white text-black': tab === '{{ $language }}', 'bg-transparent text-black': tab !== '{{ $language }}' }"
+                                    type="button" class="w-1/2 rounded-md font-medium p-1">
                                     {{ $language }}
                                 </button>
                             @endforeach
@@ -87,7 +90,7 @@
 
                             {{-- Cover --}}
 
-                            <div class="flex flex-col gap-1">
+                            {{-- <div class="flex flex-col gap-1">
                                 <div class="">
                                     <p x-show="tab=== 'English' " class="">Cover</p>
                                     <p x-show="tab=== 'Français' " class="">Couverture</p>
@@ -106,12 +109,37 @@
                                 </div>
 
 
-                            </div>
+                            </div> --}}
 
+                            <div class="flex flex-col gap-1" x-data="{
+                                selectedImage: '{{asset('storage/images/gallery/' . $gallery->couverture) }}',
+                                updateImage(event) {
+                                    const file = event.target.files[0];
+                                    if (file) {
+                                        this.selectedImage = URL.createObjectURL(file);
+                                    }
+                                }
+                            }">
+                                <div>
+                                    <p x-show="tab === 'English'" class="">Cover</p>
+                                    <p x-show="tab === 'Français'" class="">Couverture</p>
+                                    <p x-show="tab === 'العربية'" class="text-end">الغطاء</p>
+                                </div>
+                                <div class="h-48 md:h-96 relative rounded-[10px] flex items-center justify-center">
+                                    <h1 class="text-white absolute font-semibold z-30">+ Update the cover</h1>
+                                    <div class="w-full h-full bg-black/50 absolute top-0 z-20 rounded-[10px]"></div>
+                                    <input name="couverture"
+                                    onchange="imagesPlaceholder.textContent = [...this.files].map(f => f.name).join(', ')"
+                                    accept="image/*" type="file"
+                                        class="w-full rounded-[10px] h-full absolute top-0 opacity-0 cursor-pointer z-30"
+                                        @change="updateImage">
+                                    <img class="w-full h-full object-cover rounded-[10px]" :src="selectedImage"
+                                        alt="Selected Cover">
+                                </div>
+                            </div>
                         </div>
 
-                        <button type="submit"
-                            class="w-[92%] py-3  rounded-[14px] bg-black text-white">Submit</button>
+                        
                     </div>
                 </form>
             </div>
@@ -147,7 +175,7 @@
                             @method('DELETE')
                             <div class="w-[100%] relative group">
                                 <img class="w-[100%] group-hover:opacity-50 transition duration-300 aspect-square object-cover rounded border"
-                                    src="{{ asset('storage/images/' . $image->path) }}" alt="">
+                                    src="{{ asset('storage/images/gallery/' . $image->path) }}" alt="">
                                 <button name="submitButton" type="submit"
                                     class="w-[100%] h-[100%]  absolute inset-0 items-center justify-center hidden group-hover:flex transition duration-300 ">
                                     <svg class=" w-8 rounded bg-red-600 " xmlns="http://www.w3.org/2000/svg"

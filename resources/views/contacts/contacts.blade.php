@@ -30,7 +30,7 @@
                                     <p class="text-sm font-bold">{{ $contacts->count() }} Converstation,
                                         {{ $unreadMessages }} Unread</p>
                                 </div>
-                                <div class="md:h-[435px]  overflow-y-auto">
+                                <div class="md:h-[466px]  overflow-y-auto">
                                     @foreach ($contacts as $key => $message)
                                         <div onclick="toggleHidden()" x-on:click='id = {{ $key }}'
                                             class="p-4  {{ $message->mark_as_read ? '' : 'bg-blue-100 border-b-2 hover:bg-blue-50' }} flex flex-col gap-y-2  text--700 w-full border-b hover:bg-gray-100 cursor-pointer">

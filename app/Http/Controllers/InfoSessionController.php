@@ -45,12 +45,13 @@ class InfoSessionController extends Controller
             'name' => 'required',
             'formation' => 'required',
             'start_date' => 'required',
-
+            'places' => 'required',
         ]);
         InfoSession::create([
             'name' => $request->name,
             'formation' => $request->formation,
             'start_date' => $request->start_date,
+            'places' => $request->places,
         ]);
         return back();
     }
@@ -64,6 +65,7 @@ class InfoSessionController extends Controller
             'start_date' => 'required',
             'isAvailable' => 'required',
             'isFinish' => 'required',
+            'places' => 'required',
         ]);
         $infoSession->update([
             'name' => $request->name,
@@ -71,6 +73,7 @@ class InfoSessionController extends Controller
             'start_date' => $request->start_date,
             'isAvailable' => filter_var($request->isAvailable, FILTER_VALIDATE_BOOLEAN),
             'isFinish' => filter_var($request->isFinish, FILTER_VALIDATE_BOOLEAN),
+            'places' => $request->places,
         ]);
         return back();
     }

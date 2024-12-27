@@ -95,7 +95,6 @@ class ContactController extends Controller
     //* session info sign up
     public function participate(Request $request)
     {
-
         $request->validate([
             'full_name' => 'required|string',
             'email' => 'required|string|email',
@@ -108,7 +107,14 @@ class ContactController extends Controller
             'motivation' => 'required|string',
             'source' => 'required|string',
         ]);
-        
+
+        $parts = Participant::where('info_session_id', $request->info_session_id)->count();
+        $infosession = InfoSession::where('id', $request->info_session_id)->first();
+        if ($parts + 1 > $infosession->places) {            
+            return response()->json([
+                'status' => 96,
+            ]);
+        }
 
         $checkUser = Participant::where('info_session_id', $request->info_session_id)
             ->where('email', $request->email)->first();
@@ -121,11 +127,9 @@ class ContactController extends Controller
 
         $time = Carbon::now();
         $code = $request->first_name . $request->last_name . $time->format('h:i:s');
-
         $birthObj = new DateTime($request->birthday);
         $currentDay = new DateTime();
         $age = $birthObj->diff($currentDay)->y;
-
 
         // create the participant
         $participant = Participant::create([
@@ -150,8 +154,6 @@ class ContactController extends Controller
         $satisfaction = Satisfaction::create([
             'participant_id' => $participant->id,
         ]);
-
-
 
         $data['full_name'] = $participant->full_name;
         $data['email'] = $participant->email;
@@ -178,19 +180,15 @@ class ContactController extends Controller
 
         Mail::to($participant->email)->send(new CodeMail($data, $image));
 
-        $parts = Participant::where('info_session_id', $request->info_session_id)->count();
-        $infosession = InfoSession::where('id', $request->info_session_id)->first();
-        if ($parts == 16) {
+        if ($parts + 1 == $infosession->places) {
             $infosession->update([
                 'isAvailable' => false
             ]);
-            return response()->json([
-                'status' => 'refresh'
-            ]);
         }
-        
         return response()->json([
-            'message' => 'success'
+            'message' => 'success',
+            'parts'=> $parts,
+            'places' => $infosession->places
         ]);
     }
 }

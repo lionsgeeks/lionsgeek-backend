@@ -45,8 +45,12 @@
                                             </select>
                                         </div>
                                         <div class="flex flex-col gap-3 items-start">
-                                            <label for="">First Session</label>
+                                            <label for="">Session Date</label>
                                             <input min="{{ now()->format('Y-m-d\TH:i') }}" class="w-full rounded" name="start_date" type="datetime-local">
+                                        </div>
+                                        <div class="flex flex-col gap-2 items-start">
+                                            <label for="">Places</label>
+                                            <input class="w-full rounded" name="places" placeholder="0" type="number">
                                         </div>
                                         <div class="px-4 py-3 sm:px-6 gap-3 sm:flex sm:flex-row-reverse">
                                             <button  type="submit"

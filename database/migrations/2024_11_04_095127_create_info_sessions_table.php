@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->enum('formation', ['Coding', 'Media']);
             $table->dateTime('start_date');
+            $table->integer('places');
             $table->boolean('isAvailable')->default(false);
             $table->boolean('isFinish')->default(false);
             $table->timestamps();

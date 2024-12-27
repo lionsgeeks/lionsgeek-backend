@@ -49,6 +49,7 @@
                 <div class="flex gap-3">
                     @include('info_session.partials.update_session_modal')
                     @include('participants.partials.interview_modal')
+                    @include('participants.partials.jungle_modal')
                     @include('participants.partials.school_modal')
                 </div>
             </div>

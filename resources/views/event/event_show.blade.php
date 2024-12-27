@@ -214,14 +214,14 @@
                             <p x-show="tab === 'Français'" class="text-xl font-bold">Participants</p>
                             <p x-show="tab === 'العربية'" class="text-xl font-bold text-end">المشاركين</p>
 
-                            <div class="mb-4">
+                            <div class="mb-3">
                                 <input type="text" x-model="searchQuery"
                                     placeholder="Search participants..."
                                     class="px-4 py-2 border border-gray-300 rounded-[10px] w-full">
                             </div>
 
                             <div class="overflow-x-auto">
-                                <table class="w-full text-left border border-gray-300 rounded-[10px]">
+                                <table class="w-full text-left border border-gray-300 rounded-lg">
                                     <thead>
                                         <tr class="bg-gray-100">
                                             <th class="px-2 md:px-4 py-2 font-medium text-gray-700 text-sm md:text-base">#</th>

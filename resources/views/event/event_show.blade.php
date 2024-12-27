@@ -9,7 +9,7 @@
         <div class="bg-slate-100 p-4 md:p-[2rem] gap-4 md:gap-[1.6rem] flex flex-col items-center overflow-y-auto w-full">
             <div class="w-full bg-white flex flex-col">
                 <div class="flex  justify-end items-center gap-3 m-3">
-                    <button form="updateForm" type="submit" class="w-full sm:w-auto px-4 sm:px-6 text-white py-2 sm:py-3 font-bold rounded-md bg-black hover:bg-gray-800 transition-all">
+                    <button form="updateForm" type="submit" class="w-full sm:w-auto px-4 sm:px-6 text-white py-1 sm:py-2 font-bold rounded-md bg-black hover:bg-gray-800 transition-all">
                         Update Event
                     </button>
                     <form
@@ -23,7 +23,7 @@
                         <button
                             name="submitBtn"
                             type="submit"
-                            class="w-full sm:w-auto px-4 sm:px-6 text-white py-2 sm:py-3 font-bold rounded-md bg-red-500 hover:bg-red-600 transition-all"
+                            class="w-full sm:w-auto px-4 sm:px-6 text-white py-1 sm:py-2 font-bold rounded-md bg-red-500 hover:bg-red-600 transition-all"
                         >
                             Delete Event
                         </button>
@@ -43,7 +43,7 @@
                                 <div class="flex items-center justify-center gap-2 p-2 w-full overflow-x-auto">
                                     @foreach (['English', 'Français', 'العربية'] as $language)
                                         <button type="button"
-                                            class="px-[1.5rem] md:px-[3rem] py-[0.5rem] bg-[#f3f4f6] w-[32%] rounded-[20px] whitespace-nowrap text-sm md:text-base"
+                                            class="px-[1.5rem] md:px-[3rem] py-[0.5rem] bg-[#f3f4f6] w-[32%] rounded-lg whitespace-nowrap text-sm md:text-base"
                                             @click="tab = '{{ $language }}' ">
                                             {{ $language }}
                                         </button>
@@ -245,104 +245,7 @@
                                                 </td>
                                             </tr>
                                         </template>
-                                        <template x-for="(booking, index) in filteredBookings()" :key="index">
-                                            <tr class="border-t border-gray-300 hover:bg-gray-50 transition">
-                                                <td class="px-2 md:px-4 py-2 text-gray-800 font-medium text-sm md:text-base" x-text="index + 1"></td>
-                                                <td class="px-2 md:px-4 py-2 text-gray-800 text-sm md:text-base" x-text="booking.name"></td>
-                                                <td class="px-2 md:px-4 py-2 text-gray-800 text-sm md:text-base" x-text="booking.email"></td>
-                                                <td class="px-2 md:px-4 hidden md:block py-2 text-gray-800 text-sm md:text-base"
-                                                    x-text="new Date(booking.created_at).toLocaleDateString('en-GB', {
-                                                        year: 'numeric',
-                                                        month: 'numeric',
-                                                        day: 'numeric'
-                                                    })">
-                                                </td>
-                                            </tr>
-                                        </template>
-                                        <template x-for="(booking, index) in filteredBookings()" :key="index">
-                                            <tr class="border-t border-gray-300 hover:bg-gray-50 transition">
-                                                <td class="px-2 md:px-4 py-2 text-gray-800 font-medium text-sm md:text-base" x-text="index + 1"></td>
-                                                <td class="px-2 md:px-4 py-2 text-gray-800 text-sm md:text-base" x-text="booking.name"></td>
-                                                <td class="px-2 md:px-4 py-2 text-gray-800 text-sm md:text-base" x-text="booking.email"></td>
-                                                <td class="px-2 md:px-4 hidden md:block py-2 text-gray-800 text-sm md:text-base"
-                                                    x-text="new Date(booking.created_at).toLocaleDateString('en-GB', {
-                                                        year: 'numeric',
-                                                        month: 'numeric',
-                                                        day: 'numeric'
-                                                    })">
-                                                </td>
-                                            </tr>
-                                        </template>
-                                        <template x-for="(booking, index) in filteredBookings()" :key="index">
-                                            <tr class="border-t border-gray-300 hover:bg-gray-50 transition">
-                                                <td class="px-2 md:px-4 py-2 text-gray-800 font-medium text-sm md:text-base" x-text="index + 1"></td>
-                                                <td class="px-2 md:px-4 py-2 text-gray-800 text-sm md:text-base" x-text="booking.name"></td>
-                                                <td class="px-2 md:px-4 py-2 text-gray-800 text-sm md:text-base" x-text="booking.email"></td>
-                                                <td class="px-2 md:px-4 hidden md:block py-2 text-gray-800 text-sm md:text-base"
-                                                    x-text="new Date(booking.created_at).toLocaleDateString('en-GB', {
-                                                        year: 'numeric',
-                                                        month: 'numeric',
-                                                        day: 'numeric'
-                                                    })">
-                                                </td>
-                                            </tr>
-                                        </template>
-                                        <template x-for="(booking, index) in filteredBookings()" :key="index">
-                                            <tr class="border-t border-gray-300 hover:bg-gray-50 transition">
-                                                <td class="px-2 md:px-4 py-2 text-gray-800 font-medium text-sm md:text-base" x-text="index + 1"></td>
-                                                <td class="px-2 md:px-4 py-2 text-gray-800 text-sm md:text-base" x-text="booking.name"></td>
-                                                <td class="px-2 md:px-4 py-2 text-gray-800 text-sm md:text-base" x-text="booking.email"></td>
-                                                <td class="px-2 md:px-4 hidden md:block py-2 text-gray-800 text-sm md:text-base"
-                                                    x-text="new Date(booking.created_at).toLocaleDateString('en-GB', {
-                                                        year: 'numeric',
-                                                        month: 'numeric',
-                                                        day: 'numeric'
-                                                    })">
-                                                </td>
-                                            </tr>
-                                        </template>
-                                        <template x-for="(booking, index) in filteredBookings()" :key="index">
-                                            <tr class="border-t border-gray-300 hover:bg-gray-50 transition">
-                                                <td class="px-2 md:px-4 py-2 text-gray-800 font-medium text-sm md:text-base" x-text="index + 1"></td>
-                                                <td class="px-2 md:px-4 py-2 text-gray-800 text-sm md:text-base" x-text="booking.name"></td>
-                                                <td class="px-2 md:px-4 py-2 text-gray-800 text-sm md:text-base" x-text="booking.email"></td>
-                                                <td class="px-2 md:px-4 hidden md:block py-2 text-gray-800 text-sm md:text-base"
-                                                    x-text="new Date(booking.created_at).toLocaleDateString('en-GB', {
-                                                        year: 'numeric',
-                                                        month: 'numeric',
-                                                        day: 'numeric'
-                                                    })">
-                                                </td>
-                                            </tr>
-                                        </template>
-                                        <template x-for="(booking, index) in filteredBookings()" :key="index">
-                                            <tr class="border-t border-gray-300 hover:bg-gray-50 transition">
-                                                <td class="px-2 md:px-4 py-2 text-gray-800 font-medium text-sm md:text-base" x-text="index + 1"></td>
-                                                <td class="px-2 md:px-4 py-2 text-gray-800 text-sm md:text-base" x-text="booking.name"></td>
-                                                <td class="px-2 md:px-4 py-2 text-gray-800 text-sm md:text-base" x-text="booking.email"></td>
-                                                <td class="px-2 md:px-4 hidden md:block py-2 text-gray-800 text-sm md:text-base"
-                                                    x-text="new Date(booking.created_at).toLocaleDateString('en-GB', {
-                                                        year: 'numeric',
-                                                        month: 'numeric',
-                                                        day: 'numeric'
-                                                    })">
-                                                </td>
-                                            </tr>
-                                        </template>
-                                        <template x-for="(booking, index) in filteredBookings()" :key="index">
-                                            <tr class="border-t border-gray-300 hover:bg-gray-50 transition">
-                                                <td class="px-2 md:px-4 py-2 text-gray-800 font-medium text-sm md:text-base" x-text="index + 1"></td>
-                                                <td class="px-2 md:px-4 py-2 text-gray-800 text-sm md:text-base" x-text="booking.name"></td>
-                                                <td class="px-2 md:px-4 py-2 text-gray-800 text-sm md:text-base" x-text="booking.email"></td>
-                                                <td class="px-2 md:px-4 hidden md:block py-2 text-gray-800 text-sm md:text-base"
-                                                    x-text="new Date(booking.created_at).toLocaleDateString('en-GB', {
-                                                        year: 'numeric',
-                                                        month: 'numeric',
-                                                        day: 'numeric'
-                                                    })">
-                                                </td>
-                                            </tr>
-                                        </template>
+                                      
                                     </tbody>
                                     <template x-for="(booking, index) in filteredBookings()" :key="index">
                                         <tr class="border-t border-gray-300 hover:bg-gray-50 transition">

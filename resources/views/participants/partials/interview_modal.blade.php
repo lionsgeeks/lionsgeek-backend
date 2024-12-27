@@ -4,7 +4,8 @@
         <button @click="interviewModal = true" class="w-full bg-black px-2 py-1 rounded font-medium text-white ">
             Interview </button>
         <!-- Background overlay -->
-        <div x-show="interviewModal" class="fixed inset-0 transition-opacity" aria-hidden="true" @click="interviewModal = false">
+        <div x-show="interviewModal" class="fixed inset-0 transition-opacity" aria-hidden="true"
+            @click="interviewModal = false">
             <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
         </div>
         <!-- Modal -->
@@ -19,47 +20,72 @@
                 <!-- Modal panel -->
                 <div class="w-full inline-block align-bottom bg-white max-h-[90vh] overflow-y-auto rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
                     role="dialog" aria-modal="true" aria-labelledby="modal-headline">
-                    <div class="bg-white w-full px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div class="w-full px-4 pt-5 pb-4 sm:p-2 sm:pb-4 bg-white">
                         <!-- Modal content -->
-                        <div class="">
+                        <div class=" p-2">
                             <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                                <div class="mt-2">
-                                    <div class="sm:flex sm:items-start">
-                                        <div class="sm:mt-0 sm:text-left">
-                                            <h3 class="text-lg leading-6 font-bold text-gray-900" id="modal-headline">
+                                <div class="mt-2 flex flex-col gap-y-8  pt-4">
+                                    {{-- <div class="sm:flex sm:items-start">
+                                        <div class="sm:mt-0 text-center w-full  ">
+                                            <h3 class="text-lg leading-6 ont-bold text-gray-900" id="modal-headline">
                                                 Send Invitation to Participants </h3>
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <form x-data="{ times: [] }" action="{{ route('participant.interview') }}"
-                                        method="POST" class="flex flex-col gap-3">
+                                        method="POST" class="flex flex-col gap-3 ">
                                         @csrf
-                                        <div class="flex flex-col gap-3 py-3">
-                                            <label for="">Choose Interview Date </label>
-                                            <input min="{{Carbon\Carbon::now()->format('Y-m-d')}}" type="date" name="date">
+                                        <div class="w-full flex items-center justify-between ">
+                                            <h3 class="text-lg leading-6 ont-bold text-gray-900" id="modal-headline">
+                                                Send Invitation to Participants </h3>
+                                                <button type="button" @click="times.push({ id: Date.now() });"
+                                                    class="px-4 py-2 bg-black rounded-lg text-white">Add Day</button>
                                         </div>
-                                        <div>
-                                            <label for="">Choose Interview Time</label>
-                                            <p class="text-sm text-slate-500 mb-4">Based on the chosen times, the groups will
-                                                be divided.</p>
-                                            <button type="button" @click="times.push({ id: Date.now() });"
-                                                class="px-3 py-2 bg-black rounded-md text-white">Add time</button>
+                                        <div class="flex justify-between   h-[8vh] bg-slate-50   items-center border rounded-lg">
+
+
+                                            
+                                            <h1
+                                                class="rounded-full rounded-e-none  text-gray-500   flex items-center border-r p-2">
+                                                Choose a Date </h1>
+                                            {{-- <input min="{{Carbon\Carbon::now()->format('Y-m-d')}}" type="date" name="date"> --}}
+                                            <input value="{{ old('start_date', $infoSession->start_date) }}"
+                                                class="   border-0 bg-transparent  " name="dates[]" type="datetime-local"
+                                                min="{{ now()->format('Y-m-d\TH:i') }}">
+
+                                            <div class="  pe-4">
+                                                {{-- <label for="">Choose Interview Date</label>
+                                               <p class="text-sm text-slate-500 mb-4">Based on the chosen times, the groups will
+                                                   be divided.</p> --}}
+                                                {{-- <button type="button" @click="times.push({ id: Date.now() });"
+                                                    class="px-4 py-2 bg-alpha rounded-full text-white">Add Day</button> --}}
+                                            </div>
+                                            <input type="hidden" name="infosession_id" value="{{ $infoSession->id }}">
                                         </div>
-                                        <input type="hidden" name="infosession_id" value="{{ $infoSession->id }}">
-                                        <div>
+                                        <div >
                                             <template x-for="(time, index) in times" :key="time.id"
                                                 class="flex flex-col">
-                                                <div class="my-1 py-2 px-2 flex justify-between bg-slate-50">
-                                                    <input type="time" class="rounded" name="times[]">
-                                                    <button type="button" @click="times.splice(index, 1)">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                <div class="my-1    flex justify-between  bg-slate-50 h-[8vh]  items-center border rounded-full pe-4">
+                                                    <h1
+                                                    class=" text-center   rounded-full rounded-e-none  text-gray-500   flex items-center border-r p-2">
+                                                    Choose a Date </h1>
+                                                    <input :name="`dates[]`"
+                                                        value="{{ old('start_date', $infoSession->start_date) }}"
+                                                        class="  border-r border-t-0 border-b-0 border-l-0 border-gray-300 bg-transparent" type="datetime-local"
+                                                        :min="`{{ now()->format('Y-m-d\TH:i') }}`">
+                                                    <button type="button" @click="times.splice(index, 1)" class="px-4 py-2 bg-red-400 rounded-full text-white">
+                                                        {{-- <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                             viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                                                             class="size-5 cursor-pointer">
                                                             <path stroke-linecap="round" stroke-linejoin="round"
                                                                 d="M6 18 18 6M6 6l12 12" />
-                                                        </svg>
+                                                        </svg> --}}
+                                                        Remove
                                                     </button>
                                                 </div>
                                             </template>
+
+
+
                                         </div>
                                         <div class="px-4 py-3 sm:px-6 gap-3 sm:flex sm:flex-row-reverse">
                                             <button type="submit"

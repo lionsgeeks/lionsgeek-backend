@@ -2,7 +2,7 @@
     <div x-data="{ updateModal: false }">
         <!-- Button to open the modal -->
         <button @click="updateModal = true" class="w-full bg-black px-2 py-1 rounded font-medium text-white">
-            Update session </button>
+            Update  </button>
         <!-- Background overlay -->
         <div x-show="updateModal" class="fixed inset-0 transition-opacity" aria-hidden="true" @click="updateModal = false">
             <div class="absolute inset-0 bg-gray-500 opacity-75"></div>

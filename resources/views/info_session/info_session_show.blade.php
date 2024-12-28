@@ -11,11 +11,14 @@
                 Event
             </button>
         </a> --}}
-        @include('info_session.partials.delete-session_modal')
     </x-slot>
     <div class="p-10">
+        <div class="flex justify-end mb-5">
+            @include('info_session.partials.delete-session_modal')
+
+        </div>
         <div class="flex gap-4">
-            <div class="bg-white flex flex-col gap-5  font-bold w-1/3 px-5 py-8 shadow rounded-xl">
+            <div class="bg-white flex flex-col gap-5  font-bold w-1/4 px-5 py-8 shadow rounded-xl">
                 <div class="flex justify-between">
                     <h1 class="text-xl">Session</h1>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -26,7 +29,7 @@
                 </div>
                 <p>{{ $infoSession->name }}</p>
             </div>
-            <div class="bg-white flex flex-col gap-5 font-bold  w-1/3 px-5 py-8 shadow rounded-xl">
+            <div class="bg-white flex flex-col gap-5 font-bold  w-1/4 px-5 py-8 shadow rounded-xl">
                 <div class="flex justify-between">
                     <h1 class=" text-xl">Participants</h1>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -37,7 +40,7 @@
                 </div>
                 <p class="text-xl">{{ $infoSession->participants->count() }}</p>
             </div>
-            <div class="bg-white flex flex-col gap-5 font-bold  w-1/3 px-5 py-8 shadow rounded-xl">
+            <div class="bg-white flex flex-col gap-5 font-bold  w-1/4 px-2 py-8 shadow rounded-xl">
                 <div class="flex justify-between">
                     <h1 class=" text-xl">Actions</h1>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -53,18 +56,42 @@
                     @include('participants.partials.school_modal')
                 </div>
             </div>
+            <div class="bg-white flex flex-col gap-5 font-bold w-1/4 px-5 py-8 shadow rounded-xl">
+                <div class="flex justify-between">
+                    <h1 class="text-xl">Males and Females</h1>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="30" height="30" fill="currentColor">
+                        <circle cx="20" cy="12" r="6" fill="#4A90E2" />
+                        <rect x="16" y="20" width="8" height="18" rx="2" fill="#4A90E2" />
+                        <rect x="14" y="38" width="4" height="12" rx="2" fill="#4A90E2" />
+                        <rect x="22" y="38" width="4" height="12" rx="2" fill="#4A90E2" />
+                      
+                        <circle cx="44" cy="12" r="6" fill="#E94E77" />
+                        <rect x="40" y="20" width="8" height="14" rx="2" fill="#E94E77" />
+                        <path d="M40 34 L48 34 L44 50 Z" fill="#E94E77" />
+                        <rect x="38" y="38" width="4" height="12" rx="2" fill="#E94E77" />
+                        <rect x="48" y="38" width="4" height="12" rx="2" fill="#E94E77" />
+                      </svg>
+                      
+                </div>
+                @php
+                    $genderCounts = $infoSession->participants->groupBy('gender')->map->count();
+                @endphp
+                <p class="text-blue-400">Males: {{ $genderCounts['male'] ?? 0 }}</p>
+                <p class="text-pink-400">Females: {{ $genderCounts['female'] ?? 0 }}</p>
+            </div>
+            
         </div>
         @include('participants.partials.participants_table', [
             'parts' => $infoSession->participants,
             'infos' => [],
         ])
-        <div class="flex items-center gap-2 mb-3">
-            <div class="w-[30%] bg-white p-2 rounded">
+        <div class="flex items-center gap-2 m-3">
+            {{-- <div class="w-[30%] bg-white p-2 rounded">
                 @php
                     $totalNumber = $infoSession->participants->count();
                 @endphp
                 <x-gender-chart :$males :$totalNumber />
-            </div>
+            </div> --}}
 
             <div class="w-[40%] bg-white p-2 rounded">
                 <canvas id="ageChart"></canvas>

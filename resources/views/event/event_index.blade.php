@@ -6,9 +6,9 @@
 
     </x-slot>
     
-    <div class="py-12 md:px-10 px-4">
+    <div class="md:pt-12 p-12 md:px-10 px-4">
         
-        <div class=" {{ $events->count() == 0 ? 'h-[70vh]' : 'min-h-[70vh]' }} bg-white rounded-lg p-6  w-[100%] px-8 ">
+        <div class=" {{ $events->count() == 0 ? 'h-[76vh]' : 'min-h-[76vh]' }} bg-white rounded-lg p-6  w-[100%] px-8 ">
             <div class="flex justify-end mb-6">
 
                 <a href="{{ route('events.create') }}">
@@ -71,7 +71,7 @@
                 @foreach ($events as $event)
                     <div class="flex flex-col overflow-hidden gap-3 rounded-[16px] bg-[#f9f9f9] p-3 w-full sm:w-[calc(50%-1rem)]">
                         <img class="w-full aspect-video object-cover rounded-[16px]"
-                                src="{{ asset('storage/images/' . $event->cover) }}"
+                                src="{{ asset('storage/images/events/' . $event->cover) }}"
                                 alt="">
                         <div class="space-y-3">
                             <h4 class="text-lg font-semibold">{{ Str::limit($event->name->en, 15, '...') }}</h4>

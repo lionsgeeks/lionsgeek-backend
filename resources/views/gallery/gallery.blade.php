@@ -12,9 +12,9 @@
     </x-slot>
 
 
-    <div class="py-12 px-10">
+    <div class="pt-12 px-10">
         <div
-        class="flex-row-reverse justify-between flex {{ $galleries->count() == 0 ? 'h-[70vh]' : 'min-h-[70vh]' }}  p-6 flex-wrap gap-x-[calc(5%/3)] gap-y-4 w-[100%] bg-white rounded-lg ">
+        class="flex-row-reverse justify-between flex {{ $galleries->count() == 0 ? 'h-[76vh]' : 'max-h-[76vh]' }} overflow-y-auto p-6 flex-wrap gap-x-[calc(5%/3)] gap-y-4 w-[100%] bg-white rounded-lg ">
         @if ($galleries->count() == 0)
         <div class="h-[100%] bg-white flex rounded-lg items-center justify-center w-full">
             <div class="text-center">
@@ -37,8 +37,64 @@
             </button>
         </a>
     </div>
-    <div class="w-full flex gap-6 flex-wrap">
+    <div class="w-full flex gap-6 overflow-y-auto flex-wrap">
         @foreach ($galleries as $gallery)
+        <div
+        class=" w-[calc(95%/3)] text-nowrap flex flex-col overflow-hidden  gap-3 h-fit px-[1rem] py-[1rem] rounded-[16px]  bg-[#f9f9f9]">
+                        <img class="w-[100%] h-[12rem] object-cover rounded-[16px] "
+                            src="{{ asset('storage/images/gallery/' . $gallery->couverture) }}" alt="">
+                        <div class="w-full flex items-center justify-between">
+    
+                            <h4 class="text-[20px] font-semibold ">{{ Str::limit($gallery->title->en, 15, '...') }}</h4>
+                            <a href="{{ route('gallery.show', $gallery->id) }}">
+                                <button class="py-[.5rem] px-[1.5rem] rounded-lg bg-black text-white " type="button">
+                                    See Gallery
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+        <div
+        class=" w-[calc(95%/3)] text-nowrap flex flex-col overflow-hidden  gap-3 h-fit px-[1rem] py-[1rem] rounded-[16px]  bg-[#f9f9f9]">
+                        <img class="w-[100%] h-[12rem] object-cover rounded-[16px] "
+                            src="{{ asset('storage/images/gallery/' . $gallery->couverture) }}" alt="">
+                        <div class="w-full flex items-center justify-between">
+    
+                            <h4 class="text-[20px] font-semibold ">{{ Str::limit($gallery->title->en, 15, '...') }}</h4>
+                            <a href="{{ route('gallery.show', $gallery->id) }}">
+                                <button class="py-[.5rem] px-[1.5rem] rounded-lg bg-black text-white " type="button">
+                                    See Gallery
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+        <div
+        class=" w-[calc(95%/3)] text-nowrap flex flex-col overflow-hidden  gap-3 h-fit px-[1rem] py-[1rem] rounded-[16px]  bg-[#f9f9f9]">
+                        <img class="w-[100%] h-[12rem] object-cover rounded-[16px] "
+                            src="{{ asset('storage/images/gallery/' . $gallery->couverture) }}" alt="">
+                        <div class="w-full flex items-center justify-between">
+    
+                            <h4 class="text-[20px] font-semibold ">{{ Str::limit($gallery->title->en, 15, '...') }}</h4>
+                            <a href="{{ route('gallery.show', $gallery->id) }}">
+                                <button class="py-[.5rem] px-[1.5rem] rounded-lg bg-black text-white " type="button">
+                                    See Gallery
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+        <div
+        class=" w-[calc(95%/3)] text-nowrap flex flex-col overflow-hidden  gap-3 h-fit px-[1rem] py-[1rem] rounded-[16px]  bg-[#f9f9f9]">
+                        <img class="w-[100%] h-[12rem] object-cover rounded-[16px] "
+                            src="{{ asset('storage/images/gallery/' . $gallery->couverture) }}" alt="">
+                        <div class="w-full flex items-center justify-between">
+    
+                            <h4 class="text-[20px] font-semibold ">{{ Str::limit($gallery->title->en, 15, '...') }}</h4>
+                            <a href="{{ route('gallery.show', $gallery->id) }}">
+                                <button class="py-[.5rem] px-[1.5rem] rounded-lg bg-black text-white " type="button">
+                                    See Gallery
+                                </button>
+                            </a>
+                        </div>
+                    </div>
         <div
         class=" w-[calc(95%/3)] text-nowrap flex flex-col overflow-hidden  gap-3 h-fit px-[1rem] py-[1rem] rounded-[16px]  bg-[#f9f9f9]">
                         <img class="w-[100%] h-[12rem] object-cover rounded-[16px] "

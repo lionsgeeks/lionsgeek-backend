@@ -5,10 +5,10 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="pt-12">
         <div class="mx-auto sm:px-6 lg:px-8">
             @if ($blogs->count() > 0)
-                <div class="bg-white min-h-[70vh] max-h-[70vh] shadow-sm sm:rounded-lg overflow-y-auto">
+                <div class="bg-white h-[76vh]  shadow-sm sm:rounded-lg overflow-y-auto">
                     <div class="flex justify-end px-5 py-3  bg-white ">
                         <a href="{{ route('blogs.create') }}">
                             <button class="bg-black text-white rounded-lg px-4 py-2 hover:bg-alpha hover:text-black font-bold transition duration-150">
@@ -77,7 +77,7 @@
                             @foreach ($blogs->reverse() as $blog)
                                 <div class="bg-white rounded-lg shadow-sm p-4">
                                     <div class="flex items-center space-x-4">
-                                        <img class="w-24 h-16 border shadow object-cover rounded" src="{{ asset('storage/images/' . $blog->image) }}" alt="">
+                                        <img class="w-24 h-16 border shadow object-cover rounded" src="{{ asset('storage/images/blog/' . $blog->image) }}" alt="">
                                         <div class="flex-1">
                                             <h3 class="font-medium t">{{ $blog->title->en }}</h3>
                                             <p class="text-sm text-gray-500">{{ $blog->created_at }}</p>

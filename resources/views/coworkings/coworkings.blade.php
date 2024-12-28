@@ -5,8 +5,8 @@
         </h2>
     </x-slot>
 
-    <div class="py-12 sm:px-0 px-2">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 ">
+    <div class="pt-12 sm:px-0 px-2">
+        <div class="px-2 md:px-8">
             @if ($coworkings->count() > 0)
                 <div x-data='{
                     cows: {{ $coworkings }},
@@ -20,7 +20,7 @@
                             return this.matchesSearch(participant);},
 
                 }'
-                    class="bg-white  overflow-hidden shadow-sm sm:rounded-lg">
+                    class="bg-white h-[76vh] w-full overflow-y-auto  overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900 ">
 
                         <div class="flex items-center justify-between mb-4">

@@ -1,4 +1,4 @@
-<div class="py-12"
+<div class="pt-12"
     x-data='{
 participants: {{ json_encode($parts) }},
 infos: {{ json_encode($infos) ?? '[]' }},
@@ -45,7 +45,7 @@ this.selectedSession = "";
 },
 }'>
     <div class="mx-auto">
-        <div class="bg-white  overflow-hidden shadow-sm sm:rounded-lg">
+        <div class="bg-white h-[76vh] overflow-y-auto  overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 text-gray-900">
                 <div class="flex mb-3 items-center justify-between gap-4">
                     {{-- filters --}}

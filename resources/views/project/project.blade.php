@@ -9,9 +9,9 @@
     </x-slot>
 
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 ">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg flex flex-row-reverse items-center gap-5 flex-wrap p-3">
+    <div class="pt-12">
+        <div class="  mx-auto sm:px-10 lg:px-10 ">
+            <div class="bg-white h-[76vh] overflow-y-auto w-full overflow-hidden shadow-sm sm:rounded-lg flex flex-row-reverse items-center gap-5 flex-wrap px-8 py-5">
                 @if ($projects->count()>0)
                 <button onclick="openModal('projectCreate')"
                     class="bg-black text-white rounded-lg px-4 py-2 hover:bg-alpha hover:text-black  transition duration-150 ">Add
@@ -20,7 +20,7 @@
         
                 @endif
                 @include('project.partials.create_project')
-                <div class="w-full ">
+                <div class="w-full flex gap-5 flex-wrap ">
                     @forelse ($projects as $project)
                         <div class="w-[32%] shadow-l bg-[#fafafa] border border-gray-500/50 rounded-lg p-5 ">
                             <div class="py-2 flex items-center justify-between">
@@ -31,7 +31,6 @@
                                 </div>
                                 <div class="relative flex items-center gap-x-3">
     
-                                    {{-- edit btn Modal --}}
                                     <button onclick="openModal('projectUpdate{{ $project->id }}')">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" class="mb-1.5"
                                             fill="currentColor" class="bi bi-pencil-fill" viewBox="0 0 16 16">
@@ -42,7 +41,6 @@
                                     @include('project.partials.edit_project')
     
     
-                                    {{-- delete btn --}}
                                     <form class="" method="post" action="{{ route('projects.destroy', $project) }}">
                                         @csrf @method('delete')
     
@@ -71,6 +69,7 @@
                             {{-- <p class="mb-0 truncate text-black/60 pt-2">{{ $project->description }}</p> --}}
     
                         </div>
+                       
                     @empty
                         <div class="h-[70vh] flex items-center justify-center w-full">
                             <div class="text-center">

@@ -13,8 +13,8 @@
         </a> --}}
         
     </x-slot>
-    <div class="py-12 md:px-10 px-4 ">
-        <div class="bg-white rounded-lg p-6  w-[100%] px-8 min-h-[67vh]">
+    <div class="pt-12 md:px-10 px-4 ">
+        <div class="bg-white rounded-lg p-6  w-[100%] px-8 h-[76vh] overflow-y-auto">
             <div class="flex justify-end">
                 @if ($infosessions->count() > 0)
             @include('info_session.partials.create-session_modal')

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use Gemini;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -67,6 +68,33 @@ class EventController extends Controller
 
         return redirect("/events");
     }
+
+    public function translate(Request $request)
+    {
+        $gemini_api_key = env("GEMINI_API_KEY");
+    
+        $client = Gemini::client($gemini_api_key);
+    
+        $name = (object) $request->name;
+        $description = (object) $request->description;
+        $location = (object) $request->location;
+    
+        $prompt = "Translate the following text into English, French, and Arabic, and return the result in an object where each field (name, description, location) is grouped by language like this: {\"en\": {\"name\": \"[translated name in English]\", \"description\": \"[translated description in English]\", \"location\": \"[translated location in English]\"}, \"fr\": {\"name\": \"[translated name in French]\", \"description\": \"[translated description in French]\", \"location\": \"[translated location in French]\"}, \"ar\": {\"name\": \"[translated name in Arabic]\", \"description\": \"[translated description in Arabic]\", \"location\": \"[translated location in Arabic]\"}}. The text to translate is: \"$name->en, $description->en, $location->en\"";    
+        try {
+            $result = $client->geminiPro()->generateContent($prompt);
+    
+            $translatedText = $result->text();
+    
+            $translated = json_decode($translatedText, true);
+    
+            return response()->json([
+                'data' => $translated
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json(['error' => 'Translation failed due to an unexpected error'], 500);
+        }
+    }
+    
 
     /**
      * Display the specified resource.

@@ -38,6 +38,7 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
     Route::post('/projects/translate', [ProjectController::class, 'translate'])->name('projects.translate');
+    Route::post('/event/translate', [EventController::class, 'translate'])->name('event.translate');
 
     Route::get('/run', function () {
         // Artisan::call('queue:listen');

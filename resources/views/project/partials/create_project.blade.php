@@ -78,9 +78,13 @@
     </div>
 </div>
 
-<div id="waitingModal" class="fixed inset-0 bg-gray-900 bg-opacity-60 z-50 hidden">
-    <div class="bg-white p-6 rounded-lg text-center flex flex-col items-center justify-center">
-        <div class="w-10 h-10 border-4 border-t-4 border-gray-200 border-t-blue-500 rounded-full animate-spin"></div>
+
+<div id="waitingModal" class="fixed inset-0 z-50 bg-black bg-opacity-50 hidden items-center justify-center">
+    <div class="bg-white p-6 rounded-lg shadow-lg">
+        <div class="flex items-center space-x-3">
+            <div class="w-6 h-6 border-2 border-t-2 border-blue-500 rounded-full animate-spin"></div>
+            <p>Translating...</p>
+        </div>
     </div>
 </div>
 

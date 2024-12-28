@@ -11,6 +11,7 @@ class InfoSession extends Model
         'formation',
         'start_date',
         'isAvailable',
+        "isFull",
         'isFinish',
         'places'
     ];

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('places');
             $table->boolean('isAvailable')->default(false);
             $table->boolean('isFinish')->default(false);
+            $table->boolean('isFull')->default(false);
             $table->timestamps();
         });
     }

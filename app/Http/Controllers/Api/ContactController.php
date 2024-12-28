@@ -110,7 +110,7 @@ class ContactController extends Controller
 
         $parts = Participant::where('info_session_id', $request->info_session_id)->count();
         $infosession = InfoSession::where('id', $request->info_session_id)->first();
-        if ($parts + 1 > $infosession->places) {            
+        if ($parts + 1 > $infosession->places) { 
             return response()->json([
                 'status' => 96,
             ]);
@@ -182,7 +182,7 @@ class ContactController extends Controller
 
         if ($parts + 1 == $infosession->places) {
             $infosession->update([
-                'isAvailable' => false
+                'isFull'=>true
             ]);
         }
         return response()->json([

@@ -39,7 +39,6 @@
             </div>
             <div class="w-full flex gap-6 overflow-y-auto flex-wrap">
                 @foreach ($galleries as $gallery)
-                 
                     <div
                         class=" w-[calc(95%/3)] text-nowrap flex flex-col overflow-hidden  gap-3 h-fit px-[1rem] py-[1rem] rounded-[16px]  bg-[#f9f9f9]">
                         <img class="w-[100%] h-[12rem] object-cover rounded-[16px] "
@@ -54,6 +53,7 @@
                             </a>
                         </div>
                     </div>
+
                 @endforeach
 
             </div>

@@ -51,11 +51,11 @@
                     <div class=" ps-4 py-6   shadow-md bg-white flex  items-start justify-around gap-x-5 rounded-lg ">
                        
                         <div class="flex flex-col gap-y-2 justify-center  text-black">
-                            <span class="font-bold text-[18px]">Upcoming Events</span>
-                            @if ($totalEvents > 0)
-                                <p class="text-xl font-black ">{{ $totalEvents }}</p>
+                            <span class="font-bold text-[18px]">Events</span>
+                            @if ($upcomingEvents->count() > 0)
+                                <p class="text-xl font-black ">{{ $upcomingEvents->count() }}</p>
                             @else
-                                <p>there are no events yet</p>
+                                <p class="">No upcoming event</p>
                             @endif
                         </div>
                         <span class="w-[40px] h-[40px] rounded-full bg-[#eeb76b34]  relative">
@@ -72,11 +72,11 @@
                     <div class=" ps-4 py-6   shadow-md bg-white flex  items-start justify-around gap-x-5 rounded-lg ">
                        
                         <div class="flex flex-col gap-y-2 justify-center  text-black">
-                            <span class="font-bold text-[18px]">Total Members</span>
+                            <span class="font-bold text-[18px]">Subscribers</span>
                             @if ($members > 0)
                                 <p class="text-xl font-black ">{{ $members }}</p>
                             @else
-                                <p>No event Available</p>
+                                <p>News letter is empty</p>
                             @endif
                         </div>
                         <span class="w-[40px] h-[40px] rounded-full  bg-[#eeb76b34] relative">
@@ -91,7 +91,7 @@
                     <div class=" ps-4 py-6   shadow-md bg-white flex  items-start justify-around gap-x-5 rounded-lg  ">
                         
                         <div class="flex flex-col justify-center gap-y-2  text-black">
-                            <span class="font-bold text-[18px]">Total Visits</span>
+                            <span class="font-bold text-[18px]">Website visits</span>
 
                             <p class="text-xl font-black">{{ $views?->views ?? 0 }}</p>
 

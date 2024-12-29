@@ -23,6 +23,7 @@ use App\Models\Event;
 use App\Models\General;
 use App\Models\InfoSession;
 use App\Models\Participant;
+use App\Models\Subscriber;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Artisan;
@@ -82,7 +83,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', function () {
         $totalContacts = Contact::all()->count();
         $totalEvents = Event::all()->count();
-        $members = User::all()->count();
+        $members = Subscriber::all()->count();
 
         //* order sessions by the nearest date between now and one month from now
         $sessions = InfoSession::where('isAvailable', 1)

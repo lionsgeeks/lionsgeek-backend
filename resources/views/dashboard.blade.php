@@ -29,8 +29,9 @@
                 </div>
                 <div
                     class="w-full grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1  gap-x-4 lg:gap-y-0 md:gap-y-2 gap-y-4 ">
-                    <div class=" ps-4 py-6   shadow-md bg-white  text-black flex  items-start justify-around  rounded-lg  gap-x-5">
-                        
+                    <div
+                        class=" ps-4 py-6   shadow-md bg-white  text-black flex  items-start justify-around  rounded-lg  gap-x-5">
+
                         <div class="flex flex-col gap-y-2 justify-center ">
                             <span class="font-bold text-[18px]">Total Contacts</span>
                             @if ($totalContacts > 0)
@@ -49,7 +50,7 @@
                         </span>
                     </div>
                     <div class=" ps-4 py-6   shadow-md bg-white flex  items-start justify-around gap-x-5 rounded-lg ">
-                       
+
                         <div class="flex flex-col gap-y-2 justify-center  text-black">
                             <span class="font-bold text-[18px]">Events</span>
                             @if ($upcomingEvents->count() > 0)
@@ -70,7 +71,7 @@
                         </span>
                     </div>
                     <div class=" ps-4 py-6   shadow-md bg-white flex  items-start justify-around gap-x-5 rounded-lg ">
-                       
+
                         <div class="flex flex-col gap-y-2 justify-center  text-black">
                             <span class="font-bold text-[18px]">Subscribers</span>
                             @if ($members > 0)
@@ -89,7 +90,7 @@
                         </span>
                     </div>
                     <div class=" ps-4 py-6   shadow-md bg-white flex  items-start justify-around gap-x-5 rounded-lg  ">
-                        
+
                         <div class="flex flex-col justify-center gap-y-2  text-black">
                             <span class="font-bold text-[18px]">Website visits</span>
 
@@ -127,7 +128,7 @@
 
                                 </div>
                             </div>
-                                {{-- <div x-on:click='id = {{ $key }}'
+                            {{-- <div x-on:click='id = {{ $key }}'
                                     class="flex bg-yellow-400  justify-between p-2 border-b-[1.6px]">
                                     <div class="flex gap-x-2 bg-black ">
                                         <p class="bg-red-400">{{ $message->full_name }}</p>
@@ -138,38 +139,39 @@
 
                                 </div> --}}
 
-                                <table class="w-full">
-                                    <thead class="h-[7vh]">
-                                        <th class="lg:table-cell hidden">Name</th>
-                                        <th class="lg:table-cell hidden">Email</th>
-                                        <th>Message</th>
-                                        <th >Date</th>
-                                    </thead>
+                            <table class="w-full">
+                                <thead class="h-[7vh]">
+                                    <th class="lg:table-cell hidden">Name</th>
+                                    <th class="lg:table-cell hidden">Email</th>
+                                    <th>Message</th>
+                                    <th>Date</th>
+                                </thead>
 
-                                    <tbody class="w-full ">
-                                        @foreach ($notReadedMessages->reverse() as $key => $contact)
-                                            <tr  class="w-full text-center h-[7vh]  border-t  {{  $key % 2 == 0 ? '' : 'bg-gray-100' }} ">
+                                <tbody class="w-full ">
+                                    @foreach ($notReadedMessages->reverse() as $key => $contact)
+                                        <tr x-on:click="window.location.href = '/contacts?message={{ $contact->id }}' "
+                                            class="w-full text-center h-[7vh] cursor-pointer  border-t  {{ $key % 2 == 0 ? '' : 'bg-gray-100' }} ">
 
-                                                <td  class="truncate lg:table-cell hidden">
-                                                    {{ $contact->full_name }}
-                                                </td>
-                                                <td class="lg:table-cell hidden">
-                                                    {{ $contact->email }}
-                                                </td>
-                                               
-                                                
-                                                <td class="">
-                                                   <p >
+                                            <td class="truncate lg:table-cell hidden">
+                                                {{ $contact->full_name }}
+                                            </td>
+                                            <td class="lg:table-cell hidden">
+                                                {{ $contact->email }}
+                                            </td>
+
+
+                                            <td class="">
+                                                <p>
                                                     {{ Str::limit($contact->message, 15, '...') }}
-                                                   </p>
-                                                </td>
-                                                <td >
-                                                    {{ $contact->created_at->format('d M,y') }}
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                                </p>
+                                            </td>
+                                            <td>
+                                                {{ $contact->created_at->format('d M,y') }}
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
 
 
 
@@ -230,7 +232,8 @@
                                 <div class="p-6 text-gray-900 ">
                                     <div class="flex justify-between items-center">
                                         <h1 class="text-xl font-semibold text-black mb-2">Recent Coworking Requests</h1>
-                                        <a href="{{ route('coworkings.index') }}" class="underline text-alpha hover:text-black">See
+                                        <a href="{{ route('coworkings.index') }}"
+                                            class="underline text-alpha hover:text-black">See
                                             all</a>
                                     </div>
                                     <table class="w-full mt-4">
@@ -367,7 +370,8 @@
                                 <div class="p-6 text-gray-900 ">
                                     <div class="flex justify-between items-center">
                                         <h1 class="text-xl font-semibold text-black mb-2">Upcoming Events</h1>
-                                        <a href="{{ route('events.index') }}" class="underline text-alpha hover:text-black">See
+                                        <a href="{{ route('events.index') }}"
+                                            class="underline text-alpha hover:text-black">See
                                             all</a>
                                     </div>
                                     <table class="w-full mt-4">
@@ -435,7 +439,8 @@
 
                         <div class="flex justify-between items-center ">
                             <h1 class="text-xl font-semibold text-black ">Latest Blogs</h1>
-                            <a href="{{ route('blogs.index') }}" class="underline text-alpha hover:text-black">See all</a>
+                            <a href="{{ route('blogs.index') }}" class="underline text-alpha hover:text-black">See
+                                all</a>
                         </div>
                         <div class=" grid lg:grid-cols-4 md:grid-cols-2 gap-x-4  p-4 rounded-lg gap-y-4 ">
                             @foreach ($blogs as $blog)

@@ -79,7 +79,7 @@
                                 <ul>
                                     @foreach ($notifications as $notif)
                                         <li class="py-5 border-b ">
-                                            <a href={{ $notif->type === 'cowork' ? route('coworkings.show', $notif->id) : route('contacts.index') }}
+                                            <a href={{ $notif->type === 'cowork' ? route('coworkings.show', $notif->id) : "/contacts?message=".$notif->id }}
                                                 class="py-5 border-b">
                                                 <div class="flex flex-col gap-2">
                                                     <div class="flex items-center gap-4">

@@ -32,7 +32,7 @@
                                 </div>
                                 <div class="md:h-[466px]  overflow-y-auto">
                                     @foreach ($contacts->reverse() as $key => $message) 
-                                        <div onclick="toggleHidden()" x-on:click='id = {{ $key }}'
+                                        <div x-init="if({{ request()->message == $message->id }}){id = {{ $key }}}" onclick="toggleHidden()" x-on:click='id = {{ $key }}'
                                             class="p-4  {{ $message->mark_as_read ? '' : 'bg-blue-100 border-b-2 hover:bg-blue-50' }} flex flex-col gap-y-2  text--700 w-full border-b hover:bg-gray-100 cursor-pointer">
                                             <div class="flex items-center  gap-x-2 text-lg font-medium">
                                                 <h1 class="text-[#13181a] font-bold">

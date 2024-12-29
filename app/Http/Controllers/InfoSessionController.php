@@ -95,6 +95,7 @@ class InfoSessionController extends Controller
     {
         $infosession = InfoSession::where('id', $id)->first();
         $infosession->update([
+            'isAvailable' => $infosession->isAvailable ? false : $infosession->isAvailable,
             'isFinish' => !$infosession->isFinish
         ]);
         return back();

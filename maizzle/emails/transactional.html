@@ -15,11 +15,11 @@ preheader: Transactional email template
               <td class="py-6 px-9 sm:p-6 bg-white [border:1px_solid_theme(colors.slate.200)] rounded-lg">
                 <table align="center" class="m-0 mx-auto">
                   <tr>
-                    <td class="py-5 px-9 sm:p-6" href="https://lionsgeek.ma">
+                    <a class="py-5 px-9 sm:p-6" href="https://lionsgeek.ma">
                       <img class=""
                         src="https://media.licdn.com/dms/image/v2/D4E0BAQEI5pl3PyS-Eg/company-logo_200_200/company-logo_200_200/0/1734088749325/lionsgeek_logo?e=2147483647&v=beta&t=2tZP_cpgMZO4IFtfyB0GNKXIrPO5I5w6a8iUlnrhntQ"
-                        width="90" alt="Maizzle">
-                    </td>
+                        width="90" alt="LionsGeek">
+                    </a>
                   </tr>
                 </table>
 
@@ -39,8 +39,8 @@ preheader: Transactional email template
 
                 <p class="m-0 mb-6 text-base/6 text-slate-600">Here’s What You’ll Discover:</p>
                 <ul class="m-0 mb-6 text-base/6 text-slate-600">
-                  <li>A personalized overview of our courses</li>
-                  <li>Insight into our experienced instructors, who bring real-world expertise in </li>
+                  <li>A personalized overview of our @{{ $data['formation'] }} courses</li>
+                  <li>Insight into our experienced instructors, who bring real-world expertise in @{{ $data['formation'] }} </li>
                   <li>Information about the benefits and career opportunities that come with joining our community</li>
                 </ul>
 

@@ -50,7 +50,10 @@
                   <table align="center" style="margin: 0 auto" cellpadding="0" cellspacing="0" role="none">
                     <tr>
                       <td class="sm-p-6" href="https://lionsgeek.ma" style="padding: 20px 36px">
-                        <img src="https://media.licdn.com/dms/image/v2/D4E0BAQEI5pl3PyS-Eg/company-logo_200_200/company-logo_200_200/0/1734088749325/lionsgeek_logo?e=2147483647&v=beta&t=2tZP_cpgMZO4IFtfyB0GNKXIrPO5I5w6a8iUlnrhntQ" width="90" alt="Maizzle" style="max-width: 100%; vertical-align: middle">
+                        <a  href="https://lionsgeek.ma">
+
+                          <img src="https://media.licdn.com/dms/image/v2/D4E0BAQEI5pl3PyS-Eg/company-logo_200_200/company-logo_200_200/0/1734088749325/lionsgeek_logo?e=2147483647&v=beta&t=2tZP_cpgMZO4IFtfyB0GNKXIrPO5I5w6a8iUlnrhntQ" width="90" alt="Maizzle" style="max-width: 100%; vertical-align: middle">
+                        </a>
                       </td>
                     </tr>
                   </table>
@@ -66,8 +69,8 @@
                   <div role="separator" style="line-height: 24px">&zwj;</div>
                   <p style="margin: 0 0 24px; font-size: 16px; line-height: 24px; color: #475569">Here’s What You’ll Discover:</p>
                   <ul style="margin: 0 0 24px; font-size: 16px; line-height: 24px; color: #475569">
-                    <li>A personalized overview of our courses</li>
-                    <li>Insight into our experienced instructors, who bring real-world expertise in </li>
+                    <li>A personalized overview of our {{ $data["formation"] }} courses</li>
+                    <li>Insight into our experienced instructors, who bring real-world expertise in {{ $data["formation"] }} </li>
                     <li>Information about the benefits and career opportunities that come with joining our community</li>
                   </ul>
                   <div role="separator" style="line-height: 24px">&zwj;</div>

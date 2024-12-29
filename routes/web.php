@@ -52,7 +52,9 @@ Route::middleware('auth')->group(function () {
 
     Route::resource("gallery", GalleryController::class);
 
-    Route::resource("images", ImageController::class);
+    // Route::resource("images", ImageController::class);
+    Route::post("images/{gallery}", [ImageController::class, 'store'])->name('images.store');
+    Route::delete("images/{image}", [ImageController::class, 'destroy'])->name('images.destroy');
 
 
     Route::resource("blogs", BlogController::class);

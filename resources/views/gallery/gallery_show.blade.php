@@ -7,7 +7,7 @@
             onsubmit="this.submitButton.disabled =true">
             @csrf
             @method('DELETE')
-            
+
         </form>
     </x-slot>
 
@@ -22,7 +22,7 @@
                     @method('PUT')
                     <div class="flex justify-end w-full px-4 gap-x-4">
                         <button type="submit" class=" px-4 py-2  rounded-lg bg-black text-white">Submit</button>
-                        <button form="deletegallery" type="submit" class="px-4 py-2 font-semibold rounded-lg bg-red-500 text-white">Delete resource</button>    
+                        <button form="deletegallery" type="submit" class="px-4 py-2 font-semibold rounded-lg bg-red-500 text-white">Delete resource</button>
                     </div>
                     {{-- <p class="text-[25px] font-bold">Update Gallery</p> --}}
                     <div x-data="{ tab: 'English' }" class="w-[100%]  flex flex-col items-center ">
@@ -139,7 +139,7 @@
                             </div>
                         </div>
 
-                        
+
                     </div>
                 </form>
             </div>
@@ -175,7 +175,7 @@
                             @method('DELETE')
                             <div class="w-[100%] relative group">
                                 <img class="w-[100%] group-hover:opacity-50 transition duration-300 aspect-square object-cover rounded border"
-                                    src="{{ asset('storage/images/gallery/' . $image->path) }}" alt="">
+                                    src="{{ asset('storage/images/' . $image->path) }}" alt="">
                                 <button name="submitButton" type="submit"
                                     class="w-[100%] h-[100%]  absolute inset-0 items-center justify-center hidden group-hover:flex transition duration-300 ">
                                     <svg class=" w-8 rounded bg-red-600 " xmlns="http://www.w3.org/2000/svg"

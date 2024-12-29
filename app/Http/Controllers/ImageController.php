@@ -58,7 +58,8 @@ class ImageController extends Controller
      */
     public function destroy(Image $image)
     {
-        Storage::disk('public')->delete('images/' . $image->path);
+        // TODO: oussama: kayna chi l3ayba hna but i dont know yet, tal mn ba3d o nsaybha. (29/12/24)
+        Storage::disk('public')->delete('images/gallery/' . $image->path);
         $image->delete();
         return back();
     }

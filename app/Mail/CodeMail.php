@@ -41,7 +41,7 @@ class CodeMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail.qrcode_mail',
+            view: 'maizzleMails.emails.transactional',
         );
     }
 

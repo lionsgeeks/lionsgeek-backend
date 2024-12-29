@@ -22,6 +22,7 @@ use App\Models\Coworking;
 use App\Models\Event;
 use App\Models\General;
 use App\Models\InfoSession;
+use App\Models\Participant;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Artisan;
@@ -109,13 +110,12 @@ Route::middleware('auth')->group(function () {
     Route::post('questions/export', [ParticipantController::class, 'questionsExport'])->name('questions.export');
 
     // Press
-    // Route::get("/press",[PressController::class,'index'])->name("press.index");
-    // Route::get("/press/create",[PressController::class,'create'])->name("press.create");
-    // Route::post("/press/store",[PressController::class,'store'])->name("press.store");
-    // Route::get("/press/show/{press}",[PressController::class,'show'])->name("press.show");
-    // Route::put("/press/update/{press}",[PressController::class,'update'])->name("press.update");
-    // Route::delete("/press/destroy/{press}",[PressController::class,'destroy'])->name("press.destroy");
-    Route::resource('press', PressController::class);
+    Route::get("/press", [PressController::class, 'index'])->name("press.index");
+    Route::get("/press/create", [PressController::class, 'create'])->name("press.create");
+    Route::post("/press/store", [PressController::class, 'store'])->name("press.store");
+    Route::get("/press/show/{press}", [PressController::class, 'show'])->name("press.show");
+    Route::put("/press/update/{press}", [PressController::class, 'update'])->name("press.update");
+    Route::delete("/press/destroy/{press}", [PressController::class, 'destroy'])->name("press.destroy");
 
     //addAdmin
     Route::post("/addadmin/store", [AddAdminController::class, "AddAdmin"])->name("addadmin.store");
@@ -127,4 +127,8 @@ Route::middleware('auth')->group(function () {
 });
 // Route::post('/booking/store', [BookingController::class, 'store'])->name('booking.store');
 
+Route::get("/test", function () {
+    $data = Participant::find(1);
+    return view("maizzleMails.emails.transactional", compact("data"));
+});
 require __DIR__ . '/auth.php';

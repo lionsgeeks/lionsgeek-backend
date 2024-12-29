@@ -1,0 +1,97 @@
+---
+bodyClass: bg-slate-50
+preheader: Transactional email template
+---
+
+<x-main>
+  <div class="bg-slate-50 sm:px-4 font-inter">
+    <table align="center" class="m-0 mx-auto">
+      <tr>
+        <td class="w-[552px] max-w-full">
+          <x-spacer height="24px" />
+
+          <table class="w-full">
+            <tr>
+              <td class="py-6 px-9 sm:p-6 bg-white [border:1px_solid_theme(colors.slate.200)] rounded-lg">
+                <table align="center" class="m-0 mx-auto">
+                  <tr>
+                    <td class="py-5 px-9 sm:p-6" href="https://lionsgeek.ma">
+                      <img class=""
+                        src="https://media.licdn.com/dms/image/v2/D4E0BAQEI5pl3PyS-Eg/company-logo_200_200/company-logo_200_200/0/1734088749325/lionsgeek_logo?e=2147483647&v=beta&t=2tZP_cpgMZO4IFtfyB0GNKXIrPO5I5w6a8iUlnrhntQ"
+                        width="90" alt="Maizzle">
+                    </td>
+                  </tr>
+                </table>
+
+                <x-spacer height="24px" />
+
+                <h1 class="m-0 mb-6 text-2xl/8 text-slate-900 font-semibold">
+                  Hello @{{ $data['full_name'] }}!
+                </h1>
+
+                <p class="m-0 mb-6 text-base/6 text-slate-600">
+                  Thank you for your interest in our upcoming info session with LionsGeek! We’re thrilled to help you
+                  explore our
+                  programs and learn how LionsGeek can support your growth.
+                </p>
+
+                <x-spacer height="24px" />
+
+                <p class="m-0 mb-6 text-base/6 text-slate-600">Here’s What You’ll Discover:</p>
+                <ul class="m-0 mb-6 text-base/6 text-slate-600">
+                  <li>A personalized overview of our courses</li>
+                  <li>Insight into our experienced instructors, who bring real-world expertise in </li>
+                  <li>Information about the benefits and career opportunities that come with joining our community</li>
+                </ul>
+
+                <x-spacer height="24px" />
+
+                <p class="m-0 mb-6 text-base/6 text-slate-600">Event Details:</p>
+                <ul class="m-0 mb-6 text-base/6 text-slate-600">
+                  <li>Date: @{{ \Carbon\Carbon::parse($data['time'])->format('Y-m-d H:i') }}</li>
+                  <li>Location: LionsGeek, LionsGeek, 4eme étage, Ain Sebaa Center, Route de Rabat, Casablanca
+                    20060, Maroc</li>
+                </ul>
+                <p class="m-0 mb-6 text-base/6 text-slate-600" style="font-weight: 600">We've attached a PDF document
+                  with all the event details, a QR code for
+                  quick access, and
+                  a map to help you find us. Be sure to bring a copy (digital or printed) of this PDF to make check-in
+                  quick and
+                  easy.
+                </p>
+                <p class="m-0 mb-6 text-base/6 text-slate-600">Bring any questions you might have about our programs or
+                  career guidance – we’ll be happy to help!
+                  If you have any questions before the event, reach out at contact@lionsgeek.com or call +212 522 662
+                  660.</p>
+                <p class="m-0 mb-6 text-base/6 text-slate-600">We can’t wait to see you there and help you kickstart
+                  your journey with LionsGeek!</p>
+                <h5 class="m-0 mb-6 text-base/6 text-slate-600">Warm regards,</h5>
+                <p class="m-0 mb-6 text-base/6 text-slate-600">Lionsgeek</p>
+
+                <x-divider />
+                <!-- <x-spacer height="24px" /> -->
+                <x-spacer height="24px" />
+
+                <table align="center" class="m-0 mx-auto">
+                  <tr class="m-0 mb-6 text-base/6 text-slate-600 text-[20px] font-bold ">
+                    <p>Join Us :</p>
+                  </tr>
+                  <tr>
+                    <td class="py-5 px-9 sm:p-6" href="https://lionsgeek.ma">
+                        <div class="font-semibold">
+                          <a class="p-1" href="https://www.instagram.com/lions_geek?igsh=MWNhb2F6eGRjOTZvcg==">Instagram</a>
+                          <a class="p-1" href="https://www.facebook.com/LionsGeek?mibextid=ZbWKwL">Facebook</a>
+                          <a class="p-1" href="https://x.com/LionsGeek?t=oZV_osSHbR3MV7uSV3AIIA&s=09">X (Twitter)</a>
+                          <a class="p-1" href="https://www.tiktok.com/@lions_geek?_t=8sZ3ZyKrqvG&_r=1">Tiktok</a>
+                        </div>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </div>
+</x-main>

@@ -148,7 +148,7 @@
                                 </thead>
 
                                 <tbody class="w-full ">
-                                    @foreach ($notReadedMessages->reverse() as $key => $contact)
+                                    @foreach ($notReadedMessages as $key => $contact)
                                         <tr x-on:click="window.location.href = '/contacts?message={{ $contact->id }}' "
                                             class="w-full text-center h-[7vh] cursor-pointer  border-t  {{ $key % 2 == 0 ? '' : 'bg-gray-100' }} ">
 

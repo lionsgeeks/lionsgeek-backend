@@ -58,9 +58,7 @@
                     <div class="flex items-center gap-2">
                         <div class="flex flex-col gap-2 w-full">
                             <label class="font-semibold" for="city">Motivation:</label>
-                            <textarea rows="10" required class="rounded capitalize">
-                                {{ $participant->motivation }}
-                            </textarea>
+                            <textarea rows="10" required class="rounded capitalize">{{ $participant->motivation }}</textarea>
                         </div>
                     </div>
                     <br>

@@ -14,6 +14,7 @@ use App\Models\Participant;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -109,8 +110,18 @@ class ParticipantController extends Controller
      */
     public function destroy(Participant $participant)
     {
-        //
+        if ($participant->image) {
+            $imagePath = public_path('storage/' . $participant->image);
+
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
+        }
+        $participant->delete();
+
+        return redirect("/infosessions");
     }
+
 
     public function frequestQuestions(Request $request, Participant $participant)
     {

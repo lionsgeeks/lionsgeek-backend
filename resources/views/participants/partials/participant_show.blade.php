@@ -8,6 +8,13 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-5 flex justify-end items-center  ">
+                    <form action="{{ route("participants.destroy" , $participant) }}" method="post">
+                        @csrf
+                        @method("delete")
+                        <button class="py-2 rounded-lg text-white px-2 bg-red-600" type="submit">Remove participant</button>
+                    </form>
+                </div>
                 <div class="flex items-center justify-end w-full gap-2 p-2">
 
                     @if ($participant->current_step == 'interview')
@@ -21,7 +28,10 @@
                     @endif
 
                     {{-- if the participant failed any step, hide this form --}}
-                    @if (!str_contains($participant->current_step, 'fail') && !str_contains($participant->current_step, 'info') && !str_contains($participant->current_step, 'school'))
+                    @if (
+                        !str_contains($participant->current_step, 'fail') &&
+                            !str_contains($participant->current_step, 'info') &&
+                            !str_contains($participant->current_step, 'school'))
                         <form action="{{ route('participant.step', $participant) }}" method="post">
                             @csrf
                             <button type="submit" name="action" value="deny"
@@ -58,9 +68,8 @@
 
                             <div class="flex items- gap-7 ">
                                 @if ($participant->image)
-                                    <img src="{{asset('storage/images/participants/' . $participant->image)}}"
-                                    width="150" class="rounded-full aspect-square"
-                                    alt="">
+                                    <img src="{{ asset('storage/images/participants/' . $participant->image) }}"
+                                        width="150" class="rounded-full aspect-square" alt="">
                                 @else
                                     <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="125" height="125"
                                         viewBox="0 0 280 280" preserveAspectRatio="xMidYMid meet" class="">
@@ -177,7 +186,7 @@
 
                                         <div class="flex items-center justify-between">
                                             <h1 class="text-2xl font-bold mb-2">Frequent Questions:</h1>
-                                                <button type="submit"
+                                            <button type="submit"
                                                 class="px-3 py-1 bg-black text-white rounded">Save</button>
                                         </div>
 
@@ -228,7 +237,7 @@
                         get percentage() {
                             return (this.checkedTasks / this.totalTasks) * 100;
                         },
-
+                    
                         get barColor() {
                             const percentage = this.percentage;
                             if (percentage < 90) {

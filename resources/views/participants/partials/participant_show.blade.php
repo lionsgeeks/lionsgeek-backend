@@ -9,27 +9,22 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-5 flex justify-end items-center  ">
-                    <form action="{{ route("participants.destroy" , $participant) }}" method="post">
-                        @csrf
-                        @method("delete")
-                        <button class="py-2 rounded-lg text-white px-2 bg-red-600" type="submit">Remove participant</button>
-                    </form>
                 </div>
                 <div class="flex items-center justify-end w-full gap-2 p-2">
-
+                    
                     @if ($participant->current_step == 'interview')
-                        <form action="{{ route('participant.step', $participant) }}" method="post">
-                            @csrf
+                    <form action="{{ route('participant.step', $participant) }}" method="post">
+                        @csrf
                             <button type="submit" name="action" value="daz"
                                 class="bg-black text-white py-2 px-4 rounded">
                                 Pending
                             </button>
                         </form>
-                    @endif
-
-                    {{-- if the participant failed any step, hide this form --}}
-                    @if (
-                        !str_contains($participant->current_step, 'fail') &&
+                        @endif
+                        
+                        {{-- if the participant failed any step, hide this form --}}
+                        @if (
+                            !str_contains($participant->current_step, 'fail') &&
                             !str_contains($participant->current_step, 'info') &&
                             !str_contains($participant->current_step, 'school'))
                         <form action="{{ route('participant.step', $participant) }}" method="post">
@@ -43,8 +38,13 @@
                                 Go To Next Step
                             </button>
                         </form>
-                    @endif
-
+                        @endif
+                        <form action="{{ route("participants.destroy" , $participant) }}" method="post">
+                            @csrf
+                            @method("delete")
+                            <button class="py-2 rounded-lg text-white px-2 bg-red-600" type="submit">Remove participant</button>
+                        </form>
+                    
                 </div>
                 <div class="p-6 text-gray-900">
                     <div class="flex items-center gap-2 justify-between">

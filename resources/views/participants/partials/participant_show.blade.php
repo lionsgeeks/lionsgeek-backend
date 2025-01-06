@@ -11,7 +11,7 @@
                 <div class="p-5 flex justify-end items-center  ">
                 </div>
                 <div class="flex items-center justify-end w-full gap-2 p-2">
-                    
+
                     @if ($participant->current_step == 'interview')
                     <form action="{{ route('participant.step', $participant) }}" method="post">
                         @csrf
@@ -21,7 +21,7 @@
                             </button>
                         </form>
                         @endif
-                        
+
                         {{-- if the participant failed any step, hide this form --}}
                         @if (
                             !str_contains($participant->current_step, 'fail') &&
@@ -44,12 +44,12 @@
                             @method("delete")
                             <button class="py-2 rounded-lg text-white px-2 bg-red-600" type="submit">Remove participant</button>
                         </form>
-                    
+
                 </div>
                 <div class="p-6 text-gray-900">
                     <div class="flex items-center gap-2 justify-between">
                         {{-- User Info --}}
-                        <div class="w-full p-3 shadow-md h-[65vh] rounded">
+                        <div class="w-full p-3 shadow-md min-h-[70vh] rounded">
                             <div class="flex items-center justify-between">
                                 <h1 class="text-2xl font-bold mb-2">User Profile</h1>
                                 <form action="{{ route('participants.edit', $participant) }}" method="post">
@@ -143,7 +143,7 @@
                         </div>
 
                         {{-- Frequent Questions --}}
-                        <div class="w-full flex justify-center p-3 shadow-md h-[65vh] rounded overflow-y-auto">
+                        <div class="w-full flex justify-center p-3 shadow-md min-h-[70vh] rounded overflow-y-auto">
                             <div class="w-full">
                                 <div x-data="{
                                     open: null,
@@ -206,12 +206,18 @@
                                                             <p class="mb-1" x-text="question.text"></p>
                                                             <div class="flex items-center gap-2">
 
-                                                                <input class="w-full rounded focus:ring-black"
+                                                                {{-- <input class="w-full rounded focus:ring-black"
                                                                     :name="`${question.text.toLowerCase().replace(/ /g, '_').replace('?','')}`"
                                                                     type="text"
                                                                     :placeholder="`${frequents[question.text.toLowerCase().replace(/ /g, '_').replace('?','')]}`"
-                                                                    x-model="answers[`${section.title.toLowerCase()}_${question.id}`]">
+                                                                    x-model="answers[`${section.title.toLowerCase()}_${question.id}`]"> --}}
 
+                                                                    <textarea
+                                                                    class="w-full rounded"
+                                                                    :name="`${question.text.toLowerCase().replace(/ /g, '_').replace('?','')}`"
+                                                                    x-text="`${frequents[question.text.toLowerCase().replace(/ /g, '_').replace('?','')]}`"
+                                                                    x-model="answers[`${section.title.toLowerCase()}_${question.id}`]"
+                                                                    rows="1"></textarea>
                                                             </div>
                                                         </div>
                                                     </template>
@@ -229,6 +235,12 @@
                         </div>
                     </div>
                     <br>
+                    {{-- Motivation --}}
+                    <div class="shadow-md p-3 rounded">
+                        <h1 class="text-2xl font-bold mb-2">Motivation</h1>
+                        <p>{{$participant->motivation}}</p>
+                    </div>
+                    <br>
                     {{-- Satisfaction --}}
                     <div x-data="{
                         totalTasks: 8,
@@ -237,7 +249,7 @@
                         get percentage() {
                             return (this.checkedTasks / this.totalTasks) * 100;
                         },
-                    
+
                         get barColor() {
                             const percentage = this.percentage;
                             if (percentage < 90) {

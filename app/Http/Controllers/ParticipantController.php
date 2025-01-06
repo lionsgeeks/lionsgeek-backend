@@ -67,7 +67,8 @@ class ParticipantController extends Controller
      */
     public function edit(Participant $participant)
     {
-        return view('participants.partials.participant_edit', compact('participant'));
+        $sessions = InfoSession::all();
+        return view('participants.partials.participant_edit', compact('participant', 'sessions'));
     }
 
     /**
@@ -84,11 +85,24 @@ class ParticipantController extends Controller
             'prefecture' => 'required',
         ]);
 
+
         $hasImage = $request->image;
         // check if the requested image is different from the already stored image
         if ($hasImage) {
             Storage::disk('public')->delete('images/participants/' . $participant->image);
             $imageName = $this->uploadFile($request->file('image'), "/participants/");
+        }
+
+
+        if ($request->session && $request->session != $participant->info_session_id) {
+            dd('fuck');
+            $session = InfoSession::find($request->session);
+            $participant->infoSession()->associate($session);
+            $participant->save();
+            $participant->update([
+                'info_session_id' => $request->session
+            ]);
+
         }
 
 

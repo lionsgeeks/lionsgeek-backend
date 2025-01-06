@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl leading-tight">
-            Editing {{ $participant->full_name }}'s name
+            Editing {{ $participant->full_name }}'s profile
         </h2>
     </x-slot>
 
@@ -55,12 +55,24 @@
                         </div>
                     </div>
                     <br>
+                    <div class="flex flex-col gap-2 w-full">
+                        <label class="font-semibold" for="session">Session:</label>
+                        <select name="session" id="session" class="rounded capitalize">
+                            <option selected disabled value="">{{$participant->infoSession->formation}} {{$participant->infoSession->name}}</option>
+                            @foreach ($sessions as $session)
+                                <option value="{{$session->id}}">
+                                    {{$session->formation}} {{$session->name}}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    {{-- <br>
                     <div class="flex items-center gap-2">
                         <div class="flex flex-col gap-2 w-full">
                             <label class="font-semibold" for="city">Motivation:</label>
-                            <textarea rows="10" required class="rounded capitalize">{{ $participant->motivation }}</textarea>
+                            <textarea rows="10"  required class="rounded capitalize">{{ $participant->motivation }}</textarea>
                         </div>
-                    </div>
+                    </div> --}}
                     <br>
                     <div class="flex flex-col gap-2">
                         <p class="font-semibold">Profile Image:</p>

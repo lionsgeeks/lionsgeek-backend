@@ -201,7 +201,15 @@ class ParticipantController extends Controller
     public function toInterview(Request $request)
     {
         $candidats = Participant::where('info_session_id', $request->infosession_id)->where('current_step', 'interview')->get();
-        dd($request->all());
+        // dd($request->all());
+        $info = InfoSession::where('id', $request->infosession_id)->first();
+        // dd($info->formation);
+        $formationType=$info->formation;
+        if ($formationType == 'Media') {
+            $emailRecipient = 'Media';
+        } elseif ($formationType == 'Coding') {
+            $emailRecipient = 'Coding';
+        }
         $divided = ceil($candidats->count() / count($request->dates));
         foreach ($request->dates as $time) {
             // dd($time);
@@ -210,7 +218,7 @@ class ParticipantController extends Controller
                 $fullName = $candidat->full_name;
                 $day = $request->date;
                 $timeSlot = $time;
-                Mail::to($candidat->email)->send(new InterviewMail($fullName, $day, $timeSlot));
+                Mail::mailer("Media")->to($candidat->email)->send(new InterviewMail($fullName, $day, $timeSlot));
             }
         }
         return back();

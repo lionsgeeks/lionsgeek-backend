@@ -13,10 +13,7 @@
         </a> --}}
     </x-slot>
     <div class="p-10">
-        <div class="flex justify-end mb-5">
-            @include('info_session.partials.delete-session_modal')
-
-        </div>
+        
         <div class="flex gap-4">
             <div class="bg-white flex flex-col gap-5  font-bold w-1/4 px-5 py-8 shadow rounded-xl">
                 <div class="flex justify-between">
@@ -49,16 +46,11 @@
                             d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
                     </svg>
                 </div>
-                <div class="flex gap-3">
-                    @include('info_session.partials.update_session_modal')
-                    @include('participants.partials.interview_modal')
-                    @include('participants.partials.jungle_modal')
-                    @include('participants.partials.school_modal')
-                </div>
+                
             </div>
             <div class="bg-white flex flex-col gap-5 font-bold w-1/4 px-5 py-8 shadow rounded-xl">
                 <div class="flex justify-between">
-                    <h1 class="text-xl">Males and Females</h1>
+                    <h1 class="text-xl">Gender</h1>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="30" height="30" fill="currentColor">
                         <circle cx="20" cy="12" r="6" fill="#4A90E2" />
                         <rect x="16" y="20" width="8" height="18" rx="2" fill="#4A90E2" />
@@ -76,10 +68,39 @@
                 @php
                     $genderCounts = $infoSession->participants->groupBy('gender')->map->count();
                 @endphp
-                <p class="text-blue-400">Males: {{ $genderCounts['male'] ?? 0 }}</p>
-                <p class="text-pink-400">Females: {{ $genderCounts['female'] ?? 0 }}</p>
+                <p> <span class="text-sky-300">Males:</span>  {{ $genderCounts['male'] ?? 0 }}</p>
+                <p> <span  class="text-pink-300">Females:</span>  {{ $genderCounts['female'] ?? 0 }}</p>
             </div>
             
+        </div>
+        <div>
+            <div class="flex items-center gap-x-3 justify-end pt-12 ">
+              
+                
+                <form action="{{ route('questions.export') }}" method="post">
+                    @csrf
+
+                        <button class="bg-black px-2 py-1 rounded text-white">
+                            Export Questions
+                        </button>
+
+                </form>
+                <form action='{{ route('participant.export') }}' method="post">
+                    @csrf
+                    <input class="hidden" type="text" name="term" id="term" :value="searchQuery">
+                    <input class="hidden" type="text" name="step" id="step" :value="selectedStep">
+                    <input class="hidden" type="text" name="session" id="session"
+                        :value="infos && infos.length > 0 ? selectedSession : {{ $infoSession ? $infoSession->id : null }}">
+                    <button class="bg-black px-2 py-1 rounded text-white ">
+                        Export Students
+                    </button>
+                </form>
+                <div class="flex justify-end gap-x-5 items-center ">
+                    @include('info_session.partials.update_session_modal')
+                    @include('info_session.partials.delete-session_modal')
+        
+                </div>
+            </div>
         </div>
         @include('participants.partials.participants_table', [
             'parts' => $infoSession->participants,
@@ -92,10 +113,10 @@
                 @endphp
                 <x-gender-chart :$males :$totalNumber />
             </div> --}}
-
+{{-- 
             <div class="w-[40%] bg-white p-2 rounded">
                 <canvas id="ageChart"></canvas>
-            </div>
+            </div> --}}
         </div>
 
 

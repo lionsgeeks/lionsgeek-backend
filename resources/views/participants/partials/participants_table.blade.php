@@ -95,28 +95,15 @@ this.selectedSession = "";
                             Reset Filters
                         </button>
                     </div>
-
-                    <div class="flex items-center gap-x-3 ">
-                        <form action="{{ route('questions.export') }}" method="post">
-                            @csrf
-
-                                <button class="bg-black px-2 py-1 rounded text-white">
-                                    Export Questions
-                                </button>
-
-                        </form>
-                        <form action='{{ route('participant.export') }}' method="post">
-                            @csrf
-                            <input class="hidden" type="text" name="term" id="term" :value="searchQuery">
-                            <input class="hidden" type="text" name="step" id="step" :value="selectedStep">
-                            <input class="hidden" type="text" name="session" id="session"
-                                :value="infos && infos.length > 0 ? selectedSession : {{ $infoSession ? $infoSession->id : null }}">
-                            <button class="bg-black px-2 py-1 rounded text-white ">
-                                Export Students
-                            </button>
-                        </form>
+                    @if (Route::is('infosessions.show'))
+                    <div class="flex items-center gap-x-3">
+                        @include('participants.partials.interview_modal')
+                        @include('participants.partials.jungle_modal')
+                        @include('participants.partials.school_modal')
                     </div>
-
+                @endif
+                
+                   
                 </div>
 
                 <table class="w-full text-center">

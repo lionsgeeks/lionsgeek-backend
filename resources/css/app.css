@@ -8,6 +8,7 @@ input[type="checkbox"] {
     height: 150px;
     accent-color: #fee819;
   } */
+[x-cloak] { display: none !important; }
 
   #checkbox {
     display: none;

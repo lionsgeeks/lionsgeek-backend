@@ -69,7 +69,7 @@
                             <div class="flex items- gap-7 ">
                                 @if ($participant->image)
                                     <img src="{{ asset('storage/images/participants/' . $participant->image) }}"
-                                        width="150" class="rounded-full aspect-square" alt="">
+                                        width="150" class="rounded-full aspect-square object-cover" alt="">
                                 @else
                                     <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="125" height="125"
                                         viewBox="0 0 280 280" preserveAspectRatio="xMidYMid meet" class="">
@@ -199,7 +199,7 @@
                                                 </h1>
 
                                                 <!-- Section questions, shown when section is expanded -->
-                                                <div x-show="open === index" class="pl-4">
+                                                  <div x-show="open === index" class="pl-4">
                                                     <template x-for="(question, qIndex) in section.questions"
                                                         :key="qIndex">
                                                         <div class="w-full my-2">

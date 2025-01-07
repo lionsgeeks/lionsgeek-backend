@@ -73,7 +73,7 @@ copyToClip() {
             console.error("Unable to copy to clipboard", err);
         }
     document.body.removeChild(textArea);
-    }
+    },
 }'>
     <div class="mx-auto">
         <div class="bg-white h-[76vh] overflow-y-auto  overflow-hidden shadow-sm sm:rounded-lg">
@@ -129,14 +129,15 @@ copyToClip() {
                         <button @click="copyToClip()" id="copyBtn" class="bg-black px-2  py-1 rounded text-white">
                             <span x-text="buttonText"></span>
                         </button>
+                        <p x-text="count"></p>
                     </div>
                     @if (Route::is('infosessions.show'))
-                    <div class="flex items-center gap-x-3">
-                        @include('participants.partials.interview_modal')
-                        @include('participants.partials.jungle_modal')
-                        @include('participants.partials.school_modal')
-                    </div>
-                @endif
+                        <div class="flex items-center gap-x-3">
+                            @include('participants.partials.interview_modal')
+                            @include('participants.partials.jungle_modal')
+                            @include('participants.partials.school_modal')
+                        </div>
+                    @endif
 
 
                 </div>

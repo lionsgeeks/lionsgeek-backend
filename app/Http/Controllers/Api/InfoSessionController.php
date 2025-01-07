@@ -19,35 +19,63 @@ class InfoSessionController extends Controller
         ]);
     }
 
+    public function manualChecking(Request $request)
+    {
+        $request->validate([
+            "id" => "integer"
+        ]);
+        $participant = Participant::where("id", $request->id)->first();
+        if ($participant) {
+            $participant->is_visited = true;
+            $participant->current_step = "interview";
+            $participant->save();
+
+            return response()->json([
+                "message" => "manual visite",
+                "status" => 200,
+                "profile" => $participant
+            ]);
+        }
+    }
     public function validateParticipant(Request $request)
     {
         $request->validate([
             "email" => "required",
-            "code" => "required"
+            "code" => "required",
+            "id" => "integer"
         ]);
 
         $participant = Participant::where("email", $request->email)
             ->where("code", $request->code)
+            // ->where("info_session_id" , $request->id)
             ->first();
 
         if ($participant) {
-            if (!$participant->is_visited) {
-                $participant->is_visited = true;
-                $participant->current_step = "interview";
-                $participant->save();
+            if ($participant->info_session_id == "100") {
+                if (!$participant->is_visited) {
+                    $participant->is_visited = true;
+                    $participant->current_step = "interview";
+                    $participant->save();
 
+                    return response()->json([
+                        "message" => "Credentials match.",
+                        "status" => 200,
+                        "profile" => $participant
+                    ]);
+                }
                 return response()->json([
-                    "message" => "Credentials match.",
+                    "message" => "Already participated.",
+                    "status" => 200,
+                    "profile" => $participant
+                ]);
+                # code...
+            } else {
+                return response()->json([
+                    "message" => "Participant belong to another session",
                     "status" => 200,
                     "profile" => $participant
                 ]);
             }
-
-            return response()->json([
-                "message" => "Already participated.",
-                "status" => 200,
-                "profile" => $participant
-            ]);
         } else {
             return response()->json([
                 "message" => "No such participant.",

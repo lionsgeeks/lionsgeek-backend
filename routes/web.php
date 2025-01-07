@@ -131,7 +131,7 @@ Route::middleware('auth')->group(function () {
 // Route::post('/booking/store', [BookingController::class, 'store'])->name('booking.store');
 
 Route::get("/test", function () {
-    $data = Participant::find(1);
-    return view("maizzleMails.emails.transactional", compact("data"));
+    $data = InfoSession::find(1);
+    return view("maizzleMails.emails.jungleMail", compact("data"));
 });
 require __DIR__ . '/auth.php';

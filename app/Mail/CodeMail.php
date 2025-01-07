@@ -41,7 +41,7 @@ class CodeMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'maizzleMails.emails.transactional',
+            view: 'maizzleMails.emails.infoSessionInvi',
         );
     }
 

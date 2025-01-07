@@ -217,7 +217,6 @@ class ParticipantController extends Controller
         $candidats = Participant::where('info_session_id', $request->infosession_id)->where('current_step', 'interview')->get();
         // dd($request->all());
         $info = InfoSession::where('id', $request->infosession_id)->first();
-        // dd($info->formation);
         $formationType=$info->formation;
         if ($formationType == 'Media') {
             $emailRecipient = 'Media';
@@ -239,10 +238,13 @@ class ParticipantController extends Controller
     }
     public function toJungle(Request $request)
     {
+        $sessionId = $request->sessionId;
+        $traning = InfoSession::where('id', $sessionId)->first()->formation;
+
         $candidats = Participant::where('current_step', 'jungle')->where('info_session_id', $request->infosession_id)->get();
         $day = $request->date;
         foreach ($candidats as $candidat) {
-            Mail::to($candidat->email)->send(new JungleMail($candidat->full_name, $day));
+            Mail::to($candidat->email)->send(new JungleMail($candidat->full_name, $day ,$traning));
         }
         return back();
     }

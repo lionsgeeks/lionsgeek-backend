@@ -16,11 +16,11 @@ class InterviewMail extends Mailable implements ShouldQueue
     /**
      * Create a new message instance.
      */
-    public function __construct(public $full_name, public $day, public $time)
+    public function __construct(public $full_name, public $day, public $timeSlot)
     {
         $this->$full_name = $full_name;
         $this->$day = $day;
-        $this->$time = $time;
+        $this->$timeSlot = $timeSlot;
     }
 
     /**
@@ -39,7 +39,7 @@ class InterviewMail extends Mailable implements ShouldQueue
     public function content(): Content
     {
         return new Content(
-            view: 'mail.interview_mail',
+            view: 'maizzleMails.emails.interviewmail',
         );
     }
 

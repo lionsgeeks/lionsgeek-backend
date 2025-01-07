@@ -35,6 +35,7 @@
                                         @csrf
                                         <div class="flex flex-col gap-3 py-3">
                                             <label for="">Choose Jungle Day start </label>
+                                            <input name="sessionId" type="hidden" value="{{ $infoSession->id }}">
                                             <input min="{{ Carbon\Carbon::now()->format('Y-m-d') }}" type="date"
                                                 name="date">
                                             <input type="hidden" name="infosession_id" value="{{ $infoSession->id }}">

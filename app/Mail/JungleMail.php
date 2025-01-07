@@ -16,10 +16,11 @@ class JungleMail extends Mailable implements ShouldQueue
     /**
      * Create a new message instance.
      */
-    public function __construct(public $full_name, public $day)
+    public function __construct(public $full_name, public $day , public $traning)
     {
         $this->full_name = $full_name;
         $this->day = $day;
+        $this->traning = $traning;
     }
 
     /**
@@ -38,7 +39,7 @@ class JungleMail extends Mailable implements ShouldQueue
     public function content(): Content
     {
         return new Content(
-            view: 'mail.jungle_mail',
+            view: 'maizzleMails.emails.jungleMail',
         );
     }
 

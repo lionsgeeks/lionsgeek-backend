@@ -232,7 +232,7 @@ class ParticipantController extends Controller
                 $fullName = $candidat->full_name;
                 $day = $request->date;
                 $timeSlot = $time;
-                Mail::mailer("Media")->to($candidat->email)->send(new InterviewMail($fullName, $day, $timeSlot));
+                Mail::mailer($emailRecipient)->to($candidat->email)->send(new InterviewMail($fullName, $day, $timeSlot));
             }
         }
         return back();

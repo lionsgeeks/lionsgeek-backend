@@ -43,6 +43,37 @@ this.searchQuery = "";
 this.selectedStep = "";
 this.selectedSession = "";
 },
+
+
+{{-- Copying the emails --}}
+buttonText: "Copy Emails",
+copyToClip() {
+    let content = "";
+    const filteredParticipants=this.participants.filter(participant=> this.matchesFilter(participant));
+
+    filteredParticipants.forEach(participant => {
+    content += participant.email + ", ";
+    });
+
+    if (content.endsWith(", ")) {
+        content = content.slice(0, -2);
+    }
+    const textArea = document.createElement("textarea");
+    textArea.value = content;
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    try {
+            document.execCommand("copy");
+            this.buttonText = "Email Copied";
+            setTimeout(() => {
+                this.buttonText = "Copy Emails";
+            }, 2000);
+        } catch (err) {
+            console.error("Unable to copy to clipboard", err);
+        }
+    document.body.removeChild(textArea);
+    }
 }'>
     <div class="mx-auto">
         <div class="bg-white h-[76vh] overflow-y-auto  overflow-hidden shadow-sm sm:rounded-lg">
@@ -94,28 +125,19 @@ this.selectedSession = "";
                         <button @click="resetFilter()" class="bg-black px-2  py-1 rounded text-white">
                             Reset Filters
                         </button>
+
+                        <button @click="copyToClip()" id="copyBtn" class="bg-black px-2  py-1 rounded text-white">
+                            <span x-text="buttonText"></span>
+                        </button>
                     </div>
-
-                    <div class="flex items-center gap-x-3 ">
-                        <form action="{{ route('questions.export') }}" method="post">
-                            @csrf
-
-                                <button class="bg-black px-2 py-1 rounded text-white">
-                                    Export Questions
-                                </button>
-
-                        </form>
-                        <form action='{{ route('participant.export') }}' method="post">
-                            @csrf
-                            <input class="hidden" type="text" name="term" id="term" :value="searchQuery">
-                            <input class="hidden" type="text" name="step" id="step" :value="selectedStep">
-                            <input class="hidden" type="text" name="session" id="session"
-                                :value="infos && infos.length > 0 ? selectedSession : {{ $infoSession ? $infoSession->id : null }}">
-                            <button class="bg-black px-2 py-1 rounded text-white ">
-                                Export Students
-                            </button>
-                        </form>
+                    @if (Route::is('infosessions.show'))
+                    <div class="flex items-center gap-x-3">
+                        @include('participants.partials.interview_modal')
+                        @include('participants.partials.jungle_modal')
+                        @include('participants.partials.school_modal')
                     </div>
+                @endif
+
 
                 </div>
 
@@ -134,8 +156,7 @@ this.selectedSession = "";
                         <template x-for="participant in participants" :key="participant.id">
                             <tr x-show="matchesFilter(participant)" class="h-[7vh] hover:bg-slate-100 cursor-pointer"
                                 x-on:click="window.location.href = '/participants/' + participant.id"
-                                {{-- :class="participant.current_step == 'interview_pending' ? 'bg-red-500' : 'bg-yellow-600' " --}}
-                                >
+                                {{-- :class="participant.current_step == 'interview_pending' ? 'bg-red-500' : 'bg-yellow-600' " --}}>
                                 <td>
                                     <span class="cursor-pointer border-b border-black"
                                         x-on:click="window.location.href = '/participants/' + participant.id"
@@ -180,3 +201,23 @@ this.selectedSession = "";
         </div>
     </div>
 </div>
+
+{{-- <script>
+    function copyToClip(participants) {
+        let content = '';
+        participants.forEach(participant => {
+            content += participant.email + ", "
+        });
+        const textArea = document.createElement("textarea");
+        textArea.value = content;
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        try {
+            document.execCommand('copy');
+        } catch (err) {
+            console.error('Unable to copy to clipboard', err);
+        }
+        document.body.removeChild(textArea);
+    }
+</script> --}}

@@ -20,7 +20,8 @@
 </head>
 
 <body class="font-sans antialiased">
-    <div class="min-h-screen flex" :class="darkmode ? 'bg-[#252529]' : 'bg-gray-100'" x-data="{
+    <div class="min-h-screen flex" :class="darkmode ? 'bg-[#252529]' : 'bg-gray-100'"
+    x-data="{
         darkmode: false,
     }">
         {{-- @include('layouts.navigation') --}}
@@ -72,7 +73,7 @@
                             @endif
                         </button>
 
-                        <div x-show="showNotif"
+                        <div x-cloak x-show="showNotif"
                             class=" absolute right-7 w-[29rem] bg-white border rounded-lg shadow-lg z-50 h-[28rem] mt-3 overflow-y-scroll">
                             <h1 class="text-black text-center pt-6 font-bold">Notification</h1>
                             <div class="p-4 ">

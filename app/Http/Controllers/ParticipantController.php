@@ -67,7 +67,8 @@ class ParticipantController extends Controller
      */
     public function edit(Participant $participant)
     {
-        return view('participants.partials.participant_edit', compact('participant'));
+        $sessions = InfoSession::all();
+        return view('participants.partials.participant_edit', compact('participant', 'sessions'));
     }
 
     /**
@@ -84,11 +85,24 @@ class ParticipantController extends Controller
             'prefecture' => 'required',
         ]);
 
+
         $hasImage = $request->image;
         // check if the requested image is different from the already stored image
         if ($hasImage) {
             Storage::disk('public')->delete('images/participants/' . $participant->image);
             $imageName = $this->uploadFile($request->file('image'), "/participants/");
+        }
+
+
+        if ($request->session && $request->session != $participant->info_session_id) {
+            dd('fuck');
+            $session = InfoSession::find($request->session);
+            $participant->infoSession()->associate($session);
+            $participant->save();
+            $participant->update([
+                'info_session_id' => $request->session
+            ]);
+
         }
 
 
@@ -201,7 +215,15 @@ class ParticipantController extends Controller
     public function toInterview(Request $request)
     {
         $candidats = Participant::where('info_session_id', $request->infosession_id)->where('current_step', 'interview')->get();
-        dd($request->all());
+        // dd($request->all());
+        $info = InfoSession::where('id', $request->infosession_id)->first();
+        // dd($info->formation);
+        $formationType=$info->formation;
+        if ($formationType == 'Media') {
+            $emailRecipient = 'Media';
+        } elseif ($formationType == 'Coding') {
+            $emailRecipient = 'Coding';
+        }
         $divided = ceil($candidats->count() / count($request->dates));
         foreach ($request->dates as $time) {
             // dd($time);
@@ -210,7 +232,7 @@ class ParticipantController extends Controller
                 $fullName = $candidat->full_name;
                 $day = $request->date;
                 $timeSlot = $time;
-                Mail::to($candidat->email)->send(new InterviewMail($fullName, $day, $timeSlot));
+                Mail::mailer("Media")->to($candidat->email)->send(new InterviewMail($fullName, $day, $timeSlot));
             }
         }
         return back();

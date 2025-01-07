@@ -55,16 +55,36 @@
                         </div>
                     </div>
                     <br>
-                    <div class="flex flex-col gap-2 w-full">
-                        <label class="font-semibold" for="session">Session:</label>
-                        <select name="session" id="session" class="rounded capitalize">
-                            <option selected disabled value="">{{$participant->infoSession->formation}} {{$participant->infoSession->name}}</option>
-                            @foreach ($sessions as $session)
-                                <option value="{{$session->id}}">
-                                    {{$session->formation}} {{$session->name}}
-                                </option>
-                            @endforeach
-                        </select>
+                    <div class="flex items-center gap-2">
+                        <div class="flex flex-col gap-2 w-full">
+                            <label class="font-semibold" for="session">Session:</label>
+                            <select name="session" id="session" class="rounded capitalize">
+                                <option selected disabled value="">{{ $participant->infoSession->formation }}
+                                    {{ $participant->infoSession->name }}</option>
+                                @foreach ($sessions as $session)
+                                    <option value="{{ $session->id }}">
+                                        {{ $session->formation }} {{ $session->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
+
+                        <div class="flex flex-col gap-2 w-full">
+                            <label for="step">Current Step:</label>
+                            <select name="step" id="step" class="rounded capitalize">
+                                <option selected disabled value="">
+                                    {{ ucwords(str_replace('_', ' ', $participant->current_step)) }}</option>
+                                <option value="info_session">Info Session</option>
+                                <option value="interview">Interview</option>
+                                <option value="interview_pending">Interview Pending</option>
+                                <option value="interview_failed">Interview Failed</option>
+                                <option value="jungle">Jungle</option>
+                                <option value="jungle_failed">Jungle Failed</option>
+                                <option value="coding_school">Coding School</option>
+                                <option value="media_school">Media School</option>
+                            </select>
+                        </div>
                     </div>
                     {{-- <br>
                     <div class="flex items-center gap-2">

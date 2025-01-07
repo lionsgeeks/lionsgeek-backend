@@ -114,6 +114,7 @@ class ParticipantController extends Controller
             'city' => $request->city,
             'prefecture' => $request->prefecture,
             "image" => $hasImage ? $imageName : $participant->image,
+            "current_step" => $request->step ? $request->step : $participant->current_step,
         ]);
 
         return redirect()->route('participants.show', $participant);

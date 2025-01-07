@@ -18,9 +18,9 @@ class InterviewMail extends Mailable implements ShouldQueue
      */
     public function __construct(public $full_name, public $day, public $timeSlot)
     {
-        $this->$full_name = $full_name;
-        $this->$day = $day;
-        $this->$timeSlot = $timeSlot;
+        $this->full_name = $full_name;
+        $this->day = $day;
+        $this->timeSlot = $timeSlot;
     }
 
     /**

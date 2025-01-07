@@ -65,9 +65,9 @@
                   <p style="font-size: 16px; line-height: 24px; font-weight: 700; color: #475569">Here are your interview details:</p>
                   <div role="separator" style="line-height: 4px">&zwj;</div>
                   <ul style="font-size: 16px; line-height: 24px; color: #475569">
-                    <li style="margin-top: 12px">Date: {{ \Carbon\Carbon::parse($day)->format('Y-m-d H:i') }}</li>
-                    <li style="margin-top: 12px">Time: {{ $timeSlot }}</li>
-                    <li style="margin-top: 12px">Location: LionsGeek, LionsGeek, 4eme étage, Ain Sebaa Center, Route de Rabat,
+                    <li style="margin-top: 12px; font-size: 16px; line-height: 24px; color: #475569">Date: {{ \Carbon\Carbon::parse($day)->format('Y-m-d') }}</li>
+                    <li style="margin-top: 12px; font-size: 16px; line-height: 24px; color: #475569">Time: {{ $timeSlot }}</li>
+                    <li style="margin-top: 12px; font-size: 16px; line-height: 24px; color: #475569">Location: LionsGeek, LionsGeek, 4eme étage, Ain Sebaa Center, Route de Rabat,
                       Casablanca
                       20060, Maroc</li>
                   </ul>

@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -13,14 +14,24 @@ class InterviewMail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
+    public $full_name;
+    public $day;
+    public $timeSlot;
+    public $date;
+    public $exactTime;
+
     /**
      * Create a new message instance.
      */
-    public function __construct(public $full_name, public $day, public $timeSlot)
+    public function __construct($full_name, $day, $timeSlot)
     {
         $this->full_name = $full_name;
         $this->day = $day;
         $this->timeSlot = $timeSlot;
+
+        $carbonInstance = Carbon::parse($timeSlot);
+        $this->date = $carbonInstance->toDateString(); // e.g., 2025-01-24
+        $this->exactTime = $carbonInstance->format('H:i'); // e.g., 16:44
     }
 
     /**
@@ -29,7 +40,7 @@ class InterviewMail extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Interview Lionsgeek',
+            subject: 'Invitation to Your Interview at Lionsgeek!',
         );
     }
 

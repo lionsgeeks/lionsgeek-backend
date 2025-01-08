@@ -87,3 +87,49 @@ input[type="checkbox"] {
     -ms-transform: translateX(5vw);
     -o-transform: translateX(5vw);
 }
+
+.alert {
+  position: fixed;
+  top: 50px;
+  left: -200px;
+  transform: translateX(0);
+  background-color: white !important;
+  color: rgb(252, 69, 53);
+  /* color: black; */
+  opacity: 1;
+  animation: In 2.5s forwards, Out 2.5s forwards 5s;
+  border: 2px solid transparent;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 10px 20px rgba(1, 59, 13, 0.1);
+  width: 300px;
+}
+
+@keyframes In {
+  0% {
+      left: -200px;
+      opacity: 0;
+  }
+
+
+  50% {
+      left: 53%;
+      transform: translateX(-50%);
+      opacity: 1;
+  }
+  100% {
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 1;
+  }
+}
+
+@keyframes Out {
+  0% {
+      opacity: 1;
+  }
+  100% {
+      opacity: 0;
+  }
+}
+

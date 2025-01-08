@@ -15,7 +15,6 @@
         </div> --}}
 
 
-
         @include('participants.partials.participants_table', [
             'parts' => $participants,
             'infoSession' => null,

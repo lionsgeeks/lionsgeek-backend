@@ -11,6 +11,7 @@ use App\Models\FrequentQuestion;
 use App\Models\InfoSession;
 use App\Models\Note;
 use App\Models\Participant;
+use Carbon\Carbon;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -229,10 +230,12 @@ class ParticipantController extends Controller
             // dd($time);
             $group = $candidats->splice(0, $divided);
             foreach ($group as $candidat) {
-                $fullName = $candidat->full_name;
+                $full_name = $candidat->full_name;
                 $day = $request->date;
                 $timeSlot = $time;
-                Mail::mailer($emailRecipient)->to($candidat->email)->send(new InterviewMail($fullName, $day, $timeSlot));
+
+
+                Mail::mailer($emailRecipient)->to($candidat->email)->send(new InterviewMail($full_name, $day, $timeSlot));
             }
         }
         return back();

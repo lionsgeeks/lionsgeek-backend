@@ -53,7 +53,7 @@ class InfoSessionController extends Controller
             'start_date' => $request->start_date,
             'places' => $request->places,
         ]);
-        return back()->with('success','Session Has Been Created Successfully');
+        return back()->with('success','Session Has Been Created Successfully!');
     }
     public function update(Request $request,  $id)
     {
@@ -75,13 +75,13 @@ class InfoSessionController extends Controller
             'isFinish' => filter_var($request->isFinish, FILTER_VALIDATE_BOOLEAN),
             'places' => $request->places,
         ]);
-        return back();
+        return back()->with('success', 'Session Has Been Updated Successfully!');
     }
     public function destroy($id)
     {
         $infoSession = InfoSession::where('id', $id)->first();
         $infoSession->delete();
-        return redirect('infosessions');
+        return redirect('infosessions')->with('success', 'Session Has Been Deleted Successfully!');
     }
     public function availabilityStatus($id)
     {

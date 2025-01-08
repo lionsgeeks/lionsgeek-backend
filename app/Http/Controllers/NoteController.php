@@ -43,7 +43,7 @@ class NoteController extends Controller
         ]);
 
 
-        return redirect()->back();
+        return redirect()->back()->with("success","Note Has Been Added successfully!");
     }
 
     /**

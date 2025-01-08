@@ -71,7 +71,7 @@ class GalleryController extends Controller
             }
         }
 
-        return redirect("/gallery");
+        return redirect("/gallery")->with('success','Gallery Has Been Created Successfully!');
     }
 
     /**
@@ -124,7 +124,7 @@ class GalleryController extends Controller
 
 
 
-        return redirect("gallery");
+        return redirect("gallery")->with('success','Gallery Has Been Updated Successfully!');
     }
 
     /**
@@ -140,7 +140,7 @@ class GalleryController extends Controller
             }
             $gallery->delete();
 
-            return redirect("/gallery");
+            return redirect("/gallery")->with('success','Gallery Has Been Deleted Successfully!');
         }
         if (!$gallery) {
             return back();

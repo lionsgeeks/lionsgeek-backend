@@ -27,13 +27,15 @@
                         !str_contains($participant->current_step, 'fail') &&
                             !str_contains($participant->current_step, 'info') &&
                             !str_contains($participant->current_step, 'school'))
-                        <form action="{{ route('participant.step', $participant) }}" method="post">
+                        <form action="{{ route('participant.step', $participant) }}" method="post"
+                            class="flex items-center gap-2">
                             @csrf
                             <button type="submit" name="action" value="deny"
                                 class="border-2 border-black py-2 px-4 rounded">
                                 Deny
                             </button>
                         </form>
+
                         <button type="submit" id="next-step-button" class="bg-black text-white py-2 px-4 rounded">
                             Go To Next Step
                         </button>
@@ -46,9 +48,10 @@
                                 return 'Jungle';
                             } elseif ($currentStep == 'jungle') {
                                 return 'Coding School';
-                            } 
+                            }
                         }
                     @endphp
+                    {{-- Next Step Modal --}}
                     <div id="confirmation-next"
                         class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden">
                         <div class="bg-white rounded-lg shadow-lg p-6 w-[33vw]">
@@ -86,9 +89,12 @@
                         });
                     </script>
 
-                    <button id="delete-button" class="py-2 rounded-lg text-white px-2 bg-red-600" type="submit">Remove
-                        participant</button>
+                    <button id="delete-button" class="py-2 rounded-lg text-white px-2 bg-red-600" type="submit">
+                        Remove Participant
+                    </button>
 
+
+                    {{-- Delete Confirmation Modal --}}
                     <div id="confirmation-modal"
                         class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden">
                         <div class="bg-white rounded-lg shadow-lg p-6 w-[37vw] ">
@@ -123,8 +129,10 @@
                         });
                     </script>
                 </div>
+
+                {{-- User Information --}}
                 <div class="p-6 text-gray-900">
-                    <div class="flex items-center gap-2 justify-between">
+                    <div class="flex items-center flex-col lg:flex-row gap-2 justify-between">
                         {{-- User Info --}}
                         <div class="w-full p-3 shadow-md min-h-[70vh] rounded">
                             <div class="flex items-center justify-between">
@@ -323,7 +331,7 @@
                         get percentage() {
                             return (this.checkedTasks / this.totalTasks) * 100;
                         },
-                    
+
                         get barColor() {
                             const percentage = this.percentage;
                             if (percentage < 90) {
@@ -356,7 +364,7 @@
                             <!-- Task List -->
                             <div class="flex flex-wrap mt-4">
                                 @foreach ($satisfactions as $column => $item)
-                                    <div class="w-[25%] my-2">
+                                    <div class="w-[50%] lg:w-[25%] my-2">
                                         {{-- send the ones that havent been modified as well --}}
                                         <input type="hidden" name="satisfaction[{{ $column }}]"
                                             value="0">

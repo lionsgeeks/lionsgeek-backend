@@ -8,6 +8,7 @@ use App\Http\Controllers\CoworkingController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\InfoSessionController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\NoteController;
@@ -48,6 +49,7 @@ Route::middleware('auth')->group(function () {
         return redirect('dashboard');
     });
 
+    Route::post('/tableview', [GeneralController::class, 'tableview'])->name('table.view');
 
     Route::resource("events", EventController::class);
 

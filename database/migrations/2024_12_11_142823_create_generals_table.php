@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('generals', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('views')->default(100);
+            $table->boolean('darkmode')->default(0);
+            $table->string('tablemode')->default('table');
             $table->timestamps();
         });
     }

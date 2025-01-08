@@ -12,7 +12,7 @@
                     enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
-                    <div class="flex items-center gap-3">
+                    <div class="flex flex-col lg:flex-row items-center gap-2">
                         <div class="flex flex-col gap-2 w-full">
                             <label class="font-semibold" for="full_name">Full Name:</label>
                             <input type="text" name="full_name" id="full_name" class="rounded" required
@@ -26,7 +26,7 @@
                     </div>
                     <br>
 
-                    <div class="flex items-center gap-2">
+                    <div class="flex flex-col lg:flex-row items-center gap-2">
                         <div class="flex flex-col gap-2 w-full">
                             <label class="font-semibold" for="email">Email:</label>
                             <input type="email" name="email" id="email" required class="rounded"
@@ -41,7 +41,7 @@
 
 
                     <br>
-                    <div class="flex items-center gap-2">
+                    <div class="flex flex-col lg:flex-row items-center gap-2">
                         <div class="flex flex-col gap-2 w-full">
                             <label class="font-semibold" for="city">City:</label>
                             <input type="text" name="city" id="city" required class="rounded capitalize"
@@ -55,7 +55,7 @@
                         </div>
                     </div>
                     <br>
-                    <div class="flex items-center gap-2">
+                    <div class="flex flex-col lg:flex-row items-center gap-2">
                         <div class="flex flex-col gap-2 w-full">
                             <label class="font-semibold" for="session">Session:</label>
                             <select name="session" id="session" class="rounded capitalize">

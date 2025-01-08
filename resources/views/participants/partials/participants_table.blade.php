@@ -44,7 +44,6 @@ this.selectedStep = "";
 this.selectedSession = "";
 },
 
-
 {{-- Copying the emails --}}
 buttonText: "Copy Emails",
 copyToClip() {
@@ -74,13 +73,71 @@ copyToClip() {
         }
     document.body.removeChild(textArea);
     },
+
+{{-- Sorting --}}
+    sortCriteria: "",
+    sortOrder: "asc",
+
+     {{-- Sort Function --}}
+    sortTable(criteria) {
+    {{-- if same criteria button clicked then change the sorting order --}}
+        if (this.sortCriteria === criteria) {
+            this.sortOrder = this.sortOrder === "asc" ? "desc" : "asc";
+        }
+        {{-- else define a new criteria and set the order --}}
+        else {
+            this.sortCriteria = criteria;
+            this.sortOrder = "asc";
+        }
+
+        {{-- sorts the participants depending on the criteria --}}
+        this.participants = this.participants.sort((a, b) => {
+            if (criteria === "name") {
+                return this.sortOrder === "asc" ? a.full_name.localeCompare(b.full_name) : b.full_name.localeCompare(a.full_name);
+            }  else if (criteria === "birthday") {
+                return this.sortOrder === "asc" ? Date.parse(a.birthday) - Date.parse(b.birthday) : Date.parse(b.birthday) - Date.parse(a.birthday);
+            } else if (criteria === "gender") {
+                return this.sortOrder === "asc" ? a.gender.localeCompare(b.gender) : b.gender.localeCompare(a.gender);
+            } else {
+                return 0;
+            }
+        });
+    }
 }'>
     <div class="mx-auto">
-        <div class="bg-white h-[76vh] overflow-y-auto  overflow-hidden shadow-sm sm:rounded-lg">
+        @php
+            // I called this here instead of calling it in Participant+session controllers
+            $generals = App\Models\General::find(1);
+        @endphp
+        {{-- Button to change the table viewing Mode --}}
+        <form action="{{ route('table.view') }}" method="POST" class="flex gap-3">
+            @csrf
+            <button
+                class="p-2 rounded-t-lg {{ $generals->tablemode == 'table' ? 'bg-black text-white' : 'bg-white text-black' }}"
+                name="view" type="submit" value="table">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="size-8">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 0 1-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0 1 12 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0h7.5c.621 0 1.125.504 1.125 1.125M3.375 8.25c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m17.25-3.75h-7.5c-.621 0-1.125.504-1.125 1.125m8.625-1.125c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M12 10.875v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125M13.125 12h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125M20.625 12c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5M12 14.625v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 14.625c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m0 1.5v-1.5m0 0c0-.621.504-1.125 1.125-1.125m0 0h7.5" />
+                </svg>
+            </button>
+
+            <button
+                class="p-2 rounded-t-lg {{ $generals->tablemode == 'card' ? 'bg-black text-white' : 'bg-white text-black' }}"
+                name="view" type="submit" value="card">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="size-8">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" />
+                </svg>
+            </button>
+        </form>
+
+        <div class="bg-white shadow-sm sm:rounded-b-lg">
             <div class="p-6 text-gray-900">
-                <div class="flex mb-3 items-center justify-between gap-4">
+                <div class="flex mb-3 items-center justify-between gap-4 sticky top-[10px] bg-white">
                     {{-- filters --}}
-                    <div class="flex items-center gap-4 w-[70%] ">
+                    <div class="flex items-center gap-4 w-full p-2">
                         <div class="w-1/3 flex items-center bg-gray-100 rounded-lg pl-2">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                 class="size-5">
@@ -129,7 +186,6 @@ copyToClip() {
                         <button @click="copyToClip()" id="copyBtn" class="bg-black px-2  py-1 rounded text-white">
                             <span x-text="buttonText"></span>
                         </button>
-                        <p x-text="count"></p>
                     </div>
                     @if (Route::is('infosessions.show'))
                         <div class="flex items-center gap-x-3">
@@ -142,83 +198,123 @@ copyToClip() {
 
                 </div>
 
-                <table class="w-full text-center">
-                    <thead>
-                        <th>Name</th>
-                        <th>Phone</th>
-                        <th>Email</th>
-                        <th>Gender</th>
-                        <th>Session</th>
-                        <th>Date of Birth</th>
-                        <th>Current Step</th>
-                    </thead>
 
-                    <tbody class="w-full">
+
+                @if ($generals->tablemode == 'table')
+                    <table class="w-full text-center">
+                        <thead>
+                            <th @click="sortTable('name')" class="cursor-pointer">Name</th>
+                            <th>Phone</th>
+                            <th>Email</th>
+                            <th @click="sortTable('gender')" class="cursor-pointer">Gender</th>
+                            <th>Session</th>
+                            <th @click="sortTable('birthday')" class="cursor-pointer">Date of Birth</th>
+                            <th>Current Step</th>
+                        </thead>
+
+                        <tbody class="w-full">
+                            <template x-for="participant in participants" :key="participant.id">
+                                <tr x-show="matchesFilter(participant)"
+                                    class="h-[7vh] hover:bg-slate-100 cursor-pointer"
+                                    x-on:click="window.location.href = '/participants/' + participant.id">
+                                    <td>
+                                        <span class="cursor-pointer border-b border-black"
+                                            x-on:click="window.location.href = '/participants/' + participant.id"
+                                            x-text="participant.full_name"></span>
+                                    </td>
+                                    <td x-text="participant.phone"></td>
+                                    <td x-text="participant.email"></td>
+                                    <td>
+                                        <span x-text="participant.gender"
+                                            :class="participant.gender == 'male' ? 'bg-sky-100' : 'bg-pink-100'"
+                                            class="text-sm rounded-full px-2 py-1 capitalize">
+                                        </span>
+                                    </td>
+                                    <td>
+                                        <span class="hidden"
+                                            x-text="session = infos.find(session => session.id === participant.info_session_id)"></span>
+
+
+                                        @if ($infos)
+                                            <span class="p-1 rounded-lg border"
+                                                :class="{
+                                                    'bg-yellow-200 border-yellow-400': session
+                                                        ?.formation === 'Media',
+                                                    'bg-black/80 text-white border-white': session
+                                                        ?.formation === 'Coding'
+                                                }"
+                                                x-text="session?.formation + ' ' + session?.name"></span>
+                                        @else
+                                            <span
+                                                class="p-1 rounded-lg border {{ $infoSession->formation == 'Coding' ? 'bg-black/80 text-white border-white' : 'bg-yellow-200 border-yellow-400' }}">{{ $infoSession->formation }}
+                                                {{ $infoSession->name }}</span>
+                                        @endif
+
+                                    </td>
+                                    <td x-text="formatDate(participant.birthday) + '/Age: ' + participant.age"></td>
+                                    <td class="capitalize" x-text="participant.current_step.replace('_', ' ')"></td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                @else
+                    <div class="grid grid-cols-1 lg:grid-cols-4 gap-3">
+
                         <template x-for="participant in participants" :key="participant.id">
-                            <tr x-show="matchesFilter(participant)" class="h-[7vh] hover:bg-slate-100 cursor-pointer"
-                                x-on:click="window.location.href = '/participants/' + participant.id"
-                                {{-- :class="participant.current_step == 'interview_pending' ? 'bg-red-500' : 'bg-yellow-600' " --}}>
-                                <td>
-                                    <span class="cursor-pointer border-b border-black"
-                                        x-on:click="window.location.href = '/participants/' + participant.id"
-                                        x-text="participant.full_name"></span>
-                                </td>
-                                <td x-text="participant.phone"></td>
-                                <td x-text="participant.email"></td>
-                                <td>
-                                    <span x-text="participant.gender"
-                                        :class="participant.gender == 'male' ? 'bg-sky-100' : 'bg-pink-100'"
-                                        class="text-sm rounded-full px-2 py-1 capitalize">
-                                    </span>
-                                </td>
-                                <td>
-                                    <span class="hidden"
-                                        x-text="session = infos.find(session => session.id === participant.info_session_id)"></span>
 
+                            <div class="shadow-md rounded-lg" x-show="matchesFilter(participant)">
 
-                                    @if ($infos)
-                                        <span class="p-1 rounded-lg border"
-                                            :class="{
-                                                'bg-yellow-200 border-yellow-400': session
-                                                    ?.formation === 'Media',
-                                                'bg-black/80 text-white border-white': session
-                                                    ?.formation === 'Coding'
-                                            }"
-                                            x-text="session?.formation + ' ' + session?.name"></span>
-                                    @else
-                                        <span
-                                            class="p-1 rounded-lg border {{ $infoSession->formation == 'Coding' ? 'bg-black/80 text-white border-white' : 'bg-yellow-200 border-yellow-400' }}">{{ $infoSession->formation }}
-                                            {{ $infoSession->name }}</span>
-                                    @endif
+                                <img x-show="participant.image"
+                                    x-on:click="window.location.href = '/participants/' + participant.id"
+                                    :src="`{{ asset('storage/images/participants/') }}/${participant.image}`"
+                                    class="w-full aspect-square object-cover rounded cursor-pointer" alt="participant_image">
 
-                                </td>
-                                <td x-text="formatDate(participant.birthday)"></td>
-                                <td class="capitalize" x-text="participant.current_step.replace('_', ' ')"></td>
-                            </tr>
+                                <svg x-show="!participant.image" version="1.0" xmlns="http://www.w3.org/2000/svg"
+                                    x-on:click="window.location.href = '/participants/' + participant.id"
+                                    viewBox="0 0 280 280" preserveAspectRatio="xMidYMid meet" class="cursor-pointer">
+
+                                    <g transform="translate(0.000000,315.000000) scale(0.100000,-0.100000)"
+                                        fill="#000" stroke="none">
+                                        <path
+                                            d="M705 3008 c-41 -120 -475 -1467 -475 -1474 1 -9 1238 -910 1257 -916 6 -2 294 203 640 454 l631 458 -84 257 c-46 142 -154 477 -241 745 l-158 488 -783 0 c-617 0 -784 -3 -787 -12z m1265 -412 c0 -3 65 -205 145 -451 80 -245 145 -448 145 -450 0 -2 -173 -130 -384 -283 l-384 -280 -384 279 c-283 207 -382 284 -380 297 5 22 283 875 289 885 4 7 953 10 953 3z" />
+                                        <path
+                                            d="M1176 1661 c21 -15 101 -74 178 -130 l139 -101 31 23 c17 13 92 68 166 122 74 54 139 102 144 106 6 5 -145 9 -344 9 l-354 0 40 -29z" />
+                                    </g>
+                                </svg>
+
+                                <div class="flex items-center justify-between p-2">
+                                    <div class="capitalize">
+                                        <h2 class="text-lg font-semibold" x-text="participant.full_name"></h2>
+                                        <p x-text="participant.city"></p>
+                                        <p x-text="participant.prefecture.replace(/_/g, ' ')"></p>
+                                        <p x-text="'Age: ' + participant.age"></p>
+
+                                    </div>
+
+                                    <form
+                                        x-show="!participant.current_step.includes('fail') &&
+                                                !participant.current_step.includes('school') &&
+                                                !participant.current_step.includes('info')
+                                                "
+                                        action="" method="post" class="flex flex-col gap-2">
+                                        @csrf
+                                        <button type="submit" name="action" value="next"
+                                            class="bg-black text-white  px-2 py-1 rounded border-2 border-black">
+                                            Next Step
+                                        </button>
+                                        <button type="submit" name="action" value="deny"
+                                            class="border-2 border-black  px-2 py-1 rounded">
+                                            Deny
+                                        </button>
+                                    </form>
+                                </div>
+
+                            </div>
                         </template>
-                    </tbody>
-                </table>
+                    </div>
+                @endif
+
             </div>
         </div>
     </div>
 </div>
-
-{{-- <script>
-    function copyToClip(participants) {
-        let content = '';
-        participants.forEach(participant => {
-            content += participant.email + ", "
-        });
-        const textArea = document.createElement("textarea");
-        textArea.value = content;
-        document.body.appendChild(textArea);
-        textArea.focus();
-        textArea.select();
-        try {
-            document.execCommand('copy');
-        } catch (err) {
-            console.error('Unable to copy to clipboard', err);
-        }
-        document.body.removeChild(textArea);
-    }
-</script> --}}

@@ -20,6 +20,7 @@
 </head>
 
 <body class="font-sans antialiased">
+    @include('flash-messages')
     <div class="min-h-screen flex" :class="darkmode ? 'bg-[#252529]' : 'bg-gray-100'"
     x-data="{
         darkmode: false,
@@ -215,6 +216,7 @@
             </main>
         </div>
     </div>
+
 </body>
 
 </html>

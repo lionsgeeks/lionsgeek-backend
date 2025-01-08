@@ -134,7 +134,7 @@ class ParticipantController extends Controller
         }
         $participant->delete();
 
-        return redirect("/infosessions");
+        return redirect("/infosessions")->with('success', 'Participant Has Been Deleted Successfully!');
     }
 
 

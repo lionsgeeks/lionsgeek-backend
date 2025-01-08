@@ -53,7 +53,7 @@ class InfoSessionController extends Controller
             'start_date' => $request->start_date,
             'places' => $request->places,
         ]);
-        return back();
+        return back()->with('success','Session Has Been Created Successfully');
     }
     public function update(Request $request,  $id)
     {

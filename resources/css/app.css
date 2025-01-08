@@ -91,10 +91,9 @@ input[type="checkbox"] {
 .alert {
   position: fixed;
   top: 50px;
-  left: -200px;
+  right: 200px;
   transform: translateX(0);
   background-color: white !important;
-  color: rgb(252, 69, 53);
   /* color: black; */
   opacity: 1;
   animation: In 2.5s forwards, Out 2.5s forwards 5s;
@@ -107,18 +106,17 @@ input[type="checkbox"] {
 
 @keyframes In {
   0% {
-      left: -200px;
+      right: -200px;
       opacity: 0;
   }
 
-
   50% {
-      left: 53%;
+      right: 2%;
       transform: translateX(-50%);
       opacity: 1;
   }
   100% {
-      left: 50%;
+      right: 0%;
       transform: translateX(-50%);
       opacity: 1;
   }

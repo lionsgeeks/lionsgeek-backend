@@ -3,12 +3,24 @@
         <h2 class="font-semibold text-xl leading-tight">
             Editing {{ $gallery->title->en }}
         </h2>
-        <form id="deletegallery" action="{{ route('gallery.destroy', $gallery) }}" method="post" enctype="multipart/form-data"
-            onsubmit="this.submitButton.disabled =true">
-            @csrf
-            @method('DELETE')
-
-        </form>
+        <div id="confirmation-project"
+            class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden">
+            <div class="bg-white rounded-lg shadow-lg p-6 w-[37vw] ">
+                <h2 class="text-lg font-semibold text-gray-800">Are you sure?</h2>
+                <p class="text-sm text-gray-600 mt-2">Do you really want to remove this project? This
+                    action cannot be undone.</p>
+                <div class="flex justify-end space-x-4 mt-4">
+                    <button id="cancel-button" class="py-2 px-4 bg-gray-300 rounded-lg hover:bg-gray-400">Cancel</button>
+                    <form id="deletegallery" action="{{ route('gallery.destroy', $gallery) }}" method="post"
+                        enctype="multipart/form-data" onsubmit="this.submitButton.disabled =true">
+                        @csrf
+                        @method('DELETE')
+                        <button id="confirm-button"
+                            class="py-2 px-4 bg-red-600 text-white rounded-lg hover:bg-red-700">Confirm</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </x-slot>
 
 
@@ -22,12 +34,15 @@
                     @method('PUT')
                     <div class="flex justify-end w-full px-4 gap-x-4">
                         <button type="submit" class=" px-4 py-2  rounded-lg bg-black text-white">Submit</button>
-                        <button form="deletegallery" type="submit" class="px-4 py-2 font-semibold rounded-lg bg-red-500 text-white">Delete resource</button>
+                        <button type="button"
+                            class="px-4 py-2 font-semibold rounded-lg bg-red-500 text-white" id="delete-button">Delete
+                            resource</button>
                     </div>
                     {{-- <p class="text-[25px] font-bold">Update Gallery</p> --}}
                     <div x-data="{ tab: 'English' }" class="w-[100%]  flex flex-col items-center ">
                         {{-- Language buttons --}}
-                        <div class=" bg-gray-200  rounded-lg flex items-center justify-center gap-2 p-2 w-[95%] overflow-x-auto">
+                        <div
+                            class=" bg-gray-200  rounded-lg flex items-center justify-center gap-2 p-2 w-[95%] overflow-x-auto">
                             @foreach (['English', 'Français', 'العربية'] as $language)
                                 <button @click="tab = '{{ $language }}'"
                                     :class="{ 'bg-white text-black': tab === '{{ $language }}', 'bg-transparent text-black': tab !== '{{ $language }}' }"
@@ -112,7 +127,7 @@
                             </div> --}}
 
                             <div class="flex flex-col gap-1" x-data="{
-                                selectedImage: '{{asset('storage/images/gallery/' . $gallery->couverture) }}',
+                                selectedImage: '{{ asset('storage/images/gallery/' . $gallery->couverture) }}',
                                 updateImage(event) {
                                     const file = event.target.files[0];
                                     if (file) {
@@ -129,8 +144,8 @@
                                     <h1 class="text-white absolute font-semibold z-30">+ Update the cover</h1>
                                     <div class="w-full h-full bg-black/50 absolute top-0 z-20 rounded-[10px]"></div>
                                     <input name="couverture"
-                                    onchange="imagesPlaceholder.textContent = [...this.files].map(f => f.name).join(', ')"
-                                    accept="image/*" type="file"
+                                        onchange="imagesPlaceholder.textContent = [...this.files].map(f => f.name).join(', ')"
+                                        accept="image/*" type="file"
                                         class="w-full rounded-[10px] h-full absolute top-0 opacity-0 cursor-pointer z-30"
                                         @change="updateImage">
                                     <img class="w-full h-full object-cover rounded-[10px]" :src="selectedImage"
@@ -192,4 +207,18 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.getElementById('delete-button').addEventListener('click', function() {
+            document.getElementById('confirmation-project').classList.remove('hidden');
+        });
+
+        document.getElementById('cancel-button').addEventListener('click', function() {
+            document.getElementById('confirmation-project').classList.add('hidden');
+        });
+
+        document.getElementById('confirm-button').addEventListener('click', function() {
+            document.getElementById('delete-form').submit();
+        });
+    </script>
 </x-app-layout>

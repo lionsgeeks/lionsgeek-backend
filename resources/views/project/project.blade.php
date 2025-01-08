@@ -41,11 +41,7 @@
                                     @include('project.partials.edit_project')
     
     
-                                    <form class="" method="post" action="{{ route('projects.destroy', $project) }}">
-                                        @csrf @method('delete')
-    
-    
-                                        <button>
+                                        <button id="delete-button">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                 fill="red" class="bi bi-trash-fill" viewBox="0 0 16 16">
                                                 <path
@@ -53,9 +49,37 @@
                                             </svg>
                                         </button>
     
-                                    </form>
-    
-    
+                                    <div id="confirmation-project"
+                                    class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden">
+                                    <div class="bg-white rounded-lg shadow-lg p-6 w-[37vw] ">
+                                        <h2 class="text-lg font-semibold text-gray-800">Are you sure?</h2>
+                                        <p class="text-sm text-gray-600 mt-2">Do you really want to remove this project? This
+                                            action cannot be undone.</p>
+                                        <div class="flex justify-end space-x-4 mt-4">
+                                            <button id="cancel-button"
+                                                class="py-2 px-4 bg-gray-300 rounded-lg hover:bg-gray-400">Cancel</button>
+                                                <form class="" method="post" action="{{ route('projects.destroy', $project) }}">
+                                                    @csrf @method('delete')            
+                                                <button id="confirm-button"
+                                                    class="py-2 px-4 bg-red-600 text-white rounded-lg hover:bg-red-700">Confirm</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+            
+                                <script>
+                                    document.getElementById('delete-button').addEventListener('click', function() {
+                                        document.getElementById('confirmation-project').classList.remove('hidden');
+                                    });
+            
+                                    document.getElementById('cancel-button').addEventListener('click', function() {
+                                        document.getElementById('confirmation-project').classList.add('hidden');
+                                    });
+            
+                                    document.getElementById('confirm-button').addEventListener('click', function() {
+                                        document.getElementById('delete-form').submit();
+                                    });
+                                </script>
                                 </div>
     
                             </div>

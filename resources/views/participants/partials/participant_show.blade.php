@@ -13,18 +13,18 @@
                 <div class="flex items-center justify-end w-full gap-2 p-2">
 
                     @if ($participant->current_step == 'interview')
-                    <form action="{{ route('participant.step', $participant) }}" method="post">
-                        @csrf
+                        <form action="{{ route('participant.step', $participant) }}" method="post">
+                            @csrf
                             <button type="submit" name="action" value="daz"
                                 class="bg-black text-white py-2 px-4 rounded">
                                 Pending
                             </button>
                         </form>
-                        @endif
+                    @endif
 
-                        {{-- if the participant failed any step, hide this form --}}
-                        @if (
-                            !str_contains($participant->current_step, 'fail') &&
+                    {{-- if the participant failed any step, hide this form --}}
+                    @if (
+                        !str_contains($participant->current_step, 'fail') &&
                             !str_contains($participant->current_step, 'info') &&
                             !str_contains($participant->current_step, 'school'))
                         <form action="{{ route('participant.step', $participant) }}" method="post">
@@ -33,18 +33,95 @@
                                 class="border-2 border-black py-2 px-4 rounded">
                                 Deny
                             </button>
-                            <button type="submit" name="action" value="next"
-                                class="bg-black text-white py-2 px-4 rounded">
-                                Go To Next Step
-                            </button>
                         </form>
-                        @endif
-                        <form action="{{ route("participants.destroy" , $participant) }}" method="post">
-                            @csrf
-                            @method("delete")
-                            <button class="py-2 rounded-lg text-white px-2 bg-red-600" type="submit">Remove participant</button>
-                        </form>
+                        <button type="submit" id="next-step-button" class="bg-black text-white py-2 px-4 rounded">
+                            Go To Next Step
+                        </button>
+                    @endif
 
+                    @php
+                        function getNextStep($currentStep)
+                        {
+                            if ($currentStep == 'interview') {
+                                return 'Jungle';
+                            } elseif ($currentStep == 'jungle') {
+                                return 'Coding School';
+                            } 
+                        }
+                    @endphp
+                    <div id="confirmation-next"
+                        class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden">
+                        <div class="bg-white rounded-lg shadow-lg p-6 w-[33vw]">
+                            <h2 class="text-lg font-semibold text-gray-800">Are you sure?</h2>
+                            <p class="text-sm text-gray-600 mt-2">Do you really want to go
+                                {{ getNextStep($participant->current_step) }}?</p>
+                            <div class="flex justify-end space-x-4 mt-4">
+                                <button id="cancel-button2"
+                                    class="py-2 px-4 bg-gray-300 rounded-lg hover:bg-gray-400">Cancel</button>
+                                <form action="{{ route('participant.step', $participant) }}" method="post">
+                                    @csrf
+                                    <button id="confirm-next-step" class="py-2 px-4 bg-black text-white rounded-lg "
+                                        value="next" name="action">Confirm</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script>
+                        const nextStepButton = document.getElementById('next-step-button');
+                        const confirmationModal = document.getElementById('confirmation-next');
+                        const cancelButton = document.getElementById('cancel-button2');
+                        const confirmNextStep = document.getElementById('confirm-next-step');
+                        const participantForm = document.getElementById('participant-form');
+                        nextStepButton.addEventListener('click', () => {
+                            confirmationModal.classList.remove('hidden');
+                        });
+
+                        cancelButton.addEventListener('click', () => {
+                            confirmationModal.classList.add('hidden');
+                        });
+
+                        confirmNextStep.addEventListener('click', () => {
+                            participantForm.submit();
+                        });
+                    </script>
+
+                    <button id="delete-button" class="py-2 rounded-lg text-white px-2 bg-red-600" type="submit">Remove
+                        participant</button>
+
+                    <div id="confirmation-modal"
+                        class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden">
+                        <div class="bg-white rounded-lg shadow-lg p-6 w-[37vw] ">
+                            <h2 class="text-lg font-semibold text-gray-800">Are you sure?</h2>
+                            <p class="text-sm text-gray-600 mt-2">Do you really want to remove this participant? This
+                                action cannot be undone.</p>
+                            <div class="flex justify-end space-x-4 mt-4">
+                                <button id="cancel-button"
+                                    class="py-2 px-4 bg-gray-300 rounded-lg hover:bg-gray-400">Cancel</button>
+                                <form id="delete-form" action="{{ route('participants.destroy', $participant) }}"
+                                    method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <button id="confirm-button"
+                                        class="py-2 px-4 bg-red-600 text-white rounded-lg hover:bg-red-700">Confirm</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script>
+                        document.getElementById('delete-button').addEventListener('click', function() {
+                            document.getElementById('confirmation-modal').classList.remove('hidden');
+                        });
+
+                        document.getElementById('cancel-button').addEventListener('click', function() {
+                            document.getElementById('confirmation-modal').classList.add('hidden');
+                        });
+
+                        document.getElementById('confirm-button').addEventListener('click', function() {
+                            document.getElementById('delete-form').submit();
+                        });
+                    </script>
                 </div>
                 <div class="p-6 text-gray-900">
                     <div class="flex items-center gap-2 justify-between">
@@ -199,7 +276,7 @@
                                                 </h1>
 
                                                 <!-- Section questions, shown when section is expanded -->
-                                                  <div x-show="open === index" class="pl-4">
+                                                <div x-show="open === index" class="pl-4">
                                                     <template x-for="(question, qIndex) in section.questions"
                                                         :key="qIndex">
                                                         <div class="w-full my-2">
@@ -212,12 +289,9 @@
                                                                     :placeholder="`${frequents[question.text.toLowerCase().replace(/ /g, '_').replace('?','')]}`"
                                                                     x-model="answers[`${section.title.toLowerCase()}_${question.id}`]"> --}}
 
-                                                                    <textarea
-                                                                    class="w-full rounded"
-                                                                    :name="`${question.text.toLowerCase().replace(/ /g, '_').replace('?','')}`"
+                                                                <textarea class="w-full rounded" :name="`${question.text.toLowerCase().replace(/ /g, '_').replace('?','')}`"
                                                                     x-text="`${frequents[question.text.toLowerCase().replace(/ /g, '_').replace('?','')]}`"
-                                                                    x-model="answers[`${section.title.toLowerCase()}_${question.id}`]"
-                                                                    rows="1"></textarea>
+                                                                    x-model="answers[`${section.title.toLowerCase()}_${question.id}`]" rows="1"></textarea>
                                                             </div>
                                                         </div>
                                                     </template>
@@ -238,7 +312,7 @@
                     {{-- Motivation --}}
                     <div class="shadow-md p-3 rounded">
                         <h1 class="text-2xl font-bold mb-2">Motivation</h1>
-                        <p>{{$participant->motivation}}</p>
+                        <p>{{ $participant->motivation }}</p>
                     </div>
                     <br>
                     {{-- Satisfaction --}}
@@ -249,7 +323,7 @@
                         get percentage() {
                             return (this.checkedTasks / this.totalTasks) * 100;
                         },
-
+                    
                         get barColor() {
                             const percentage = this.percentage;
                             if (percentage < 90) {

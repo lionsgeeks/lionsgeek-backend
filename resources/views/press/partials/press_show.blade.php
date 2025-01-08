@@ -3,28 +3,43 @@
             <h2 class="font-semibold text-xl leading-tight">
                 {{ $press->name->en }}
             </h2>
+                <div id="confirmation-press"
+                class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden">
+                <div class="bg-white rounded-lg shadow-lg p-6 w-[37vw] ">
+                    <h2 class="text-lg font-semibold text-gray-800">Are you sure?</h2>
+                    <p class="text-sm text-gray-600 mt-2">Do you really want to remove this press? This
+                        action cannot be undone.</p>
+                    <div class="flex justify-end space-x-4 mt-4">
+                        <button id="cancel-button"
+                            class="py-2 px-4 bg-gray-300 rounded-lg hover:bg-gray-400">Cancel</button>
+                            <form id="deleteform" action="{{ route('press.destroy', $press) }}" method="post" enctype="multipart/form-data"
+                            onsubmit="this.submitBtn.disabled = true ">
+                            @csrf
+                            @method('DELETE')
+                            <button id="confirm-button"
+                                class="py-2 px-4 bg-red-600 text-white rounded-lg hover:bg-red-700">Confirm</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
-            <form id="deleteform" action="{{ route('press.destroy', $press) }}" method="post" enctype="multipart/form-data"
-                onsubmit="this.submitBtn.disabled = true ">
-                @csrf
-                @method('DELETE')
-                
-            </form>
         </x-slot>
         <div class="flex flex-col ">
 
             <div class="bg-slate-100 p-[2rem] gap-[1.6rem] flex flex-col items-center overflow-y-scroll w-[100%]">
 
                 {{-- <img class="w-[50%] bg-yellow-50  " src="{{ asset("storage/images/".$event->cover) }}" alt=""> --}}
-                <form id="updateform"  class="flex flex-col items-center justify-center py-6 w-full bg-white rounded-[20px] gap-5 "
-                action="{{ route('press.update', $press) }}" method="post" enctype="multipart/form-data">
-                @csrf
-                @method('PUT')
-                <div class="flex justify-end gap-x-4 px-5 py-1 w-full">
-                    <button form="updateform" class=" px-4 py-2  rounded-lg bg-black text-white">Submit</button>
-                    <button form="deleteform" type="submit" class="px-4 py-2 font-semibold rounded-lg bg-red-500 text-white">Delete resource</button>
-                </div>
-                {{-- <p class="text-[25px] font-bold">Update Press</p> --}}
+                <form id="updateform"
+                    class="flex flex-col items-center justify-center py-6 w-full bg-white rounded-[20px] gap-5 "
+                    action="{{ route('press.update', $press) }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    @method('PUT')
+                    <div class="flex justify-end gap-x-4 px-5 py-1 w-full">
+                        <button form="updateform" class=" px-4 py-2  rounded-lg bg-black text-white">Submit</button>
+                        <button type="button"
+                        class="px-4 py-2 font-semibold rounded-lg bg-red-500 text-white" id="delete-button">Delete resource</button>
+                    </div>
+                    {{-- <p class="text-[25px] font-bold">Update Press</p> --}}
 
                     <div x-data="{ tab: 'English' }" class="w-full flex flex-col items-center">
                         {{-- Language buttons --}}
@@ -50,7 +65,8 @@
                                         <label for="name_en">Name</label>
                                         <input required placeholder="Enter name"
                                             class="w-[100%] border-[2px] border-black bg-slate-100 rounded-[10px]"
-                                            type="text" name="name[en]" id="name_en" value="{{ $press->name->en }}">
+                                            type="text" name="name[en]" id="name_en"
+                                            value="{{ $press->name->en }}">
                                     </div>
                                 </div>
 
@@ -59,8 +75,9 @@
                                     <div class="flex flex-col w-[100%] gap-1">
                                         <label for="name_fr">Nom</label>
                                         <input required placeholder="Enter le nom"
-                                            class=" border-[2px] border-black bg-slate-100 rounded-[10px]" type="text"
-                                            name="name[fr]" id="name_fr" value="{{ $press->name->fr }}">
+                                            class=" border-[2px] border-black bg-slate-100 rounded-[10px]"
+                                            type="text" name="name[fr]" id="name_fr"
+                                            value="{{ $press->name->fr }}">
                                     </div>
                                 </div>
 
@@ -69,8 +86,9 @@
                                     <div class="flex flex-col  w-[100%] text-end gap-1">
                                         <label for="name_ar">الاسم</label>
                                         <input required placeholder="أدخل الاسم"
-                                            class=" border-[2px] border-black bg-slate-100 rounded-[10px]" type="text"
-                                            name="name[ar]" id="name_ar" value="{{ $press->name->ar }}">
+                                            class=" border-[2px] border-black bg-slate-100 rounded-[10px]"
+                                            type="text" name="name[ar]" id="name_ar"
+                                            value="{{ $press->name->ar }}">
                                     </div>
                                 </div>
                             </div>
@@ -158,9 +176,22 @@
 
                         </div>
                     </div>
-                  
+
                 </form>
             </div>
         </div>
+        
+        <script>
+            document.getElementById('delete-button').addEventListener('click', function() {
+                document.getElementById('confirmation-press').classList.remove('hidden');
+            });
 
+            document.getElementById('cancel-button').addEventListener('click', function() {
+                document.getElementById('confirmation-press').classList.add('hidden');
+            });
+
+            document.getElementById('confirm-button').addEventListener('click', function() {
+                document.getElementById('delete-form').submit();
+            });
+        </script>   
     </x-app-layout>

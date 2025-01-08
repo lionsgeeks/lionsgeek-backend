@@ -67,7 +67,7 @@ class ContactController extends Controller
     public function destroy(Contact $contact)
     {
         $contact->delete();
-        return back();
+        return back()->with("success","The Mail Has Been Deleted Successfully");
     }
     public function export()
     {

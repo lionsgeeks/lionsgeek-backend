@@ -15,7 +15,7 @@ class CoworkingController extends Controller
     public function index()
     {
         $coworkings = Coworking::latest()->get();
-        $pending = Coworking::where('status', '0')->get(); 
+        $pending = Coworking::where('status', '0')->get();
         $notread = Contact::latest()->get();
         $notifications = $pending->merge($notread)->sortByDesc('created_at');
         return view('coworkings.coworkings', compact('coworkings' , 'pending' , 'notifications' ));
@@ -27,7 +27,7 @@ class CoworkingController extends Controller
     }
 
     public function update(Request $request, Coworking $coworking) {
-        
+
         // dd($coworking);
         $status = $request->action;
         if($status == 'approve'){
@@ -35,7 +35,7 @@ class CoworkingController extends Controller
                 "status" => "1"
             ]);
             Mail::to($coworking->email)->send(new CoworkingActionMailer($coworking->full_name));
-            session()->increment('pending_count'); 
+            session()->increment('pending_count');
 
         }else{
             $coworking->update([
@@ -50,7 +50,7 @@ class CoworkingController extends Controller
     public function destroy(Coworking $coworking){
         $coworking->delete();
 
-        return redirect('/coworkings');
+        return redirect('/coworkings')->with("success", "Request Has Been Deleted Successfully");
     }
 
 
@@ -58,5 +58,5 @@ class CoworkingController extends Controller
     {
         return Excel::download(new CoworkingsExport, 'coworking.xlsx');
     }
-    
+
 }

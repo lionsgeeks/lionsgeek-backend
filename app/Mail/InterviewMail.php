@@ -19,19 +19,22 @@ class InterviewMail extends Mailable implements ShouldQueue
     public $timeSlot;
     public $date;
     public $exactTime;
+    public $course;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($full_name, $day, $timeSlot)
+    public function __construct($full_name, $day, $timeSlot , $course)
     {
         $this->full_name = $full_name;
         $this->day = $day;
         $this->timeSlot = $timeSlot;
-
+        
         $carbonInstance = Carbon::parse($timeSlot);
         $this->date = $carbonInstance->toDateString(); // e.g., 2025-01-24
         $this->exactTime = $carbonInstance->format('H:i'); // e.g., 16:44
+
+        $this->course = $course;
     }
 
     /**

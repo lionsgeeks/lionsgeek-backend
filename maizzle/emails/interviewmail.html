@@ -20,46 +20,194 @@
 
                                 <x-spacer height="24px" />
 
-                                <h1 class="m-0 mb-4 text-2xl/8 text-slate-900 font-semibold">
-                                    Invitation to Your Interview at Lionsgeek!
-                                </h1>
+                                @if ($course == "Coding")
+                                <!-- ? Coding Mail -->
+                                <span>
 
-                                <x-spacer height="24px" />
+                                    <h1 class="m-0 mb-4 text-2xl/8 text-slate-900 font-semibold">
+                                        Invitation to Your Coding Interview at LionsGeek
+                                    </h1>
 
-                                <p class="text-slate-600  text-base/6">Dear @{{ $full_name }}!</p>
+                                    <x-spacer height="24px" />
 
-                                <x-spacer height="4px" />
+                                    <p class="text-slate-600  text-base/6">Dear @{{ $full_name }}!</p>
 
-                                <p class="text-slate-600  text-base/6">
-                                    Congratulations on advancing to the next step in your journey with Lionsgeek!
-                                    We are pleased to invite you to an in-person interview to discuss your application.
-                                </p>
+                                    <x-spacer height="4px" />
 
-                                <x-spacer height="4px" />
+                                    <p class="text-slate-600  text-base/6">
+                                        We are excited to invite you to the next phase of your
+                                        LionsGeek journey: the coding interview! This is your chance to
+                                        showcase your passion for coding and your enthusiasm for technology.
+                                    </p>
 
-                                <p class="text-slate-600 text-base/6 font-bold ">Here are your interview details:</p>
+                                    <x-spacer height="4px" />
 
-                                <x-spacer height="4px" />
+                                    <p class="text-slate-600 text-base/6">
+                                        Your interview is scheduled to take place on <span class="font-bold">@{{ $date
+                                            }}</span> at <span class="font-bold">@{{ $exactTime }}</span> ,
+                                        at LionsGeek,
+                                        located at Location: LionsGeek, 4eme étage, Ain Sebaa Center, Route de Rabat,
+                                        Casablanca 20060, Maroc .
+                                    </p>
 
-                                <ul class="text-slate-600 text-base/6">
-                                    <li class="mt-3 text-slate-600 text-base/6 ">Date: @{{ \Carbon\Carbon::parse($day)->format('Y-m-d') }}</li>
-                                    <li class="mt-3 text-slate-600 text-base/6 ">Time: @{{ $timeSlot }}</li>
-                                    <li class="mt-3 text-slate-600 text-base/6 ">Location: LionsGeek, LionsGeek, 4eme étage, Ain Sebaa Center, Route de Rabat,
-                                        Casablanca
-                                        20060, Maroc</li>
-                                </ul>
+                                    <x-spacer height="4px" />
 
-                                <x-spacer height="4px" />
+                                    <p class="text-slate-600 text-base/6">
+                                        At LionsGeek, we appreciate individuals who are
+                                        driven and motivated to make a difference in the tech
+                                        world. This interview is all about your potential, your passion,
+                                        and your willingness to learn and grow. Please make sure to
+                                        be on time and bring your enthusiasm with you.
+                                    </p>
 
-                                <p class="text-slate-600 text-base/6 ">
-                                    We look forward to meeting you and learning more about your goals
-                                    and aspirations! If you have any questions or need to reschedule,
-                                    feel free to contact us on our Social Media accounts.
-                                </p>
+                                    <x-spacer height="4px" />
 
-                                <p class="text-slate-600 mt-10 font-bold text-base/6">Best regards,</p>
+                                    <p class="text-slate-600 text-base/6 ">
+                                        We’re looking forward to meeting you and
+                                        discovering how you can contribute to the
+                                        LionsGeek community. If you have any questions or
+                                        need further information,
+                                        don’t hesitate to contact us.
+                                    </p>
 
-                                <p class="text-slate-600 text-base/6">LionsGeek</p>
+                                    <p class="text-slate-600 mt-10 font-bold text-base/6">Best regards,</p>
+
+                                    <p class="text-slate-600 text-base/6">LionsGeek Team</p>
+
+                                    <x-spacer height="2px" />
+
+                                    <!-- ? Arabic Coding mail -->
+                                    <span dir="rtl">
+                                        <p class="text-slate-600 text-base/6 ">
+                                            السلام عليكم <span dir="ltr">@{{ $full_name }}</span>،
+                                        </p>
+
+                                        <p class="text-slate-600 text-base/6 ">
+                                            فرحانين بزاف باش نعلموك أنك وصلتي للمرحلة الموالية: المقابلة ديال Coding !
+                                            هادي هي الفرصة باش تورينا الحماس ديالك وحبك للتكنولوجيا والبرمجة.
+                                        </p>
+
+                                        <p class="text-slate-600 text-base/6 ">
+                                            فرحانين بزاف باش نعلموك أنك وصلتي للمرحلة الموالية: المقابلة ديال Coding !
+                                            هادي هي الفرصة باش تورينا الحماس ديالك وحبك للتكنولوجيا والبرمجة.
+                                        </p>
+
+                                        <p class="text-slate-600 text-base/6 ">
+                                            المقابلة ديالك غادي تكون نهار <span class="font-bold">@{{ $date }}</span> مع
+                                            <span class="font-bold">@{{ $exactTime }}</span>، فـ
+                                            LionsGeek
+                                        </p>
+
+                                        <p class="text-slate-600 text-base/6 ">
+                                            كنعتابروا الناس لي عندهم الحافز والطموح باش يطوروا راسهم ويخدمو فمجال
+                                            التكنولوجيا. هاد المقابلة هي فرصة باش تورينا الطاقة ديالك والرغبة
+                                            ديالك فالتعلم. مهم بزاف تكون فـ الوقت وتجي بحماس كبير.
+                                        </p>
+
+                                        <p class="text-slate-600 text-base/6 ">
+                                            كنتشوقوا نشوفوك ونكتاشفوا القدرات ديالك.
+                                        </p>
+
+                                        <p class="text-slate-600 text-base/6 ">
+                                            نتلاقاو قريب!
+                                        </p>
+                                    </span>
+
+                                </span>
+                                @else
+                                <!-- & Media Mail -->
+                                <span>
+
+                                    <h1 class="m-0 mb-4 text-2xl/8 text-slate-900 font-semibold">
+                                        Invitation to Your Media Interview at LionsGeek
+                                    </h1>
+
+                                    <x-spacer height="24px" />
+
+                                    <p class="text-slate-600  text-base/6">Dear @{{ $full_name }}!</p>
+
+                                    <x-spacer height="4px" />
+
+                                    <p class="text-slate-600  text-base/6">
+                                        We are thrilled to invite you to the next step in your journey
+                                        with LionsGeek: the media interview! This stage is your opportunity
+                                        to show us your creativity, passion, and enthusiasm
+                                        for media and digital marketing.
+                                    </p>
+
+                                    <x-spacer height="4px" />
+
+                                    <p class="text-slate-600 text-base/6">
+                                        Your interview is scheduled to take place on <span class="font-bold">@{{ $date
+                                            }}</span> at <span class="font-bold">@{{ $exactTime }}</span> ,
+                                        at LionsGeek,
+                                        located at Location: LionsGeek, 4eme étage, Ain Sebaa Center, Route de Rabat,
+                                        Casablanca 20060, Maroc .
+                                    </p>
+
+                                    <x-spacer height="4px" />
+
+                                    <p class="text-slate-600 text-base/6">
+                                        At LionsGeek, we value individuals
+                                        who are motivated and ready to embrace challenges.
+                                        This interview is not just about skills—it’s about
+                                        your passion and dedication to growing in this
+                                        field. Make sure you arrive on time and bring
+                                        your positive energy with you.
+                                    </p>
+
+                                    <x-spacer height="4px" />
+
+                                    <p class="text-slate-600 text-base/6 ">
+                                        We can’t wait to meet you and learn more about
+                                        what makes you unique. If you have any questions,
+                                        feel free to reach out.
+                                    </p>
+
+                                    <p class="text-slate-600 mt-10 font-bold text-base/6">Warm regards,</p>
+
+                                    <p class="text-slate-600 text-base/6">LionsGeek Team</p>
+
+                                    <!-- & Arabic Media mail -->
+                                    <span dir="rtl">
+                                        <p class="text-slate-600 text-base/6 ">
+                                            السلام عليكم <span dir="ltr">@{{ $full_name }}</span>،
+                                        </p>
+
+                                        <p class="text-slate-600 text-base/6 ">
+                                            كنبغيو نعلموك أنه وصلتي للمرحلة الموالية: المقابلة ديال Media !
+                                            هادي هي الفرصة باش تورينا الحماس ديالك، الإبداع ديالك،
+                                            وحبك للميديا والتسويق الرقمي.
+                                        </p>
+
+                                        <p class="text-slate-600 text-base/6 ">
+                                            المقابلة ديالك غادي تكون نهار [دخل التاريخ] مع [دخل التوقيت]، فـ LionsGeek .
+
+                                        </p>
+
+                                        <p class="text-slate-600 text-base/6 ">
+                                            المقابلة ديالك غادي تكون نهار <span class="font-bold">@{{ $date }}</span> مع
+                                            <span class="font-bold">@{{ $exactTime }}</span>، فـ
+                                            LionsGeek
+                                        </p>
+
+                                        <p class="text-slate-600 text-base/6 ">
+                                            حنا كنقدروا الناس لي عندهم الحافز والطموح. المقابلة ماشي غير على المهارات
+                                            ، ولكن على الحماس ديالك والرغبة ديالك فالتطور فهاد
+                                            المجال. ضروري تجي فـ الوقت وتجيب معاك طاقة إيجابية.
+                                        </p>
+
+                                        <p class="text-slate-600 text-base/6 ">
+                                            كنتشوقوا باش نتلاقاو معاك ونتعرفو عليك مزيان. 
+                                        </p>
+
+                                        <p class="text-slate-600 text-base/6 ">
+                                            نتلاقاو قريب!
+                                        </p>
+                                    </span>
+
+                                </span>
+                                @endif
 
                                 <x-spacer height="24px" />
 

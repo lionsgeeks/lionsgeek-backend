@@ -50,36 +50,130 @@
                       </td>
                     </tr>
                   </table>
-                  <div role="separator" style="line-height: 24px">&zwj;</div>
-                  <h1 style="margin: 0 0 16px; font-size: 24px; line-height: 32px; font-weight: 600; color: #0f172a">
-                    Invitation to Your Interview at Lionsgeek!
-                  </h1>
-                  <div role="separator" style="line-height: 24px">&zwj;</div>
-                  <p style="font-size: 16px; line-height: 24px; color: #475569">Dear {{ $full_name }}!</p>
-                  <div role="separator" style="line-height: 4px">&zwj;</div>
-                  <p style="font-size: 16px; line-height: 24px; color: #475569">
-                    Congratulations on advancing to the next step in your journey with Lionsgeek!
-                    We are pleased to invite you to an in-person interview to discuss your application.
+                  <div role="separator" style="line-height: 24px">&zwj;</div> @if ($course == "Coding") <span>
+                                    <h1 style="margin: 0 0 16px; font-size: 24px; line-height: 32px; font-weight: 600; color: #0f172a">
+                                        Invitation to Your Coding Interview at LionsGeek
+                                    </h1>  <div role="separator" style="line-height: 24px">&zwj;</div>                                    <p style="font-size: 16px; line-height: 24px; color: #475569">Dear {{ $full_name }}!</p>  <div role="separator" style="line-height: 4px">&zwj;</div>                                    <p style="font-size: 16px; line-height: 24px; color: #475569">
+                                        We are excited to invite you to the next phase of your
+                                        LionsGeek journey: the coding interview! This is your chance to
+                                        showcase your passion for coding and your enthusiasm for technology.
+                                    </p>  <div role="separator" style="line-height: 4px">&zwj;</div>                                    <p style="font-size: 16px; line-height: 24px; color: #475569">
+                                        Your interview is scheduled to take place on <span style="font-weight: 700">{{ $date
+                                            }}</span> at <span style="font-weight: 700">{{ $exactTime }}</span> ,
+                  at LionsGeek,
+                  located at Location: LionsGeek, 4eme étage, Ain Sebaa Center, Route de Rabat,
+                  Casablanca 20060, Maroc .
                   </p>
                   <div role="separator" style="line-height: 4px">&zwj;</div>
-                  <p style="font-size: 16px; line-height: 24px; font-weight: 700; color: #475569">Here are your interview details:</p>
-                  <div role="separator" style="line-height: 4px">&zwj;</div>
-                  <ul style="font-size: 16px; line-height: 24px; color: #475569">
-                    <li style="margin-top: 12px; font-size: 16px; line-height: 24px; color: #475569">Date: {{ \Carbon\Carbon::parse($day)->format('Y-m-d') }}</li>
-                    <li style="margin-top: 12px; font-size: 16px; line-height: 24px; color: #475569">Time: {{ $timeSlot }}</li>
-                    <li style="margin-top: 12px; font-size: 16px; line-height: 24px; color: #475569">Location: LionsGeek, LionsGeek, 4eme étage, Ain Sebaa Center, Route de Rabat,
-                      Casablanca
-                      20060, Maroc</li>
-                  </ul>
+                  <p style="font-size: 16px; line-height: 24px; color: #475569">
+                    At LionsGeek, we appreciate individuals who are
+                    driven and motivated to make a difference in the tech
+                    world. This interview is all about your potential, your passion,
+                    and your willingness to learn and grow. Please make sure to
+                    be on time and bring your enthusiasm with you.
+                  </p>
                   <div role="separator" style="line-height: 4px">&zwj;</div>
                   <p style="font-size: 16px; line-height: 24px; color: #475569">
-                    We look forward to meeting you and learning more about your goals
-                    and aspirations! If you have any questions or need to reschedule,
-                    feel free to contact us on our Social Media accounts.
+                    We’re looking forward to meeting you and
+                    discovering how you can contribute to the
+                    LionsGeek community. If you have any questions or
+                    need further information,
+                    don’t hesitate to contact us.
                   </p>
                   <p style="margin-top: 40px; font-size: 16px; line-height: 24px; font-weight: 700; color: #475569">Best regards,</p>
-                  <p style="font-size: 16px; line-height: 24px; color: #475569">LionsGeek</p>
-                  <div role="separator" style="line-height: 24px">&zwj;</div>
+                  <p style="font-size: 16px; line-height: 24px; color: #475569">LionsGeek Team</p>
+                  <div role="separator" style="line-height: 2px">&zwj;</div> <span dir="rtl">
+                                        <p style="font-size: 16px; line-height: 24px; color: #475569">
+                                            السلام عليكم <span dir="ltr">{{ $full_name }}</span>،
+                  </p>
+                  <p style="font-size: 16px; line-height: 24px; color: #475569">
+                    فرحانين بزاف باش نعلموك أنك وصلتي للمرحلة الموالية: المقابلة ديال Coding !
+                    هادي هي الفرصة باش تورينا الحماس ديالك وحبك للتكنولوجيا والبرمجة.
+                  </p>
+                  <p style="font-size: 16px; line-height: 24px; color: #475569">
+                    فرحانين بزاف باش نعلموك أنك وصلتي للمرحلة الموالية: المقابلة ديال Coding !
+                    هادي هي الفرصة باش تورينا الحماس ديالك وحبك للتكنولوجيا والبرمجة.
+                  </p>
+                  <p style="font-size: 16px; line-height: 24px; color: #475569">
+                    المقابلة ديالك غادي تكون نهار <span style="font-weight: 700">{{ $date }}</span> مع
+                    <span style="font-weight: 700">{{ $exactTime }}</span>، فـ
+                    LionsGeek
+                  </p>
+                  <p style="font-size: 16px; line-height: 24px; color: #475569">
+                    كنعتابروا الناس لي عندهم الحافز والطموح باش يطوروا راسهم ويخدمو فمجال
+                    التكنولوجيا. هاد المقابلة هي فرصة باش تورينا الطاقة ديالك والرغبة
+                    ديالك فالتعلم. مهم بزاف تكون فـ الوقت وتجي بحماس كبير.
+                  </p>
+                  <p style="font-size: 16px; line-height: 24px; color: #475569">
+                    كنتشوقوا نشوفوك ونكتاشفوا القدرات ديالك.
+                  </p>
+                  <p style="font-size: 16px; line-height: 24px; color: #475569">
+                    نتلاقاو قريب!
+                  </p>
+                  </span>
+                  </span>
+                  @else <span>
+                                    <h1 style="margin: 0 0 16px; font-size: 24px; line-height: 32px; font-weight: 600; color: #0f172a">
+                                        Invitation to Your Media Interview at LionsGeek
+                                    </h1>  <div role="separator" style="line-height: 24px">&zwj;</div>                                    <p style="font-size: 16px; line-height: 24px; color: #475569">Dear {{ $full_name }}!</p>  <div role="separator" style="line-height: 4px">&zwj;</div>                                    <p style="font-size: 16px; line-height: 24px; color: #475569">
+                                        We are thrilled to invite you to the next step in your journey
+                                        with LionsGeek: the media interview! This stage is your opportunity
+                                        to show us your creativity, passion, and enthusiasm
+                                        for media and digital marketing.
+                                    </p>  <div role="separator" style="line-height: 4px">&zwj;</div>                                    <p style="font-size: 16px; line-height: 24px; color: #475569">
+                                        Your interview is scheduled to take place on <span style="font-weight: 700">{{ $date
+                                            }}</span> at <span style="font-weight: 700">{{ $exactTime }}</span> ,
+                  at LionsGeek,
+                  located at Location: LionsGeek, 4eme étage, Ain Sebaa Center, Route de Rabat,
+                  Casablanca 20060, Maroc .
+                  </p>
+                  <div role="separator" style="line-height: 4px">&zwj;</div>
+                  <p style="font-size: 16px; line-height: 24px; color: #475569">
+                    At LionsGeek, we value individuals
+                    who are motivated and ready to embrace challenges.
+                    This interview is not just about skills—it’s about
+                    your passion and dedication to growing in this
+                    field. Make sure you arrive on time and bring
+                    your positive energy with you.
+                  </p>
+                  <div role="separator" style="line-height: 4px">&zwj;</div>
+                  <p style="font-size: 16px; line-height: 24px; color: #475569">
+                    We can’t wait to meet you and learn more about
+                    what makes you unique. If you have any questions,
+                    feel free to reach out.
+                  </p>
+                  <p style="margin-top: 40px; font-size: 16px; line-height: 24px; font-weight: 700; color: #475569">Warm regards,</p>
+                  <p style="font-size: 16px; line-height: 24px; color: #475569">LionsGeek Team</p> <span dir="rtl">
+                                        <p style="font-size: 16px; line-height: 24px; color: #475569">
+                                            السلام عليكم <span dir="ltr">{{ $full_name }}</span>،
+                  </p>
+                  <p style="font-size: 16px; line-height: 24px; color: #475569">
+                    كنبغيو نعلموك أنه وصلتي للمرحلة الموالية: المقابلة ديال Media !
+                    هادي هي الفرصة باش تورينا الحماس ديالك، الإبداع ديالك،
+                    وحبك للميديا والتسويق الرقمي.
+                  </p>
+                  <p style="font-size: 16px; line-height: 24px; color: #475569">
+                    المقابلة ديالك غادي تكون نهار [دخل التاريخ] مع [دخل التوقيت]، فـ LionsGeek .
+                  </p>
+                  <p style="font-size: 16px; line-height: 24px; color: #475569">
+                    المقابلة ديالك غادي تكون نهار <span style="font-weight: 700">{{ $date }}</span> مع
+                    <span style="font-weight: 700">{{ $exactTime }}</span>، فـ
+                    LionsGeek
+                  </p>
+                  <p style="font-size: 16px; line-height: 24px; color: #475569">
+                    حنا كنقدروا الناس لي عندهم الحافز والطموح. المقابلة ماشي غير على المهارات
+                    ، ولكن على الحماس ديالك والرغبة ديالك فالتطور فهاد
+                    المجال. ضروري تجي فـ الوقت وتجيب معاك طاقة إيجابية.
+                  </p>
+                  <p style="font-size: 16px; line-height: 24px; color: #475569">
+                    كنتشوقوا باش نتلاقاو معاك ونتعرفو عليك مزيان.
+                  </p>
+                  <p style="font-size: 16px; line-height: 24px; color: #475569">
+                    نتلاقاو قريب!
+                  </p>
+                  </span>
+                  </span>
+                  @endif <div role="separator" style="line-height: 24px">&zwj;</div>
                   <div role="separator" style="height: 1px; line-height: 1px; background-color: #cbd5e1; margin-top: 24px; margin-bottom: 24px">&zwj;</div>
                   <table align="center" style="margin: 0 auto" cellpadding="0" cellspacing="0" role="none">
                     <tr style="margin-bottom: 24px; font-size: 16px; line-height: 24px; font-weight: 700">

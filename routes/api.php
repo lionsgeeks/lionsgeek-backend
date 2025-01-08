@@ -34,6 +34,7 @@ Route::post('/cowork', [ContactController::class, 'cowork']);
 Route::post('/infosession', [InfoSessionController::class, 'store']);
 Route::post('/participate', [ContactController::class, 'participate']);
 Route::get('/infosessions', [InfoSessionController::class, 'index']);
+Route::get('/0cb1e4af6e3d2a705e07ac733dbf66275940f03fa243b8b5f5680b1af134b98c', [InfoSessionController::class, 'PrivateSession']);
 Route::put('/validate-invitation', [InfoSessionController::class,'validateParticipant']);
 Route::put('/manual-checking', [InfoSessionController::class,'manualChecking']);
 Route::get('/session-data', [InfoSessionController::class,'infoData']);

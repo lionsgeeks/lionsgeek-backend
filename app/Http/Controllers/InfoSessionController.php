@@ -48,7 +48,7 @@ class InfoSessionController extends Controller
             'places' => 'required',
         ]);
         InfoSession::create([
-            'name' => $request->name,
+            'name' => strtolower($request->name),
             'formation' => $request->formation,
             'start_date' => $request->start_date,
             'places' => $request->places,

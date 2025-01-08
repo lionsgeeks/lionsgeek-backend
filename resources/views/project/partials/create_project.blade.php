@@ -1,5 +1,5 @@
-<div id="projectCreate" class="fixed inset-0 bg-gray-900 bg-opacity-60 justify-center items-center z-50 hidden px-4 py-12">
-    <div class="bg-white w-[30%] rounded-lg p-5">
+<div id="projectCreate" class="fixed inset-0   bg-gray-900 bg-opacity-60 justify-center items-center z-50 hidden lg:px-4 py-12">
+    <div class="bg-white lg:w-[60%] w-[100%] rounded-lg p-5">
         <div class="flex justify-between p-2 px-3 py-2">
             <h1 class="text-lg font-semibold text-black">Add New Project</h1>
             <button onclick="closeModal('projectCreate')" type="button"

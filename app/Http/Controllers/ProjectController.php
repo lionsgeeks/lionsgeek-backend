@@ -86,7 +86,7 @@ class ProjectController extends Controller
             "preview" => $request->hasFile("preview") ? $previewName : null
         ]);
 //
-        return back()->with("success", "kj");
+        return back()->with("success", "Project has been created successfully!");
 
     }
     public function translate(Request $request)
@@ -188,7 +188,7 @@ class ProjectController extends Controller
             "preview" => $request->hasFile("preview") ? $previewName : $project->preview
         ]);
 
-        return back()->with("success", "kj");
+        return back()->with("success", "Project has been updated successfully!");
     }
 
     /**
@@ -200,6 +200,6 @@ class ProjectController extends Controller
         Storage::disk('public')->delete("images/projects/" . $project->logo);
         Storage::disk('public')->delete("images/projects/" . $project->preview);
         $project->delete();
-        return back();
+        return back()->with("success", "Project has been deleted successfully!");
     }
 }

@@ -52,7 +52,7 @@ class PressController extends Controller
             "link" => $request->link,
             "logo" => $logoName,
         ]);
-        return redirect(route("press.index"));
+        return redirect(route("press.index"))->with("success", "Press has been added successfully!");
     }
 
     /**
@@ -108,7 +108,7 @@ class PressController extends Controller
             "link" => $request->link,
             "logo" => $hasLogo ? $logoName : $press->logo,
         ]);
-        return redirect(route("press.index"));
+        return redirect(route("press.index"))->with("success", "Press has been updated successfully!");
     }
 
     /**
@@ -121,6 +121,6 @@ class PressController extends Controller
         Storage::disk("public")->delete("images/press/" . $press->logo);
         $press->delete();
 
-        return redirect(route("press.index"));
+        return redirect(route("press.index"))->with("success", "Press has been deleted successfully!");
     }
 }

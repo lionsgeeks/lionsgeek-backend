@@ -66,7 +66,7 @@ class EventController extends Controller
             "cover" => $fileName
         ]);
 
-        return redirect("/events");
+        return redirect("/events")->with("success", "Event has been added successfully!");
     }
 
     public function translate(Request $request)
@@ -158,7 +158,7 @@ class EventController extends Controller
             "cover" => $hasFile ? $fileName : $event->cover
         ]);
 
-        return redirect("events");
+        return redirect("events")->with("success", "Event has been updated successfully!");
     }
 
     /**
@@ -171,6 +171,6 @@ class EventController extends Controller
 
         $event->delete();
 
-        return redirect("/events");
+        return redirect("/events")->with("success", "Event has been deleted successfully!");
     }
 }

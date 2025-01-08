@@ -131,3 +131,9 @@ input[type="checkbox"] {
   }
 }
 
+@media (max-width: 640px) {
+  .alert{
+    left: 200px;
+  }
+}
+

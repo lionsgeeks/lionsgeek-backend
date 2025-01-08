@@ -28,6 +28,6 @@ class AddAdminController extends Controller
         Mail::to($request->email)->send(new addAdminMail($randomPassword));
 
 
-        return back();
+        return back()->with("success", "Admin has been added successfully!");
     }
 }

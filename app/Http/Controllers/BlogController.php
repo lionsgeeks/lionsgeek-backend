@@ -58,8 +58,10 @@ class BlogController extends Controller
 
         }
 
+
+
         if ($blog instanceof Model) {
-            return redirect()->route('blogs.index')->with('success', 'Blog created');
+            return redirect()->route('blogs.index')->with('success', 'Blog has been created successfully!');
         } else {
             return redirect()->route('blogs.index')->with('error', 'Something Went Wrong. Try Again.');
         }
@@ -121,6 +123,6 @@ class BlogController extends Controller
     {
         Storage::disk('public')->delete('images/blog/' . $blog->image);
         $blog->delete();
-        return back()->with('success', 'Blog Deleted Successuflly');
+        return back()->with('success', 'Blog has been deleted successuflly');
     }
 }

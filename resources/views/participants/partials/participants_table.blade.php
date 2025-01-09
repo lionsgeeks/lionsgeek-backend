@@ -102,7 +102,13 @@ copyToClip() {
                 return 0;
             }
         });
-    }
+    },
+
+    modalContent: "",
+    id: "",
+
+
+    satisfactions: {{ json_encode($satisfactions) }}
 }'>
     <div class="mx-auto">
         @php
@@ -135,7 +141,8 @@ copyToClip() {
 
         <div class="bg-white shadow-sm sm:rounded-b-lg">
             <div class="p-6 text-gray-900">
-                <div class="flex mb-3 items-center justify-between gap-4 sticky top-[10px] bg-white">
+                <div class="flex mb-3 items-center justify-between gap-4 bg-white"
+                >
                     {{-- filters --}}
                     <div class="flex items-center gap-4 w-full p-2">
                         <div class="w-1/3 flex items-center bg-gray-100 rounded-lg pl-2">
@@ -203,6 +210,7 @@ copyToClip() {
                 @if ($generals->tablemode == 'table')
                     <table class="w-full text-center">
                         <thead>
+                            <th></th>
                             <th @click="sortTable('name')" class="cursor-pointer">Name</th>
                             <th>Phone</th>
                             <th>Email</th>
@@ -217,6 +225,23 @@ copyToClip() {
                                 <tr x-show="matchesFilter(participant)"
                                     class="h-[7vh] hover:bg-slate-100 cursor-pointer"
                                     x-on:click="window.location.href = '/participants/' + participant.id">
+                                    <td>
+                                        <img x-show="participant.image"
+                                            :src="`{{ asset('storage/images/participants/') }}/${participant.image}`"
+                                            class="w-[25px] rounded-full aspect-square object-cover" alt="">
+
+                                        <svg x-show="!participant.image" version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 280" preserveAspectRatio="xMidYMid meet"
+                                            class="w-[25px]">
+
+                                            <g transform="translate(0.000000,315.000000) scale(0.100000,-0.100000)"
+                                                fill="#000" stroke="none">
+                                                <path
+                                                    d="M705 3008 c-41 -120 -475 -1467 -475 -1474 1 -9 1238 -910 1257 -916 6 -2 294 203 640 454 l631 458 -84 257 c-46 142 -154 477 -241 745 l-158 488 -783 0 c-617 0 -784 -3 -787 -12z m1265 -412 c0 -3 65 -205 145 -451 80 -245 145 -448 145 -450 0 -2 -173 -130 -384 -283 l-384 -280 -384 279 c-283 207 -382 284 -380 297 5 22 283 875 289 885 4 7 953 10 953 3z" />
+                                                <path
+                                                    d="M1176 1661 c21 -15 101 -74 178 -130 l139 -101 31 23 c17 13 92 68 166 122 74 54 139 102 144 106 6 5 -145 9 -344 9 l-354 0 40 -29z" />
+                                            </g>
+                                        </svg>
+                                    </td>
                                     <td>
                                         <span class="cursor-pointer border-b border-black"
                                             x-on:click="window.location.href = '/participants/' + participant.id"
@@ -262,12 +287,14 @@ copyToClip() {
 
                         <template x-for="participant in participants" :key="participant.id">
 
-                            <div class="shadow-md rounded-lg" x-show="matchesFilter(participant)">
-
+                            <div class="shadow-md rounded-lg relative" x-show="matchesFilter(participant)">
+                                <p class="absolute top-[10px] right-[10px] bg-black text-white px-2 rounded-full capitalize"
+                                    x-text="participant.current_step.replace('_', ' ')"></p>
                                 <img x-show="participant.image"
                                     x-on:click="window.location.href = '/participants/' + participant.id"
                                     :src="`{{ asset('storage/images/participants/') }}/${participant.image}`"
-                                    class="w-full aspect-square object-cover rounded cursor-pointer" alt="participant_image">
+                                    class="w-full aspect-square object-cover rounded cursor-pointer"
+                                    alt="participant_image">
 
                                 <svg x-show="!participant.image" version="1.0" xmlns="http://www.w3.org/2000/svg"
                                     x-on:click="window.location.href = '/participants/' + participant.id"
@@ -287,26 +314,75 @@ copyToClip() {
                                         <h2 class="text-lg font-semibold" x-text="participant.full_name"></h2>
                                         <p x-text="participant.city"></p>
                                         <p x-text="participant.prefecture.replace(/_/g, ' ')"></p>
-                                        <p x-text="'Age: ' + participant.age"></p>
-
                                     </div>
 
-                                    <form
+                                    {{-- Modal --}}
+                                    <div x-show="modalContent"
+                                        class="fixed inset-0 bg-gray-700 flex items-center justify-center">
+                                        <div class="bg-white rounded-lg shadow-lg p-6 w-[80vw] lg:w-[33vw]">
+                                            <h2 class="text-lg font-semibold text-gray-800">Are you sure?</h2>
+
+                                            <p x-show="modalContent == 'next'" class="text-sm text-gray-600 mt-2">Do
+                                                you really want to move participant to the next step
+                                                <span
+                                                    x-text="participants.find(participant => participant.id == id).current_step.includes('interview') ? 'Jungle' : 'School'"></span>
+                                            </p>
+
+                                            <p x-show="modalContent=='deny'"> Are You Sure You Want to Deny
+                                                <span
+                                                    x-text="participants.find(participant => participant.id == id).full_name"></span>
+                                            </p>
+
+                                            <div class="flex justify-end space-x-4 mt-4">
+                                                <button x-on:click="modalContent = ''"
+                                                    class="py-2 px-4 bg-gray-300 rounded-lg hover:bg-gray-400">Cancel</button>
+
+
+                                                <form :action="`{{ route('participant.step', '') }}/${id}`"
+                                                    method="post">
+                                                    @csrf
+                                                    <button x-show="modalContent == 'deny'" name="action"
+                                                        value="deny"
+                                                        class="py-2 px-4 bg-red-600 rounded-lg hover:bg-red-700 text-white">
+                                                        Deny
+                                                    </button>
+
+                                                    <button x-show="modalContent == 'next'" name="action"
+                                                        value="next"
+                                                        class="py-2 px-4 bg-gray-900 rounded-lg hover:bg-gray-700 text-white">
+                                                        Next
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {{-- Modal Buttons for denying or next step --}}
+                                    <div class="flex flex-col gap-2"
                                         x-show="!participant.current_step.includes('fail') &&
-                                                !participant.current_step.includes('school') &&
-                                                !participant.current_step.includes('info')
-                                                "
-                                        action="" method="post" class="flex flex-col gap-2">
-                                        @csrf
-                                        <button type="submit" name="action" value="next"
-                                            class="bg-black text-white  px-2 py-1 rounded border-2 border-black">
-                                            Next Step
-                                        </button>
-                                        <button type="submit" name="action" value="deny"
-                                            class="border-2 border-black  px-2 py-1 rounded">
+                                        !participant.current_step.includes('school') &&
+                                        !participant.current_step.includes('info')
+                                    ">
+
+                                        <button
+                                            x-on:click="
+                                        modalContent = 'deny';
+                                        id = participant.id;
+                                        "
+                                            type="button" id="deny-step-button"
+                                            class="bg-red-600 hover:bg-red-700 text-white py-1 px-2 rounded">
                                             Deny
                                         </button>
-                                    </form>
+                                        <button
+                                            x-on:click="
+                                        modalContent = 'next';
+                                        id = participant.id
+                                        "
+                                            type="button"
+                                            class="bg-black hover:bg-gray-900 text-white py-1 px-2 rounded">
+                                            Next Step
+                                        </button>
+                                    </div>
                                 </div>
 
                             </div>

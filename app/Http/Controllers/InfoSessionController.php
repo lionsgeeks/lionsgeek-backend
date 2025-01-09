@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\InfoSession;
 use App\Models\Participant;
+use App\Models\Satisfaction;
 use Illuminate\Http\Request;
 
 class InfoSessionController extends Controller
@@ -37,7 +38,9 @@ class InfoSessionController extends Controller
             return $participant->age >= 27;
         })->count();
 
-        return view('info_session.info_session_show', compact('infoSession', 'participants', 'males', 'babies', 'prime', 'late', 'oldies'));
+        $satisfactions = Satisfaction::all();
+
+        return view('info_session.info_session_show', compact('infoSession', 'participants', 'males', 'babies', 'prime', 'late', 'oldies', 'satisfactions'));
     }
     public function store(Request $request)
     {

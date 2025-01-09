@@ -34,6 +34,7 @@
                                 class="border-2 border-black py-2 px-4 rounded">
                                 Deny
                             </button>
+
                         </form>
 
                         <button type="submit" id="next-step-button" class="bg-black text-white py-2 px-4 rounded">
@@ -41,23 +42,24 @@
                         </button>
                     @endif
 
-                    @php
+                    {{-- @php
                         function getNextStep($currentStep)
                         {
-                            if ($currentStep == 'interview') {
+                            if ($currentStep.include('interview')) {
                                 return 'Jungle';
                             } elseif ($currentStep == 'jungle') {
-                                return 'Coding School';
+                                return 'School';
                             }
                         }
-                    @endphp
-                    {{-- Next Step Modal --}}
+                    @endphp --}}
+                    {{-- Go To Next Step modal --}}
                     <div id="confirmation-next"
                         class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden">
                         <div class="bg-white rounded-lg shadow-lg p-6 w-[33vw]">
                             <h2 class="text-lg font-semibold text-gray-800">Are you sure?</h2>
                             <p class="text-sm text-gray-600 mt-2">Do you really want to go
-                                {{ getNextStep($participant->current_step) }}?</p>
+                                {{-- {{ getNextStep($participant->current_step) }}? --}}
+                            </p>
                             <div class="flex justify-end space-x-4 mt-4">
                                 <button id="cancel-button2"
                                     class="py-2 px-4 bg-gray-300 rounded-lg hover:bg-gray-400">Cancel</button>
@@ -89,12 +91,9 @@
                         });
                     </script>
 
-                    <button id="delete-button" class="py-2 rounded-lg text-white px-2 bg-red-600" type="submit">
-                        Remove Participant
-                    </button>
+                    <button id="delete-button" class="py-2 rounded-lg text-white px-2 bg-red-600" type="submit">Remove
+                        participant</button>
 
-
-                    {{-- Delete Confirmation Modal --}}
                     <div id="confirmation-modal"
                         class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden">
                         <div class="bg-white rounded-lg shadow-lg p-6 w-[37vw] ">
@@ -129,8 +128,6 @@
                         });
                     </script>
                 </div>
-
-                {{-- User Information --}}
                 <div class="p-6 text-gray-900">
                     <div class="flex items-center flex-col lg:flex-row gap-2 justify-between">
                         {{-- User Info --}}

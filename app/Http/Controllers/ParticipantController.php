@@ -202,19 +202,20 @@ class ParticipantController extends Controller
             $participant->update([
                 'current_step' => 'interview_pending'
             ]);
-            return back();
+            return back()->with('success','Participant in Pending Interview');
         }
 
         if ($participant->current_step == "interview" || $participant->current_step == "interview_pending") {
             $participant->update([
                 "current_step" => $action == "next" ? "jungle" : "interview_failed",
             ]);
+            return back()->with('success', $action == "next" ? "Move To Jungle" : "Participant Has Failed");
         } elseif ($participant->current_step == "jungle") {
             $participant->update([
                 "current_step" => $action == "next" ? $school : "jungle" . "_failed",
             ]);
+            return back()->with('success', $action == "next" ? "Move To School" : "Participant Has Failed");
         }
-        return back();
     }
 
     public function toInterview(Request $request)
@@ -239,7 +240,7 @@ class ParticipantController extends Controller
                 Mail::mailer($emailRecipient)->to($candidat->email)->send(new InterviewMail($full_name, $day, $timeSlot , $course));
             }
         }
-        return back();
+        return back()->with('success','The Invitation Has Been Sent Successfully!');
     }
     public function toJungle(Request $request)
     {
@@ -251,7 +252,7 @@ class ParticipantController extends Controller
         foreach ($candidats as $candidat) {
             Mail::to($candidat->email)->send(new JungleMail($candidat->full_name, $day ,$traning));
         }
-        return back();
+        return back()->with('success','The Invitation Has Been Sent Successfully!');
     }
     public function toSchool(Request $request)
     {
@@ -260,6 +261,6 @@ class ParticipantController extends Controller
         foreach ($candidats as $key => $candidat) {
             Mail::to($candidat->email)->send(new SchoolMail($candidat->full_name, $day, $candidat->current_step));
         }
-        return back();
+        return back()->with('success','The Invitation Has Been Sent Successfully!');
     }
 }

@@ -9,7 +9,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class SchoolMail extends Mailable
+class SchoolMail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
@@ -29,7 +29,7 @@ class SchoolMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'School Mail',
+            subject: 'LionsGeek School Invitation',
         );
     }
 
@@ -39,7 +39,7 @@ class SchoolMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail.school_mail',
+            view: 'maizzleMails.emails.schoolMail',
         );
     }
 

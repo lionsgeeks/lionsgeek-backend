@@ -30,7 +30,7 @@
                                                 Send Invitation to Participants </h3>
                                         </div>
                                     </div>
-                                    <form action="{{ route('participant.jungle') }}"
+                                    <form action="{{ route('participant.school') }}"
                                         method="POST" class="flex flex-col gap-3">
                                         @csrf
                                         <div class="flex flex-col gap-3 py-3">

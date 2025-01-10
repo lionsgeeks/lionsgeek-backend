@@ -258,6 +258,7 @@ class ParticipantController extends Controller
     {
         $candidats = Participant::where('info_session_id', $request->infosession_id)->where('current_step', 'coding_school')->orWhere('current_step', 'media_school')->get();
         $day = $request->date;
+        // dd($candidats);
         foreach ($candidats as $key => $candidat) {
             Mail::to($candidat->email)->send(new SchoolMail($candidat->full_name, $day, $candidat->current_step));
         }

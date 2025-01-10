@@ -53,7 +53,7 @@ class InterviewMail extends Mailable implements ShouldQueue
     public function content(): Content
     {
         return new Content(
-            view: 'maizzleMails.emails.interviewmail',
+            view: 'maizzleMails.emails.schoolMail',
         );
     }
 

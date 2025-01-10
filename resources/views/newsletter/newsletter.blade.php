@@ -12,7 +12,7 @@
             </button>
         </a> --}}
     </x-slot>
-    <div class="flex gap-2 p-4 rounded-lg">
+    <div class="flex md:flex-row flex-col  gap-2 p-4 rounded-lg">
         <form id="newsForm" class="md:w-1/2 bg-white p-3 flex flex-col gap-3" action="{{ route('newsletter.store') }}" method="POST">
             @csrf
             <div>

@@ -150,8 +150,12 @@
 
                             <div class="flex items- gap-7 ">
                                 @if ($participant->image)
-                                    <img src="{{ asset('storage/images/participants/' . $participant->image) }}"
-                                        width="150" class="rounded-full aspect-square object-cover" alt="">
+                                    <a href="https://backend.mylionsgeek.ma/storage/images/participants/{{ $participant->image }}"
+                                        target="_blank">
+                                        <img src="{{ asset('storage/images/participants/' . $participant->image) }}"
+                                            width="150" class="rounded-full aspect-square object-cover"
+                                            alt="">
+                                    </a>
                                 @else
                                     <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="125" height="125"
                                         viewBox="0 0 280 280" preserveAspectRatio="xMidYMid meet" class="">

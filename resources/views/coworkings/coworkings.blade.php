@@ -20,7 +20,7 @@
                             return this.matchesSearch(participant);},
 
                 }'
-                    class="bg-white h-[76vh] w-full overflow-y-auto  overflow-hidden shadow-sm sm:rounded-lg">
+                    class="bg-white min-h-[76vh] mb-3 w-full shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900 ">
 
                         <div class="flex items-center justify-between mb-4">

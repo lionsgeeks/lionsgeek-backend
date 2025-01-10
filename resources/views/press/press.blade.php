@@ -6,7 +6,7 @@
 
     </x-slot>
     <div class="pt-12 md:px-10 px-4">
-        <div class=" {{ $presses->count() == 0 ? 'h-[76vh]' : 'min-h-[76vh]' }} bg-white rounded-lg p-6  w-[100%] px-8 ">
+        <div class=" {{ $presses->count() == 0 ? 'h-[76vh]' : 'min-h-[76vh]' }} mb-3 bg-white rounded-lg p-6  w-[100%] px-8 ">
             <div class="flex justify-end">
                 <a href="{{ route('press.create') }}">
                     <button

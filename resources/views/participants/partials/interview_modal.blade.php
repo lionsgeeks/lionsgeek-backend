@@ -46,7 +46,7 @@
                                                       <span>Add Date</span>
                                                    </button>
                                         </div>
-                                        <div class="flex    h-[8vh] bg-slate-50   items-center border rounded-lg px-4"> 
+                                        <div class="flex    h-[8vh] bg-slate-50   items-center border rounded-lg px-4">
                                             <h1
                                                 class="rounded-full rounded-e-none  text-gray-500   flex items-center border-r p-2">
                                                 Choose a Date </h1>
@@ -58,7 +58,7 @@
                                         </div>
                                         <div class="flex flex-col gap-y-2">
                                             <template x-for="(time, index) in times" :key="time.id">
-                                                
+
                                                 <div class="my-1    flex justify-between  bg-slate-50 h-[8vh]  items-center border rounded-lg px-4">
                                                     <div class="flex">
                                                         <h1

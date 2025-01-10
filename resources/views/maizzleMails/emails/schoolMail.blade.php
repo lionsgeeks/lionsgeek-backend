@@ -52,14 +52,14 @@
                   </table>
                   <div role="separator" style="line-height: 24px">&zwj;</div>
                   <h1 style="margin: 0 0 24px; font-size: 24px; line-height: 32px; font-weight: 600; color: #0f172a">
-                    Welcome to the {{ $school == "coding_school" ? "Coding" : "Media" }} School! Your Journey Starts Soon
+                    Welcome to the {{ $school }} School! Your Journey Starts Soon
                   </h1>
                   <div role="separator" style="line-height: 4px">&zwj;</div>
                   <p style="font-size: 16px; line-height: 24px; color: #475569">Dear {{ $full_name }},</p>
                   <div role="separator" style="line-height: 4px">&zwj;</div>
                   <p style="font-size: 16px; line-height: 24px; color: #475569">
                     We are excited to invite you to join
-                    the {{ $school == "coding_school" ? "Coding" : "Media" }} School at LionsGeek!
+                    the {{ $school }} School at LionsGeek!
                     Your passion and potential have earned you a place in this dynamic and inspiring
                     environment where creativity meets innovation.
                   </p>
@@ -67,7 +67,7 @@
                   <p style="font-size: 16px; line-height: 24px; color: #475569">Here are your important details:</p>
                   <div role="separator" style="line-height: 4px">&zwj;</div>
                   <ul style="font-size: 16px; line-height: 24px; color: #475569">
-                    <li style="margin-top: 12px">Program: {{ $school == "coding_school" ? "Coding" : "Media" }}</li>
+                    <li style="margin-top: 12px">Program: {{ $school }}</li>
                     <li style="margin-top: 12px">Start Date: {{ \Carbon\Carbon::parse($day)->format('Y-m-d') }} at
                       9:30 am
                     </li>
@@ -93,17 +93,18 @@
                     LionsGeek
                   </p> <span dir="rtl">
                                     <h1 style="margin: 0 0 24px; font-size: 24px; line-height: 32px; font-weight: 600; color: #0f172a">
-                                        مرحبا بيك فمدرسة {{ $school == "coding_school" ? "Coding" : "Media" }} !رحلتك غاتبدى قريبا
+                                        مرحبا بيك فمدرسة {{ $school }} !رحلتك غاتبدى قريبا
                                     </h1>  <div role="separator" style="line-height: 4px">&zwj;</div>                                    <p style="font-size: 16px; line-height: 24px; color: #475569">عزيزنا {{ $full_name }},</p>  <div role="separator" style="line-height: 4px">&zwj;</div>                                    <p style="font-size: 16px; line-height: 24px; color: #475569">
-                                        فرحانين بزاف باش نبلغوك بالدعوة للالتحاق بمدرسة {{ $school == "coding_school" ? "Coding" : "Media" }}م!ع LionsGeek!
+                                        فرحانين بزاف باش نبلغوك بالدعوة للالتحاق بمدرسة {{ $school }} مع LionsGeek!
                                         الحماس والموهبة ديالك عطاوك الفرصة باش تكون جزء من هاد البيئة الحماسية والملهمة
                                         اللي كاتجمع بين الإبداع والابتكار.
                                     </p>  <div role="separator" style="line-height: 4px">&zwj;</div>                                    <p style="font-size: 16px; line-height: 24px; color: #475569">ها التفاصيل المهمة ديالك:</p>  <div role="separator" style="line-height: 4px">&zwj;</div>                                    <ul style="font-size: 16px; line-height: 24px; color: #475569">
-                                        <li style="margin-top: 12px">البرنامج: {{ $school == "coding_school" ? "Coding" : "Media" }}/!li>
-                                        </li><li style="margin-top: 12px">تاريخ البداية: {{ \Carbon\Carbon::parse($day)->format('Y-m-d')
-                                            }} مع 9:30 صباحا</li>
+                                        <li style="margin-top: 12px">البرنامج: {{ $school }}</li>
+                                        <li style="margin-top: 12px">تاريخ البداية: {{
+                                            \Carbon\Carbon::parse($day)->format('Y-m-d')}} مع 9:30 صباحا </li>
                                         <li style="margin-top: 12px">الموقع: الطابق الرابع، عين السبع سنتر، طريق الرباط، كيلومتر 8،
-                                            الدار البيضاء 20050</li>
+                                            الدار البيضاء 20050
+                                        </li>
                                     </ul>  <div role="separator" style="line-height: 4px">&zwj;</div>                                    <p style="font-size: 16px; line-height: 24px; color: #475569">
                                         وجد راسك باش تكتسب مهارات جديدة، تخدم على مشاريع زوينة، وتتعامل مع زملاء عندهم
                                         نفس الطموحات. من إتقان فن البرمجة إلى إنشاء محتوى مؤثر، الرحلة ديالك كاتبدا هنا.

@@ -2,8 +2,8 @@
     <div x-data="{ showModal: false }">
         <!-- Button to open the modal -->
         <button @click="showModal = true"
-            class="w-full px-4 py-2 text-sm font-medium bg-red-500 text-white border border-red-500 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-red-500">
-            Delete session </button>
+            class="bg-red-600 px-2 py-1 rounded text-white">
+            Delete Session </button>
         <!-- Background overlay -->
         <div x-show="showModal" class="fixed inset-0 transition-opacity" aria-hidden="true" @click="showModal = false">
             <div class="absolute inset-0 bg-gray-500 opacity-75"></div>

@@ -23,7 +23,7 @@
 
                     <div id="confirmation-event"
                         class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden">
-                        <div class="bg-white rounded-lg shadow-lg p-6 w-[37vw] ">
+                        <div class="bg-white rounded-lg shadow-lg p-6 w-[75vw] md:w-[37vw] ">
                             <h2 class="text-lg font-semibold text-gray-800">Are you sure?</h2>
                             <p class="text-sm text-gray-600 mt-2">Do you really want to remove this event? This
                                 action cannot be undone.</p>
@@ -56,8 +56,8 @@
                         });
                     </script>
                 </div>
-                <div class="w-full flex ">
-                    <div class="w-[57%]">
+                <div class="w-full flex flex-col md:flex-row gap-4 ">
+                    <div class="w-full md:w-[57%] ">
                         <form id="updateForm"
                             class="flex flex-col items-center justify-center py-4 md:py-6 w-full rounded-[20px] gap-4 md:gap-5"
                             action="{{ route('events.update', $event) }}" method="post" enctype="multipart/form-data">
@@ -231,7 +231,7 @@
                             </div>
                         </form>
                     </div>
-                    <div class="w-[42%] max-h-[60rem] overflow-y-auto">
+                    <div class="w-full md:w-[42%] max-h-[60rem] overflow-y-auto">
                         {{-- Participants --}}
                         <div class="flex flex-col gap-3 w-full mt-4" x-data="{
                             searchQuery: '',

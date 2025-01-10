@@ -1,7 +1,7 @@
 <div class="flex items-center justify-center text-black">
     <div x-data="{ updateModal: false }">
         <!-- Button to open the modal -->
-        <button @click="updateModal = true" class="w-full bg-black px-2 py-1 rounded font-medium text-white">
+        <button @click="updateModal = true" class="bg-black px-2 py-1 rounded text-white">
             Update  </button>
         <!-- Background overlay -->
         <div x-show="updateModal" class="fixed inset-0 transition-opacity" aria-hidden="true" @click="updateModal = false">

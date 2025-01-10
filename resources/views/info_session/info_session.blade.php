@@ -11,10 +11,10 @@
                 Event
             </button>
         </a> --}}
-        
+
     </x-slot>
     <div class="pt-12 md:px-10 px-4 ">
-        <div class="bg-white rounded-lg p-6  w-[100%] px-8 h-[76vh] overflow-y-auto">
+        <div class="bg-white rounded-lg p-6  w-[100%] px-8 min-h-[76vh] mb-5">
             <div class="flex justify-end">
                 @if ($infosessions->count() > 0)
             @include('info_session.partials.create-session_modal')
@@ -49,7 +49,7 @@
                                         <p>{{ $infosession->formation }}</p>
                                     </div>
                                 </div>
-            
+
                                 <div class="flex flex-col gap-2">
                                     <div class="flex items-center gap-3">
                                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -74,7 +74,7 @@
                                           <h1>Places: {{ count($infosession->participants)  }} / {{ $infosession->places }}</h1>
                                     </div>
                                 </div>
-            
+
                                 <div class="flex justify-between items-center">
                                     <form action="{{ route('infosessions.isavailable', $infosession->id) }}" method="POST">
                                         @csrf
@@ -93,10 +93,10 @@
                                                         d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                                                 </svg>
                                             @endif
-                                            <span>Mark {{ $infosession->isAvailable ? 'Unavailable' : 'Available' }}</span>
+                                            <span>{{ $infosession->isAvailable ? 'Unavailable' : 'Available' }}</span>
                                         </button>
                                     </form>
-            
+
                                     <form action="{{ route('infosessions.isfinish', $infosession->id) }}" method="POST">
                                         @csrf
                                         @method('PATCH')
@@ -112,5 +112,5 @@
             </div>
         </div>
     </div>
-    
+
 </x-app-layout>

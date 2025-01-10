@@ -14,8 +14,8 @@
     </x-slot>
     <div class="p-10">
 
-        <div class="flex gap-4">
-            <div class="bg-white flex flex-col gap-5  font-bold w-1/4 px-5 py-8 shadow rounded-xl">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-2">
+            <div class="bg-white flex flex-col gap-5 font-bold px-5 py-8 shadow rounded-xl">
                 <div class="flex justify-between">
                     <h1 class="text-xl">Session</h1>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -25,8 +25,10 @@
                     </svg>
                 </div>
                 <p>{{ $infoSession->name }}</p>
+                <p>{{ \Carbon\Carbon::parse($infoSession->start_date)->format('d/m/Y') }}</p>
+                <p>{{ \Carbon\Carbon::parse($infoSession->start_date)->format('h:i A') }}</p>
             </div>
-            <div class="bg-white flex flex-col  gap-5 font-bold  w-1/4 px-5 py-8 shadow rounded-xl">
+            <div class="bg-white flex flex-col  gap-5 font-bold  px-5 py-8 shadow rounded-xl">
                 <div class="flex justify-between items-center">
                     <h1 class=" text-xl">Participants</h1>
                     <p>{{ $infoSession->participants->count() }}</p>
@@ -47,11 +49,12 @@
                 </div>
 
                 <div class="grid grid-cols-2">
-                    <p>Pending: {{$infoSession->participants->where('current_step', 'interview_pending')->count()}}</p>
+                    <p>Pending: {{ $infoSession->participants->where('current_step', 'interview_pending')->count() }}
+                    </p>
                     <p>School: {{ $infoSession->participants->where('current_step', 'like', '%school%')->count() }}</p>
                 </div>
             </div>
-            <div class="bg-white flex flex-col gap-5 font-bold  w-1/4 px-2 py-8 shadow rounded-xl">
+            {{-- <div class="bg-white flex flex-col gap-5 font-bold  px-2 py-8 shadow rounded-xl">
                 <div class="flex justify-between">
                     <h1 class=" text-xl">Actions</h1>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -61,8 +64,8 @@
                     </svg>
                 </div>
 
-            </div>
-            <div class="bg-white flex flex-col gap-5 font-bold w-1/4 px-5 py-8 shadow rounded-xl">
+            </div> --}}
+            <div class="bg-white flex flex-col gap-5 font-bold px-5 py-8 shadow rounded-xl">
                 <div class="flex justify-between">
                     <h1 class="text-xl">Gender</h1>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="30" height="30"
@@ -89,28 +92,28 @@
 
         </div>
         <div>
-            <div class="flex items-center gap-x-3 justify-end pt-12 ">
+            <div class="flex items-center gap-3 justify-end pt-12 flex-wrap ">
+                <div class="flex justify-around gap-5 w-full lg:w-fit items-center">
+                    <form action="{{ route('questions.export') }}" method="post">
+                        @csrf
 
+                        <button class="bg-black px-2 py-1 rounded text-white">
+                            Export Questions
+                        </button>
 
-                <form action="{{ route('questions.export') }}" method="post">
-                    @csrf
-
-                    <button class="bg-black px-2 py-1 rounded text-white">
-                        Export Questions
-                    </button>
-
-                </form>
-                <form action='{{ route('participant.export') }}' method="post">
-                    @csrf
-                    <input class="hidden" type="text" name="term" id="term" :value="searchQuery">
-                    <input class="hidden" type="text" name="step" id="step" :value="selectedStep">
-                    <input class="hidden" type="text" name="session" id="session"
-                        :value="infos && infos.length > 0 ? selectedSession : {{ $infoSession ? $infoSession->id : null }}">
-                    <button class="bg-black px-2 py-1 rounded text-white ">
-                        Export Students
-                    </button>
-                </form>
-                <div class="flex justify-end gap-x-5 items-center ">
+                    </form>
+                    <form action='{{ route('participant.export') }}' method="post">
+                        @csrf
+                        <input class="hidden" type="text" name="term" id="term" :value="searchQuery">
+                        <input class="hidden" type="text" name="step" id="step" :value="selectedStep">
+                        <input class="hidden" type="text" name="session" id="session"
+                            :value="infos && infos.length > 0 ? selectedSession : {{ $infoSession ? $infoSession->id : null }}">
+                        <button class="bg-black px-2 py-1 rounded text-white ">
+                            Export Students
+                        </button>
+                    </form>
+                </div>
+                <div class="flex justify-around lg:justify-around gap-5 w-full lg:w-fit items-center ">
                     @include('info_session.partials.update_session_modal')
                     @include('info_session.partials.delete-session_modal')
 
@@ -121,18 +124,18 @@
             'parts' => $infoSession->participants,
             'infos' => [],
         ])
-        <div class="flex items-center gap-2 m-3">
-            {{-- <div class="w-[30%] bg-white p-2 rounded">
+        {{-- <div class="flex items-center gap-2 m-3">
+            <div class="w-[30%] bg-white p-2 rounded">
                 @php
                     $totalNumber = $infoSession->participants->count();
                 @endphp
                 <x-gender-chart :$males :$totalNumber />
-            </div> --}}
-            {{--
+            </div>
+
             <div class="w-[40%] bg-white p-2 rounded">
                 <canvas id="ageChart"></canvas>
-            </div> --}}
-        </div>
+            </div>
+        </div> --}}
 
 
     </div>

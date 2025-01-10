@@ -141,11 +141,10 @@ copyToClip() {
 
         <div class="bg-white shadow-sm sm:rounded-b-lg">
             <div class="p-6 text-gray-900">
-                <div class="flex mb-3 items-center justify-between gap-4 bg-white"
-                >
+                <div class="flex mb-3 items-center justify-between gap-4 bg-white flex-col lg:flex-row">
                     {{-- filters --}}
-                    <div class="flex items-center gap-4 w-full p-2">
-                        <div class="w-1/3 flex items-center bg-gray-100 rounded-lg pl-2">
+                    <div class="flex items-center flex-wrap lg:flex-nowrap gap-4 w-full p-2">
+                        <div class="w-full lg:w-1/3 flex items-center bg-gray-100 rounded-lg pl-2">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"
                                 class="size-5">
                                 <path fill-rule="evenodd"
@@ -162,7 +161,7 @@ copyToClip() {
 
 
                         <select x-model="selectedStep" name="step" id="step"
-                            class="rounded border border-gray-300 py-1">
+                            class="rounded border border-gray-300 py-1 w-full lg:w-1/3">
                             <option value="" disabled selected>Filter By Steps</option>
                             <option value="">All Steps</option>
                             <option value="info_session">Info Session</option>
@@ -177,7 +176,7 @@ copyToClip() {
 
                         @if ($infos)
                             <select x-model="selectedSession" name="session" id="session"
-                                class="rounded border border-gray-300 py-1">
+                                class="rounded border border-gray-300 py-1 w-full lg:w-1/3">
                                 <option value="" disabled selected> Filter By Session</option>
                                 @foreach ($infos as $info)
                                     <option value={{ $info->id }}>{{ $info->formation }} {{ $info->name }}
@@ -186,16 +185,17 @@ copyToClip() {
                             </select>
                         @endif
 
-                        <button @click="resetFilter()" class="bg-black px-2  py-1 rounded text-white">
+                        <button @click="resetFilter()" class="bg-black px-2 w-full lg:w-1/3 py-1 rounded text-white">
                             Reset Filters
                         </button>
 
-                        <button @click="copyToClip()" id="copyBtn" class="bg-black px-2  py-1 rounded text-white">
+                        <button @click="copyToClip()" id="copyBtn" class=" px-2 w-full lg:w-1/3 py-1 rounded"
+                            :class="buttonText == 'Copy Emails' ? 'bg-black text-white' : 'bg-alpha text-black'">
                             <span x-text="buttonText"></span>
                         </button>
                     </div>
                     @if (Route::is('infosessions.show'))
-                        <div class="flex items-center gap-x-3">
+                        <div class="flex items-center flex-wrap lg:flex-nowrap gap-2">
                             @include('participants.partials.interview_modal')
                             @include('participants.partials.jungle_modal')
                             @include('participants.partials.school_modal')
@@ -211,27 +211,55 @@ copyToClip() {
                     <table class="w-full text-center">
                         <thead>
                             <th></th>
-                            <th @click="sortTable('name')" class="cursor-pointer">Name</th>
+                            <th @click="sortTable('name')" class="cursor-pointer flex items-center justify-center">
+                                <div class="flex items-center gap-1">
+                                    <p>Name</p>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="size-4">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5" />
+                                    </svg>
+                                </div>
+                            </th>
                             <th>Phone</th>
                             <th>Email</th>
-                            <th @click="sortTable('gender')" class="cursor-pointer">Gender</th>
+                            <th @click="sortTable('gender')" class="cursor-pointer flex items-center justify-center">
+                                <div class="flex items-center gap-1">
+                                    <p>Gender</p>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="size-4">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5" />
+                                    </svg>
+                                </div>
+                            </th>
                             <th>Session</th>
-                            <th @click="sortTable('birthday')" class="cursor-pointer">Date of Birth</th>
+                            <th @click="sortTable('birthday')" class="cursor-pointer flex items-center justify-center">
+                                <div class="flex items-center gap-1">
+                                    <p>Date of Birthday</p>
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        stroke-width="1.5" stroke="currentColor" class="size-4">
+                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                            d="M3 7.5 7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5" />
+                                    </svg>
+                                </div>
+                            </th>
                             <th>Current Step</th>
                         </thead>
 
                         <tbody class="w-full">
                             <template x-for="participant in participants" :key="participant.id">
                                 <tr x-show="matchesFilter(participant)"
-                                    class="h-[7vh] hover:bg-slate-100 cursor-pointer"
+                                    class="h-[7vh] hover:bg-gray-100 cursor-pointer "
                                     x-on:click="window.location.href = '/participants/' + participant.id">
                                     <td>
                                         <img x-show="participant.image"
                                             :src="`{{ asset('storage/images/participants/') }}/${participant.image}`"
                                             class="w-[25px] rounded-full aspect-square object-cover" alt="">
 
-                                        <svg x-show="!participant.image" version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 280" preserveAspectRatio="xMidYMid meet"
-                                            class="w-[25px]">
+                                        <svg x-show="!participant.image" version="1.0"
+                                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 280"
+                                            preserveAspectRatio="xMidYMid meet" class="w-[25px]">
 
                                             <g transform="translate(0.000000,315.000000) scale(0.100000,-0.100000)"
                                                 fill="#000" stroke="none">
@@ -287,7 +315,7 @@ copyToClip() {
 
                         <template x-for="participant in participants" :key="participant.id">
 
-                            <div class="shadow-md rounded-lg relative" x-show="matchesFilter(participant)">
+                            <div class="shadow-md group rounded-lg relative" x-show="matchesFilter(participant)">
                                 <p class="absolute top-[10px] right-[10px] bg-black text-white px-2 rounded-full capitalize"
                                     x-text="participant.current_step.replace('_', ' ')"></p>
                                 <img x-show="participant.image"
@@ -309,7 +337,12 @@ copyToClip() {
                                     </g>
                                 </svg>
 
-                                <div class="flex items-center justify-between p-2">
+                                <div class="flex items-center justify-between p-2"
+                                    :class="participant.current_step.includes('fail') ? 'bg-red-100 group-hover:bg-red-50' :
+                                        participant.current_step == 'jungle' ? 'bg-blue-100 group-hover:bg-blue-50' :
+                                        participant.current_step.includes('school') ? 'bg-green-100 group-hover:bg-green-50' :
+                                        participant.current_step.includes('pending') || participant.current_step ==
+                                        'interview' ? 'bg-gray-100 group-hover:bg-gray-50' : 'bg-white'">
                                     <div class="capitalize">
                                         <h2 class="text-lg font-semibold" x-text="participant.full_name"></h2>
                                         <p x-text="participant.city"></p>

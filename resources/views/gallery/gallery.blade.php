@@ -14,7 +14,7 @@
 
     <div class="pt-12 px-10">
         <div
-            class="flex-row-reverse justify-between flex {{ $galleries->count() == 0 ? 'h-[76vh]' : 'max-h-[76vh]' }} overflow-y-auto p-6 flex-wrap gap-x-[calc(5%/3)] gap-y-4 w-[100%] bg-white rounded-lg ">
+            class="flex-row-reverse justify-between flex {{ $galleries->count() == 0 ? 'h-[76vh]' : 'max-h-[76vh]' }} mb-3 p-6 flex-wrap gap-x-[calc(5%/3)] gap-y-4 w-[100%] bg-white rounded-lg ">
             @if ($galleries->count() == 0)
                 <div class="h-[100%] bg-white flex rounded-lg items-center justify-center w-full">
                     <div class="text-center">

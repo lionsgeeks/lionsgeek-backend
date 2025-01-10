@@ -5,10 +5,10 @@
         </h2>
 
     </x-slot>
-    
+
     <div class="md:pt-12 p-12 md:px-10 px-4">
-        
-        <div class=" {{ $events->count() == 0 ? 'h-[76vh]' : 'min-h-[76vh]' }} bg-white rounded-lg p-6  w-[100%] px-8 ">
+
+        <div class=" {{ $events->count() == 0 ? 'h-[76vh]' : 'min-h-[76vh]' }} mb-3 bg-white rounded-lg p-6  w-[100%] px-8 ">
             <div class="flex justify-end mb-6">
 
                 <a href="{{ route('events.create') }}">

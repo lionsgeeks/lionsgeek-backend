@@ -25,7 +25,7 @@
             </div>
             <div class="flex flex-col gap-2">
                 <label class="font-bold" for="">Content</label>
-                <textarea name="content" class="rounded-sm" id="" cols="30" rows="10"
+                <textarea name="content" class="rounded-sm" id="" cols="30" rows="7"
                     placeholder="Write your newsletter content here ..."></textarea>
             </div>
             <button type="button" id="sendNews" class="bg-black text-white flex justify-center items-center px-3 py-2 rounded-sm">Send
@@ -36,18 +36,22 @@
                 <h1 class="font-bold">Total Subscribers</h1>
                 <p class="font-medium">{{ $subscribers->count() }}</p>
             </div>
-            <div class="bg-white p-4">
+            <div class="bg-white p-6">
                 <div>
                     <h1 class="text-xl font-bold">Newsletter History</h1>
                     <p>Recent newsletters sent to subscribers</p>
                 </div>
                 <div>
                     @if ($lastnews->count() > 0)
-                        <table class="w-full ">
+                        <table class="w-full">
+                            <tr class="border-b ">
+                                <th class="py-3 text-start">Subject</th>
+                                <th class="py-3 text-start">Date</th>
+                            </tr>
                             @foreach ($lastnews as $item)
                                 <tr class="border-b ">
-                                    <th class="py-3 text-start">{{ $item->subject }}</th>
-                                    <th class="py-3 text-start">{{ $item->created_at }}</th>
+                                    <td class="py-3 text-start">{{ Str::limit($item->subject, 35, '...')  }}</td>
+                                    <td class="py-3 text-start">{{ $item->created_at }}</td>
                                 </tr>
                             @endforeach
                         </table>

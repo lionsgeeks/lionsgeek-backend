@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AddAdminController;
+use App\Http\Controllers\Api\SubscriberController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ContactController;
@@ -129,6 +130,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/email/destroy/{contact}', [ContactController::class, 'destroy'])->name('email.destroy');
     //mark email as read
     Route::put('/email/markread/{contact}', [ContactController::class, 'update'])->name('email.markread');
+
+    // delete fake subscribers 
+    Route::get('/kill', [NewsletterController::class, 'fakeUsers'])->name('destroy.subscriber');
 });
 // Route::post('/booking/store', [BookingController::class, 'store'])->name('booking.store');
 

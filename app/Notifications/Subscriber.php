@@ -6,6 +6,8 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Hash;
 
 class Subscriber extends Notification implements ShouldQueue
 {
@@ -33,12 +35,15 @@ class Subscriber extends Notification implements ShouldQueue
      */
     public function toMail(object $notifiable): MailMessage
     {
+        $unsubscribeUrl = url('http://localhost:3000/unsubscribe/' . Crypt::encrypt($notifiable->id) );
         return (new MailMessage)
             ->subject($this->subject)
-            // ->line('The introduction to the notification.')
             ->line($this->content)
             ->action('Click to see more', url('/'))
-            ->line('Thank you for using our application!');
+            ->line('Thank you!')
+            ->markdown('vendor.notifications.email', [
+                'unsubscribeUrl' => $unsubscribeUrl,
+            ]);
     }
 
     /**

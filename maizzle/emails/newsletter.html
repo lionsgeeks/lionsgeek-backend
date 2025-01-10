@@ -1,0 +1,87 @@
+---
+bodyClass: bg-slate-50
+preheader: Transactional email template
+---
+
+<x-main>
+  <div class="bg-slate-50 sm:px-4 font-inter">
+    <table align="center" class="m-0 mx-auto">
+      <tr>
+        <td class="w-[552px] max-w-full">
+          <x-spacer height="24px" />
+
+          <table class="w-full">
+            <tr>
+              <td
+                class="py-6 px-9 sm:p-6 bg-white [border:1px_solid_theme(colors.slate.200)] rounded-lg"
+              >
+                <table align="center" class="m-0 mx-auto">
+                  <tr>
+                    <a class="py-5 px-9 sm:p-6" href="https://lionsgeek.ma">
+                      <img
+                        class=""
+                        src="https://media.licdn.com/dms/image/v2/D4E0BAQEI5pl3PyS-Eg/company-logo_200_200/company-logo_200_200/0/1734088749325/lionsgeek_logo?e=2147483647&v=beta&t=2tZP_cpgMZO4IFtfyB0GNKXIrPO5I5w6a8iUlnrhntQ"
+                        width="90"
+                        alt="LionsGeek"
+                      />
+                    </a>
+                  </tr>
+                </table>
+
+                <x-spacer height="24px" />
+
+                <h1 class="m-0 mb-6 text-2xl/8 text-slate-900 font-semibold">
+                  Hello Lion !
+                </h1>
+
+                <p class="m-0 mb-6 text-base/6 text-slate-600">
+                    @{{ $content }}
+                </p>
+
+                <x-divider />
+
+                <table align="center" class="m-0 mx-auto">
+                  <tr
+                    class="m-0 mb-6 text-base/6 text-slate-600 text-[20px] font-bold"
+                  >
+                    <p>Join Us :</p>
+                  </tr>
+                  <tr>
+                    <td class="py-5 px-9 sm:p-6" href="https://lionsgeek.ma">
+                      <div class="font-semibold">
+                        <a
+                          class="p-1"
+                          href="https://www.instagram.com/lions_geek?igsh=MWNhb2F6eGRjOTZvcg=="
+                          >Instagram</a
+                        >
+                        <a
+                          class="p-1"
+                          href="https://www.facebook.com/LionsGeek?mibextid=ZbWKwL"
+                          >Facebook</a
+                        >
+                        <a
+                          class="p-1"
+                          href="https://x.com/LionsGeek?t=oZV_osSHbR3MV7uSV3AIIA&s=09"
+                          >X (Twitter)</a
+                        >
+                        <a
+                          class="p-1"
+                          href="https://www.tiktok.com/@lions_geek?_t=8sZ3ZyKrqvG&_r=1"
+                          >Tiktok</a
+                        >
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+                <x-divider />
+                <p class="m-0 mb-6 text-sm text-slate-400">
+                    You may <a href="https://lionsgeek.ma/unsubscribe/">unsubscribe</a>  if you prefer not to receive messages like these. 
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </div>
+</x-main>

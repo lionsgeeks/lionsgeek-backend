@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v="urn:schemas-microsoft-com:vml">
+<head>
+  <meta charset="utf-8">
+  <meta name="x-apple-disable-message-reformatting">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="format-detection" content="telephone=no, date=no, address=no, email=no, url=no">
+  <meta name="color-scheme" content="light dark">
+  <meta name="supported-color-schemes" content="light dark"> <!--[if mso]>
+  <noscript>
+    <xml>
+      <o:OfficeDocumentSettings xmlns:o="urn:schemas-microsoft-com:office:office">
+        <o:PixelsPerInch>96</o:PixelsPerInch>
+      </o:OfficeDocumentSettings>
+    </xml>
+  </noscript>
+  <style>
+    td,th,div,p,a,h1,h2,h3,h4,h5,h6 {font-family: "Segoe UI", sans-serif; mso-line-height-rule: exactly;}
+  </style>
+  <![endif]-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" media="screen">
+  <style>
+    @media (max-width: 600px) {
+      .sm-p-6 {
+        padding: 24px !important
+      }
+      .sm-px-4 {
+        padding-left: 16px !important;
+        padding-right: 16px !important
+      }
+    }
+  </style>
+</head>
+<body style="margin: 0; width: 100%; background-color: #f8fafc; padding: 0; -webkit-font-smoothing: antialiased; word-break: break-word">
+  <div style="display: none">
+    Transactional email template
+    &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847; &#8199;&#65279;&#847;
+  </div>
+  <div role="article" aria-roledescription="email" aria-label lang="en">
+    <div class="sm-px-4" style="background-color: #f8fafc; font-family: Inter, ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif">
+      <table align="center" style="margin: 0 auto" cellpadding="0" cellspacing="0" role="none">
+        <tr>
+          <td style="width: 552px; max-width: 100%">
+            <div role="separator" style="line-height: 24px">&zwj;</div>
+            <table style="width: 100%" cellpadding="0" cellspacing="0" role="none">
+              <tr>
+                <td class="sm-p-6" style="border-radius: 8px; background-color: #fffffe; padding: 24px 36px; border: 1px solid #e2e8f0">
+                  <table align="center" style="margin: 0 auto" cellpadding="0" cellspacing="0" role="none">
+                    <tr>
+                      <a class="sm-p-6" href="https://lionsgeek.ma" style="padding: 20px 36px">
+                        <img src="https://media.licdn.com/dms/image/v2/D4E0BAQEI5pl3PyS-Eg/company-logo_200_200/company-logo_200_200/0/1734088749325/lionsgeek_logo?e=2147483647&v=beta&t=2tZP_cpgMZO4IFtfyB0GNKXIrPO5I5w6a8iUlnrhntQ" width="90" alt="LionsGeek" style="max-width: 100%; vertical-align: middle">
+                      </a>
+                    </tr>
+                  </table>
+                  <div role="separator" style="line-height: 24px">&zwj;</div>
+                  <h1 style="margin: 0 0 24px; font-size: 24px; line-height: 32px; font-weight: 600; color: #0f172a">
+                    Hello Lion !
+                  </h1>
+                  <p style="margin: 0 0 24px; font-size: 16px; line-height: 24px; color: #475569">
+                    Thank you for signing up for our newsletter! 🎉 We're thrilled
+                    to have you on board.
+                  </p>
+                  <div role="separator" style="line-height: 17px">&zwj;</div>
+                  <p style="margin: 0 0 24px; font-size: 16px; line-height: 24px; color: #475569">
+                    Here's what you can expect:
+                  </p>
+                  <ul style="margin: 0 0 24px; font-size: 16px; line-height: 24px; color: #475569">
+                    <li>
+                      Updates on our latest projects in coding, digital media, and
+                      beyond.
+                    </li>
+                    <li>
+                      Exclusive insights, tips, and tricks to help you excel in
+                      web development, app creation, and digital media production.
+                    </li>
+                    <li>
+                      Early access to workshops, tutorials, and events tailored to
+                      tech and media enthusiasts like you.
+                    </li>
+                  </ul>
+                  <div role="separator" style="line-height: 17px">&zwj;</div>
+                  <p style="margin: 0 0 24px; font-size: 16px; line-height: 24px; color: #475569">
+                    LionsGeek is your hub for learning, growth, and innovation. If
+                    there’s something specific you’d love to see in our updates,
+                    let us know—we’d love to hear from you!
+                  </p>
+                  <p style="margin: 0 0 24px; font-size: 16px; line-height: 24px; color: #475569">
+                    Stay tuned for exciting news and updates coming your way soon!
+                  </p>
+                  <h5 style="margin: 0 0 24px; font-size: 16px; line-height: 24px; color: #475569">
+                    Warm regards,
+                  </h5>
+                  <p style="margin: 0 0 24px; font-size: 16px; line-height: 24px; color: #475569">Lionsgeek</p>
+                  <div role="separator" style="height: 1px; line-height: 1px; background-color: #cbd5e1; margin-top: 24px; margin-bottom: 24px">&zwj;</div>
+                  <table align="center" style="margin: 0 auto" cellpadding="0" cellspacing="0" role="none">
+                    <tr style="margin: 0 0 24px; font-size: 16px; line-height: 24px; font-weight: 700; color: #475569">
+                      <p>Join Us :</p>
+                    </tr>
+                    <tr>
+                      <td class="sm-p-6" href="https://lionsgeek.ma" style="padding: 20px 36px">
+                        <div style="font-weight: 600">
+                          <a href="https://www.instagram.com/lions_geek?igsh=MWNhb2F6eGRjOTZvcg==" style="padding: 4px">Instagram</a>
+                          <a href="https://www.facebook.com/LionsGeek?mibextid=ZbWKwL" style="padding: 4px">Facebook</a>
+                          <a href="https://x.com/LionsGeek?t=oZV_osSHbR3MV7uSV3AIIA&s=09" style="padding: 4px">X (Twitter)</a>
+                          <a href="https://www.tiktok.com/@lions_geek?_t=8sZ3ZyKrqvG&_r=1" style="padding: 4px">Tiktok</a>
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

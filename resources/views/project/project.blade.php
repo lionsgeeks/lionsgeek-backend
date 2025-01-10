@@ -22,12 +22,12 @@
                 @include('project.partials.create_project')
                 <div class="w-full flex gap-5 flex-wrap ">
                     @forelse ($projects as $project)
-                        <div class="w-[32%] shadow-l bg-[#fafafa] border border-gray-500/50 rounded-lg p-5 ">
+                        <div class="lg:w-[calc(95%/3)] md:w-[calc(95%/2)] w-full shadow-l bg-[#fafafa] border border-gray-500/50 rounded-lg p-5 ">
                             <div class="py-2 flex items-center justify-between">
                                 <div class=" flex items-center gap-x-3">
                                     <img class="w-14 h-14 rounded-full object-cover"
                                         src="{{ asset('storage/images/projects/' . $project->logo) }}" alt="">
-                                    <h1 class="font-bold text-lg truncate">{{ $project->name }}</h1>
+                                    <h1 class="font-bold lg:text-lg">{{ Str::limit($project->name, 10, '...') }}</h1>
                                 </div>
                                 <div class="relative flex items-center gap-x-3">
     
@@ -84,7 +84,7 @@
     
                             </div>
                             <div class="py-3">
-                                <img class=" w-full shadow-l h-[30vh] rounded-lg object-cover"
+                                <img class=" w-full shadow-l h-[12rem] rounded-lg object-cover"
                                     src="{{ asset('storage/images/projects/' . ($project->preview ? $project->preview : $project->logo)) }}"
                                     alt="">
     

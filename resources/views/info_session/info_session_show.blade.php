@@ -14,7 +14,7 @@
     </x-slot>
     <div class="p-10">
 
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-2">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
             <div class="bg-white flex flex-col gap-5 font-bold px-5 py-8 shadow rounded-xl">
                 <div class="flex justify-between">
                     <h1 class="text-xl">Session</h1>
@@ -92,7 +92,7 @@
 
         </div>
         <div>
-            <div class="flex items-center gap-3 justify-end pt-12 flex-wrap ">
+            <div class="hidden lg:flex items-center gap-3 justify-end pt-12 flex-wrap ">
                 <div class="flex justify-around gap-5 w-full lg:w-fit items-center">
                     <form action="{{ route('questions.export') }}" method="post">
                         @csrf
@@ -140,7 +140,7 @@
 
     </div>
 
-    <script>
+    {{-- <script>
         // The Age Chart
         const ageChart = document.getElementById('ageChart')
         new Chart(ageChart, {
@@ -171,5 +171,5 @@
                 }]
             }
         })
-    </script>
+    </script> --}}
 </x-app-layout>

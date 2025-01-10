@@ -141,7 +141,7 @@ copyToClip() {
 
         <div class="bg-white shadow-sm sm:rounded-b-lg">
             <div class="p-6 text-gray-900">
-                <div class="flex mb-3 items-center justify-between gap-4 bg-white flex-col lg:flex-row">
+                <div class="flex mb-3 items-center justify-between gap-4 bg-white  flex-col lg:flex-row">
                     {{-- filters --}}
                     <div class="flex items-center flex-wrap lg:flex-nowrap gap-4 w-full p-2">
                         <div class="w-full lg:w-1/3 flex items-center bg-gray-100 rounded-lg pl-2">
@@ -161,7 +161,7 @@ copyToClip() {
 
 
                         <select x-model="selectedStep" name="step" id="step"
-                            class="rounded border border-gray-300 py-1 w-full lg:w-1/3">
+                            class="rounded border border-gray-300 py-1 w-full md:w-[48%] lg:w-1/3">
                             <option value="" disabled selected>Filter By Steps</option>
                             <option value="">All Steps</option>
                             <option value="info_session">Info Session</option>
@@ -176,7 +176,7 @@ copyToClip() {
 
                         @if ($infos)
                             <select x-model="selectedSession" name="session" id="session"
-                                class="rounded border border-gray-300 py-1 w-full lg:w-1/3">
+                                class="rounded border border-gray-300 py-1 w-full md:w-[48%] lg:w-1/3">
                                 <option value="" disabled selected> Filter By Session</option>
                                 @foreach ($infos as $info)
                                     <option value={{ $info->id }}>{{ $info->formation }} {{ $info->name }}
@@ -185,11 +185,11 @@ copyToClip() {
                             </select>
                         @endif
 
-                        <button @click="resetFilter()" class="bg-black px-2 w-full lg:w-1/3 py-1 rounded text-white">
+                        <button @click="resetFilter()" class="bg-black px-2 w-full md:w-[48%] lg:w-1/3 py-1 rounded text-white">
                             Reset Filters
                         </button>
 
-                        <button @click="copyToClip()" id="copyBtn" class=" px-2 w-full lg:w-1/3 py-1 rounded"
+                        <button @click="copyToClip()" id="copyBtn" class=" px-2 w-full md:w-[48%] lg:w-1/3 py-1 rounded"
                             :class="buttonText == 'Copy Emails' ? 'bg-black text-white' : 'bg-alpha text-black'">
                             <span x-text="buttonText"></span>
                         </button>
@@ -311,7 +311,7 @@ copyToClip() {
                         </tbody>
                     </table>
                 @else
-                    <div class="grid grid-cols-1 lg:grid-cols-4 gap-3">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
 
                         <template x-for="participant in participants" :key="participant.id">
 

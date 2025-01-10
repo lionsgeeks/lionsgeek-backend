@@ -246,11 +246,15 @@ class ParticipantController extends Controller
     {
         $sessionId = $request->sessionId;
         $traning = InfoSession::where('id', $sessionId)->first()->formation;
-
+        if ($traning == 'Media') {
+            $emailRecipient = 'Media';
+        } elseif ($traning == 'Coding') {
+            $emailRecipient = 'Coding';
+        }
         $candidats = Participant::where('current_step', 'jungle')->where('info_session_id', $request->infosession_id)->get();
         $day = $request->date;
         foreach ($candidats as $candidat) {
-            Mail::to($candidat->email)->send(new JungleMail($candidat->full_name, $day ,$traning));
+            Mail::mailer($emailRecipient)->to($candidat->email)->send(new JungleMail($candidat->full_name, $day ,$traning));
         }
         return back()->with('success','The Invitation Has Been Sent Successfully!');
     }
@@ -258,8 +262,16 @@ class ParticipantController extends Controller
     {
         $candidats = Participant::where('info_session_id', $request->infosession_id)->where('current_step', 'coding_school')->orWhere('current_step', 'media_school')->get();
         $day = $request->date;
+        $info = InfoSession::where('id', $request->infosession_id)->first();
+        $formationType=$info->formation;
+        // dd($formationType);
         foreach ($candidats as $key => $candidat) {
-            Mail::to($candidat->email)->send(new SchoolMail($candidat->full_name, $day, $candidat->current_step));
+            if ($formationType == 'Media' && $candidat->current_step == "media_school") {
+                $emailRecipient = 'Media';
+            } elseif ($formationType == 'Coding' && $candidat->current_step == "coding_school") {
+                $emailRecipient = 'Coding';
+            }
+            Mail::mailer($emailRecipient)->to($candidat->email)->send(new SchoolMail($candidat->full_name, $day, $candidat->current_step));
         }
         return back()->with('success','The Invitation Has Been Sent Successfully!');
     }

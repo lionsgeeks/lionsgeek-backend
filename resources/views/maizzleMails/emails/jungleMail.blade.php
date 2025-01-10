@@ -57,27 +57,42 @@
                   <div role="separator" style="line-height: 5px">&zwj;</div>
                   <p style="font-size: 16px; line-height: 24px; color: #475569">Congratulations, {{ $full_name }}!</p>
                   <div role="separator" style="line-height: 4px">&zwj;</div>
-                  <p style="font-size: 16px; line-height: 24px; color: #475569">We are thrilled to welcome you to the {{ $traning }}
+                  <p style="font-size: 16px; line-height: 24px; color: #475569">We are thrilled to welcome you to the {{
+                                    $traning }}
                     Jungle after your successful interview!</p>
                   <div role="separator" style="line-height: 4px">&zwj;</div>
                   <p style="font-size: 16px; line-height: 24px; color: #475569">Here are your important details:</p>
                   <div role="separator" style="line-height: 4px">&zwj;</div>
                   <ul style="font-size: 16px; line-height: 24px; color: #475569">
                     <li style="margin-top: 12px">Your Jungle Path: {{ $traning }}</li>
-                    <li style="margin-top: 12px">Start Date: {{ \Carbon\Carbon::parse($day)->format('Y-m-d H:i') }}</li>
+                    <li style="margin-top: 12px">Start Date: {{ \Carbon\Carbon::parse($day)->format('Y-m-d') }} at
+                      9:30 am
+                    </li>
                     <li style="margin-top: 12px">Location: 4eme étage, Ain Sebaa Center, Route de Rabat-، Km 8,
                       Casablanca 20050</li>
                   </ul>
                   <div role="separator" style="line-height: 4px">&zwj;</div>
-                  <p style="font-size: 16px; line-height: 24px; color: #475569">Stay tuned for further instructions to make the most of your
+                  <p style="font-size: 16px; line-height: 24px; color: #475569">Stay tuned for further instructions to make the
+                    most of your
                     journey.</p>
                   <div role="separator" style="line-height: 4px">&zwj;</div>
-                  <p style="font-size: 16px; line-height: 24px; color: #475569">We are excited to have you on board and can’t wait to see you
+                  <p style="font-size: 16px; line-height: 24px; color: #475569">We are excited to have you on board and can’t wait
+                    to see you
                     flourish in the jungle!</p>
                   <div role="separator" style="line-height: 24px">&zwj;</div>
                   <p style="font-size: 16px; line-height: 24px; font-weight: 700; color: #475569">Best wishes,</p>
                   <div role="separator" style="line-height: 4px">&zwj;</div>
                   <p style="font-size: 16px; line-height: 24px; color: #475569">LionsGeek</p>
+                  <div role="separator" style="line-height: 24px">&zwj;</div> <span dir="rtl">  <div role="separator" style="line-height: 5px">&zwj;</div>                                    <p style="font-size: 16px; line-height: 24px; color: #475569">تهانينا، {{ $full_name }}!</p>  <div role="separator" style="line-height: 4px">&zwj;</div>                                    <p style="font-size: 16px; line-height: 24px; color: #475569">نحن متحمسون جدًا للترحيب بك في الـJungle
+                                        الخاصة بـ{{ $traning }} بعد نجاحك في المقابلة!</p>  <div role="separator" style="line-height: 4px">&zwj;</div>                                    <p style="font-size: 16px; line-height: 24px; color: #475569">إليك التفاصيل المهمة الخاصة بك:</p>  <div role="separator" style="line-height: 4px">&zwj;</div>                                    <ul style="font-size: 16px; line-height: 24px; color: #475569">
+                                        <li style="margin-top: 12px">مسارك : {{ $traning }}</li>
+                                        <li style="margin-top: 12px">تاريخ البدء: {{ \Carbon\Carbon::parse($day)->format('Y-m-d
+                                            ') }} على الساعة 9:30  </li>
+                                        <li style="margin-top: 12px">الموقع: الطابق الرابع، عين السبع سنتر، طريق الرباط، كيلومتر 8،
+                                            الدار البيضاء 20050</li>
+                                    </ul>  <div role="separator" style="line-height: 4px">&zwj;</div>                                    <p style="font-size: 16px; line-height: 24px; color: #475569">تابعنا للحصول على المزيد من التعليمات لتحقيق
+                                        أقصى استفادة من رحلتك.</p>  <div role="separator" style="line-height: 4px">&zwj;</div>                                    <p style="font-size: 16px; line-height: 24px; color: #475569">نحن متحمسون لانضمامك إلينا ولا نستطيع الانتظار
+                                        لرؤيتك تتألق في الـJungle!</p>  <div role="separator" style="line-height: 24px">&zwj;</div>                                    <p style="font-size: 16px; line-height: 24px; font-weight: 700; color: #475569">مع أطيب التمنيات،</p>  <div role="separator" style="line-height: 4px">&zwj;</div>                                    <p style="font-size: 16px; line-height: 24px; color: #475569">LionsGeek</p>                                </span>
                   <div role="separator" style="line-height: 24px">&zwj;</div>
                   <div role="separator" style="height: 1px; line-height: 1px; background-color: #cbd5e1; margin-top: 24px; margin-bottom: 24px">&zwj;</div>
                   <table align="center" style="margin: 0 auto" cellpadding="0" cellspacing="0" role="none">

@@ -153,9 +153,6 @@
                     وحبك للميديا والتسويق الرقمي.
                   </p>
                   <p style="font-size: 16px; line-height: 24px; color: #475569">
-                    المقابلة ديالك غادي تكون نهار [دخل التاريخ] مع [دخل التوقيت]، فـ LionsGeek .
-                  </p>
-                  <p style="font-size: 16px; line-height: 24px; color: #475569">
                     المقابلة ديالك غادي تكون نهار <span style="font-weight: 700">{{ $date }}</span> مع
                     <span style="font-weight: 700">{{ $exactTime }}</span>، فـ
                     LionsGeek

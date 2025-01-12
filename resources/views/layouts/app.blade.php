@@ -75,7 +75,7 @@
                         </button>
 
                         <div x-cloak x-show="showNotif"
-                            class=" absolute right-7 w-[29rem] bg-white border rounded-lg shadow-lg z-50 h-[28rem] mt-3 overflow-y-scroll">
+                            class=" absolute right-7 lg:w-[33rem] sm:w-56 ml-5 bg-white border rounded-lg shadow-lg z-50 h-[28rem] mt-3 overflow-y-scroll">
                             <h1 class="text-black text-center pt-6 font-bold">Notification</h1>
                             <div class="p-4 ">
                                 <ul>

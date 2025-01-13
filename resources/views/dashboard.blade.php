@@ -6,20 +6,24 @@
     </x-slot>
 
     <div class="py-12 md:px-10 px-4 ">
-        <div class=" mx-auto bg-white  sm:px-6 lg:px-8 rounded-lg">
+        <div class=" mx-auto sm:px-6 lg:px-8 rounded-lg"
+        :class="darkmode ? 'bg-black text-white' : 'bg-white text-black'"
+        >
             <div class=" w-full   overflow-hidden p-4 flex flex-col gap-y-4 ">
 
                 <div class="flex items-center justify-between ">
-                    <h1 class="lg:text-3xl md:text-2xl font-bold capitalize text-gray-500">hello
+                    <h1 class="lg:text-3xl md:text-2xl font-bold capitalize ">hello
                         {{ Auth::user()->name }},</h1>
                     <div>
                         <button onclick="openModal('modalAdmin')"
-                            class="lg:px-6 px-2 py-2 bg-black text-white text-base font-medium rounded-md shadow hover:bg-alpha hover:text-black  transition">
+                        :class="darkmode ? 'bg-alpha text-black hover:bg-white' : 'bg-black text-white hover:bg-alpha hover:text-black'"
+                        class="lg:px-6 px-2 py-2  text-base font-medium rounded-md shadow transition">
                             Add Admin
                         </button>
                         @include('layouts.AdminModal')
                         <button
-                            class="lg:px-6 px-2 py-2 bg-black text-white text-base font-medium rounded-md shadow hover:bg-alpha hover:text-black  transition">
+                        :class="darkmode ? 'bg-alpha text-black hover:bg-white' : 'bg-black text-white hover:bg-alpha hover:text-black'"
+                        class="lg:px-6 px-2 py-2  text-base font-medium rounded-md shadow transition">
                             <a href="{{ route('press.create') }}">Add Press</a>
                         </button>
 
@@ -30,7 +34,8 @@
                 <div
                     class="w-full grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1  gap-x-4 lg:gap-y-0 md:gap-y-2 gap-y-4 ">
                     <div
-                        class=" ps-4 py-6   shadow-md bg-white  text-black flex  items-start justify-around  rounded-lg  gap-x-5">
+                    :class="darkmode ? 'bg-[#252529]' : 'bg-white'"
+                        class=" ps-4 py-6   shadow-md flex  items-start justify-around  rounded-lg  gap-x-5">
 
                         <div class="flex flex-col gap-y-2 justify-center ">
                             <span class="font-bold text-[18px]">Total Contacts</span>
@@ -40,7 +45,9 @@
                                 <p>No Messages Received</p>
                             @endif
                         </div>
-                        <span class="w-[40px] h-[40px] rounded-full   bg-[#eeb76b34] relative">
+                        <span class="w-[40px] h-[40px] rounded-full relative"
+                        :class="darkmode ? 'bg-[#eeb76ba1]' : 'bg-[#eeb76b34]'"
+                        >
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black"
                                 class="bi bi-envelope   absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
                                 viewBox="0 0 16 16">
@@ -49,9 +56,12 @@
                             </svg>
                         </span>
                     </div>
-                    <div class=" ps-4 py-6   shadow-md bg-white flex  items-start justify-around gap-x-5 rounded-lg ">
+                    <div
+                    :class="darkmode ? 'bg-[#252529]' : 'bg-white'"
 
-                        <div class="flex flex-col gap-y-2 justify-center  text-black">
+                    class=" ps-4 py-6   shadow-md flex  items-start justify-around gap-x-5 rounded-lg ">
+
+                        <div class="flex flex-col gap-y-2 justify-center ">
                             <span class="font-bold text-[18px]">Events</span>
                             @if ($upcomingEvents->count() > 0)
                                 <p class="text-xl font-black ">{{ $upcomingEvents->count() }}</p>
@@ -59,7 +69,9 @@
                                 <p class="">No upcoming event</p>
                             @endif
                         </div>
-                        <span class="w-[40px] h-[40px] rounded-full bg-[#eeb76b34]  relative">
+                        <span class="w-[40px] h-[40px] rounded-full relative"
+                        :class="darkmode ? 'bg-[#eeb76ba1]' : 'bg-[#eeb76b34]'"
+                        >
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black"
                                 class="bi bi-envelope text-black absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
                                 viewBox="0 0 16 16">
@@ -70,9 +82,12 @@
                             </svg>
                         </span>
                     </div>
-                    <div class=" ps-4 py-6   shadow-md bg-white flex  items-start justify-around gap-x-5 rounded-lg ">
+                    <div
+                    :class="darkmode ? 'bg-[#252529]' : 'bg-white'"
 
-                        <div class="flex flex-col gap-y-2 justify-center  text-black">
+                    class=" ps-4 py-6   shadow-md  flex  items-start justify-around gap-x-5 rounded-lg ">
+
+                        <div class="flex flex-col gap-y-2 justify-center ">
                             <span class="font-bold text-[18px]">Subscribers</span>
                             @if ($members > 0)
                                 <p class="text-xl font-black ">{{ $members }}</p>
@@ -80,7 +95,9 @@
                                 <p>News letter is empty</p>
                             @endif
                         </div>
-                        <span class="w-[40px] h-[40px] rounded-full  bg-[#eeb76b34] relative">
+                        <span class="w-[40px] h-[40px] rounded-full relative"
+                        :class="darkmode ? 'bg-[#eeb76ba1]' : 'bg-[#eeb76b34]'"
+                        >
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black"
                                 class="bi bi-envelope text-black absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
                                 viewBox="0 0 16 16">
@@ -89,15 +106,20 @@
                             </svg>
                         </span>
                     </div>
-                    <div class=" ps-4 py-6   shadow-md bg-white flex  items-start justify-around gap-x-5 rounded-lg  ">
+                    <div
+                    :class="darkmode ? 'bg-[#252529]' : 'bg-white'"
 
-                        <div class="flex flex-col justify-center gap-y-2  text-black">
+                    class=" ps-4 py-6   shadow-md flex  items-start justify-around gap-x-5 rounded-lg  ">
+
+                        <div class="flex flex-col justify-center gap-y-2  ">
                             <span class="font-bold text-[18px]">Website visits</span>
 
                             <p class="text-xl font-black">{{ $views?->views ?? 0 }}</p>
 
                         </div>
-                        <span class="w-[40px] h-[40px] rounded-full bg-[#eeb76b34] relative">
+                        <span
+                        :class="darkmode ? 'bg-[#eeb76ba1]' : 'bg-[#eeb76b34]'"
+                        class="w-[40px] h-[40px] rounded-full relative">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="black"
                                 class="bi bi-envelope text-black absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
                                 viewBox="0 0 16 16">
@@ -110,7 +132,10 @@
 
                 </div>
                 @if ($notReadedMessages->count() > 0)
-                    <div class="lg:p-6 p-3 bg-white rounded-lg shadow-md">
+                    <div class="lg:p-6 p-3 rounded-lg shadow-md"
+                    :class="darkmode ? 'bg-[#252529]' : 'bg-white'"
+
+                    >
                         <div class="w-full flex flex-col gap-y-3">
                             <div class="flex items-center gap-x-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -150,7 +175,7 @@
                                 <tbody class="w-full ">
                                     @foreach ($notReadedMessages as $key => $contact)
                                         <tr x-on:click="window.location.href = '/contacts?message={{ $contact->id }}' "
-                                            class="w-full text-center h-[7vh] cursor-pointer  border-t  {{ $key % 2 == 0 ? '' : 'bg-gray-100' }} ">
+                                            class="w-full text-center h-[7vh] cursor-pointer  border-t  {{ $key % 2 == 0 ? '' : 'bg-gray-200 text-black' }} ">
 
                                             <td class="truncate lg:table-cell hidden">
                                                 {{ $contact->full_name }}
@@ -353,17 +378,21 @@
                                 </div>
                             </div>
                         @else
-                            <div class=" bg-white  h-full rounded-lg flex items-center justify-center w-full">
+                            <div
+                            :class="darkmode ? 'bg-[#252529]' : 'bg-white'"
+                            class="  h-full rounded-lg flex items-center justify-center w-full">
                                 <div class="text-center">
-                                    <h1 class="text-2xl font-semibold text-black mb-3">No Pending Requests</h1>
-                                    <p class="text-gray-600 mb-6">Currently, there are no pending requests to join the
+                                    <h1 class="text-2xl font-semibold  mb-3">No Pending Requests</h1>
+                                    <p class="text-gray-500 mb-6">Currently, there are no pending requests to join the
                                         coworking space.</p>
 
                                 </div>
                             </div>
                         @endif
                     </div>
-                    <div class=" bg-white  shadow-md py-4  rounded-lg">
+                    <div
+                    :class="darkmode ? 'bg-[#252529]' : 'bg-white'"
+                    class=" shadow-md py-4  rounded-lg">
                         @if ($upcomingEvents->count() < 0)
                             <div class=" overflow-hidden  sm:rounded-lg">
 
@@ -416,9 +445,9 @@
                                 </div>
                             </div>
                         @else
-                            <div class="h-[100%] bg-white flex rounded-lg items-center justify-center w-full">
+                            <div class="h-[100%]  flex rounded-lg items-center justify-center w-full">
                                 <div class="text-center">
-                                    <h1 class="text-2xl font-semibold text-gray-700 mb-3">No event Available</h1>
+                                    <h1 class="text-2xl font-semibold mb-3">No event Available</h1>
                                     <p class="text-gray-500 mb-6">It looks like there aren’t any events created yet.
                                     </p>
                                     <a href="{{ route('events.create') }}">
@@ -433,12 +462,14 @@
                     </div>
                 </div>
 
-                <div class="w-full  flex flex-col shadow-md gap-y-2 bg-white p-4 rounded-lg">
+                <div
+                :class="darkmode ? 'bg-[#252529]' : 'bg-white'"
+                class="w-full  flex flex-col shadow-md gap-y-2 p-4 rounded-lg">
 
                     @if ($blogs->count() > 0)
 
                         <div class="flex justify-between items-center ">
-                            <h1 class="text-xl font-semibold text-black ">Latest Blogs</h1>
+                            <h1 class="text-xl font-semibold ">Latest Blogs</h1>
                             <a href="{{ route('blogs.index') }}" class="underline text-alpha hover:text-black">See
                                 all</a>
                         </div>

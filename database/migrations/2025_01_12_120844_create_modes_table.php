@@ -11,11 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('generals', function (Blueprint $table) {
+        Schema::create('modes', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('views')->default(100);
-            // $table->boolean('darkmode')->default(0);
-            // $table->string('tablemode')->default('table');
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->boolean('darkmode')->default(0);
+            $table->string('tablemode')->default('table');
             $table->timestamps();
         });
     }
@@ -25,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('generals');
+        Schema::dropIfExists('modes');
     }
 };

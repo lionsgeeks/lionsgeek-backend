@@ -111,15 +111,12 @@ copyToClip() {
     satisfactions: {{ json_encode($satisfactions) }}
 }'>
     <div class="mx-auto">
-        @php
-            // I called this here instead of calling it in Participant+session controllers
-            $generals = App\Models\General::find(1);
-        @endphp
+
         {{-- Button to change the table viewing Mode --}}
         <form action="{{ route('table.view') }}" method="POST" class="flex gap-3">
             @csrf
             <button
-                class="p-2 rounded-t-lg {{ $generals->tablemode == 'table' ? 'bg-black text-white' : 'bg-white text-black' }}"
+                class="p-2 rounded-t-lg {{ Auth::user()->mode->tablemode == 'table' ? 'bg-black text-white' : 'bg-white text-black' }}"
                 name="view" type="submit" value="table">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="size-8">
@@ -129,7 +126,7 @@ copyToClip() {
             </button>
 
             <button
-                class="p-2 rounded-t-lg {{ $generals->tablemode == 'card' ? 'bg-black text-white' : 'bg-white text-black' }}"
+                class="p-2 rounded-t-lg {{ Auth::user()->mode->tablemode == 'card' ? 'bg-black text-white' : 'bg-white text-black' }}"
                 name="view" type="submit" value="card">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                     stroke="currentColor" class="size-8">
@@ -139,7 +136,7 @@ copyToClip() {
             </button>
         </form>
 
-        <div class="bg-white shadow-sm sm:rounded-b-lg">
+        <div :class="darkmode ? 'bg-black text-white' : 'bg-white text-black'" class=" shadow-sm sm:rounded-b-lg">
             <div class="p-6 text-gray-900">
                 <div class="flex mb-3 items-center justify-between gap-4 bg-white  flex-col lg:flex-row">
                     {{-- filters --}}
@@ -185,11 +182,13 @@ copyToClip() {
                             </select>
                         @endif
 
-                        <button @click="resetFilter()" class="bg-black px-2 w-full md:w-[48%] lg:w-1/3 py-1 rounded text-white">
+                        <button @click="resetFilter()"
+                            class="bg-black px-2 w-full md:w-[48%] lg:w-1/3 py-1 rounded text-white">
                             Reset Filters
                         </button>
 
-                        <button @click="copyToClip()" id="copyBtn" class=" px-2 w-full md:w-[48%] lg:w-1/3 py-1 rounded"
+                        <button @click="copyToClip()" id="copyBtn"
+                            class=" px-2 w-full md:w-[48%] lg:w-1/3 py-1 rounded"
                             :class="buttonText == 'Copy Emails' ? 'bg-black text-white' : 'bg-alpha text-black'">
                             <span x-text="buttonText"></span>
                         </button>
@@ -207,8 +206,8 @@ copyToClip() {
 
 
 
-                @if ($generals->tablemode == 'table')
-                    <table class="w-full text-center">
+                @if (Auth::user()->mode->tablemode == 'table')
+                    <table class="w-full text-center" :class="darkmode ? 'text-white' : ''">
                         <thead>
                             <th></th>
                             <th @click="sortTable('name')" class="cursor-pointer flex items-center justify-center">
@@ -249,8 +248,8 @@ copyToClip() {
 
                         <tbody class="w-full">
                             <template x-for="participant in participants" :key="participant.id">
-                                <tr x-show="matchesFilter(participant)"
-                                    class="h-[7vh] hover:bg-gray-100 cursor-pointer "
+                                <tr x-show="matchesFilter(participant)" class="h-[7vh] cursor-pointer "
+                                    :class="darkmode ? 'hover:bg-[#252529]' : 'hover:bg-gray-100'"
                                     x-on:click="window.location.href = '/participants/' + participant.id">
                                     <td>
                                         <img x-show="participant.image"
@@ -259,10 +258,11 @@ copyToClip() {
 
                                         <svg x-show="!participant.image" version="1.0"
                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 280"
-                                            preserveAspectRatio="xMidYMid meet" class="w-[25px]">
+                                            preserveAspectRatio="xMidYMid meet" class="w-[25px]"
+                                            :class="darkmode ? 'text-white' : 'text-black'">
 
                                             <g transform="translate(0.000000,315.000000) scale(0.100000,-0.100000)"
-                                                fill="#000" stroke="none">
+                                                fill="currentColor" stroke="none">
                                                 <path
                                                     d="M705 3008 c-41 -120 -475 -1467 -475 -1474 1 -9 1238 -910 1257 -916 6 -2 294 203 640 454 l631 458 -84 257 c-46 142 -154 477 -241 745 l-158 488 -783 0 c-617 0 -784 -3 -787 -12z m1265 -412 c0 -3 65 -205 145 -451 80 -245 145 -448 145 -450 0 -2 -173 -130 -384 -283 l-384 -280 -384 279 c-283 207 -382 284 -380 297 5 22 283 875 289 885 4 7 953 10 953 3z" />
                                                 <path
@@ -280,7 +280,7 @@ copyToClip() {
                                     <td>
                                         <span x-text="participant.gender"
                                             :class="participant.gender == 'male' ? 'bg-sky-100' : 'bg-pink-100'"
-                                            class="text-sm rounded-full px-2 py-1 capitalize">
+                                            class="text-sm rounded-full px-2 py-1 capitalize text-black">
                                         </span>
                                     </td>
                                     <td>
@@ -291,7 +291,7 @@ copyToClip() {
                                         @if ($infos)
                                             <span class="p-1 rounded-lg border"
                                                 :class="{
-                                                    'bg-yellow-200 border-yellow-400': session
+                                                    'bg-yellow-200 border-yellow-400 text-black': session
                                                         ?.formation === 'Media',
                                                     'bg-black/80 text-white border-white': session
                                                         ?.formation === 'Coding'
@@ -318,29 +318,33 @@ copyToClip() {
                             <div class="shadow-md group rounded-lg relative" x-show="matchesFilter(participant)">
                                 <p class="absolute top-[10px] right-[10px] bg-black text-white px-2 rounded-full capitalize"
                                     x-text="participant.current_step.replace('_', ' ')"></p>
-                                <img x-show="participant.image"
-                                    x-on:click="window.location.href = '/participants/' + participant.id"
-                                    :src="`{{ asset('storage/images/participants/') }}/${participant.image}`"
-                                    class="w-full aspect-square object-cover rounded cursor-pointer"
-                                    alt="participant_image">
+                                <a :href="'/participants/' + participant.id">
+                                    <img x-show="participant.image"
+                                        :src="`{{ asset('storage/images/participants/') }}/${participant.image}`"
+                                        class="w-full aspect-square object-cover rounded cursor-pointer"
+                                        alt="participant_image">
 
-                                <svg x-show="!participant.image" version="1.0" xmlns="http://www.w3.org/2000/svg"
-                                    x-on:click="window.location.href = '/participants/' + participant.id"
-                                    viewBox="0 0 280 280" preserveAspectRatio="xMidYMid meet" class="cursor-pointer">
+                                    <svg x-show="!participant.image" version="1.0"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        viewBox="0 0 280 280" preserveAspectRatio="xMidYMid meet"
+                                        class="cursor-pointer"
+                                        :class="darkmode ? 'text-white' : 'text-black'">
 
-                                    <g transform="translate(0.000000,315.000000) scale(0.100000,-0.100000)"
-                                        fill="#000" stroke="none">
-                                        <path
-                                            d="M705 3008 c-41 -120 -475 -1467 -475 -1474 1 -9 1238 -910 1257 -916 6 -2 294 203 640 454 l631 458 -84 257 c-46 142 -154 477 -241 745 l-158 488 -783 0 c-617 0 -784 -3 -787 -12z m1265 -412 c0 -3 65 -205 145 -451 80 -245 145 -448 145 -450 0 -2 -173 -130 -384 -283 l-384 -280 -384 279 c-283 207 -382 284 -380 297 5 22 283 875 289 885 4 7 953 10 953 3z" />
-                                        <path
-                                            d="M1176 1661 c21 -15 101 -74 178 -130 l139 -101 31 23 c17 13 92 68 166 122 74 54 139 102 144 106 6 5 -145 9 -344 9 l-354 0 40 -29z" />
-                                    </g>
-                                </svg>
+                                        <g transform="translate(0.000000,315.000000) scale(0.100000,-0.100000)"
+                                            fill="currentColor" stroke="none">
+                                            <path
+                                                d="M705 3008 c-41 -120 -475 -1467 -475 -1474 1 -9 1238 -910 1257 -916 6 -2 294 203 640 454 l631 458 -84 257 c-46 142 -154 477 -241 745 l-158 488 -783 0 c-617 0 -784 -3 -787 -12z m1265 -412 c0 -3 65 -205 145 -451 80 -245 145 -448 145 -450 0 -2 -173 -130 -384 -283 l-384 -280 -384 279 c-283 207 -382 284 -380 297 5 22 283 875 289 885 4 7 953 10 953 3z" />
+                                            <path
+                                                d="M1176 1661 c21 -15 101 -74 178 -130 l139 -101 31 23 c17 13 92 68 166 122 74 54 139 102 144 106 6 5 -145 9 -344 9 l-354 0 40 -29z" />
+                                        </g>
+                                    </svg>
+                                </a>
 
                                 <div class="flex items-center justify-between p-2"
                                     :class="participant.current_step.includes('fail') ? 'bg-red-100 group-hover:bg-red-50' :
                                         participant.current_step == 'jungle' ? 'bg-blue-100 group-hover:bg-blue-50' :
-                                        participant.current_step.includes('school') ? 'bg-green-100 group-hover:bg-green-50' :
+                                        participant.current_step.includes('school') ?
+                                        'bg-green-100 group-hover:bg-green-50' :
                                         participant.current_step.includes('pending') || participant.current_step ==
                                         'interview' ? 'bg-gray-100 group-hover:bg-gray-50' : 'bg-white'">
                                     <div class="capitalize">

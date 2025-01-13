@@ -99,7 +99,7 @@ class ParticipantController extends Controller
 
 
         if ($request->session && $request->session != $participant->info_session_id) {
-            dd('fuck');
+            // dd('fuck');
             $session = InfoSession::find($request->session);
             $participant->infoSession()->associate($session);
             $participant->save();

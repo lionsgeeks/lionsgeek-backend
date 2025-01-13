@@ -131,10 +131,13 @@ Route::middleware('auth')->group(function () {
     //mark email as read
     Route::put('/email/markread/{contact}', [ContactController::class, 'update'])->name('email.markread');
 
-    // delete fake subscribers 
+    // delete fake subscribers
     Route::get('/kill', [NewsletterController::class, 'fakeUsers'])->name('destroy.subscriber');
 });
 // Route::post('/booking/store', [BookingController::class, 'store'])->name('booking.store');
+
+//* to create relation for all existing users
+Route::get('/mode', [GeneralController::class, 'createUserModeAssociations']);
 
 Route::get("/test", function () {
     $data = InfoSession::find(1);

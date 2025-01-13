@@ -49,5 +49,6 @@ Route::get('/upcoming', [EventController::class,'upcoming']);
 
 Route::post('/views', [GeneralController::class, 'increment']);
 Route::get('/queue', [ParticipantController::class, 'runQueue']);
+Route::post('darkmode', [GeneralController::class, 'darkmode']);
 
 Route::post('/unsubscribe', [SubscriberController::class, 'unsubscribe']);

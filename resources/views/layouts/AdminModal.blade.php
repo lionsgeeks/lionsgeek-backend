@@ -1,5 +1,5 @@
 <div id="modalAdmin" class="fixed hidden z-50 inset-0 bg-gray-900 bg-opacity-60 overflow-y-auto h-full w-full px-4 ">
-    <div class="relative top-10 mx-auto shadow-xl rounded-md bg-white max-w-md">
+    <div class="relative top-10 mx-auto shadow-xl rounded-md max-w-md" :class="darkmode ? 'bg-[#252529]' : 'bg-white'">
         <div class="flex justify-end p-2">
             <button onclick="closeModal('modalAdmin')" type="button"
                 class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center">
@@ -11,26 +11,31 @@
             </button>
         </div>
         <div class="px-6">
-            <form action="{{ route("addadmin.store") }}" class="flex flex-col gap-3" method="post">
+            <form action="{{ route('addadmin.store') }}" class="flex flex-col gap-3" method="post">
                 @csrf
                 <h1 class="text-center text-xl font-semibold">Add Admin</h1>
                 <div class="flex gap-2 flex-col">
                     <label for="" class="font-semibold">Name :</label>
-                    <input type="text" name="name" placeholder="Enter Name" class="p-2 rounded-lg border-2 focus:ring-alpha focus:border-alpha">
+                    <input type="text" name="name" placeholder="Enter Name"
+                        class="p-2 rounded-lg border-2 focus:ring-alpha focus:border-alpha">
                 </div>
                 <div class="flex gap-2 flex-col">
                     <label for="" class="font-semibold">Email :</label>
-                    <input type="email" name="email" placeholder="Enter Email" class="p-2 rounded-lg border-2 focus:ring-alpha focus:border-alpha">
+                    <input type="email" name="email" placeholder="Enter Email"
+                        class="p-2 rounded-lg border-2 focus:ring-alpha focus:border-alpha">
                 </div>
                 <div class="py-5 flex items-center justify-end gap-x-2 ">
-                    <button class=" lg:px-6 px-7 py-2 bg-black text-base font-medium text-white hover:bg-alpha hover:text-black  rounded-md shadow   transition">
-                        Add
-                    </button>
                     <a href="#" onclick="closeModal('modalAdmin')"
                         class="text-gray-900 bg-white hover:bg-gray-100 focus:ring-4 focus:ring-cyan-200 border border-gray-200 font-medium inline-flex items-center rounded-lg text-base lg:px-6 px-2 py-2 text-center"
                         data-modal-toggle="delete-user-modal">
                         Cancel
                     </a>
+                    <button
+                        :class="darkmode ? 'bg-alpha text-black hover:bg-[#ffc801]' :
+                            'bg-black text-white hover:bg-alpha hover:text-black'"
+                        class=" lg:px-6 px-7 py-2  text-base font-medium rounded-md shadow transition">
+                        Add
+                    </button>
                 </div>
             </form>
         </div>

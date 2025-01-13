@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\General;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class GeneralController extends Controller
 {
@@ -24,5 +26,19 @@ class GeneralController extends Controller
         }
 
         return 'success';
+    }
+
+
+    public function darkmode(Request $request)
+    {
+        $user = User::find($request->user_id);
+        if ($user) {
+            $mode = $user->mode;
+
+            $mode->update([
+                'darkmode' => !$mode->darkmode,
+            ]);
+            return 'updated mode successfully';
+        }
     }
 }

@@ -35,7 +35,7 @@ class Subscriber extends Notification implements ShouldQueue
      */
     public function toMail(object $notifiable): MailMessage
     {
-        $unsubscribeUrl = url('http://localhost:3000/unsubscribe/' . Crypt::encrypt($notifiable->id) );
+        $unsubscribeUrl = url('https://lionsgeek.ma/unsubscribe/' . Crypt::encrypt($notifiable->id) );
         return (new MailMessage)
             ->subject($this->subject)
             ->line($this->content)

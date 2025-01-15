@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Mail\WelcomeSubscriberMail;
 use App\Models\Subscriber;
+use Illuminate\Contracts\Encryption\DecryptException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Mail;
@@ -37,7 +38,17 @@ class SubscriberController extends Controller
     public function unsubscribe(Request $request)
     {
         // dd($request->id);
-        $subscriberId = Crypt::decrypt($request->id);
+        $request->validate([
+            'id' => 'required',
+        ]);
+        try {
+            $subscriberId = Crypt::decrypt($request->id);
+        } catch (DecryptException $e) {
+            return response()->json([
+                'status' => 69,
+                'message' => 'Invalid decryption key or tampered data',
+            ]);
+        }
         $subscriber = Subscriber::where('id', $subscriberId)->first();
         if ($subscriber) {
             $subscriber->delete();

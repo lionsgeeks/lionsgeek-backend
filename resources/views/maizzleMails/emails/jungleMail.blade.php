@@ -99,7 +99,7 @@
 
 
                                     <div style="text-align:center">
-                                        <a href="http://172.28.0.135:8000/participant/confirmation/jungle/{{ $full_name }}"
+                                        <a href="https://backend.mylionsgeek.ma/participant/confirmation/jungle/{{ $full_name }}"
                                             style="padding: 10px 20px; background-color:#000; color: #fff; text-decoration: none;
                                             border-radius: 10px;
                                             ">
@@ -145,7 +145,7 @@
                                         <div role="separator" style="line-height: 24px">&zwj;</div>
 
                                         <div style="text-align:center">
-                                            <a href="http://172.28.0.135:8000/participant/confirmation/jungle/{{ $full_name }}"
+                                            <a href="https://backend.mylionsgeek.ma/participant/confirmation/jungle/{{ $full_name }}"
                                                 style="padding: 10px 20px; background-color:#000; color: #fff; text-decoration: none;
                                             border-radius: 10px;
                                             ">

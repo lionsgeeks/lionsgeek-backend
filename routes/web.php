@@ -27,6 +27,7 @@ use App\Models\InfoSession;
 use App\Models\Participant;
 use App\Models\Subscriber;
 use App\Models\User;
+use App\Models\JObs;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
@@ -153,5 +154,13 @@ Route::get("/test", function () {
     $school = "School";
 
     return view("maizzleMails.emails.schoolMail", compact("full_name", "traning", "day", "school"));
+});
+
+use Illuminate\Support\Facades\DB;
+
+Route::get('/filter', function () {
+ 
+
+    DB::table('jobs')->whereBetween('id', [99, 173])->delete();   
 });
 require __DIR__ . '/auth.php';

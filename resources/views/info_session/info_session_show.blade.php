@@ -107,7 +107,7 @@
                         <input class="hidden" type="text" name="term" id="term" :value="searchQuery">
                         <input class="hidden" type="text" name="step" id="step" :value="selectedStep">
                         <input class="hidden" type="text" name="session" id="session"
-                            :value="infos && infos.length > 0 ? selectedSession : {{ $infoSession ? $infoSession->id : null }}">
+                            :value="infos && infos.length > 0 ? selectedSession : {{ $infoSession  }}">
                         <button class="bg-black px-2 py-1 rounded text-white ">
                             Export Students
                         </button>

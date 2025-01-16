@@ -7,7 +7,7 @@
 
     <div class="w-full min-h-screen flex flex-col overflow-y-auto">
         <div
-            class="bg-slate-100 p-4 md:p-[2rem] gap-4 md:gap-[1.6rem] flex flex-col items-center overflow-y-auto w-full">
+            class="p-4 md:p-[2rem] gap-4 md:gap-[1.6rem] flex flex-col items-center overflow-y-auto w-full">
             <div class="w-full bg-white flex flex-col">
                 <div class="flex  justify-end items-center gap-3 m-3">
                     <button form="updateForm" type="submit"

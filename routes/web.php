@@ -137,10 +137,21 @@ Route::middleware('auth')->group(function () {
 // Route::post('/booking/store', [BookingController::class, 'store'])->name('booking.store');
 
 //* to create relation for all existing users
-Route::get('/mode', [GeneralController::class, 'createUserModeAssociations']);
+Route::get('/confirmation', [GeneralController::class, 'participantConfirmationAssociations']);
+
+Route::get('/participant/confirmation/jungle/{full_name}', [ParticipantController::class, 'confirmationJungle']);
+Route::get('/participant/confirmation/school/{full_name}', [ParticipantController::class, 'confirmationSchool']);
+
+Route::post('/darkmode', [GeneralController::class, 'darkmode'])->name('change.darkmode');
 
 Route::get("/test", function () {
-    $data = InfoSession::find(1);
-    return view("maizzleMails.emails.jungleMail", compact("data"));
+    // $data = InfoSession::find(1);
+    $participant = Participant::find(2);
+    $full_name=$participant->full_name;
+    $traning = "Coding";
+    $day = Carbon::now();
+    $school = "School";
+
+    return view("maizzleMails.emails.schoolMail", compact("full_name", "traning", "day", "school"));
 });
 require __DIR__ . '/auth.php';

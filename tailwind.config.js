@@ -13,6 +13,8 @@ export default {
         extend: {
             colors: {
                 alpha: "#ffc801",
+                dark: "#1D1D1F",
+                deep: "#252529"
             },
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],

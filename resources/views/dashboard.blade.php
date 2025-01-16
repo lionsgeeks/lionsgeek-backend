@@ -34,7 +34,7 @@
                 <div
                     class="w-full grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1  gap-x-4 lg:gap-y-0 md:gap-y-2 gap-y-4 ">
                     <div
-                    :class="darkmode ? 'bg-[#252529]' : 'bg-white'"
+                    :class="darkmode ? 'bg-deep' : 'bg-white'"
                         class=" ps-4 py-6   shadow-md flex  items-start justify-around  rounded-lg  gap-x-5">
 
                         <div class="flex flex-col gap-y-2 justify-center ">
@@ -57,7 +57,7 @@
                         </span>
                     </div>
                     <div
-                    :class="darkmode ? 'bg-[#252529]' : 'bg-white'"
+                    :class="darkmode ? 'bg-deep' : 'bg-white'"
 
                     class=" ps-4 py-6   shadow-md flex  items-start justify-around gap-x-5 rounded-lg ">
 
@@ -83,7 +83,7 @@
                         </span>
                     </div>
                     <div
-                    :class="darkmode ? 'bg-[#252529]' : 'bg-white'"
+                    :class="darkmode ? 'bg-deep' : 'bg-white'"
 
                     class=" ps-4 py-6   shadow-md  flex  items-start justify-around gap-x-5 rounded-lg ">
 
@@ -107,7 +107,7 @@
                         </span>
                     </div>
                     <div
-                    :class="darkmode ? 'bg-[#252529]' : 'bg-white'"
+                    :class="darkmode ? 'bg-deep' : 'bg-white'"
 
                     class=" ps-4 py-6   shadow-md flex  items-start justify-around gap-x-5 rounded-lg  ">
 
@@ -133,7 +133,7 @@
                 </div>
                 @if ($notReadedMessages->count() > 0)
                     <div class="lg:p-6 p-3 rounded-lg shadow-md"
-                    :class="darkmode ? 'bg-[#252529]' : 'bg-white'"
+                    :class="darkmode ? 'bg-deep' : 'bg-white'"
 
                     >
                         <div class="w-full flex flex-col gap-y-3">
@@ -174,8 +174,8 @@
 
                                 <tbody class="w-full ">
                                     @foreach ($notReadedMessages as $key => $contact)
-                                        <tr x-on:click="window.location.href = '/contacts?message={{ $contact->id }}' "
-                                            class="w-full text-center h-[7vh] cursor-pointer  border-t  {{ $key % 2 == 0 ? '' : 'bg-gray-200 text-black' }} ">
+                                        <tr x-on:click="window.location.href = '/contacts?message={{ $contact->id }}'"
+                                            class="w-full text-center h-[7vh] cursor-pointer  border-t hover:opacity-50  {{ $key % 2 == 0 ? '' : 'bg-gray-200 text-black' }} ">
 
                                             <td class="truncate lg:table-cell hidden">
                                                 {{ $contact->full_name }}
@@ -224,16 +224,16 @@
                                                 class="font-bold  {{ $session->formation == 'Coding' ? 'bg-[#ffc80155] border-[#ffc801e2]' : '' }} {{ $session->formation == 'Media' ? 'bg-[#6ad86451] border-[#3f6b6e]' : '' }}  border border-[#ffc801e2] text-center rounded-full">
                                                 {{ $session->formation }}</h1> --}}
                                                 <h1
-                                                class="md:w-32 w-20 font-bold text-center rounded-full 
-                                                       {{ $session->formation == 'Coding' ? 'bg-[#ffc80155] border-[#ffc801e2]' : '' }} 
-                                                       {{ $session->formation == 'Media' ? 'bg-[#6ad86451] border-[#3f6b6e]' : '' }}  
+                                                class="md:w-32 w-20 font-bold text-center rounded-full
+                                                       {{ $session->formation == 'Coding' ? 'bg-[#ffc80155] border-[#ffc801e2]' : '' }}
+                                                       {{ $session->formation == 'Media' ? 'bg-[#6ad86451] border-[#3f6b6e]' : '' }}
                                                        border border-[#ffc801e2]">
                                                 {{ $session->formation }}
                                             </h1>
                                             <h2 class="text-sm font-medium truncate text-[#919391]">
                                                 {{ $session->name }}</h2>
                                         </div>
-                                        
+
 
 
                                     </div>
@@ -387,7 +387,7 @@
                             </div>
                         @else
                             <div
-                            :class="darkmode ? 'bg-[#252529]' : 'bg-white'"
+                            :class="darkmode ? 'bg-deep' : 'bg-white'"
                             class="  h-full rounded-lg flex items-center justify-center w-full">
                                 <div class="text-center">
                                     <h1 class="text-2xl font-semibold  mb-3">No Pending Requests</h1>
@@ -399,7 +399,7 @@
                         @endif
                     </div>
                     <div
-                    :class="darkmode ? 'bg-[#252529]' : 'bg-white'"
+                    :class="darkmode ? 'bg-deep' : 'bg-white'"
                     class=" shadow-md py-4  rounded-lg">
                         @if ($upcomingEvents->count() < 0)
                             <div class=" overflow-hidden  sm:rounded-lg">
@@ -471,7 +471,7 @@
                 </div>
 
                 <div
-                :class="darkmode ? 'bg-[#252529]' : 'bg-white'"
+                :class="darkmode ? 'bg-deep' : 'bg-white'"
                 class="w-full  flex flex-col shadow-md gap-y-2 p-4 rounded-lg">
 
                     @if ($blogs->count() > 0)

@@ -106,7 +106,6 @@ class ParticipantController extends Controller
             $participant->update([
                 'info_session_id' => $request->session
             ]);
-
         }
 
 
@@ -202,7 +201,7 @@ class ParticipantController extends Controller
             $participant->update([
                 'current_step' => 'interview_pending'
             ]);
-            return back()->with('success','Participant in Pending Interview');
+            return back()->with('success', 'Participant in Pending Interview');
         }
 
         if ($participant->current_step == "interview" || $participant->current_step == "interview_pending") {
@@ -222,7 +221,7 @@ class ParticipantController extends Controller
     {
         $candidats = Participant::where('info_session_id', $request->infosession_id)->where('current_step', 'interview')->get();
         $info = InfoSession::where('id', $request->infosession_id)->first();
-        $formationType=$info->formation;
+        $formationType = $info->formation;
         if ($formationType == 'Media') {
             $emailRecipient = 'Media';
         } elseif ($formationType == 'Coding') {
@@ -237,10 +236,10 @@ class ParticipantController extends Controller
                 $day = $request->date;
                 $timeSlot = $time;
                 $course = $emailRecipient;
-                Mail::mailer($emailRecipient)->to($candidat->email)->send(new InterviewMail($full_name, $day, $timeSlot , $course));
+                Mail::mailer($emailRecipient)->to($candidat->email)->send(new InterviewMail($full_name, $day, $timeSlot, $course));
             }
         }
-        return back()->with('success','The Invitation Has Been Sent Successfully!');
+        return back()->with('success', 'The Invitation Has Been Sent Successfully!');
     }
     public function toJungle(Request $request)
     {
@@ -254,9 +253,9 @@ class ParticipantController extends Controller
         $candidats = Participant::where('current_step', 'jungle')->where('info_session_id', $request->infosession_id)->get();
         $day = $request->date;
         foreach ($candidats as $candidat) {
-            Mail::mailer($emailRecipient)->to($candidat->email)->send(new JungleMail($candidat->full_name, $day ,$traning));
+            Mail::mailer($emailRecipient)->to($candidat->email)->send(new JungleMail($candidat->full_name, $day, $traning));
         }
-        return back()->with('success','The Invitation Has Been Sent Successfully!');
+        return back()->with('success', 'The Invitation Has Been Sent Successfully!');
     }
     public function toSchool(Request $request)
     {
@@ -264,7 +263,7 @@ class ParticipantController extends Controller
         $day = $request->date;
         // dd($candidats);
         $info = InfoSession::where('id', $request->infosession_id)->first();
-        $formationType=$info->formation;
+        $formationType = $info->formation;
         // dd($formationType);
         foreach ($candidats as $key => $candidat) {
             if ($formationType == 'Media' && $candidat->current_step == "media_school") {
@@ -272,10 +271,37 @@ class ParticipantController extends Controller
             } elseif ($formationType == 'Coding' && $candidat->current_step == "coding_school") {
                 $emailRecipient = 'Coding';
             }
-            $school = $candidat->current_step == "coding_school" ? "Coding" : "Media" ;
+            $school = $candidat->current_step == "coding_school" ? "Coding" : "Media";
             // Mail::mailer($emailRecipient)->to($candidat->email)->send(new SchoolMail($candidat->full_name, $day, $candidat->current_step));
-            Mail::to($candidat->email)->send(new SchoolMail($candidat->full_name, $day,$school ));
+            Mail::to($candidat->email)->send(new SchoolMail($candidat->full_name, $day, $school));
         }
-        return back()->with('success','The Invitation Has Been Sent Successfully!');
+        return back()->with('success', 'The Invitation Has Been Sent Successfully!');
+    }
+
+
+    public function confirmationJungle(string $full_name)
+    {
+        if ($full_name) {
+            $participant = Participant::where('full_name', $full_name)->first();
+            $confirmation = $participant->confirmation;
+            $confirmation->update([
+                'jungle' => 1
+            ]);
+            return redirect()->away('https://lionsgeek.ma/attendance/confirmation');
+        }
+    }
+
+
+    public function confirmationSchool(string $full_name)
+    {
+        if ($full_name) {
+            $participant = Participant::where('full_name', $full_name)->first();
+            $confirmation = $participant->confirmation;
+            $confirmation->update([
+                'school' => 1
+            ]);
+
+            return redirect()->away('https://lionsgeek.ma/attendance/confirmation');
+        }
     }
 }

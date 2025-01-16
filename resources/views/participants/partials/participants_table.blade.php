@@ -136,9 +136,9 @@ copyToClip() {
             </button>
         </form>
 
-        <div :class="darkmode ? 'bg-black text-white' : 'bg-white text-black'" class=" shadow-sm sm:rounded-b-lg">
+        <div :class="darkmode ? 'bg-dark text-white' : 'bg-white text-black'" class=" shadow-sm sm:rounded-b-lg">
             <div class="p-6 text-gray-900">
-                <div class="flex mb-3 items-center justify-between gap-4 bg-white  flex-col lg:flex-row">
+                <div class="flex mb-3 items-center justify-between gap-4 flex-col lg:flex-row">
                     {{-- filters --}}
                     <div class="flex items-center flex-wrap lg:flex-nowrap gap-4 w-full p-2">
                         <div class="w-full lg:w-1/3 flex items-center bg-gray-100 rounded-lg pl-2">
@@ -183,13 +183,14 @@ copyToClip() {
                         @endif
 
                         <button @click="resetFilter()"
-                            class="bg-black px-2 w-full md:w-[48%] lg:w-1/3 py-1 rounded text-white">
+                        :class="darkmode ? 'bg-alpha text-black' : 'bg-black text-white'"
+                            class=" px-2 w-full md:w-[48%] lg:w-1/3 py-1 rounded ">
                             Reset Filters
                         </button>
 
                         <button @click="copyToClip()" id="copyBtn"
                             class=" px-2 w-full md:w-[48%] lg:w-1/3 py-1 rounded"
-                            :class="buttonText == 'Copy Emails' ? 'bg-black text-white' : 'bg-alpha text-black'">
+                            :class="darkmode ? ' bg-alpha text-black' : 'bg-black text-white'">
                             <span x-text="buttonText"></span>
                         </button>
                     </div>
@@ -249,7 +250,7 @@ copyToClip() {
                         <tbody class="w-full">
                             <template x-for="participant in participants" :key="participant.id">
                                 <tr x-show="matchesFilter(participant)" class="h-[7vh] cursor-pointer "
-                                    :class="darkmode ? 'hover:bg-[#252529]' : 'hover:bg-gray-100'"
+                                    :class="darkmode ? 'hover:bg-deep' : 'hover:bg-gray-100'"
                                     x-on:click="window.location.href = '/participants/' + participant.id">
                                     <td>
                                         <img x-show="participant.image"
@@ -299,7 +300,7 @@ copyToClip() {
                                                 x-text="session?.formation + ' ' + session?.name"></span>
                                         @else
                                             <span
-                                                class="p-1 rounded-lg border {{ $infoSession->formation == 'Coding' ? 'bg-black/80 text-white border-white' : 'bg-yellow-200 border-yellow-400' }}">{{ $infoSession->formation }}
+                                                class="p-1 rounded-lg border {{ $infoSession->formation == 'Coding' ? 'bg-black/80 text-white border-white' : 'bg-yellow-200 border-yellow-400 text-black' }}">{{ $infoSession->formation }}
                                                 {{ $infoSession->name }}</span>
                                         @endif
 

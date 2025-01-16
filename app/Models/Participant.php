@@ -44,4 +44,9 @@ class Participant extends Model
     {
         return $this->hasOne(Satisfaction::class);
     }
+
+    public function confirmation()
+    {
+        return $this->hasOne(ParticipantConfirmation::class);
+    }
 }

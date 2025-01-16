@@ -31,7 +31,7 @@
                                         {{ $unreadMessages }} Unread</p>
                                 </div>
                                 <div class="md:h-[466px]  overflow-y-auto">
-                                    @foreach ($contacts->reverse() as $key => $message) 
+                                    @foreach ($contacts->reverse() as $key => $message)
                                         <div x-init="if({{ request()->message == $message->id }}){id = {{ $key }}}" onclick="toggleHidden()" x-on:click='id = {{ $key }}'
                                             class="p-4  {{ $message->mark_as_read ? '' : 'bg-blue-100 border-b-2 hover:bg-blue-50' }} flex flex-col gap-y-2  text--700 w-full border-b hover:bg-gray-100 cursor-pointer">
                                             <div class="flex items-center  gap-x-2 text-lg font-medium">
@@ -73,7 +73,7 @@
                                         class=" px-6 pt-1 w-full h-[10%] flex justify-between items-center bg-white border-b">
                                             <h1 x-text='messages[id].full_name'
                                                 class="text-xl text-[#13181a] w-fit font-bold"></h1>
-                                            
+
                                         <div class=" flex gap-3 justify-end items-center font-medium  ">
                                             <form :action="'{{ route('email.markread', '') }}' + '/' + messages[id].id"
                                                 method="POST">
@@ -160,7 +160,7 @@
 
 
 
-                        
+
                         <template x-if="id !== null">
 
                             <div id="parentMessage"
@@ -188,7 +188,7 @@
                                                     method="POST">
                                                     @csrf
                                                     @method('PUT')
-    
+
                                                     <template x-if='messages[id].mark_as_read == false'>
                                                         <button class="flex items-center gap-x-2">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="30"
@@ -225,11 +225,11 @@
                                                             <path
                                                                 d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
                                                         </svg>
-                                                        
+
                                                     </button>
                                                 </form>
                                             </div>
-    
+
                                         </div>
                                         <div class="p-6    h-[85%] border flex flex-col justify-between">
                                             <div>
@@ -244,7 +244,7 @@
                                                     </p>
                                                 </div>
                                                 <p class="pt-4" x-text='messages[id].message'></p>
-    
+
                                             </div>
                                             <div class="flex w-full justify-end  px-6">
                                                 <a class="bg-black px-3 py-2 text-white font-bold hover:bg-alpha hover:text-black rounded-lg"
@@ -432,15 +432,15 @@
     </div>
     <script>
         function toggleHidden(){
-            
+
             if (parentMessage.classList.contains("hidden")) {
                 parentMessage.classList.remove("hidden")
                 // parentEmails.classList.add("hidden")
-                
+
             }else{
-                parentMessage.classList.add("hidden")  
+                parentMessage.classList.add("hidden")
                 // parentEmails.classList.remove('hidden')
-                
+
             }
 
         }

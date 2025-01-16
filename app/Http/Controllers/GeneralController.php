@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\General;
 use App\Models\Mode;
+use App\Models\Participant;
+use App\Models\ParticipantConfirmation;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -34,12 +36,36 @@ class GeneralController extends Controller
                 // Create a new mode association with default values
                 Mode::create([
                     'user_id' => $user->id,
-                    'darkmode' => 0,  // Default value for darkmode
-                    'tablemode' => 'table',  // Default value for tablemode
                 ]);
             }
         }
 
         return response()->json(['message' => 'User-mode associations created successfully!']);
+    }
+
+    // basically the same as the above function
+    public function participantConfirmationAssociations()
+    {
+        $participants = Participant::all();
+        foreach ($participants as $participant) {
+            if (!$participant->confirmation) {
+                ParticipantConfirmation::create([
+                    'participant_id' => $participant->id,
+                ]);
+            }
+        }
+
+        return response()->json(['message' => 'Participant Confirmation associations created Successfully!']);
+    }
+
+
+    public function darkmode()
+    {
+        $user = Auth::user();
+        $user->mode->update([
+            'darkmode' => !$user->mode->darkmode,
+        ]);
+
+        return back();
     }
 }

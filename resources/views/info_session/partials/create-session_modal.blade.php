@@ -2,7 +2,8 @@
     <div x-data="{ showModal: false }">
         <!-- Button to open the modal -->
         <button @click="showModal = true"
-            class="px-2 md:px-6 py-2 bg-black text-white text-base font-medium rounded-md shadow hover:bg-alpha hover:text-black transition">
+        :class="darkmode ? 'bg-alpha text-black hover:opacity-75' : 'bg-black text-white hover:bg-alpha hover:text-black'"
+            class="px-2 md:px-6 py-2  text-base font-medium rounded-md shadow  transition">
             Create new session </button>
         <!-- Background overlay -->
         <div x-show="showModal" class="fixed inset-0 transition-opacity" aria-hidden="true" @click="showModal = false">
@@ -18,13 +19,15 @@
             class="fixed z-10 inset-0 overflow-y-auto w-full" x-cloak>
             <div class="flex w-full items-end justify-center  pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                 <!-- Modal panel -->
-                <div class="w-full inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+                <div
+                :class="darkmode ? 'bg-dark text-white' : 'bg-white'"
+                class="w-full inline-block align-bottom  rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
                     role="dialog" aria-modal="true" aria-labelledby="modal-headline">
-                    <div class="bg-white w-full px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                    <div class=" w-full px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                         <!-- Modal content -->
                         <div class="">
                             <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                                <h3 class=" text-lg leading-6 font-medium text-gray-900" id="modal-headline"> Create
+                                <h3 class=" text-lg leading-6 font-medium" id="modal-headline"> Create
                                     Info
                                     Session
                                 </h3>
@@ -33,12 +36,12 @@
                                         @csrf
                                         <div class="flex flex-col gap-2 items-start ">
                                             <label for="">Name</label>
-                                            <input class="w-full rounded" placeholder="info session name" type="text"
+                                            <input class="w-full rounded text-black" placeholder="info session name" type="text"
                                                 name="name">
                                         </div>
                                         <div class="flex flex-col gap-2 items-start">
                                             <label for="">Formation</label>
-                                            <select class="w-full rounded" name="formation" id="">
+                                            <select class="w-full rounded text-black" name="formation" id="">
                                                 <option disabled selected>Formation</option>
                                                 <option value="Coding">Coding</option>
                                                 <option value="Media">Media</option>
@@ -46,11 +49,11 @@
                                         </div>
                                         <div class="flex flex-col gap-3 items-start">
                                             <label for="">Session Date</label>
-                                            <input min="{{ now()->format('Y-m-d\TH:i') }}" class="w-full rounded" name="start_date" type="datetime-local">
+                                            <input min="{{ now()->format('Y-m-d\TH:i') }}" class="w-full rounded text-black" name="start_date" type="datetime-local">
                                         </div>
                                         <div class="flex flex-col gap-2 items-start">
                                             <label for="">Places</label>
-                                            <input class="w-full rounded" name="places" placeholder="0" type="number">
+                                            <input class="w-full rounded text-black" name="places" placeholder="0" type="number">
                                         </div>
                                         <div class="px-4 py-3 sm:px-6 gap-3 sm:flex sm:flex-row-reverse">
                                             <button  type="submit"

@@ -27,18 +27,4 @@ class GeneralController extends Controller
 
         return 'success';
     }
-
-
-    public function darkmode(Request $request)
-    {
-        $user = User::find($request->user_id);
-        if ($user) {
-            $mode = $user->mode;
-
-            $mode->update([
-                'darkmode' => !$mode->darkmode,
-            ]);
-            return 'updated mode successfully';
-        }
-    }
 }

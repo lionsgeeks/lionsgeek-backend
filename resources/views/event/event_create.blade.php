@@ -153,7 +153,7 @@
 
                             {{-- <button type="button" onclick="translateFields()"
                                 class="bg-black hover:bg-alpha hover:text-black text-white rounded py-2 px-4 transition-colors">
-                                Translate 
+                                Translate
                             </button> --}}
                             <button type="submit" class="bg-black flex-1 text-white rounded py-2">Submit</button>
                         </div>
@@ -177,23 +177,23 @@
             const nameEn = document.getElementById('name_en').value;
             const descriptionEn = document.getElementById('description_en').value;
             const locationEn = document.getElementById('location_en').value;
-    
+
             if (!nameEn && !descriptionEn && !locationEn) {
                 alert('Please fill in at least one English field to translate');
                 return;
             }
-    
+
             const modal = document.getElementById('translationModal');
             modal.classList.remove('hidden');
             modal.classList.add('flex');
-    
+
             try {
                 const data = {
                     name: { en: nameEn },
                     description: { en: descriptionEn },
                     location: { en: locationEn }
                 };
-    
+
                 const response = await fetch('{{ route('event.translate') }}', {
                     method: 'POST',
                     headers: {
@@ -203,16 +203,16 @@
                     body: JSON.stringify(data)
                 });
                 console.log(response);
-                
+
                 if (!response.ok) {
                     throw new Error('Translation failed');
                 }
-    
+
                 const result = await response.json();
                 console.log(result.data);
                 console.log(result.data.ar.name);
                 console.log(result.data.fr.name);
-                
+
                 document.getElementById('name_ar').value = result.data.ar.name || '';
                 document.getElementById('description_ar').value = result.data.ar.description || '';
                 document.getElementById('location_ar').value = result.data.ar.location || '';
@@ -228,5 +228,5 @@
             }
         }
     </script>
-    
+
 </x-app-layout>

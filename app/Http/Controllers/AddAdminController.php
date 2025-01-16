@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\addAdminMail;
+use App\Models\Mode;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -23,6 +24,11 @@ class AddAdminController extends Controller
             "name" => $request->name,
             "email" => $request->email,
             "password" => Hash::make($randomPassword)
+        ]);
+
+        // create the tablemode and darkmode relationship
+        Mode::create([
+            'user_id' => $addAdmin->id,
         ]);
 
         Mail::to($request->email)->send(new addAdminMail($randomPassword));

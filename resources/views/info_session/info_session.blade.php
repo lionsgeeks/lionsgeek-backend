@@ -14,7 +14,9 @@
 
     </x-slot>
     <div class="pt-12 md:px-10 px-4 ">
-        <div class="bg-white rounded-lg p-6  w-[100%] px-8 min-h-[76vh] mb-5">
+        <div
+        :class="darkmode ? 'bg-dark text-white' : 'bg-white'"
+        class="rounded-lg p-6  w-[100%] px-8 min-h-[76vh] mb-5">
             <div class="flex justify-end">
                 @if ($infosessions->count() > 0)
                     @include('info_session.partials.create-session_modal')
@@ -32,7 +34,9 @@
                 @else
                     @foreach ($infosessions as $infosession)
                         <a href={{ "/infosessions/$infosession->id" }}>
-                            <div class="bg-white p-5 flex flex-col gap-4 border rounded-lg">
+                            <div
+                            :class="darkmode ? 'bg-deep border-black' : 'bg-white'"
+                            class="p-5 flex flex-col gap-4 border rounded-lg">
                                 <div class="flex justify-between items-start">
                                     <div>
                                         <h1 class="text-2xl font-bold">{{ Str::limit($infosession->name, 12, '...') }}
@@ -86,7 +90,9 @@
                                         method="POST">
                                         @csrf
                                         @method('PATCH')
-                                        <button class="border flex items-center gap-2 px-3 py-2 rounded-md">
+                                        <button
+                                        :class="darkmode ? 'border-black' : ''"
+                                        class="border flex items-center gap-2 px-3 py-2 rounded-md">
                                             @if ($infosession->isAvailable)
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none"
                                                     viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -111,7 +117,8 @@
                                         @csrf
                                         @method('PATCH')
                                         <button
-                                            class="border px-3 py-2 rounded-md {{ $infosession->isFinish ? 'bg-gray-200 text-black' : 'bg-black text-white' }}">
+                                        :class="darkmode ? 'bg-alpha text-black' : 'bg-black text-white'"
+                                            class="border  px-3 py-2 rounded-md {{ $infosession->isFinish ? 'bg-gray-200 text-black' : '' }}">
                                             {{ $infosession->isFinish ? 'Completed' : 'Mark Complete' }}
                                         </button>
                                     </form>

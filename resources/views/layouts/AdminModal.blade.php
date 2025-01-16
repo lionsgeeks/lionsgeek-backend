@@ -1,5 +1,5 @@
 <div id="modalAdmin" class="fixed hidden z-50 inset-0 bg-gray-900 bg-opacity-60 overflow-y-auto h-full w-full px-4 ">
-    <div class="relative top-10 mx-auto shadow-xl rounded-md max-w-md" :class="darkmode ? 'bg-[#252529]' : 'bg-white'">
+    <div class="relative top-10 mx-auto shadow-xl rounded-md max-w-md" :class="darkmode ? 'bg-deep' : 'bg-white'">
         <div class="flex justify-end p-2">
             <button onclick="closeModal('modalAdmin')" type="button"
                 class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center">

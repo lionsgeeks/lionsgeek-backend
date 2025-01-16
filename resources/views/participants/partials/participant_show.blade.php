@@ -91,8 +91,8 @@
                         });
                     </script>
 
-                    <button id="delete-button" class="py-2 rounded-lg text-white px-2 bg-red-600" type="submit">Remove
-                        participant</button>
+                    {{-- <button id="delete-button" class="py-2 rounded-lg text-white px-2 bg-red-600" type="submit">Remove
+                        participant</button> --}}
 
                     <div id="confirmation-modal"
                         class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden">

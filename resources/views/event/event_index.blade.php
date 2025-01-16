@@ -8,12 +8,13 @@
 
     <div class="md:pt-12 p-12 md:px-10 px-4">
 
-        <div class=" {{ $events->count() == 0 ? 'h-[76vh]' : 'min-h-[76vh]' }} mb-3 bg-white rounded-lg p-6  w-[100%] px-8 ">
+        <div :class="darkmode ? 'bg-dark' : 'bg-white'"
+            class=" {{ $events->count() == 0 ? 'h-[76vh]' : 'min-h-[76vh]' }} mb-3 rounded-lg p-6  w-[100%] px-8 ">
             <div class="flex justify-end mb-6">
 
                 <a href="{{ route('events.create') }}">
-                    <button
-                        class="{{ $events->count() == 0 ? 'hidden' : '' }} text-white bg-black  hover:bg-alpha hover:text-black font-bold rounded-lg px-4 py-2   transition duration-150">
+                    <button :class="darkmode ? 'bg-alpha hover:opacity-75' : 'text-white bg-black  hover:bg-alpha hover:text-black'"
+                        class="{{ $events->count() == 0 ? 'hidden' : '' }}  font-bold rounded-lg px-4 py-2   transition duration-150">
                         <span class="text-lg font-bold">+</span> Create a New Event
                     </button>
                 </a>
@@ -49,16 +50,19 @@
                             </button>
                         </a>
                     </div> --}}
-                    <div
-                        class=" lg:w-[calc(95%/3)] md:w-[calc(95%/2)] text-nowrap flex flex-col overflow-hidden  gap-3 h-fit px-[1rem] py-[1rem] rounded-[16px]  bg-[#f9f9f9]">
+                    <div :class="darkmode ? 'bg-deep' : 'bg-[#f9f9f9]'"
+                        class=" lg:w-[calc(95%/3)] md:w-[calc(95%/2)] text-nowrap flex flex-col overflow-hidden  gap-3 h-fit px-[1rem] py-[1rem] rounded-[16px]  ">
                         <img class="w-[100%] h-[12rem] object-cover rounded-[16px] "
                             src="{{ asset('storage/images/events/' . $event->cover) }}" alt="">
                         <div class="w-full flex items-center justify-between">
 
-                            <h4 class="lg:text-[20px] text-[15px] font-semibold ">{{ Str::limit($event->name->en, 15, '...') }}
+                            <h4 :class="darkmode ? 'text-white' : ''" class="lg:text-[20px] text-[15px] font-semibold ">
+                                {{ Str::limit($event->name->en, 15, '...') }}
                             </h4>
                             <a href="{{ route('events.show', $event->id) }}">
-                                <button class="lg:py-2 py-1 px-4 lg:text-base text-sm rounded-lg bg-black text-white " type="button">
+                                <button :class="darkmode ? 'bg-alpha' : 'bg-black text-white'"
+                                    class="lg:py-2 py-1 px-4 lg:text-base text-sm rounded-lg hover:opacity-75 "
+                                    type="button">
                                     Event Details
                                 </button>
                             </a>
@@ -69,10 +73,10 @@
             <!-- Mobile Grid -->
             <div class="md:hidden flex flex-wrap gap-4">
                 @foreach ($events as $event)
-                    <div class="flex flex-col overflow-hidden gap-3 rounded-[16px] bg-[#f9f9f9] p-3 w-full sm:w-[calc(50%-1rem)]">
+                    <div
+                        class="flex flex-col overflow-hidden gap-3 rounded-[16px] bg-[#f9f9f9] p-3 w-full sm:w-[calc(50%-1rem)]">
                         <img class="w-full aspect-video object-cover rounded-[16px]"
-                                src="{{ asset('storage/images/events/' . $event->cover) }}"
-                                alt="">
+                            src="{{ asset('storage/images/events/' . $event->cover) }}" alt="">
                         <div class="space-y-3">
                             <h4 class="text-lg font-semibold">{{ Str::limit($event->name->en, 15, '...') }}</h4>
                             <a href="{{ route('events.show', $event->id) }}" class="block">

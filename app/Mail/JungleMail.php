@@ -16,11 +16,12 @@ class JungleMail extends Mailable implements ShouldQueue
     /**
      * Create a new message instance.
      */
-    public function __construct(public $full_name, public $day , public $traning)
+    public function __construct(public $full_name,public $id, public $day , public $traning)
     {
         $this->full_name = $full_name;
         $this->day = $day;
         $this->traning = $traning;
+        $this->id = $id;
     }
 
     /**

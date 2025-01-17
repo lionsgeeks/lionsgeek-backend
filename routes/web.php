@@ -140,8 +140,8 @@ Route::middleware('auth')->group(function () {
 //* to create relation for all existing users
 Route::get('/confirmation', [GeneralController::class, 'participantConfirmationAssociations']);
 
-Route::get('/participant/confirmation/jungle/{full_name}', [ParticipantController::class, 'confirmationJungle']);
-Route::get('/participant/confirmation/school/{full_name}', [ParticipantController::class, 'confirmationSchool']);
+Route::get('/participant/confirmation/jungle/{full_name}/{id}', [ParticipantController::class, 'confirmationJungle']);
+Route::get('/participant/confirmation/school/{full_name}/{id}', [ParticipantController::class, 'confirmationSchool']);
 
 Route::post('/darkmode', [GeneralController::class, 'darkmode'])->name('change.darkmode');
 
@@ -152,8 +152,9 @@ Route::get("/test", function () {
     $traning = "Coding";
     $day = Carbon::now();
     $school = "School";
+    $id = 5;
 
-    return view("maizzleMails.emails.schoolMail", compact("full_name", "traning", "day", "school"));
+    return view("maizzleMails.emails.schoolMail", compact("full_name", "traning", "day", "school", "id"));
 });
 
 use Illuminate\Support\Facades\DB;

@@ -16,11 +16,12 @@ class SchoolMail extends Mailable implements ShouldQueue
     /**
      * Create a new message instance.
      */
-    public function __construct(public $full_name, public $day, public $school)
+    public function __construct(public $full_name, public $id, public $day, public $school)
     {
         $this->full_name = $full_name;
         $this->day = $day;
         $this->school = $school;
+        $this->id = $id;
     }
 
     /**

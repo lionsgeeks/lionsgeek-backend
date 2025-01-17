@@ -255,7 +255,7 @@ class ParticipantController extends Controller
         $candidats = Participant::where('current_step', 'jungle')->where('info_session_id', $request->infosession_id)->get();
         $day = $request->date;
         foreach ($candidats as $candidat) {
-            Mail::mailer($emailRecipient)->to($candidat->email)->send(new JungleMail($candidat->full_name, $day, $traning));
+            Mail::mailer($emailRecipient)->to($candidat->email)->send(new JungleMail($candidat->full_name, $candidat->id, $day, $traning));
         }
         return back()->with('success', 'The Invitation Has Been Sent Successfully!');
     }
@@ -275,16 +275,16 @@ class ParticipantController extends Controller
             }
             $school = $candidat->current_step == "coding_school" ? "Coding" : "Media";
             // Mail::mailer($emailRecipient)->to($candidat->email)->send(new SchoolMail($candidat->full_name, $day, $candidat->current_step));
-            Mail::to($candidat->email)->send(new SchoolMail($candidat->full_name, $day, $school));
+            Mail::to($candidat->email)->send(new SchoolMail($candidat->full_name, $candidat->id, $day, $school));
         }
         return back()->with('success', 'The Invitation Has Been Sent Successfully!');
     }
 
 
-    public function confirmationJungle(string $full_name)
+    public function confirmationJungle($full_name, $id)
     {
         if ($full_name) {
-            $participant = Participant::where('full_name', $full_name)->first();
+            $participant = Participant::where('full_name', $full_name)->where('id', $id)->first();
             $confirmation = $participant->confirmation;
             $confirmation->update([
                 'jungle' => 1
@@ -294,10 +294,10 @@ class ParticipantController extends Controller
     }
 
 
-    public function confirmationSchool(string $full_name)
+    public function confirmationSchool($full_name, $id)
     {
         if ($full_name) {
-            $participant = Participant::where('full_name', $full_name)->first();
+            $participant = Participant::where('full_name', $full_name)->where('id', $id)->first();
             $confirmation = $participant->confirmation;
             $confirmation->update([
                 'school' => 1

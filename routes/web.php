@@ -138,7 +138,7 @@ Route::middleware('auth')->group(function () {
 // Route::post('/booking/store', [BookingController::class, 'store'])->name('booking.store');
 
 //* to create relation for all existing users
-// Route::get('/confirmation', [GeneralController::class, 'participantConfirmationAssociations']);
+Route::get('/confirmation', [GeneralController::class, 'participantConfirmationAssociations']);
 
 Route::get('/participant/confirmation/jungle/{full_name}', [ParticipantController::class, 'confirmationJungle']);
 Route::get('/participant/confirmation/school/{full_name}', [ParticipantController::class, 'confirmationSchool']);

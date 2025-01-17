@@ -138,7 +138,7 @@ Route::middleware('auth')->group(function () {
 // Route::post('/booking/store', [BookingController::class, 'store'])->name('booking.store');
 
 //* to create relation for all existing users
-Route::get('/confirmation', [GeneralController::class, 'participantConfirmationAssociations']);
+// Route::get('/confirmation', [GeneralController::class, 'participantConfirmationAssociations']);
 
 Route::get('/participant/confirmation/jungle/{full_name}', [ParticipantController::class, 'confirmationJungle']);
 Route::get('/participant/confirmation/school/{full_name}', [ParticipantController::class, 'confirmationSchool']);
@@ -147,7 +147,7 @@ Route::post('/darkmode', [GeneralController::class, 'darkmode'])->name('change.d
 
 Route::get("/test", function () {
     // $data = InfoSession::find(1);
-    $participant = Participant::find(2);
+    $participant = Participant::find(5);
     $full_name=$participant->full_name;
     $traning = "Coding";
     $day = Carbon::now();
@@ -159,8 +159,8 @@ Route::get("/test", function () {
 use Illuminate\Support\Facades\DB;
 
 Route::get('/filter', function () {
- 
 
-    DB::table('jobs')->whereBetween('id', [99, 173])->delete();   
+
+    DB::table('jobs')->whereBetween('id', [99, 173])->delete();
 });
 require __DIR__ . '/auth.php';

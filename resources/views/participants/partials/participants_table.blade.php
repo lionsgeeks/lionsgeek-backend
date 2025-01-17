@@ -2,6 +2,7 @@
     x-data='{
 participants: {{ json_encode($parts) }},
 infos: {{ json_encode($infos) ?? '[]' }},
+confirmations: {{ json_encode($confirmations) }},
 searchQuery: "",
 selectedStep: "",
 selectedSession: "",
@@ -106,9 +107,6 @@ copyToClip() {
 
     modalContent: "",
     id: "",
-
-
-    satisfactions: {{ json_encode($satisfactions) }}
 }'>
     <div class="mx-auto">
 
@@ -138,6 +136,27 @@ copyToClip() {
 
         <div :class="darkmode ? 'bg-dark text-white' : 'bg-white text-black'" class=" shadow-sm sm:rounded-b-lg">
             <div class="p-6 text-gray-900">
+                <div class="flex justify-end gap-5 w-full items-center">
+                    <form action="{{ route('questions.export') }}" method="post">
+                        @csrf
+
+                        <button class="bg-black px-2 py-1 rounded text-white">
+                            Export Questions
+                        </button>
+
+                    </form>
+                    <form action='{{ route('participant.export') }}' method="post">
+                        @csrf
+                        <input class="hidden" type="text" name="term" id="term" :value="searchQuery">
+                        <input class="hidden" type="text" name="step" id="step" :value="selectedStep">
+                        <input class="hidden" type="text" name="session" id="session"
+                            :value="selectedSession ? selectedSession : {{ $infoSession ? $infoSession->id : null }}">
+                        <button class="bg-black px-2 py-1 rounded text-white ">
+                            Export Students
+                        </button>
+                    </form>
+                </div>
+                <br>
                 <div class="flex mb-3 items-center justify-between gap-4 flex-col lg:flex-row">
                     {{-- filters --}}
                     <div class="flex items-center flex-wrap lg:flex-nowrap gap-4 w-full p-2">
@@ -182,8 +201,7 @@ copyToClip() {
                             </select>
                         @endif
 
-                        <button @click="resetFilter()"
-                        :class="darkmode ? 'bg-alpha text-black' : 'bg-black text-white'"
+                        <button @click="resetFilter()" :class="darkmode ? 'bg-alpha text-black' : 'bg-black text-white'"
                             class=" px-2 w-full md:w-[48%] lg:w-1/3 py-1 rounded ">
                             Reset Filters
                         </button>
@@ -201,7 +219,6 @@ copyToClip() {
                             @include('participants.partials.school_modal')
                         </div>
                     @endif
-
 
                 </div>
 
@@ -234,7 +251,8 @@ copyToClip() {
                                 </div>
                             </th>
                             <th>Session</th>
-                            <th @click="sortTable('birthday')" class="cursor-pointer flex items-center justify-center">
+                            <th @click="sortTable('birthday')"
+                                class="cursor-pointer flex items-center justify-center">
                                 <div class="flex items-center gap-1">
                                     <p>Date of Birthday</p>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
@@ -317,18 +335,38 @@ copyToClip() {
                         <template x-for="participant in participants" :key="participant.id">
 
                             <div class="shadow-md group rounded-lg relative" x-show="matchesFilter(participant)">
-                                <p class="absolute top-[10px] right-[10px] bg-black text-white px-2 rounded-full capitalize"
-                                    x-text="participant.current_step.replace('_', ' ')"></p>
+                                <div
+                                    class="absolute capitalize top-[10px] right-[10px] bg-black text-white px-2 rounded-full flex items-center gap-2 ">
+                                    <p x-text="participant.current_step.replace('_', ' ')"></p>
+                                    {{-- confirmation for jungle --}}
+                                    <p x-show="participant.current_step == 'jungle'"
+                                        :class="confirmations.find(confirmation => confirmation.participant_id === participant
+                                                .id)
+                                            .jungle ? 'bg-green-500' : 'bg-red-600'"
+                                        x-text="
+                                        confirmations.find(confirmation => confirmation.participant_id === participant.id).jungle ? 'Confirmed' : 'Not Confirmed'">
+                                    </p>
+                                    {{-- confirmation for school --}}
+                                    <p x-show="participant.current_step.includes('school')"
+                                        :class="confirmations.find(confirmation => confirmation.participant_id === participant
+                                                .id)
+                                            .school ? 'bg-green-500' : 'bg-red-600'"
+                                        x-text="
+                                        confirmations.find(confirmation => confirmation.participant_id === participant.id).school ? 'Confirmed' : 'Not Confirmed'">
+                                    </p>
+
+
+                                </div>
                                 <a :href="'/participants/' + participant.id">
+
                                     <img x-show="participant.image"
                                         :src="`{{ asset('storage/images/participants/') }}/${participant.image}`"
                                         class="w-full aspect-square object-cover rounded cursor-pointer"
                                         alt="participant_image">
 
                                     <svg x-show="!participant.image" version="1.0"
-                                        xmlns="http://www.w3.org/2000/svg"
-                                        viewBox="0 0 280 280" preserveAspectRatio="xMidYMid meet"
-                                        class="cursor-pointer"
+                                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 280"
+                                        preserveAspectRatio="xMidYMid meet" class="cursor-pointer"
                                         :class="darkmode ? 'text-white' : 'text-black'">
 
                                         <g transform="translate(0.000000,315.000000) scale(0.100000,-0.100000)"

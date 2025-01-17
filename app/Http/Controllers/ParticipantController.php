@@ -11,6 +11,7 @@ use App\Models\FrequentQuestion;
 use App\Models\InfoSession;
 use App\Models\Note;
 use App\Models\Participant;
+use App\Models\ParticipantConfirmation;
 use App\Models\Satisfaction;
 use Carbon\Carbon;
 use DateTime;
@@ -33,9 +34,8 @@ class ParticipantController extends Controller
         })->count();
 
         $infos = InfoSession::all();
-
-        $satisfactions = Satisfaction::all();
-        return view("participants.participants", compact("participants", "infos", "males", "satisfactions"));
+        $confirmations = ParticipantConfirmation::all();
+        return view("participants.participants", compact("participants", "infos", "males" , "confirmations"));
     }
 
     /**
@@ -178,6 +178,8 @@ class ParticipantController extends Controller
     public function export(Request $request)
     {
         $date = (new DateTime())->format('F_d_Y');
+
+        // dd($request->all());
         return (new ParticipantsExport($request->term, $request->step, $request->session))->download($date . '_participants.xlsx');
     }
 

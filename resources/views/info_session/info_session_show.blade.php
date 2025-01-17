@@ -93,29 +93,11 @@
         </div>
         <div>
             <div class="hidden lg:flex items-center gap-3 justify-end pt-12 flex-wrap ">
-                <div class="flex justify-around gap-5 w-full lg:w-fit items-center">
-                    <form action="{{ route('questions.export') }}" method="post">
-                        @csrf
-
-                        <button class="bg-black px-2 py-1 rounded text-white">
-                            Export Questions
-                        </button>
-
-                    </form>
-                    <form action='{{ route('participant.export') }}' method="post">
-                        @csrf
-                        <input class="hidden" type="text" name="term" id="term" :value="searchQuery">
-                        <input class="hidden" type="text" name="step" id="step" :value="selectedStep">
-                        <input class="hidden" type="text" name="session" id="session"
-                            :value="infos && infos.length > 0 ? selectedSession : {{ $infoSession  }}">
-                        <button class="bg-black px-2 py-1 rounded text-white ">
-                            Export Students
-                        </button>
-                    </form>
-                </div>
+                
                 <div class="flex justify-around lg:justify-around gap-5 w-full lg:w-fit items-center ">
                     @include('info_session.partials.update_session_modal')
-                    @include('info_session.partials.delete-session_modal')
+                    {{-- commentit hadi bach maywerkoch 3liha "USERS" bl ghalat --}}
+                    {{-- @include('info_session.partials.delete-session_modal') --}}
 
                 </div>
             </div>

@@ -335,11 +335,12 @@ copyToClip() {
                         <template x-for="participant in participants" :key="participant.id">
 
                             <div class="shadow-md group rounded-lg relative" x-show="matchesFilter(participant)">
-                                <div
-                                    class="absolute capitalize top-[10px] right-[10px] bg-black text-white px-2 rounded-full flex items-center gap-2 ">
+                                <div :class="participant.current_step == 'jungle' || participant.current_step.includes('school') ?
+                                    '' : 'pr-2'"
+                                    class="absolute capitalize top-[10px] right-[10px] bg-black text-white pl-2 rounded-full flex items-center gap-2 ">
                                     <p x-text="participant.current_step.replace('_', ' ')"></p>
                                     {{-- confirmation for jungle --}}
-                                    <p x-show="participant.current_step == 'jungle'"
+                                    <p x-show="participant.current_step == 'jungle'" class="rounded-r-full px-2"
                                         :class="confirmations.find(confirmation => confirmation.participant_id === participant
                                                 .id)
                                             .jungle ? 'bg-green-500' : 'bg-red-600'"
@@ -348,15 +349,15 @@ copyToClip() {
                                     </p>
                                     {{-- confirmation for school --}}
                                     <p x-show="participant.current_step.includes('school')"
+                                        class="rounded-r-full px-2"
                                         :class="confirmations.find(confirmation => confirmation.participant_id === participant
                                                 .id)
                                             .school ? 'bg-green-500' : 'bg-red-600'"
                                         x-text="
                                         confirmations.find(confirmation => confirmation.participant_id === participant.id).school ? 'Confirmed' : 'Not Confirmed'">
                                     </p>
-
-
                                 </div>
+                                
                                 <a :href="'/participants/' + participant.id">
 
                                     <img x-show="participant.image"

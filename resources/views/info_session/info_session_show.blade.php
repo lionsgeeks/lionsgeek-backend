@@ -44,14 +44,28 @@
                 </div>
 
                 <div class="grid grid-cols-2">
-                    <p>Jungle: {{ $infoSession->participants->where('current_step', 'jungle')->count() }}</p>
+                    <p>Jungle: {{ $infoSession->participants->where('current_step', 'jungle')->count() }}
+
+                        <span>({{ $infoSession->participants()->whereHas('confirmation', function ($query) {
+                                $query->where('jungle', 1);
+                            })->count() }})
+                        </span>
+                    </p>
                     <p>Failed: {{ $infoSession->participants->where('current_step', 'jungle_failed')->count() }}</p>
                 </div>
 
                 <div class="grid grid-cols-2">
                     <p>Pending: {{ $infoSession->participants->where('current_step', 'interview_pending')->count() }}
                     </p>
-                    <p>School: {{ $infoSession->participants->where('current_step', 'like', '%school%')->count() }}</p>
+                    <p>School:
+                        {{ $infoSession->participants->where('current_step', strtolower($infoSession->formation . '_school'))->count() }}
+
+                        <span>({{ $infoSession->participants()->whereHas('confirmation', function ($query) {
+                                $query->where('school', 1);
+                            })->count() }})
+                        </span>
+
+                    </p>
                 </div>
             </div>
             {{-- <div class="bg-white flex flex-col gap-5 font-bold  px-2 py-8 shadow rounded-xl">
@@ -93,7 +107,7 @@
         </div>
         <div>
             <div class="hidden lg:flex items-center gap-3 justify-end pt-12 flex-wrap ">
-                
+
                 <div class="flex justify-around lg:justify-around gap-5 w-full lg:w-fit items-center ">
                     @include('info_session.partials.update_session_modal')
                     {{-- commentit hadi bach maywerkoch 3liha "USERS" bl ghalat --}}

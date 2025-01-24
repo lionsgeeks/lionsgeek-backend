@@ -3,9 +3,9 @@
 participants: {{ json_encode($parts) }},
 infos: {{ json_encode($infos) ?? '[]' }},
 confirmations: {{ json_encode($confirmations) }},
-searchQuery: "",
-selectedStep: "",
-selectedSession: "",
+searchQuery: localStorage.getItem("searchQuery") || "",
+selectedStep: localStorage.getItem("selectedStep") || "",
+selectedSession: localStorage.getItem("selectedSession") || "",
 {{-- search function: return true if any of the conditions are met --}}
 matchesSearch(participants) {
 const query = this.searchQuery.toLowerCase();
@@ -43,6 +43,9 @@ resetFilter() {
 this.searchQuery = "";
 this.selectedStep = "";
 this.selectedSession = "";
+localStorage.removeItem("selectedStep");
+localStorage.removeItem("searchQuery");
+localStorage.removeItem("selectedSession");
 },
 
 {{-- Copying the emails --}}
@@ -169,14 +172,15 @@ copyToClip() {
                             </svg>
 
                             {{-- change the variable to whatever is in the input --}}
-                            <input x-model="searchQuery" placeholder="Name, Email or Phone" type="search"
-                                name="search" id="search"
+                            <input @change="localStorage.setItem('searchQuery', searchQuery)" x-model="searchQuery"
+                                placeholder="Name, Email or Phone" type="search" name="search" id="search"
                                 class="border-none bg-transparent w-full outline-none focus:border-none focus:ring-0 focus:outline-none text-sm">
 
                         </div>
 
 
                         <select x-model="selectedStep" name="step" id="step"
+                            @change="localStorage.setItem('selectedStep', selectedStep)"
                             class="rounded border border-gray-300 py-1 w-full md:w-[48%] lg:w-1/3">
                             <option value="" disabled selected>Filter By Steps</option>
                             <option value="">All Steps</option>
@@ -192,6 +196,7 @@ copyToClip() {
 
                         @if ($infos)
                             <select x-model="selectedSession" name="session" id="session"
+                                @change="localStorage.setItem('selectedSession', selectedSession)"
                                 class="rounded border border-gray-300 py-1 w-full md:w-[48%] lg:w-1/3">
                                 <option value="" disabled selected> Filter By Session</option>
                                 @foreach ($infos as $info)
@@ -357,7 +362,7 @@ copyToClip() {
                                         confirmations.find(confirmation => confirmation.participant_id === participant.id).school ? 'Confirmed' : 'Not Confirmed'">
                                     </p>
                                 </div>
-                                
+
                                 <a :href="'/participants/' + participant.id">
 
                                     <img x-show="participant.image"

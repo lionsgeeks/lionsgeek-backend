@@ -6,6 +6,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CoworkingController;
+use App\Http\Controllers\CustomEmailController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\InfoSessionController;
 use App\Http\Controllers\GalleryController;
@@ -134,6 +135,9 @@ Route::middleware('auth')->group(function () {
 
     // delete fake subscribers
     Route::get('/kill', [NewsletterController::class, 'fakeUsers'])->name('destroy.subscriber');
+
+    // Custom Emails
+    Route::resource('customEmail', CustomEmailController::class);
 });
 // Route::post('/booking/store', [BookingController::class, 'store'])->name('booking.store');
 
@@ -146,15 +150,7 @@ Route::get('/participant/confirmation/school/{full_name}/{id}', [ParticipantCont
 Route::post('/darkmode', [GeneralController::class, 'darkmode'])->name('change.darkmode');
 
 Route::get("/test", function () {
-    // $data = InfoSession::find(1);
-    $participant = Participant::find(5);
-    $full_name=$participant->full_name;
-    $traning = "Coding";
-    $day = Carbon::now();
-    $school = "School";
-    $id = 5;
-
-    return view("maizzleMails.emails.schoolMail", compact("full_name", "traning", "day", "school", "id"));
+    return view("mail.customMail");
 });
 
 use Illuminate\Support\Facades\DB;

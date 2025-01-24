@@ -21,11 +21,11 @@
                             Add Admin
                         </button>
                         @include('layouts.AdminModal')
-                        <button
+                        {{-- <button
                         :class="darkmode ? 'bg-alpha text-black hover:bg-white' : 'bg-black text-white hover:bg-alpha hover:text-black'"
                         class="lg:px-6 px-2 py-2  text-base font-medium rounded-md shadow transition">
-                            <a href="{{ route('press.create') }}">Add Press</a>
-                        </button>
+                            <a href="{{ route('customEmail.index') }}">Send an Email</a>
+                        </button> --}}
 
                     </div>
                     {{-- <h1 class="text-6xl font-medium capitalize text-black/75">welcome back !</h1> --}}

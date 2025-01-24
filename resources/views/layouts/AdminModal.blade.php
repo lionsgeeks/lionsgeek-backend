@@ -11,17 +11,22 @@
             </button>
         </div>
         <div class="px-6">
-            <form action="{{ route('addadmin.store') }}" class="flex flex-col gap-3" method="post">
+            <form
+            action="{{ route('addadmin.store') }}" class="flex flex-col gap-3" method="post">
                 @csrf
                 <h1 class="text-center text-xl font-semibold">Add Admin</h1>
                 <div class="flex gap-2 flex-col">
                     <label for="" class="font-semibold">Name :</label>
                     <input type="text" name="name" placeholder="Enter Name"
+                    :class="darkmode ? 'text-black' : ''"
+
                         class="p-2 rounded-lg border-2 focus:ring-alpha focus:border-alpha">
                 </div>
                 <div class="flex gap-2 flex-col">
                     <label for="" class="font-semibold">Email :</label>
                     <input type="email" name="email" placeholder="Enter Email"
+                    :class="darkmode ? 'text-black' : ''"
+
                         class="p-2 rounded-lg border-2 focus:ring-alpha focus:border-alpha">
                 </div>
                 <div class="py-5 flex items-center justify-end gap-x-2 ">

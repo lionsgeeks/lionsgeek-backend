@@ -150,7 +150,8 @@ Route::get('/participant/confirmation/school/{full_name}/{id}', [ParticipantCont
 Route::post('/darkmode', [GeneralController::class, 'darkmode'])->name('change.darkmode');
 
 Route::get("/test", function () {
-    return view("mail.customMail");
+    $content = "hello Nassima. jhgjhg kugiug liiy trturg kjglg  fu utd";
+    return view("mail.customMail", compact("content"));
 });
 
 use Illuminate\Support\Facades\DB;

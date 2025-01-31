@@ -321,7 +321,7 @@
                     {{-- Motivation --}}
                     <div class="shadow-md p-3 rounded">
                         <h1 class="text-2xl font-bold mb-2">Motivation</h1>
-                        <p>{{ $participant->motivation }}</p>
+                        <p class="text-clip">{{ $participant->motivation }}</p>
                     </div>
                     <br>
                     {{-- Satisfaction --}}

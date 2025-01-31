@@ -365,7 +365,7 @@ copyToClip() {
 
                                 <a :href="'/participants/' + participant.id">
 
-                                    <img x-show="participant.image"
+                                    <img x-show="participant.image" loading="lazy"
                                         :src="`{{ asset('storage/images/participants/') }}/${participant.image}`"
                                         class="w-full aspect-square object-cover rounded cursor-pointer"
                                         alt="participant_image">

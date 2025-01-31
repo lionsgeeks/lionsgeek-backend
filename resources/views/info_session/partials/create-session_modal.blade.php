@@ -1,10 +1,16 @@
-<div class="flex items-center justify-center text-black">
-    <div x-data="{ showModal: false }">
+<div :class="darkmode ? 'bg-deep' : 'bg-[#f9f9f9]'"
+x-data="{ showModal: false }"
+class="group w-full border-2 border-dashed text-nowrap flex flex-col overflow-hidden gap-3 rounded-[16px] justify-center items-center">
         <!-- Button to open the modal -->
         <button @click="showModal = true"
-        :class="darkmode ? 'bg-alpha text-black hover:opacity-75' : 'bg-black text-white hover:bg-alpha hover:text-black'"
-            class="px-2 md:px-6 py-2  text-base font-medium rounded-md shadow  transition">
-            Create new session </button>
+            class="flex items-center justify-center flex-col w-full h-full"
+            >
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                stroke="currentColor" class="size-10 group-hover:animate-bounce">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+           <p class="font-semibold text-lg group-hover:animate-bounce capitalize"> Create new session</p>
+        </button>
         <!-- Background overlay -->
         <div x-show="showModal" class="fixed inset-0 transition-opacity" aria-hidden="true" @click="showModal = false">
             <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
@@ -19,9 +25,8 @@
             class="fixed z-10 inset-0 overflow-y-auto w-full" x-cloak>
             <div class="flex w-full items-end justify-center  pt-4 px-4 pb-20 text-center sm:block sm:p-0">
                 <!-- Modal panel -->
-                <div
-                :class="darkmode ? 'bg-dark text-white' : 'bg-white'"
-                class="w-full inline-block align-bottom  rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+                <div :class="darkmode ? 'bg-dark text-white' : 'bg-white'"
+                    class="w-full inline-block align-bottom  rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
                     role="dialog" aria-modal="true" aria-labelledby="modal-headline">
                     <div class=" w-full px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                         <!-- Modal content -->
@@ -32,12 +37,13 @@
                                     Session
                                 </h3>
                                 <div class="mt-2">
-                                    <form action="{{ route('infosessions.store') }}" method="POST" class="flex flex-col gap-3">
+                                    <form action="{{ route('infosessions.store') }}" method="POST"
+                                        class="flex flex-col gap-3">
                                         @csrf
                                         <div class="flex flex-col gap-2 items-start ">
                                             <label for="">Name</label>
-                                            <input class="w-full rounded text-black" placeholder="info session name" type="text"
-                                                name="name">
+                                            <input class="w-full rounded text-black" placeholder="info session name"
+                                                type="text" name="name">
                                         </div>
                                         <div class="flex flex-col gap-2 items-start">
                                             <label for="">Formation</label>
@@ -49,14 +55,17 @@
                                         </div>
                                         <div class="flex flex-col gap-3 items-start">
                                             <label for="">Session Date</label>
-                                            <input min="{{ now()->format('Y-m-d\TH:i') }}" class="w-full rounded text-black" name="start_date" type="datetime-local">
+                                            <input min="{{ now()->format('Y-m-d\TH:i') }}"
+                                                class="w-full rounded text-black" name="start_date"
+                                                type="datetime-local">
                                         </div>
                                         <div class="flex flex-col gap-2 items-start">
                                             <label for="">Places</label>
-                                            <input class="w-full rounded text-black" name="places" placeholder="0" type="number">
+                                            <input class="w-full rounded text-black" name="places" placeholder="0"
+                                                type="number">
                                         </div>
                                         <div class="px-4 py-3 sm:px-6 gap-3 sm:flex sm:flex-row-reverse">
-                                            <button  type="submit"
+                                            <button type="submit"
                                                 class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-alpha text-base font-medium text-black hover:bg-alpha hover:text-black transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-alpha sm:ml-3 sm:w-auto sm:text-sm">
                                                 Create </button>
                                             <button @click="showModal = false" type="button"
@@ -71,5 +80,4 @@
                 </div>
             </div>
         </div>
-    </div>
 </div>

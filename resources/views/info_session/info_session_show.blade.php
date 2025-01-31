@@ -228,23 +228,31 @@
             <div class="mx-auto">
 
                 {{-- Button to change the table viewing Mode --}}
-                <form action="{{ route('table.view') }}" method="POST" class="flex gap-3">
+                <form action="{{ route('table.view') }}" method="POST" class="flex gap-3" x-data="{
+                    mode: '{{ Auth::user()->mode->tablemode }}',
+                }">
                     @csrf
-                    <button
-                        class="p-2 rounded-t-lg {{ Auth::user()->mode->tablemode == 'table' ? 'bg-black text-white' : 'bg-white text-black' }}"
-                        name="view" type="submit" value="table">
+                    <button class="p-2 rounded-t-lg" name="view"
+                        :class="{
+                            'bg-white': (mode == 'table') && !darkmode,
+                            'bg-dark': (mode == 'table') && darkmode,
+                        }"
+                        type="submit" value="table">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="size-8">
+                            :stroke="darkmode ? '#fff' : '#000'" class="size-8">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 0 1-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0 1 12 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0h7.5c.621 0 1.125.504 1.125 1.125M3.375 8.25c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m17.25-3.75h-7.5c-.621 0-1.125.504-1.125 1.125m8.625-1.125c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M12 10.875v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125M13.125 12h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125M20.625 12c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5M12 14.625v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 14.625c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m0 1.5v-1.5m0 0c0-.621.504-1.125 1.125-1.125m0 0h7.5" />
                         </svg>
                     </button>
 
-                    <button
-                        class="p-2 rounded-t-lg {{ Auth::user()->mode->tablemode == 'card' ? 'bg-black text-white' : 'bg-white text-black' }}"
-                        name="view" type="submit" value="card">
+                    <button class="p-2 rounded-t-lg " name="view"
+                        :class="{
+                            'bg-white': (mode == 'card') && !darkmode,
+                            'bg-dark': (mode == 'card') && darkmode,
+                        }"
+                        type="submit" value="card">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                            stroke="currentColor" class="size-8">
+                            :stroke="darkmode ? '#fff' : '#000'" class="size-8">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z" />
                         </svg>
@@ -390,7 +398,7 @@
                                             :class="darkmode ? 'hover:bg-deep' : 'hover:bg-gray-100'"
                                             x-on:click="window.location.href = '/participants/' + participant.id">
                                             <td>
-                                                <img x-show="participant.image"
+                                                <img x-show="participant.image" loading="lazy"
                                                     :src="`{{ asset('storage/images/participants/') }}/${participant.image}`"
                                                     class="w-[25px] rounded-full aspect-square object-cover"
                                                     alt="">
@@ -474,7 +482,7 @@
 
                                             <img x-show="participant.image"
                                                 :src="`{{ asset('storage/images/participants/') }}/${participant.image}`"
-                                                class="w-full aspect-square object-cover rounded cursor-pointer"
+                                                class="w-full aspect-square object-cover rounded-t cursor-pointer"
                                                 alt="participant_image">
 
                                             <svg x-show="!participant.image" version="1.0"
@@ -492,7 +500,7 @@
                                             </svg>
                                         </a>
 
-                                        <div class="flex items-center justify-between p-2"
+                                        <div class="flex items-center rounded-b justify-between p-2"
                                             :class="participant.current_step.includes('fail') ?
                                                 'bg-red-100 group-hover:bg-red-50' :
                                                 participant.current_step == 'jungle' ?

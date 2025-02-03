@@ -124,9 +124,9 @@
                                                                         {{ $notif->type === 'cowork' ? 'requested to join cowork' : '' }}
                                                                     </span>
                                                                 </p>
-                                                                <p class="text-xs text-gray-500">
+                                                                {{-- <p class="text-xs text-gray-500">
                                                                     {{ $notif->time->diffForHumans() }}
-                                                                </p>
+                                                                </p> --}}
                                                             </div>
                                                             <p class="text-sm text-gray-500 truncate w-52">
                                                                 {{ $notif->type === 'cowork' ? '' : $notif->message }}

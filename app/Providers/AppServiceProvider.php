@@ -39,7 +39,6 @@ class AppServiceProvider extends ServiceProvider
         // dd($notifications);
         view()->share([
             "notifications" => $notifications
-
         ]);
     }
 }

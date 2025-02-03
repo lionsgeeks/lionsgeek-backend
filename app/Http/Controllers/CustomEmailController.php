@@ -61,7 +61,7 @@ class CustomEmailController extends Controller
 
             // Add cc and bcc only if they exist
             if ($request->cc) {
-                $mailer->send(new CustomEmailMail($request->subject, $request->content))->cc($request->cc);
+                $mailer->cc($request->cc);
             }
             if ($request->bcc) {
                 $mailer->send(new CustomEmailMail($request->subject, $request->content))->bcc($request->bcc);

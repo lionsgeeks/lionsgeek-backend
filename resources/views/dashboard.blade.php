@@ -190,9 +190,9 @@
                                                     {{ Str::limit($contact->message, 15, '...') }}
                                                 </p>
                                             </td>
-                                            <td>
+                                            {{-- <td>
                                                 {{ $contact->created_at->format('d M,y') }}
-                                            </td>
+                                            </td> --}}
                                         </tr>
                                     @endforeach
                                 </tbody>

@@ -50,7 +50,8 @@ class InfoSessionController extends Controller
         $request->validate([
             "email" => "required",
             "code" => "required",
-            "id" => "integer"
+            "id" => "integer",
+            "sessionId" => "integer"
         ]);
 
         $participant = Participant::where("email", $request->email)
@@ -59,7 +60,7 @@ class InfoSessionController extends Controller
             ->first();
 
         if ($participant) {
-            if ($participant->info_session_id == "100") {
+            if ($participant->info_session_id == $request->sessionId) {
                 if (!$participant->is_visited) {
                     $participant->is_visited = true;
                     $participant->current_step = "interview";

@@ -8,8 +8,10 @@
 
 
     <div class="pt-12 md:px-10 px-4 " x-data="{
-        sendMail: true,
+        sendMail: false,
         filter: 'All',
+        showCc: false,
+        showBcc: false,
         allData: {{ json_encode($connect) }},
         sendData:{{ json_encode($customEmails) }},
         receiveData: {{ json_encode($contacts) }},
@@ -388,8 +390,8 @@
                             </div>
                         </template>
 
-                        <template x-if='sendMail'>
-                            <form x-show="sendMail" class="lg:w-2/3 w-full max-h-[78vh]  overflow-y-scroll p-7 flex flex-col gap-2 md:hidden"
+                        <template x-if='sendMail '>
+                            <form x-show="sendMail" class="lg:w-2/3 w-full max-h-[78vh]  overflow-y-scroll p-7 flex flex-col gap-2 "
                                 action="{{ route('customEmail.store') }}" method="post">
                                 @csrf
                                 <div class="flex flex-col gap-2">
@@ -523,7 +525,7 @@
                             </form>
                         </template>
 
-                        <template x-if='sendMail'>
+                        <template x-if='sendMail '>
                             <form x-show="sendMail" class="w-full h-full  fixed top-0 left-0 bg-white lg:hidden  overflow-y-scroll p-7 flex flex-col gap-2"
                                 action="{{ route('customEmail.store') }}" method="post">
                                 @csrf

@@ -26,53 +26,45 @@ class CustomEmailController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'sender' => 'required',
-            'receiver' => 'required',
-            'subject' => 'required',
-            'content' => 'required',
+            'sender' => 'required|string',
+            'receiver' => 'required|string', 
+            'cc' => 'nullable|string',
+            'bcc' => 'nullable|string',
+            'subject' => 'required|string',
+            'content' => 'required|string',
         ]);
-
+    
         CustomEmail::create([
             'sender' => $request->sender,
             'receiver' => $request->receiver,
             'subject' => $request->subject,
             'content' => $request->content,
         ]);
-
-
-        // in case there are multiple emails
-        if (str_contains($request->receiver, ',')) {
-            $receivers = explode(',', $request->receiver);
-            $mailer = Mail::mailer($request->sender);
-
-            foreach ($receivers as $receiver) {
-                $mailer->to($receiver)->send(new CustomEmailMail($request->subject, $request->content));
-            }
-
-            if ($request->cc) {
-                $mailer->send(new CustomEmailMail($request->subject, $request->content))->cc($request->cc);
-            }
-            if ($request->bcc) {
-                $mailer->send(new CustomEmailMail($request->subject, $request->content))->bcc($request->bcc);
-            }
-
-        } else {
-            $mailer = Mail::mailer($request->sender)->to($request->receiver);
-
-            // Add cc and bcc only if they exist
-            if ($request->cc) {
-                $mailer->cc($request->cc);
-            }
-            if ($request->bcc) {
-                $mailer->send(new CustomEmailMail($request->subject, $request->content))->bcc($request->bcc);
-            }
-
-
-            $mailer->send(new CustomEmailMail($request->subject, $request->content));
+    
+        // Création du mailer
+        $mailer = Mail::mailer($request->sender);
+    
+        // Préparer l'email
+        $mail = $mailer->to(explode(',', $request->receiver));
+    
+        // Ajout des destinataires "CC"
+        if (!empty($request->cc)) {
+            $mail->cc(explode(',', $request->cc));
         }
-
-        return back()->with('success', 'Email Sent Successfully!');
+    
+        // Ajout des destinataires "BCC"
+        if (!empty($request->bcc)) {
+            $mail->bcc(explode(',', $request->bcc));
+        }
+    
+        // Envoi de l'e-mail
+        $mail->send(new CustomEmailMail($request->subject, $request->content));
+    
+        return back()->with('success', 'Email envoyé avec succès !');
     }
+    
+    
+
 
     /**
      * Display the specified resource.

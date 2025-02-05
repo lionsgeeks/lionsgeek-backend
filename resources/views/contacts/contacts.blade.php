@@ -416,7 +416,7 @@
                                 @csrf
                                 <div class="flex flex-col gap-2">
                                     <button x-show="sendMail" x-on:click="sendMail = false; id=null"
-                                        class="bg-red-600 text-white w-[5vw] self-end px-4 py-1.5 rounded">
+                                        class="bg-red-600 text-white  self-end px-4 py-1.5 rounded">
                                         Cancel
                                     </button>
                                     <div class="flex items-center gap-2">

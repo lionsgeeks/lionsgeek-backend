@@ -40,7 +40,7 @@ class SchoolMail extends Mailable implements ShouldQueue
     public function content(): Content
     {
         return new Content(
-            view: 'maizzleMails.emails.schoolMail',
+            view: 'maizzleMails.emails.schoolMail2',
         );
     }
 

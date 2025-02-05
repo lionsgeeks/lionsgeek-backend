@@ -106,12 +106,11 @@
                                 <div class="md:h-[466px] overflow-y-auto" x-show="filter == 'All'">
                                     @foreach ($connect->reverse() as $key => $message)
                                         <div x-init="if ({{ request()->message == $message['id'] }}) { id = {{ $key }} }" onclick="toggleHidden()"
-                                            x-on:click='id = {{ $key }}'
+                                            x-on:click='id = {{ $key }};sendMail = false'
                                             class="p-4 {{ $message['mark_as_read'] ?? false ? '' : 'bg-blue-100 border-b-2 hover:bg-blue-50' }} flex flex-col gap-y-2 text--700 w-full border-b hover:bg-gray-100 cursor-pointer">
 
                                             <div class="flex items-center gap-x-2 text-lg font-medium">
                                                 <h1 class="text-[#13181a] font-bold">
-                                                    <span x-text=""></span>
                                                     @switch($message['full_name'])
                                                         @case('default')
                                                             {{ Str::limit('info@lionsgeek.com', 15, '...') }}
@@ -167,10 +166,10 @@
                                     @endforeach
                                 </div>
                                 <div class="md:h-[466px] overflow-y-auto" x-show="filter == 'Sended'">
-                                    @foreach ($customEmails->reverse() as $key => $message)
+                                    @foreach ($connect->reverse() as $key => $message)
                                         <div x-init="if ({{ request()->message == $message['id'] }}) { id = {{ $key }} }" onclick="toggleHidden()"
-                                            x-on:click='id = {{ $key }}' x-show="filter == 'All"
-                                            class="p-4 {{ $message['mark_as_read'] ?? false ? '' : 'bg-blue-100 border-b-2 hover:bg-blue-50' }} flex flex-col gap-y-2 text--700 w-full border-b hover:bg-gray-100 cursor-pointer">
+                                            x-on:click='id = {{ $key }};sendMail = false' x-show="filter == 'All"
+                                            class="p-4 {{ $message['mark_as_read'] ?? false ? '' : 'bg-blue-100 border-b-2 hover:bg-blue-50' }} {{ $message['source'] != 'contacts' ? '' : 'hidden' }} flex flex-col gap-y-2 text--700 w-full border-b hover:bg-gray-100 cursor-pointer">
 
                                             <div class="flex items-center gap-x-2 text-lg font-medium">
                                                 <h1 class="text-[#13181a] font-bold">
@@ -230,14 +229,13 @@
                                     @endforeach
                                 </div>
                                 <div class="md:h-[466px] overflow-y-auto" x-show="filter == 'Received'">
-                                    @foreach ($contacts->reverse() as $key => $message)
+                                    @foreach ($connect->reverse() as $key => $message)
                                         <div x-init="if ({{ request()->message == $message['id'] }}) { id = {{ $key }} }" onclick="toggleHidden()"
-                                            x-on:click='id = {{ $key }}' x-show="filter == 'All"
-                                            class="p-4 {{ $message['mark_as_read'] ?? false ? '' : 'bg-blue-100 border-b-2 hover:bg-blue-50' }} flex flex-col gap-y-2 text--700 w-full border-b hover:bg-gray-100 cursor-pointer">
+                                            x-on:click='id = {{ $key }};sendMail = false' x-show="filter == 'All"
+                                            class="p-4 {{ $message['mark_as_read'] ?? false ? '' : 'bg-blue-100 border-b-2 hover:bg-blue-50' }}  {{ $message['source'] != 'customEmails' ? '' : 'hidden' }} flex flex-col gap-y-2 text--700 w-full border-b hover:bg-gray-100 cursor-pointer">
 
                                             <div class="flex items-center gap-x-2 text-lg font-medium">
                                                 <h1 class="text-[#13181a] font-bold">
-                                                    <span x-text=""></span>
                                                     @switch($message['full_name'])
                                                         @case('default')
                                                             {{ Str::limit('info@lionsgeek.com', 15, '...') }}
@@ -334,22 +332,42 @@
                                                 </template>
                                             </form>
 
-                                            <form :action="'{{ route('email.destroy', '') }}' + '/' + messages[id].id"
-                                                method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="flex gap-x-2 items-center">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="20"
-                                                        height="20" fill="red" class="bi bi-trash"
-                                                        viewBox="0 0 16 16">
-                                                        <path
-                                                            d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
-                                                        <path
-                                                            d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
-                                                    </svg>
+                                            <form
+                                                x-show="messages[id].source == 'contacts'"
+                                                    :action="'{{ route('email.destroy', '') }}' + '/' + messages[id].id"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="flex gap-x-2 items-center">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20"
+                                                            height="20" fill="red" class="bi bi-trash"
+                                                            viewBox="0 0 16 16">
+                                                            <path
+                                                                d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+                                                            <path
+                                                                d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+                                                        </svg>
 
-                                                </button>
-                                            </form>
+                                                    </button>
+                                                </form>
+                                                <form
+                                                x-show="messages[id].source == 'customEmails'"
+                                                    :action="'{{ route('customEmail.destroy', '') }}' + '/' + messages[id].id"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="flex gap-x-2 items-center">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20"
+                                                            height="20" fill="red" class="bi bi-trash"
+                                                            viewBox="0 0 16 16">
+                                                            <path
+                                                                d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+                                                            <path
+                                                                d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+                                                        </svg>
+
+                                                    </button>
+                                                </form>
                                         </div>
 
                                     </div>
@@ -357,7 +375,7 @@
                                         <div>
                                             <div class="flex justify-between  border-b pb-2  ">
                                                 <div class="flex items-center gap-x-2">
-                                                    <span class="text-[#999b9c] font-medium">From:</span>
+                                                    <span class="text-[#999b9c] font-medium" x-text="messages[id].source == 'customEmails' ? 'To:' : 'From'"></span>
                                                     <p x-text='messages[id].email' class="font-medium text-[#13181a] ">
                                                     </p>
                                                 </div>
@@ -377,6 +395,8 @@
                                 </div>
                             </div>
                         </template>
+
+
                         <template x-if='id === null && !sendMail'>
                             <div class="w-2/3 h-[91vh]  hidden lg:block  border">
                                 <div class="hidden lg:flex w-full h-full justify-center gap-x-1 items-center ">
@@ -715,7 +735,26 @@
                                                     </template>
                                                 </form>
                                                 <form
+                                                x-show="messages[id].source == 'contacts'"
                                                     :action="'{{ route('email.destroy', '') }}' + '/' + messages[id].id"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="flex gap-x-2 items-center">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20"
+                                                            height="20" fill="red" class="bi bi-trash"
+                                                            viewBox="0 0 16 16">
+                                                            <path
+                                                                d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+                                                            <path
+                                                                d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+                                                        </svg>
+
+                                                    </button>
+                                                </form>
+                                                <form
+                                                x-show="messages[id].source == 'customEmails'"
+                                                    :action="'{{ route('customEmail.destroy', '') }}' + '/' + messages[id].id"
                                                     method="POST">
                                                     @csrf
                                                     @method('DELETE')

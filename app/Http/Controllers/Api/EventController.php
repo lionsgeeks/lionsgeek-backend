@@ -69,7 +69,7 @@ public function validateParticipant(Request $request)
             # code...
         } else {
             return response()->json([
-                "message" => "Participant belong to another session",
+                "message" => "Participant belong to another event",
                 "status" => 200,
                 "profile" => $participant
             ]);

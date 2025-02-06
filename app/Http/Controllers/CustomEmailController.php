@@ -28,8 +28,8 @@ class CustomEmailController extends Controller
         $request->validate([
             'sender' => 'required|string',
             'receiver' => 'required|string', 
-            'cc' => 'nullable|string',
-            'bcc' => 'nullable|string',
+            // 'cc' => 'nullable|string',
+            // 'bcc' => 'nullable|string',
             'subject' => 'required|string',
             'content' => 'required|string',
         ]);

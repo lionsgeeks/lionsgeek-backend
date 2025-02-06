@@ -16,7 +16,7 @@ class SchoolMail extends Mailable implements ShouldQueue
     /**
      * Create a new message instance.
      */
-    public function __construct(public $full_name, public $id, public $day, public $school)
+    public function __construct(public $full_name, public $id, public $day , public $school)
     {
         $this->full_name = $full_name;
         $this->day = $day;
@@ -39,8 +39,11 @@ class SchoolMail extends Mailable implements ShouldQueue
      */
     public function content(): Content
     {
+       
+        $view = $this->day ? 'maizzleMails.emails.schoolMail' : 'maizzleMails.emails.schoolMail2';
+
         return new Content(
-            view: 'maizzleMails.emails.schoolMail2',
+            view: $view
         );
     }
 

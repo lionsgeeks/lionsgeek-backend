@@ -30,23 +30,35 @@
                                                 Send Invitation to Participants </h3>
                                         </div>
                                     </div>
-                                    <form action="{{ route('participant.school') }}"
-                                        method="POST" class="flex flex-col gap-3">
+                                    <form action="{{ route('participant.school') }}" method="POST" class="flex flex-col gap-3">
                                         @csrf
                                         <div class="flex flex-col gap-3 py-3">
-                                            <label for="">Choose School Day start </label>
-                                            <input min="{{Carbon\Carbon::now()->format('Y-m-d')}}" type="date" name="date">
+                                            <label for="date">Choose School Day Start</label>
+                                            <input required min="{{ Carbon\Carbon::now()->format('Y-m-d') }}" type="date" name="date">
                                             <input type="hidden" name="infosession_id" value="{{ $infoSession->id }}">
                                         </div>
+                                    
                                         <div class="px-4 py-3 sm:px-6 gap-3 sm:flex sm:flex-row-reverse">
-                                            <button type="submit"
+                                            <!-- Normal Send Button (Requires Date) -->
+                                            <button type="submit" name="submit_with_date"
                                                 class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-black text-base font-medium text-white hover:bg-alpha focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-alpha sm:ml-3 sm:w-auto sm:text-sm">
-                                                Send </button>
+                                                Send
+                                            </button>
+                                    
+                                            <!-- Send Without Date Button -->
+                                            <button type="submit" name="submit_without_date"
+                                                class="w-full inline-flex justify-center rounded-md border border-gray-500 shadow-sm px-4 py-2 bg-gray-600 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:w-auto sm:text-sm"
+                                                formnovalidate>
+                                                Send Without Date
+                                            </button>
+                                    
                                             <button @click="schoolModal = false" type="button"
                                                 class="w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
-                                                Cancel </button>
+                                                Cancel
+                                            </button>
                                         </div>
                                     </form>
+                                    
                                 </div>
                             </div>
                         </div>

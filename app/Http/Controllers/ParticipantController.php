@@ -262,11 +262,16 @@ class ParticipantController extends Controller
     public function toSchool(Request $request)
     {
         $candidats = Participant::where('info_session_id', $request->infosession_id)->where('current_step', 'coding_school')->orWhere('current_step', 'media_school')->get();
-        $day = $request->date;
-        // dd($candidats);
+         // If "Send" button is clicked, validate that a date is provided
+        if ($request->has('submit_with_date')) {
+            $request->validate([
+                'date' => 'required|date'
+            ]);
+        }
+   	    // If "Send Without Date" button is clicked, set date to null
+        $day = $request->has('submit_without_date') ? null : $request->date;
         $info = InfoSession::where('id', $request->infosession_id)->first();
         $formationType = $info->formation;
-        // dd($formationType);
         foreach ($candidats as $key => $candidat) {
             if ($formationType == 'Media' && $candidat->current_step == "media_school") {
                 $emailRecipient = 'Media';

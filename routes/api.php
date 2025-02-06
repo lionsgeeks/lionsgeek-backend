@@ -36,6 +36,7 @@ Route::post('/participate', [ContactController::class, 'participate']);
 Route::get('/infosessions', [InfoSessionController::class, 'index']);
 Route::get('/0cb1e4af6e3d2a705e07ac733dbf66275940f03fa243b8b5f5680b1af134b98c', [InfoSessionController::class, 'PrivateSession']);
 Route::put('/validate-invitation', [InfoSessionController::class,'validateParticipant']);
+Route::put('/validate-event-invitation', [EventController::class,'validateParticipant']);
 Route::put('/manual-checking', [InfoSessionController::class,'manualChecking']);
 Route::get('/session-data', [InfoSessionController::class,'infoData']);
 Route::get('/profile-data', [InfoSessionController::class,'profileData']);
@@ -44,7 +45,7 @@ Route::post('/session-photo', [ParticipantController::class,'setPhoto']);
 Route::get("/galleries",[GalleryController::class,"index"]);
 Route::get('/events',[EventController::class,'index']);
 Route::get('/projects',[ProjectController::class,'index']);
-
+Route::get("events/{event}",[EventController::class,'show']);
 Route::get('/upcoming', [EventController::class,'upcoming']);
 
 Route::post('/views', [GeneralController::class, 'increment']);

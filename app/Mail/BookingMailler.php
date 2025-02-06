@@ -7,6 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
+use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Queue\SerializesModels;
 
 class BookingMailler extends Mailable
@@ -16,10 +17,15 @@ class BookingMailler extends Mailable
     /**
      * Create a new message instance.
      */
-    public $name ;
-    public function __construct($name)
+    public $name;
+    public $date;
+    private $qrCodeBase64;
+
+    public function __construct($name, $qrCodeBase64 ,$date)
     {
         $this->name = $name;
+        $this->date = $date;
+        $this->qrCodeBase64 = $qrCodeBase64;
     }
 
     /**
@@ -28,7 +34,7 @@ class BookingMailler extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Booking Mailler',
+            subject: 'Your Event Booking Confirmation',
         );
     }
 
@@ -39,6 +45,11 @@ class BookingMailler extends Mailable
     {
         return new Content(
             view: 'mail.bookingmailler',
+            with: [
+                'name' => $this->name,
+                'date' => $this->date,
+                'qrCode' => $this->qrCodeBase64
+            ]
         );
     }
 
@@ -49,6 +60,14 @@ class BookingMailler extends Mailable
      */
     public function attachments(): array
     {
-        return [];
+        // Create a temporary file for the QR code
+        $tempFile = tempnam(sys_get_temp_dir(), 'qr_');
+        file_put_contents($tempFile, base64_decode($this->qrCodeBase64));
+
+        return [
+            Attachment::fromPath($tempFile)
+                ->as('event_qr_code.png')
+                ->withMime('image/png')
+        ];
     }
 }

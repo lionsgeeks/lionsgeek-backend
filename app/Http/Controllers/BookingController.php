@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Mail\BookingMailler;
 use App\Models\booking;
+use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use LaravelQRCode\Facades\QRCode;
 
 class BookingController extends Controller
 {
@@ -30,25 +32,45 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        // dd();
         $request->validate([
             "email" => "required|email",
             "name" => "required",
             "event_id" => "required",
-           
         ]);
+    
         $booking = booking::create([
-                "name" => $request->name,
-                "email" => $request->email,
-                "event_id" => $request->event_id
-            ]);
-            Mail::to($booking->email)->send(new BookingMailler($booking->name));
+            "name" => $request->name,
+            "email" => $request->email,
+            "event_id" => $request->event_id,
+            "is_visited" => false,
+        ]);
         
-        return  response()->json([
-            "message" => "booking successsssssfullllly"
+        $jsonData = json_encode([
+            "email" => $booking->email,
+            "code" => $booking->event_id
+        ]);
+        
+        // Generate QR code
+        ob_start();
+        QRCode::text($jsonData)
+            ->setSize(300)  
+            ->setMargin(10) 
+            ->setErrorCorrectionLevel('H')
+            ->png(); 
+        $qrImage = ob_get_clean();
+        
+        // Convert to base64 for email attachment
+        $qrBase64 = base64_encode($qrImage);
+        $event = Event::find($booking->event_id);
+        // Send email with QR code
+        // Mail::to($booking->email)->send(new BookingMailler($booking->name, $event->date , $qrBase64));
+    
+        return response()->json([
+            "message" => "Booking successful",
+            "qr_code" => "data:image/png;base64," . $qrBase64 
         ]);
     }
+    
 
     /**
      * Display the specified resource.

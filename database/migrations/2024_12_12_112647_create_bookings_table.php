@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string("name");
             $table->string("email");
+            $table->boolean("is_visited")->default(false);
             $table->foreignId("event_id")->constrained()->cascadeOnDelete();
             $table->timestamps();
         });

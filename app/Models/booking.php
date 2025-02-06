@@ -10,7 +10,8 @@ class booking extends Model
     protected $fillable =[
         "name",
         "email",
-        "event_id"
+        "event_id",
+        "is_visited"
     ];
     public function event()
     {

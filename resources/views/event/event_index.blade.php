@@ -6,15 +6,14 @@
 
     </x-slot>
 
-    <div class="md:pt-12 p-12 md:px-10 px-4">
-
+        <div class="md:pt-12 p-12 md:px-10 px-4">
+            
         <div :class="darkmode ? 'bg-dark' : 'bg-white'"
             class=" {{ $events->count() == 0 ? 'h-[76vh]' : 'min-h-[76vh]' }} mb-3 rounded-lg p-6  w-[100%] px-8 ">
             
             <div class="md:flex hidden flex-wrap gap-x-[calc(5%/2)] gap-y-4   ">
-                @if ($events->count() > 0)
-                    <x-creation-card route="events.create" label="event" />
-                @endif
+            
+                <x-creation-card route="events.create" label="event" />
                 @foreach ($events as $event)
                     {{-- <div
                         class="w-[calc(95%/4)] flex flex-col overflow-hidden text-nowrap gap-3 h-fit px-[1rem] py-[1rem] rounded-[16px]  bg-[#f9f9f9]">

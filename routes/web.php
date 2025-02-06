@@ -153,6 +153,9 @@ Route::get("/test", function () {
     $content = "hello Nassima. jhgjhg kugiug liiy trturg kjglg  fu utd";
     return view("mail.customMail", compact("content"));
 });
+Route::get("/testt", function () {
+    return view("mail.bookingmailler");
+});
 
 use Illuminate\Support\Facades\DB;
 

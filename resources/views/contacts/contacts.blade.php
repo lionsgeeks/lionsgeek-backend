@@ -259,7 +259,7 @@
 
 
                                             <div class="flex justify-between">
-                                                <div class="flex items-center gap-x-1">
+                                                <div class="flex items-center w-f gap-x-1">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                         height="16" fill="#3d5563" class="bi bi-box-arrow-up-right"
                                                         viewBox="0 0 16 16">
@@ -269,7 +269,7 @@
                                                             d="M16 .5a.5.5 0 0 0-.5-.5h-5a.5.5 0 0 0 0 1h3.793L6.146 9.146a.5.5 0 1 0 .708.708L15 1.707V5.5a.5.5 0 0 0 1 0z" />
                                                     </svg>
 
-                                                    <p class="font-[600] text-sm text-[#3d5563]">
+                                                    <p class="font-[600] text-sm truncate text-[#3d5563]">
                                                         {{ Str::limit($message['message'], 50, '...') }}
                                                     </p>
                                                 </div>
@@ -294,6 +294,8 @@
                             </div>
 
                         </div>
+
+                        {{-- messages --}}
                         <template x-if="id !== null && !sendMail">
                             <div class="lg:w-2/3 w-full max-h-[78vh]  overflow-y-hidden  border hidden lg:block">
                                 <div class=" hidden w-full sm:flex flex-col gap-3 h-full px-4">
@@ -378,6 +380,12 @@
                                                     <span class="text-[#999b9c] font-medium" x-text="messages[id].source == 'customEmails' ? 'To:' : 'From'"></span>
                                                     <p x-text='messages[id].email' class="font-medium text-[#13181a] ">
                                                     </p>
+                                                    <p :title="'CC : \n' + messages[id].cc.replace(',', '\n')" x-show='messages[id].cc != null'  class="font-medium text-[#999b9c] ">
+                                                        CC
+                                                    </p>
+                                                    <p :title="'BCC : \n' + messages[id].bcc.replace(',', '\n') " x-show='messages[id].bcc != null'  class="font-medium text-[#999b9c] ">
+                                                        BCC
+                                                    </p>
                                                 </div>
                                                 <p class="text-[#999b9c] font-[500]"
                                                     x-text="new Date(messages[id].created_at).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false })">
@@ -396,7 +404,7 @@
                             </div>
                         </template>
 
-
+                        {{-- messages --}}
                         <template x-if='id === null && !sendMail'>
                             <div class="w-2/3 h-[91vh]  hidden lg:block  border">
                                 <div class="hidden lg:flex w-full h-full justify-center gap-x-1 items-center ">
@@ -409,7 +417,7 @@
                                 </div>
                             </div>
                         </template>
-
+                        {{-- customEmails --}}
                         <template x-if='sendMail '>
                             <form x-show="sendMail" class="lg:w-2/3 w-full max-h-[78vh]  overflow-y-scroll p-7 flex flex-col gap-2 "
                                 action="{{ route('customEmail.store') }}" method="post">
@@ -544,7 +552,7 @@
                                 </button>
                             </form>
                         </template>
-
+                        {{-- mobile customEmails --}}
                         <template x-if='sendMail '>
                             <form x-show="sendMail" class="w-full h-full  fixed top-0 left-0 bg-white lg:hidden  overflow-y-scroll p-7 flex flex-col gap-2"
                                 action="{{ route('customEmail.store') }}" method="post">
@@ -680,10 +688,10 @@
                             </form>
                         </template>
 
+                        {{-- mobile messages --}}
                         <template x-if="id !== null && !sendMail">
-
                             <div id="parentMessage"
-                                class="p-2 w-full h-screen overflow-y-scroll fixed top-0 bg-white sm:hidden flex flex-col gap-3">
+                                class="p-2 w-full h-screen overflow-y-scroll fixed top-0 left-0 bg-white lg:hidden flex flex-col gap-3">
                                 <div class="">
                                     <svg onclick="toggleHidden()" xmlns="http://www.w3.org/2000/svg" width="25"
                                         height="25" fill="currentColor" class="bi bi-arrow-left"
@@ -735,40 +743,40 @@
                                                     </template>
                                                 </form>
                                                 <form
-                                                x-show="messages[id].source == 'contacts'"
-                                                    :action="'{{ route('email.destroy', '') }}' + '/' + messages[id].id"
-                                                    method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button class="flex gap-x-2 items-center">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20"
-                                                            height="20" fill="red" class="bi bi-trash"
-                                                            viewBox="0 0 16 16">
-                                                            <path
-                                                                d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
-                                                            <path
-                                                                d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
-                                                        </svg>
+                                                    x-show="messages[id].source == 'contacts'"
+                                                        :action="'{{ route('email.destroy', '') }}' + '/' + messages[id].id"
+                                                        method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button class="flex gap-x-2 items-center">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="20"
+                                                                height="20" fill="red" class="bi bi-trash"
+                                                                viewBox="0 0 16 16">
+                                                                <path
+                                                                    d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+                                                                <path
+                                                                    d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+                                                            </svg>
 
-                                                    </button>
+                                                        </button>
                                                 </form>
                                                 <form
-                                                x-show="messages[id].source == 'customEmails'"
-                                                    :action="'{{ route('customEmail.destroy', '') }}' + '/' + messages[id].id"
-                                                    method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button class="flex gap-x-2 items-center">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20"
-                                                            height="20" fill="red" class="bi bi-trash"
-                                                            viewBox="0 0 16 16">
-                                                            <path
-                                                                d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
-                                                            <path
-                                                                d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
-                                                        </svg>
+                                                    x-show="messages[id].source == 'customEmails'"
+                                                        :action="'{{ route('customEmail.destroy', '') }}' + '/' + messages[id].id"
+                                                        method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button class="flex gap-x-2 items-center">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="20"
+                                                                height="20" fill="red" class="bi bi-trash"
+                                                                viewBox="0 0 16 16">
+                                                                <path
+                                                                    d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+                                                                <path
+                                                                    d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+                                                            </svg>
 
-                                                    </button>
+                                                        </button>
                                                 </form>
                                             </div>
 
@@ -776,17 +784,27 @@
                                         <div class="p-6    h-[85%] border flex flex-col justify-between">
                                             <div>
                                                 <div class="flex justify-between  border-b pb-2  ">
-                                                    <div class="flex items-center gap-x-2">
-                                                        <span class="text-[#999b9c] font-medium">From:</span>
-                                                        <p x-text='messages[id].email'
-                                                            class="font-medium text-[#13181a] ">
-                                                        </p>
+                                                    <div class="flex flex-col  gap-x-2">
+                                                        <div class="flex items-center gap-y-2">
+                                                            <span class="text-[#999b9c] font-medium" x-text="messages[id].source == 'customEmails' ? 'To:' : 'From'"></span>
+                                                            <p x-text='messages[id].email'
+                                                                class="font-medium text-[#13181a] ">
+                                                            </p>
+                                                        </div>
+                                                        <div class="flex items-center gap-x-2">
+                                                            <p :title="'CC : \n' + messages[id].cc.replace(',', '\n')" x-show='messages[id].cc != null'  class="font-medium text-[#999b9c] ">
+                                                                CC
+                                                            </p>
+                                                            <p :title="'BCC : \n' + messages[id].bcc.replace(',', '\n') " x-show='messages[id].bcc != null'  class="font-medium text-[#999b9c] ">
+                                                                BCC
+                                                            </p>
+                                                        </div>
                                                     </div>
                                                     <p class="text-[#999b9c] font-[500]"
                                                         x-text="new Date(messages[id].created_at).toLocaleString('en-US', { month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false })">
                                                     </p>
                                                 </div>
-                                                <p class="pt-4" x-text='messages[id].message'></p>
+                                                <p class="pt-4 " x-text='messages[id].message'></p>
 
                                             </div>
                                             <div class="flex w-full justify-end  px-6">

@@ -31,6 +31,8 @@ class ContactController extends Controller
                 'id' => $customEmail->id,
                 'full_name' => $customEmail->sender,
                 'email' => $customEmail->receiver,
+                'cc' => $customEmail->cc,
+                'bcc' => $customEmail->bcc,
                 'message' => $customEmail->content,
                 'created_at' => $customEmail->created_at,
                 'source' => 'customEmails',
@@ -50,11 +52,16 @@ class ContactController extends Controller
             ];
         });
 
-
-
-        // Merge and sort data by created_at
-        $connect = $customEmails->merge($contacts);
-        // dd($connect);
+        $connect = collect([]);
+        if (count($contacts) > 0 && count($customEmails) > 0) {
+            // Merge and sort data by created_at
+            $connect = $customEmails->merge($contacts);
+            // dd($connect);
+        } elseif (count($contacts) > 0) {
+            $connect = $contacts;
+        } elseif (count($customEmails) > 0) {
+            $connect = $customEmails;
+        }
 
         $unreadMessages = Contact::where('mark_as_read', 0)->count();
 

@@ -15,6 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('sender');
             $table->string('receiver');
+            $table->string('cc')->nullable();
+            $table->string('bcc')->nullable();
             $table->string('subject');
             $table->text('content');
             $table->timestamps();

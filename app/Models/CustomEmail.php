@@ -9,6 +9,8 @@ class CustomEmail extends Model
     protected $fillable = [
         'sender',
         'receiver',
+        'cc',
+        'bcc',
         'subject',
         'content',
     ];

@@ -27,43 +27,51 @@ class CustomEmailController extends Controller
     {
         $request->validate([
             'sender' => 'required|string',
+<<<<<<< Updated upstream
             'receiver' => 'required|string', 
             // 'cc' => 'nullable|string',
             // 'bcc' => 'nullable|string',
+=======
+            'receiver' => 'required|string',
+            'cc' => 'nullable|string',
+            'bcc' => 'nullable|string',
+>>>>>>> Stashed changes
             'subject' => 'required|string',
             'content' => 'required|string',
         ]);
-    
+
         CustomEmail::create([
             'sender' => $request->sender,
             'receiver' => $request->receiver,
+            "cc" => $request->cc,
+            "bcc" => $request->bcc,
             'subject' => $request->subject,
             'content' => $request->content,
         ]);
-    
+
         // Création du mailer
         $mailer = Mail::mailer($request->sender);
-    
+
         // Préparer l'email
         $mail = $mailer->to(explode(',', $request->receiver));
-    
+
         // Ajout des destinataires "CC"
         if (!empty($request->cc)) {
             $mail->cc(explode(',', $request->cc));
         }
-    
+
         // Ajout des destinataires "BCC"
         if (!empty($request->bcc)) {
             $mail->bcc(explode(',', $request->bcc));
         }
-    
+
         // Envoi de l'e-mail
         $mail->send(new CustomEmailMail($request->subject, $request->content));
-    
+
         return back()->with('success', 'Email envoyé avec succès !');
     }
-    
-    
+
+
 
 
     /**

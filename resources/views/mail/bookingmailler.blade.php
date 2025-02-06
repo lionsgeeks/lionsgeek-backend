@@ -57,7 +57,7 @@
                   <div role="separator" style="line-height: 24px">&zwj;</div>
                   <h1 style="margin: 0 0 24px; font-size: 24px; line-height: 32px; font-weight: 600; color: #0f172a">
                     Hello {{ $name }}!
-                    Hello {{ $time }}!
+                    {{-- Hello {{ $eventName }}! --}}
                   </h1>
                   <p style="margin: 0 0 24px; font-size: 16px; line-height: 24px; color: #475569">
                     Thank you for your interest in our upcoming event with LionsGeek!
@@ -67,7 +67,9 @@
                   <div role="separator" style="line-height: 24px">&zwj;</div>
                   <p style="margin: 0 0 24px; font-size: 16px; line-height: 24px; color: #475569">Event Details:</p>
                   <ul style="margin: 0 0 24px; font-size: 16px; line-height: 24px; color: #475569">
-                    {{-- <li>Date: {{ \Carbon\Carbon::parse($time)->format('Y-m-d H:i') }}</li> --}}
+                    <li> Name: {{$eventName }}</li>
+                    <li>Description: {{ $eventDescription }}</li>
+                    <li>Date: {{ \Carbon\Carbon::parse($eventDate)->format('Y-m-d H:i') }}</li>
                     <li>Location: LionsGeek, LionsGeek, 4eme étage, Ain Sebaa Center, Route de Rabat, Casablanca
                       20060, Maroc</li>
                   </ul>
@@ -111,5 +113,8 @@
       </table>
     </div>
   </div>
+</body>
+<body>
+  
 </body>
 </html>

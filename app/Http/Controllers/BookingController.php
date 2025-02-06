@@ -38,18 +38,18 @@ class BookingController extends Controller
             "event_id" => "required",
         ]);
     
-        $booking = booking::create([
+        $booking = Booking::create([
             "name" => $request->name,
             "email" => $request->email,
             "event_id" => $request->event_id,
             "is_visited" => false,
         ]);
-        
+    
         $jsonData = json_encode([
             "email" => $booking->email,
             "code" => $booking->event_id
         ]);
-        
+    
         // Generate QR code
         ob_start();
         QRCode::text($jsonData)
@@ -61,15 +61,25 @@ class BookingController extends Controller
         
         // Convert to base64 for email attachment
         $qrBase64 = base64_encode($qrImage);
+    
+        // Fetch event details
         $event = Event::find($booking->event_id);
-        // Send email with QR code
-        // Mail::to($booking->email)->send(new BookingMailler($booking->name, $event->date , $qrBase64));
+    
+        // Send email with event details
+        Mail::to($booking->email)->send(new BookingMailler(
+            $booking->name,
+            $qrBase64,
+            $event->name->en, 
+            $event->description->en, 
+            $event->date
+        ));
     
         return response()->json([
             "message" => "Booking successful",
             "qr_code" => "data:image/png;base64," . $qrBase64 
         ]);
     }
+    
     
 
     /**

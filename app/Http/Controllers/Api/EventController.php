@@ -36,7 +36,7 @@ class EventController extends Controller
 }
 public function validateParticipant(Request $request)
 {
-    dd($request->all());
+    // dd($request->all());
     $request->validate([
         "email" => "required",
         "code" => "required",
@@ -45,7 +45,7 @@ public function validateParticipant(Request $request)
     ]);
 
     $participant = booking::where("email", $request->email)
-        ->where("code", $request->code)
+        // ->where("code", $request->code)
         // ->where("info_session_id" , $request->id)
         ->first();
 

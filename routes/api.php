@@ -47,8 +47,9 @@ Route::get('/events',[EventController::class,'index']);
 Route::get('/projects',[ProjectController::class,'index']);
 Route::get("events/{event}",[EventController::class,'show']);
 Route::get('/upcoming', [EventController::class,'upcoming']);
-
 Route::post('/views', [GeneralController::class, 'increment']);
 Route::get('/queue', [ParticipantController::class, 'runQueue']);
 
 Route::post('/unsubscribe', [SubscriberController::class, 'unsubscribe']);
+
+Route::get('/lionsgate/infosessions', [InfoSessionController::class, 'indexLionsgate']);

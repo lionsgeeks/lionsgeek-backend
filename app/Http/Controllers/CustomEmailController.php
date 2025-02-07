@@ -27,15 +27,9 @@ class CustomEmailController extends Controller
     {
         $request->validate([
             'sender' => 'required|string',
-<<<<<<< Updated upstream
-            'receiver' => 'required|string', 
-            // 'cc' => 'nullable|string',
-            // 'bcc' => 'nullable|string',
-=======
             'receiver' => 'required|string',
             'cc' => 'nullable|string',
             'bcc' => 'nullable|string',
->>>>>>> Stashed changes
             'subject' => 'required|string',
             'content' => 'required|string',
         ]);

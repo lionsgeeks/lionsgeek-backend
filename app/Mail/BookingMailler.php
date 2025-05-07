@@ -28,6 +28,13 @@ class BookingMailler extends Mailable
         $this->qrCodeBase64 = $qrCodeBase64;
     }
 
+    public function envelope(): Envelope
+    {
+        return new Envelope(
+            subject: 'Event Booking Confirmation',
+        );
+    }
+
     public function content(): Content
     {
         return new Content(

@@ -291,23 +291,7 @@
                                         </template>
 
                                     </tbody>
-                                    <template x-for="(booking, index) in filteredBookings()" :key="index">
-                                        <tr class="border-t border-gray-300 hover:bg-gray-50 transition">
-                                            <td class="px-2 md:px-4 py-2 text-gray-800 font-medium text-sm md:text-base"
-                                                x-text="index + 1"></td>
-                                            <td class="px-2 md:px-4 py-2 text-gray-800 text-sm md:text-base"
-                                                x-text="booking.name"></td>
-                                            <td class="px-2 md:px-4 py-2 text-gray-800 text-sm md:text-base"
-                                                x-text="booking.email"></td>
-                                            <td class="px-2 md:px-4 hidden md:block py-2 text-gray-800 text-sm md:text-base"
-                                                x-text="new Date(booking.created_at).toLocaleDateString('en-GB', {
-                                                    year: 'numeric',
-                                                    month: 'numeric',
-                                                    day: 'numeric'
-                                                })">
-                                            </td>
-                                        </tr>
-                                    </template>
+                                 
                                 </table>
                             </div>
                         </div>

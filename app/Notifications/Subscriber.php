@@ -39,7 +39,7 @@ class Subscriber extends Notification implements ShouldQueue
         return (new MailMessage)
             ->subject($this->subject)
             ->line($this->content)
-            ->action('Click to see more', url('/'))
+            ->action('Click to see more', url('https://lionsgeek.ma/'))
             ->line('Thank you!')
             ->markdown('vendor.notifications.email', [
                 'unsubscribeUrl' => $unsubscribeUrl,

@@ -11,6 +11,8 @@ class booking extends Model
         "name",
         "email",
         "event_id",
+        "phone",
+        "gender",
         "is_visited"
     ];
     public function event()

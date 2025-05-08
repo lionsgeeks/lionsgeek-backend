@@ -53,12 +53,12 @@
         'actionText' => $actionText,
     ]
 ) <span class="break-all">[{{ $displayableActionUrl }}]({{ $actionUrl }})</span>
-<p style="text-align: center; font-size:smaller; ">
-    @if ($unsubscribeUrl)
-    If you no longer wish to receive these emails, you can 
-    <a href="{{ $unsubscribeUrl }}">unsubscribe here</a>.
-    @endif
-</p> 
+@isset($unsubscribeUrl)
+        <p style="text-align: center; font-size:smaller; ">
+            If you no longer wish to receive these emails, you can 
+            <a href="{{ $unsubscribeUrl }}">unsubscribe here</a>.
+        </p>
+@endisset
 </x-slot:subcopy>
 @endisset
 </x-mail::message>

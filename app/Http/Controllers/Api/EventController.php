@@ -12,9 +12,10 @@ class EventController extends Controller
 {
     public function index()
     {
-        $events = Event::all();
+        $events = Event::orderBy('created_at', 'desc')->get();
         return response()->json($events);
     }
+
     public function upcoming()
     {
         $timeNow = now();

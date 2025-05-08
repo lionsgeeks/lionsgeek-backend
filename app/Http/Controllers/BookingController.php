@@ -36,51 +36,56 @@ class BookingController extends Controller
             "email" => "required|email",
             "name" => "required",
             "event_id" => "required",
+            "phone" => "required",
+            "gender" => "required", // you can customize accepted values
         ]);
-    
+
         $booking = Booking::create([
             "name" => $request->name,
             "email" => $request->email,
+            "phone" => $request->phone,
+            "gender" => $request->gender,
             "event_id" => $request->event_id,
             "is_visited" => false,
         ]);
-    
+
         $jsonData = json_encode([
             "email" => $booking->email,
             "code" => $booking->event_id
         ]);
-    
+
         // Generate QR code
         ob_start();
         QRCode::text($jsonData)
-            ->setSize(300)  
-            ->setMargin(10) 
+            ->setSize(300)
+            ->setMargin(10)
             ->setErrorCorrectionLevel('H')
-            ->png(); 
+            ->png();
         $qrImage = ob_get_clean();
-        
+
         // Convert to base64 for email attachment
         $qrBase64 = base64_encode($qrImage);
-    
+
         // Fetch event details
         $event = Event::find($booking->event_id);
-    
+
         // Send email with event details
         Mail::to($booking->email)->send(new BookingMailler(
             $booking->name,
             $qrBase64,
-            $event->name->en, 
-            $event->description->en, 
+            $event->name->en,
+            $event->description->en,
             $event->date
         ));
-    
+
         return response()->json([
             "message" => "Booking successful",
-            "qr_code" => "data:image/png;base64," . $qrBase64 
+            "qr_code" => "data:image/png;base64," . $qrBase64
         ]);
     }
-    
-    
+
+
+
 
     /**
      * Display the specified resource.

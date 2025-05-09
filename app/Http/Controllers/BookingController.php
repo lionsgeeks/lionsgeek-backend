@@ -40,6 +40,18 @@ class BookingController extends Controller
             "gender" => "required", // you can customize accepted values
         ]);
 
+
+        $bookinng = Booking::where("email", $request->email)
+                  ->where("event_id", $request->event_id)
+                  ->first();
+
+        if ($bookinng) {
+        return response()->json([
+            "message" => "You have already booked this event",
+        ]);
+    }
+
+
         $booking = Booking::create([
             "name" => $request->name,
             "email" => $request->email,

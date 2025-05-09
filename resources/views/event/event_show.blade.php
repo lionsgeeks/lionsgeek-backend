@@ -56,8 +56,8 @@
                         });
                     </script>
                 </div>
-                <div class="w-full flex flex-col md:flex-row gap-4 ">
-                    <div class="w-full md:w-[57%] ">
+                <div class="w-full flex px-4 flex-col  gap-4 ">
+                    <div class="w-full ">
                         <form id="updateForm"
                             class="flex flex-col items-center justify-center py-4 md:py-6 w-full rounded-[20px] gap-4 md:gap-5"
                             action="{{ route('events.update', $event) }}" method="post" enctype="multipart/form-data">
@@ -231,7 +231,7 @@
                             </div>
                         </form>
                     </div>
-                    <div class="w-full md:w-[42%] max-h-[60rem] overflow-y-auto">
+                    <div class="w-full p-4  overflow-y-auto">
                         {{-- Participants --}}
                         <div class="flex flex-col gap-3 w-full mt-4" x-data="{
                             searchQuery: '',
@@ -266,6 +266,12 @@
                                                 class="px-2 md:px-4 py-2 font-medium text-gray-700 text-sm md:text-base">
                                                 Email</th>
                                             <th
+                                                class="px-2 md:px-4 py-2 font-medium text-gray-700 text-sm md:text-base">
+                                                Gender</th>
+                                            <th
+                                                class="px-2 md:px-4 py-2 font-medium text-gray-700 text-sm md:text-base">
+                                                phone</th>
+                                            <th
                                                 class="px-2 hidden md:block md:px-4 py-2 font-medium text-gray-700 text-sm md:text-base">
                                                 Booked at</th>
                                         </tr>
@@ -280,6 +286,10 @@
                                                     x-text="booking.name"></td>
                                                 <td class="px-2 md:px-4 py-2 text-gray-800 text-sm md:text-base"
                                                     x-text="booking.email"></td>
+                                                <td class="px-2 md:px-4 py-2 text-gray-800 text-sm md:text-base"
+                                                    x-text="booking.gender"></td>
+                                                <td class="px-2 md:px-4 py-2 text-gray-800 text-sm md:text-base"
+                                                    x-text="booking.phone"></td>
                                                 <td class="px-2 md:px-4 hidden md:block py-2 text-gray-800 text-sm md:text-base"
                                                     x-text="new Date(booking.created_at).toLocaleDateString('en-GB', {
                                                         year: 'numeric',
@@ -291,7 +301,7 @@
                                         </template>
 
                                     </tbody>
-                                 
+
                                 </table>
                             </div>
                         </div>
